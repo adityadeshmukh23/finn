@@ -8,6 +8,7 @@ COPY --chown=app backend backend
 COPY --chown=app data data
 
 USER app
+# PUBLIC_DEMO also makes LLM_MODE default to mock; set LLM_MODE=auto as a Space variable to allow live calls.
 ENV PUBLIC_DEMO=true \
     FINN_DATA_DIR=/app/data \
     PYTHONUNBUFFERED=1

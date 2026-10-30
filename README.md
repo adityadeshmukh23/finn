@@ -25,6 +25,10 @@ Tests: `cd backend && ../.venv/bin/pytest -q`
 - **LLM gate** (`backend/finn/llm.py`): every model call goes through one function that replays recorded outputs first, runs mock mode with no key, enforces free-tier rate limits, a hard spend cap and per-visitor limits on the public demo, and logs tokens and cost to a ledger shown in the app.
 - **Providers** (`backend/finn/providers.py`): Gemini (default, free tier) and Anthropic behind one interface. Two slots, `cheap` and `strong`, each with provider, model, price and limits set only in `.env` (see `.env.example`); `backend/finn/models.py` maps tasks to slots.
 
+## Deploy
+
+PWA on Vercel, API on a Hugging Face Space, mirrored from GitHub. Steps and the env each host needs: [docs/DEPLOY.md](docs/DEPLOY.md).
+
 ## Refresh the snapshot
 
 ```bash

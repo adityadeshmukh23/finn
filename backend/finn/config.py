@@ -14,11 +14,16 @@ def _bool(name: str, default: bool) -> bool:
     return default if v is None else v.strip().lower() in {"1", "true", "yes", "on"}
 
 
+def default_llm_mode() -> str:
+    return os.getenv("LLM_MODE") or ("mock" if _bool("PUBLIC_DEMO", False) else "auto")
+
+
 @dataclass(frozen=True)
 class Settings:
     data_dir: Path = field(default_factory=lambda: Path(os.getenv("FINN_DATA_DIR", REPO_ROOT / "data")))
     # "auto" = live for any slot whose provider has a key, else mock. "mock" forces recorded/mock outputs.
-    llm_mode: str = os.getenv("LLM_MODE", "auto")
+    # The public demo defaults to mock: a key on the host does nothing until LLM_MODE=auto is set too.
+    llm_mode: str = field(default_factory=lambda: default_llm_mode())
     provider_keys: dict[str, bool] = field(default_factory=lambda: {
         "gemini": bool(os.getenv("GEMINI_API_KEY")),
         "anthropic": bool(os.getenv("ANTHROPIC_API_KEY")),

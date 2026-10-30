@@ -123,3 +123,24 @@ def test_gemini_429_parsing():
     ]}})
     rl = providers._gemini_rate_limit(err)
     assert rl.retry_after == 34.0 and rl.daily is True
+
+
+def test_public_demo_daily_cap_across_clients(setup):
+    fake = setup(public_demo=True, daily_live_calls=2, per_ip_daily_calls=10)
+    r = [ask(user=f"u{i}", client=f"ip{i}") for i in range(3)]
+    assert [x.source for x in r] == ["live", "live", "blocked"] and "public demo" in r[2].note
+    assert len(fake.calls) == 2
+
+
+@pytest.mark.parametrize("env,expected", [
+    ({"PUBLIC_DEMO": "true"}, "mock"),                       # hosted demo: a key alone never goes live
+    ({"PUBLIC_DEMO": "true", "LLM_MODE": "auto"}, "auto"),   # explicit opt-in
+    ({}, "auto"),                                            # local dev
+])
+def test_default_llm_mode(monkeypatch, env, expected):
+    from finn import config
+    for k in ("PUBLIC_DEMO", "LLM_MODE"):
+        monkeypatch.delenv(k, raising=False)
+    for k, v in env.items():
+        monkeypatch.setenv(k, v)
+    assert config.default_llm_mode() == expected
