@@ -33,6 +33,18 @@ export function LedgerSheet({ onClose }: { onClose: () => void }) {
               <dd className="tabular font-semibold text-ink">{data.today.live_calls} calls · {usd(data.today.usd)}</dd>
             </div>
           </dl>
+          <ul className="space-y-2 text-[13px]">
+            {data.slots.map((s) => (
+              <li key={s.slot} className="flex items-baseline justify-between gap-3">
+                <span className="text-ink-2">
+                  <span className="font-semibold capitalize text-ink">{s.slot}</span> · {s.model}
+                  {s.free && <span className="text-ink-3"> · free tier</span>}
+                  {!s.live && <span className="text-ink-3"> · no key, mock</span>}
+                </span>
+                <span className="tabular whitespace-nowrap text-ink">{s.calls_today}{s.rpd ? ` / ${s.rpd}` : ''} today</span>
+              </li>
+            ))}
+          </ul>
           {data.by_purpose.length === 0 ? (
             <p className="text-[13px] leading-snug text-ink-2">
               No live model calls yet. The briefing is ranked by rules, so it costs nothing to build.

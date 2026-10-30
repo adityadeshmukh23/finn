@@ -1,15 +1,10 @@
-"""The one place models and prices are configured.
-
-Routing order everywhere: deterministic rules first, then the cheap model, then the strong
-model only for tasks that need judgement. Prices are USD per million tokens (first-party API).
+"""Which slot each task uses. Slots themselves (provider, model, price, limits) are set in env;
+see config.Slot. Routing order everywhere: deterministic rules first, then the cheap slot, then
+the strong slot only for tasks that need judgement.
 """
+from .config import Slot, settings
 
-MODELS = {
-    "cheap": {"id": "claude-haiku-5-5", "input": 0.10, "output": 0.50, "cache_read": 0.01},
-    "strong": {"id": "claude-sonnet-5-5", "input": 2.00, "output": 10.00, "cache_read": 0.20},
-}
-
-# purpose -> tier. Sonnet is reserved for promised-vs-delivered verdicts and bull/bear.
+# purpose -> slot. The strong slot is reserved for promised-vs-delivered verdicts and bull/bear.
 ROUTES = {
     "classify": "cheap",
     "summarise_filing": "cheap",
@@ -21,11 +16,11 @@ ROUTES = {
 }
 
 
-def model_for(purpose: str) -> dict:
-    return MODELS[ROUTES[purpose]]
+def slot_for(purpose: str) -> Slot:
+    return settings.slots[ROUTES[purpose]]
 
 
-def cost_usd(model: dict, input_tokens: int, output_tokens: int, cache_read_tokens: int = 0) -> float:
+def cost_usd(slot: Slot, input_tokens: int, output_tokens: int, cache_read_tokens: int = 0) -> float:
     return (
-        input_tokens * model["input"] + output_tokens * model["output"] + cache_read_tokens * model["cache_read"]
+        input_tokens * slot.price_in + output_tokens * slot.price_out + cache_read_tokens * slot.price_cache_read
     ) / 1_000_000

@@ -54,6 +54,7 @@ export interface Ledger {
   today: { live_calls: number; usd: number }
   by_source: Record<string, { calls: number; usd: number }>
   by_purpose: { purpose: string; model: string; calls: number; input_tokens: number; output_tokens: number; usd: number }[]
+  slots: { slot: string; provider: string; model: string; live: boolean; free: boolean; calls_today: number; rpd: number; rpm: number }[]
   mode: 'live' | 'mock'
   public_demo: boolean
 }

@@ -17,9 +17,15 @@ def _bool(name: str, default: bool) -> bool:
 @dataclass(frozen=True)
 class Settings:
     data_dir: Path = field(default_factory=lambda: Path(os.getenv("FINN_DATA_DIR", REPO_ROOT / "data")))
-    # "auto" = live if a key is present, else mock. "mock" forces recorded/mock outputs.
+    # "auto" = live for any slot whose provider has a key, else mock. "mock" forces recorded/mock outputs.
     llm_mode: str = os.getenv("LLM_MODE", "auto")
-    has_api_key: bool = bool(os.getenv("ANTHROPIC_API_KEY"))
+    provider_keys: dict[str, bool] = field(default_factory=lambda: {
+        "gemini": bool(os.getenv("GEMINI_API_KEY")),
+        "anthropic": bool(os.getenv("ANTHROPIC_API_KEY")),
+    })
+    slots: dict[str, "Slot"] = field(default_factory=lambda: {"cheap": _slot("CHEAP"), "strong": _slot("STRONG")})
+    # Longest we'll wait for a free per-minute slot before falling back (seconds).
+    rate_wait_max: float = float(os.getenv("LLM_RATE_WAIT_MAX", "20"))
     # Public demo: serve cached/snapshot results; live LLM calls are rate-limited.
     public_demo: bool = _bool("PUBLIC_DEMO", False)
     budget_usd_total: float = float(os.getenv("BUDGET_USD_TOTAL", "5.0"))
@@ -43,11 +49,48 @@ class Settings:
     def snapshot_dir(self) -> Path:
         return self.data_dir / "snapshots"
 
+    def live(self, slot: "Slot") -> bool:
+        return self.llm_mode != "mock" and self.provider_keys.get(slot.provider, False)
+
     @property
-    def llm_live(self) -> bool:
-        if self.llm_mode == "mock":
-            return False
-        return self.has_api_key
+    def any_live(self) -> bool:
+        return any(self.live(s) for s in self.slots.values())
+
+
+@dataclass(frozen=True)
+class Slot:
+    """A model slot. Provider, model, prices and rate limits all come from env."""
+    name: str
+    provider: str
+    model: str
+    price_in: float          # USD per million tokens; 0 on a free tier
+    price_out: float
+    price_cache_read: float
+    rpm: int                 # requests per minute we allow ourselves (0 = unlimited)
+    rpd: int                 # requests per day, counted from midnight Pacific (0 = unlimited)
+
+
+# Defaults are Gemini free-tier models. Google publishes per-project limits only in AI Studio
+# (aistudio.google.com/rate-limit); set LLM_*_RPM / LLM_*_RPD to what yours shows.
+_DEFAULTS = {
+    "CHEAP": ("gemini", "gemini-3.5-flash-lite", 10, 500),
+    "STRONG": ("gemini", "gemini-3.8-flash", 5, 20),
+}
+
+
+def _slot(name: str) -> Slot:
+    provider, model, rpm, rpd = _DEFAULTS[name]
+    env = lambda k, d: os.getenv(f"LLM_{name}_{k}", d)  # noqa: E731
+    return Slot(
+        name=name.lower(),
+        provider=env("PROVIDER", provider),
+        model=env("MODEL", model),
+        price_in=float(env("PRICE_IN", "0")),
+        price_out=float(env("PRICE_OUT", "0")),
+        price_cache_read=float(env("PRICE_CACHE_READ", "0")),
+        rpm=int(env("RPM", str(rpm))),
+        rpd=int(env("RPD", str(rpd))),
+    )
 
 
 settings = Settings()

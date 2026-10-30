@@ -29,7 +29,7 @@ def client_id(request: Request) -> str:
 
 @app.get("/api/health")
 def health():
-    return {"ok": True, "llm_mode": "live" if settings.llm_live else "mock", "public_demo": settings.public_demo}
+    return {"ok": True, "llm_mode": "live" if settings.any_live else "mock", "public_demo": settings.public_demo}
 
 
 @app.get("/api/portfolio")
