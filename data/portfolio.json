@@ -1,0 +1,23 @@
+{
+  "portfolio": [
+    {"symbol": "RELIANCE", "name": "Reliance Industries", "sector": "Energy & conglomerate", "size": "large"},
+    {"symbol": "HDFCBANK", "name": "HDFC Bank", "sector": "Private bank", "size": "large"},
+    {"symbol": "INFY", "name": "Infosys", "sector": "IT services", "size": "large"},
+    {"symbol": "LT", "name": "Larsen & Toubro", "sector": "Engineering", "size": "large"},
+    {"symbol": "SUNPHARMA", "name": "Sun Pharma", "sector": "Pharma", "size": "large"},
+    {"symbol": "MARUTI", "name": "Maruti Suzuki", "sector": "Autos", "size": "large"},
+    {"symbol": "ASIANPAINT", "name": "Asian Paints", "sector": "Paints", "size": "large"},
+    {"symbol": "HINDUNILVR", "name": "Hindustan Unilever", "sector": "FMCG", "size": "large"},
+    {"symbol": "BAJFINANCE", "name": "Bajaj Finance", "sector": "NBFC", "size": "large"},
+    {"symbol": "NAUKRI", "name": "Info Edge", "sector": "Internet", "size": "large"},
+    {"symbol": "POLYCAB", "name": "Polycab India", "sector": "Cables & wires", "size": "mid"},
+    {"symbol": "BAJAJELEC", "name": "Bajaj Electricals", "sector": "Consumer durables", "size": "mid"},
+    {"symbol": "DEEPAKNTR", "name": "Deepak Nitrite", "sector": "Chemicals", "size": "mid"},
+    {"symbol": "KPITTECH", "name": "KPIT Technologies", "sector": "Auto software", "size": "mid"},
+    {"symbol": "HOMEFIRST", "name": "Home First Finance", "sector": "Housing finance", "size": "small"},
+    {"symbol": "EQUITASBNK", "name": "Equitas Small Finance Bank", "sector": "Small finance bank", "size": "small"},
+    {"symbol": "AARTIPHARM", "name": "Aarti Pharmalabs", "sector": "Pharma", "size": "small"},
+    {"symbol": "STERTOOLS", "name": "Sterling Tools", "sector": "Auto components", "size": "small"}
+  ],
+  "research": ["PERSISTENT", "POLYCAB", "COFORGE", "KAYNES"]
+}

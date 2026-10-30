@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "api",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "cd backend && ../.venv/bin/uvicorn finn.main:app --port 8000"],
+      "port": 8000
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "cd web && PATH=$HOME/.local/node/bin:$PATH npm run dev -- --port 5173 --strictPort"],
+      "port": 5173
+    }
+  ]
+}

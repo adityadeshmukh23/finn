@@ -4,3 +4,7 @@ node_modules/
 .venv/
 .DS_Store
 docs/*.pdf
+data/cache/
+*.sqlite
+dist/
+.pytest_cache/
