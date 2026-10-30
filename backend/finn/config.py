@@ -26,6 +26,8 @@ class Settings:
     slots: dict[str, "Slot"] = field(default_factory=lambda: {"cheap": _slot("CHEAP"), "strong": _slot("STRONG")})
     # Longest we'll wait for a free per-minute slot before falling back (seconds).
     rate_wait_max: float = float(os.getenv("LLM_RATE_WAIT_MAX", "20"))
+    # Per-request timeout; the SDK's own silent retries otherwise stretch an overload to minutes.
+    request_timeout: float = float(os.getenv("LLM_TIMEOUT", "90"))
     # Public demo: serve cached/snapshot results; live LLM calls are rate-limited.
     public_demo: bool = _bool("PUBLIC_DEMO", False)
     budget_usd_total: float = float(os.getenv("BUDGET_USD_TOTAL", "5.0"))
@@ -74,7 +76,7 @@ class Slot:
 # (aistudio.google.com/rate-limit); set LLM_*_RPM / LLM_*_RPD to what yours shows.
 _DEFAULTS = {
     "CHEAP": ("gemini", "gemini-3.5-flash-lite", 10, 500),
-    "STRONG": ("gemini", "gemini-3.8-flash", 5, 20),
+    "STRONG": ("gemini", "gemini-3.6-flash", 5, 20),
 }
 
 

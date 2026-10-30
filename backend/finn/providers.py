@@ -38,9 +38,25 @@ class Provider(Protocol):
 class GeminiProvider:
     def __init__(self):
         from google import genai
-        self._client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+        from google.genai import types
+
+        from .config import settings
+        self._timeout = settings.request_timeout
+        # The SDK retries 5 times by default, 429s included, which hides RetryInfo from the gate and
+        # turned a 503 "high demand" into a 279s call. Retry fast server errors once; a 504 (deadline
+        # already spent) and 429s go straight back to llm.call.
+        self._client = genai.Client(
+            api_key=os.environ["GEMINI_API_KEY"],
+            http_options=types.HttpOptions(
+                timeout=int(self._timeout * 1000),
+                retry_options=types.HttpRetryOptions(
+                    attempts=2, initial_delay=2, max_delay=8, http_status_codes=[500, 502, 503],
+                ),
+            ),
+        )
 
     def generate(self, model, system, user, schema, max_tokens):
+        import httpx
         from google.genai import errors, types
 
         try:
@@ -58,6 +74,8 @@ class GeminiProvider:
             if e.code == 429:
                 raise _gemini_rate_limit(e) from e
             raise ProviderError(f"Gemini {e.code}: {e.message}") from e
+        except httpx.TimeoutException as e:
+            raise ProviderError(f"Gemini timed out after {self._timeout:.0f}s") from e
         u = r.usage_metadata
         parsed = r.parsed if isinstance(r.parsed, schema) else None
         if parsed is None and r.text:
