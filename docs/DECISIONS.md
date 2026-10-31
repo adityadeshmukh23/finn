@@ -134,3 +134,20 @@
 - **Strong-model calls:** `LLM_TIMEOUT=240` for offline research runs. The Gemini SDK sends the timeout to the server as the deadline, so at 90 s, 3.8-flash and 3.7-flash returned 504 while reasoning over a long judge prompt. With 240 s, 3.8-flash answered first time. Unusable output (cut off or off-schema) now hands over to the next model like an error.
 - **Our ledger undercounts Google's daily quota.** Google stopped gemini-3.8-flash at its 20/day limit when our ledger showed 11 calls for it: the SDK retries 503s itself, and timed-out attempts count on Google's side. Treat the ledger's per-model count as a lower bound. The 429 path also crashed reading the quota details (the SDK names the field `details`), which is now fixed and tested.
 - **Outcome:** BEL met 3 of 6 checkable promises. Kaynes is short on FY26 revenue (₹4,500 cr+ guided, ₹3,626.35 cr delivered, 80.6%, so partially). Coforge met 2 of 2 (FY26 EBIT 14.4% against 14%+, Q4 EBIT 16.6% against 15%+). Asian Paints has no checkable promise: its guidance is worded or a margin band with no year. Dixon's six cheap-model reads are recorded, and its judge step waits for tomorrow's quota.
+
+## Pull mode 3: Dixon recorded; known weak spots (2026-11-01)
+
+- **Dixon:** the judge ran once on gemini-3.7-flash, whose daily quota was already gone, then once on 3.6-flash, which answered. The recording names both. `LLM_RETRIES=0` made that one request per model; by default, the SDK and the gate each retry a 503 or short rate limit once, and every try counts against the free quota. Met 1 of 5 checkable promises (robo vacuums by December '25). Missed: HKC display trials and mass production, and the Inventec JV date, all now promised for Q3–Q4 FY27. Partially: Tirupati, where the facility was ready but mass production moved to Q2 FY27.
+- **New rule from Dixon's review:** a model verdict of late or missed needs evidence that says when. "We have started manufacturing semi-auto washing machines" shows it happened, not that it was late, so that row is "not found" with the reason stated.
+
+### Weak spots, stated plainly
+
+- **Asian Paints has no checkable promise.** Its management guides in words ("mid-single-digit value growth", "high single-digit volume growth") and with an 18–20% PBDIT band that names no year. FINN doesn't turn words into numbers or assign a year management didn't say, so the scorecard shows six "too vague" rows and no verdict. It's in the set so Ask FINN works from a push card. As a demo of the lens it's thin; a numeric guider from the portfolio (L&T, Bajaj Finance) would show more.
+- **Our call ledger undercounts Google's.** On 1 Nov, Google stopped gemini-3.8-flash at its 20/day free limit while our ledger showed 11 calls to it. The SDK's own 503 retry and the attempts that timed out are counted by Google but not fully by us. Treat ledger counts as a lower bound, run research with `LLM_RETRIES=0`, and stop well before the per-model limit.
+- **PDF text needed verifier rules, and they're tolerances we chose:**
+  - Words and numbers split by extraction ("fi rst", "202 5", "9 ,976 .51") are matched by comparing letters, digits, "." and "%" only.
+  - Transcripts print "Page 3 of 20" on PDF page 4, so a quote may be re-cited to one neighbouring page, and only if it's verbatim there and on no other neighbour.
+  - Report titles can sit under their table (BEL's consolidated P&L), and revenue can be printed only as its parts (Asian Paints), which code sums.
+  - Each rule is tested on the real text that needed it. A stricter verifier would drop more true claims; a looser one would admit paraphrase.
+- **"Not found" is FINN's search, not proof of absence.** The cheap model sometimes misses a reported figure: Coforge's Q4 EBIT was found only after the period-from-quote rule. The rules search of later calls uses keywords. Reasons are worded "FINN found no…" for that reason.
+- **Model verdicts on milestones rest on one quote each.** They're shown with the quote and page, and withheld if the reasoning uses an unsourced number or claims lateness without a date, but they're still a judgement.
