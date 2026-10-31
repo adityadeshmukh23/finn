@@ -9,11 +9,15 @@ from dataclasses import dataclass
 
 HIGH, MEDIUM, ROUTINE = "high", "medium", "routine"
 
-TOP_ROLE = re.compile(
+TOP_EXEC = re.compile(
     r"\b(MD|M\.D\.|CEO|CFO|COO|Managing Director|Chief Executive|Chief Financial|Chief Operating|"
-    r"Whole[- ]?time Director|Executive Director|Chairman|Chairperson)\b",
+    r"Whole[- ]?time Director|(?<!Non-)(?<!Non )Executive Director)\b",
     re.I,
 )
+CHAIR = re.compile(r"\b(Chairman|Chairperson)\b", re.I)
+RESULTS_AD = re.compile(r"financial results|\bresults\b.*(quarter|half[- ]year)", re.I)
+SUBSIDIARY_SETUP = re.compile(r"incorporation of (a |an )?(new )?(wholly[- ]owned |step[- ]down )*subsidiar|strike[- ]off|struck off", re.I)
+LISTING = re.compile(r"initial public offer|\bipo\b|listing of (its |our )?subsidiary|trading in (the )?equity shares of .{0,80}commence", re.I)
 RESULTS = re.compile(r"financial results?|\bresults\b.*quarter|quarter.*\bresults\b", re.I)
 
 
@@ -22,10 +26,19 @@ class Classified:
     category: str
     tier: str
     reason: str      # short label; for routine items it's the "why hidden" group name
+    ambiguous: bool = False   # rules couldn't tell from NSE's text; the filing itself decides (cheap model)
 
 
-def _c(category, tier, reason):
-    return Classified(category, tier, reason)
+def _c(category, tier, reason, ambiguous=False):
+    return Classified(category, tier, reason, ambiguous)
+
+
+def is_top_role(text: str) -> bool:
+    """CEO/CFO/MD-level. A chair counts only if they aren't an independent director, and a role at a
+    subsidiary only if it's executive (KPIT: an independent chair of a subsidiary's board is not the top)."""
+    if TOP_EXEC.search(text):
+        return True
+    return bool(CHAIR.search(text)) and not re.search(r"independent director|subsidiary", text, re.I)
 
 
 def classify(desc: str, text: str) -> Classified:
@@ -34,7 +47,10 @@ def classify(desc: str, text: str) -> Classified:
     tl = t.lower()
 
     # Paperwork that never moves a stock, whatever it mentions.
-    if "newspaper publication" in d:
+    if "newspaper publication" in d or re.search(r"newspaper (clipping|publication|advertisement)", tl):
+        # The glossary files results ads under results; they repeat the results filing, so they stay routine.
+        if RESULTS_AD.search(t):
+            return _c("results", ROUTINE, "Results newspaper ads")
         return _c("unclassified", ROUTINE, "Newspaper ads")
     if d.startswith("certificate under sebi") or "compliance certificate" in tl:
         return _c("unclassified", ROUTINE, "Compliance certificates")
@@ -52,14 +68,18 @@ def classify(desc: str, text: str) -> Classified:
     ) and re.search(r"director|officer|kmp|ceo|cfo|\bmd\b", tl) or re.search(
         r"change in (the )?(managing director|\bmd\b|ceo|cfo|chief|key managerial|director|management)", tl
     ):
-        if TOP_ROLE.search(t):
+        if is_top_role(t):
             return _c("management_change", HIGH, "Top management change")
         if re.search(r"independent director|additional director|director", tl):
             return _c("management_change", MEDIUM, "Board change")
         if not t or t.lower().endswith(("director/kmp/smp", "change in management")):
             # Generic header filing; the specific one usually arrives alongside it.
-            return _c("management_change", MEDIUM, "Management change (details in filing)")
+            return _c("management_change", MEDIUM, "Management change (details in filing)", True)
         return _c("management_change", ROUTINE, "Senior staff changes")
+
+    # A subsidiary listing mentions the subsidiary's results; it's still a listing, not ours (Reliance/JPL).
+    if LISTING.search(t):
+        return _c("M&A", HIGH, "Subsidiary IPO / listing")
 
     # Results and their satellites
     if d == "outcome of board meeting":
@@ -69,15 +89,13 @@ def classify(desc: str, text: str) -> Classified:
             return _c("dividend", MEDIUM, "Dividend")
         if re.search(r"fund ?rais|qip|preferential|rights issue|buy-?back|non[- ]convertible", tl):
             return _c("fund_raise", MEDIUM, "Fund raise")
-        return _c("unclassified", ROUTINE, "Board outcomes (no detail in NSE summary)")
+        return _c("unclassified", ROUTINE, "Board outcomes (no detail in NSE summary)", True)
     if d == "investor presentation" or re.search(r"(results|analyst) presentation", tl):
         return _c("results", MEDIUM, "Results deck")
     if d in {"updates", "general updates", "press release"} and RESULTS.search(t):
         return _c("results", HIGH if d != "press release" else MEDIUM, "Quarterly results")
     if d == "press release" and re.search(r"quarter|\bq[1-4] ?fy|\bh[12] ?fy|performance", tl):
         return _c("results", MEDIUM, "Results press release")
-    if re.search(r"initial public offer|\bipo\b|listing of (its |our )?subsidiary", tl):
-        return _c("M&A", HIGH, "Subsidiary IPO / listing")
     if "transcript" in tl:
         return _c("earnings_call", MEDIUM, "Concall transcript")
     if re.search(r"audio recording|link of recording|con\.? ?call|conference call|earnings call|investors' call", tl):
@@ -88,13 +106,16 @@ def classify(desc: str, text: str) -> Classified:
     # Corporate actions and events
     if d in {"acquisition", "amalgamation / merger", "scheme of arrangement", "diversification/disinvestment"} \
             or re.search(r"acqui|amalgamat|merger|demerger|joint venture", tl):
-        if re.search(r"incorporation of a wholly owned subsidiary|strike[- ]off", tl):
+        if SUBSIDIARY_SETUP.search(t):
             return _c("M&A", ROUTINE, "Subsidiary housekeeping")
         return _c("M&A", HIGH, "M&A")
     if d in {"sale or disposal", "other restructuring"}:
-        if re.search(r"strike[- ]off|struck off", tl):
+        if SUBSIDIARY_SETUP.search(t):
             return _c("M&A", ROUTINE, "Subsidiary housekeeping")
         return _c("M&A", MEDIUM, "Restructuring")
+    if "insolvency" in d and not re.search(r"nclat|nclt|order|appeal", tl):
+        # Is the company the debtor or a creditor? Only the filing says.
+        return _c("litigation", HIGH, "Litigation / regulatory order", True)
     if "insolvency" in d or re.search(r"\bnclt|nclat|sebi order|penalty|show cause|litigation|lawsuit", tl):
         return _c("litigation", HIGH, "Litigation / regulatory order")
     if "credit rating" in d:
@@ -134,10 +155,10 @@ def classify(desc: str, text: str) -> Classified:
     if re.search(r"board leadership|chairman|chairperson", tl):
         return _c("management_change", MEDIUM, "Board change")
     if d == "outcome of board meeting" or re.search(r"^outcome of (the )?board meeting", tl):
-        return _c("unclassified", ROUTINE, "Board outcomes (no detail in NSE summary)")
+        return _c("unclassified", ROUTINE, "Board outcomes (no detail in NSE summary)", True)
     if re.search(r"regulation 30|^general updates?$|^updates?$", tl.strip()) or not t:
         # NSE gave no summary; the substance is only in the PDF. Labelled honestly, not guessed.
-        return _c("unclassified", ROUTINE, "Reg. 30 disclosures (NSE gave no summary)")
+        return _c("unclassified", ROUTINE, "Reg. 30 disclosures (NSE gave no summary)", True)
     if d in {"updates", "general updates"}:
-        return _c("press_release", ROUTINE, "Company news & PR")
-    return _c("unclassified", ROUTINE, "Other routine filings")
+        return _c("press_release", ROUTINE, "Company news & PR", True)
+    return _c("unclassified", ROUTINE, "Other routine filings", True)

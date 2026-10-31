@@ -1,0 +1,21 @@
+{
+ "id": "106815707",
+ "symbol": "NAUKRI",
+ "url": "https://nsearchives.nseindia.com/corporate/NAUKRI2_13102026132622_SE_Intimation_SISL_and_SIHL_13102026.pdf",
+ "rules": {
+  "category": "M&A",
+  "tier": "high"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "M&A",
+ "importance": "high",
+ "summary": "Info Edge approved investments of about Rs. 100 crore each in its wholly owned subsidiaries Startup Internet Services Limited and Startup Investments (Holding) Limited.",
+ "quote": "The Board of Directors has approved an investment of about Rs. 100 crore in the equity shares of its wholly owned subsidiary, Startup Internet Services Limited",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

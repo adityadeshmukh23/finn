@@ -1,0 +1,21 @@
+{
+ "id": "106830354",
+ "symbol": "INFY",
+ "url": "https://nsearchives.nseindia.com/corporate/Infosys_27102026163727_PR_27102026.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "press_release",
+ "importance": "medium",
+ "summary": "Infosys successfully delivered Syngenta's global SAP S/4HANA transformation for its Crop Protection business.",
+ "quote": "Infosys Successfully Delivers Syngenta’s Global SAP S/4HANA Transformation for Crop Protection Business",
+ "page": 2,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "id": "106816002",
+ "symbol": "POLYCAB",
+ "url": "https://nsearchives.nseindia.com/corporate/POLYCAB_13102026164554_StockExchangeIntimation-Press_Release.pdf",
+ "rules": {
+  "category": "litigation",
+  "tier": "high"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "high",
+ "summary": "The Hon'ble NCLAT stayed and kept in abeyance the order admitting a Corporate Insolvency Resolution Process against the company.",
+ "quote": "Hon'ble National Company Law Appellate Tribunal, Principal Bench, New Delhi staying and keeping in abeyance the order dated October 07, 2026 passed by the Hon'ble National Company Law Tribunal, Ahmedabad Bench, regarding admission and initiation of Corporate Insolvency Resolution Process",
+ "page": 1,
+ "verified": false,
+ "checks": {
+  "quote_found": false,
+  "summary_numbers_found": true
+ }
+}

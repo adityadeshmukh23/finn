@@ -1,0 +1,21 @@
+{
+ "id": "106815003",
+ "symbol": "SUNPHARMA",
+ "url": "https://nsearchives.nseindia.com/corporate/SUNSEC_12102026195625_BMOutcome12October2026.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "fund_raise",
+ "importance": "routine",
+ "summary": "The board approved issuing non-convertible debentures up to INR 10,000 Crore on a private placement basis and noted the resignation of Mr. Gautam Doshi.",
+ "quote": "approved the issuance of listed, rated, unsecured, redeemable non-convertible debentures (\"NCDs\"), on a private placement basis, in one or more tranches and/or series, for an aggregate amount not exceeding INR 10,000 Crore.",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

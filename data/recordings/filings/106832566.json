@@ -1,0 +1,21 @@
+{
+ "id": "106832566",
+ "symbol": "INFY",
+ "url": "https://nsearchives.nseindia.com/corporate/Infosys_28102026173120_PR_28102026.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "press_release",
+ "importance": "routine",
+ "summary": "Canada's UNI Financial Cooperation deployed Infosys Finacle Universal Banker across all its branches.",
+ "quote": "Canada’s UNI Financial Cooperation Advances Branch Modernization with Infosys Finacle Universal Banker",
+ "page": 2,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

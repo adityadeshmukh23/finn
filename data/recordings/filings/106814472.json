@@ -1,0 +1,21 @@
+{
+ "id": "106814472",
+ "symbol": "MARUTI",
+ "url": "https://nsearchives.nseindia.com/corporate/MARUTIASHISH_12102026161252_STxIntimation_CCI_12Oct2026.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "medium",
+ "summary": "The Competition Commission of India matter hearing scheduled for 02nd November 2026 will not be taken up by NCLAT.",
+ "quote": "notifying that the matter will not be taken up on 02nd November 2026.As per the notice, the next date of hearing before the NCLAT would be notified in due course.",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

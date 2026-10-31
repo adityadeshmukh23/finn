@@ -1,0 +1,21 @@
+{
+ "id": "106831835",
+ "symbol": "KPITTECH",
+ "url": "https://nsearchives.nseindia.com/corporate/KPITTECH_28102026125528_1_Outcome.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "results",
+ "importance": "high",
+ "summary": "KPIT Technologies approved un-audited consolidated and standalone financial results for the quarter and half year ended September 30, 2026.",
+ "quote": "Un- audited Conso lidated Financial Resu lts and Standa lone Financ ial Resu lts for the quarter and half year ended September 30, 2026 .",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

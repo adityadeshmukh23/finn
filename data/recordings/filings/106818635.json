@@ -1,0 +1,21 @@
+{
+ "id": "106818635",
+ "symbol": "POLYCAB",
+ "url": "https://nsearchives.nseindia.com/corporate/POLYCAB_15102026153319_UnauditedInterimCondensed15102026.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "results",
+ "importance": "high",
+ "summary": "Polycab India Limited submitted un-audited standalone and consolidated financial statements for the quarter and half year ended September 30, 2026.",
+ "quote": "please find enclosed herewith the Unaudited Interim Condensed (Standalone and Consolidated) Financial Statements of the Company, along with Review Reports for the quarter and half year ended September 30, 2026",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "id": "106829683",
+ "symbol": "LT",
+ "url": "https://nsearchives.nseindia.com/corporate/PAM_27102026101631_PressRelease27102026.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "medium"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "press_release",
+ "importance": "medium",
+ "summary": "L&T secured major Design & Build orders for two key systems packages of the Dhaka Mass Rapid Transit Development Project (Line 1).",
+ "quote": "The Transportation Infrastructure business vertical of L&T has secured major Design & Build orders for two key systems p ackages of the Dhaka Mass Rapid Transit Development Project (Line 1)",
+ "page": 2,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

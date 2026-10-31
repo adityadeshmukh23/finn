@@ -1,0 +1,21 @@
+{
+ "id": "106815914",
+ "symbol": "BAJAJELEC",
+ "url": "https://nsearchives.nseindia.com/corporate/BAJAJELEC_13102026160820_SignedDraftSEIntimationKolkata13102026.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "high",
+ "summary": "Bajaj Electricals received an adverse appellate GST order for FY 2019-20 imposing a total demand of Rs. 627.36 lakh including a penalty of Rs. 31.89 lakh.",
+ "quote": "imposing a total demand of Rs. 627.36 lakh, which inter alia includes a general penalty of Rs. 31.89 lakh",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

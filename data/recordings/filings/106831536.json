@@ -1,0 +1,21 @@
+{
+ "id": "106831536",
+ "symbol": "POLYCAB",
+ "url": "https://nsearchives.nseindia.com/corporate/POLYCAB_28102026102430_StockExchangeintimation27102026.pdf",
+ "rules": {
+  "category": "litigation",
+  "tier": "high"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "high",
+ "summary": "NCLAT directed MSCI not to delist Polycab India Limited from the MSCI Index till the pronouncement of the order.",
+ "quote": "Hon'ble National Company Law Appellate Tribunal (\"Hon'ble NCLAT\"), Principal Bench, New Delhi has vide its order dated October 27, 2026 directed MSCI not to delist the scrip of Polycab from MSCI Index till the pronouncement of the order.",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

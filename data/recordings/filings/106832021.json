@@ -1,0 +1,21 @@
+{
+ "id": "106832021",
+ "symbol": "BAJAJELEC",
+ "url": "https://nsearchives.nseindia.com/corporate/BAJAJELEC_28102026143309_SEIntimationOutcome.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "management_change",
+ "importance": "high",
+ "summary": "Mr. Shekhar Bajaj ceased as Executive Chairman and was appointed Chairman Emeritus, while Mr. Sudarshan Sampathkumar was appointed Non-Executive Chairman.",
+ "quote": "Cessation of Mr. Shekhar Bajaj (DIN: 00089358) as Executive Chairman and approve his continuation as Non-Executive Non-Independent Director, and confer upon him the title of 'Chairman Emeritus'",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

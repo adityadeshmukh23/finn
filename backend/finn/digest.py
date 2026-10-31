@@ -6,6 +6,7 @@ import re
 from collections import defaultdict
 from datetime import datetime, timedelta
 
+from . import filings
 from .classify import HIGH, MEDIUM, ROUTINE, Classified, classify
 from .sources.nse import Announcement
 
@@ -90,7 +91,8 @@ def headline(a: Announcement, c: Classified | None = None) -> str:
     return t if len(t) <= 180 else t[:177].rstrip() + "…"
 
 
-def _item(a: Announcement, c: Classified, window_start: datetime, window_end: datetime) -> dict:
+def _item(a: Announcement, c: Classified, window_start: datetime, window_end: datetime,
+          read: dict | None = None, summary: str | None = None) -> dict:
     base = SCORES.get((c.category, c.tier), 0)
     span = (window_end - window_start).total_seconds() or 1
     recency = 5 * max(0.0, (a.dt - window_start).total_seconds()) / span
@@ -100,7 +102,9 @@ def _item(a: Announcement, c: Classified, window_start: datetime, window_end: da
         "category": c.category,
         "tier": c.tier,
         "reason": c.reason,
-        "headline": headline(a, c),
+        "headline": summary or headline(a, c),
+        # Where a summary came from the filing (verified quote + numbers), say so and cite the page.
+        "read": {"page": read["page"], "quote": read["quote"]} if summary and read else None,
         "why": WHY.get(c.reason, ""),
         "url": a.url,
         "ts": a.ts,
@@ -109,23 +113,34 @@ def _item(a: Announcement, c: Classified, window_start: datetime, window_end: da
     }
 
 
-def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str, dict]) -> dict:
+def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str, dict],
+          reads: dict[str, dict] | None = None) -> dict:
+    reads = reads or {}
     start = as_of - timedelta(hours=hours)
     in_window = [a for a in items if start < a.dt <= as_of]
 
     seen, rows = set(), []
     for a in sorted(in_window, key=lambda a: a.ts, reverse=True):
-        c = classify(a.desc, a.text)
         key = (a.symbol, headline(a).lower()[:120])
         if key in seen:
             continue
         seen.add(key)
-        rows.append(_item(a, c, start, as_of))
+        c, summary = filings.apply(classify(a.desc, a.text), reads.get(a.id))
+        rows.append(_item(a, c, start, as_of, reads.get(a.id), summary))
 
     surfaced = defaultdict(list)
     hidden = defaultdict(list)
     for r in rows:
-        (hidden[r["reason"]] if r["tier"] == ROUTINE else surfaced[r["symbol"]]).append(r)
+        if r["tier"] != ROUTINE:
+            surfaced[r["symbol"]].append(r)
+    folded = defaultdict(list)
+    for r in rows:
+        if r["tier"] == ROUTINE:
+            # Results ads repeat the results filing: they ride on that company's card, not in the hidden row.
+            if r["category"] == "results" and r["symbol"] in surfaced:
+                folded[r["symbol"]].append(r)
+            else:
+                hidden[r["reason"]].append(r)
 
     cards = []
     for sym, its in surfaced.items():
@@ -141,6 +156,7 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
             "lead": its[0],
             "items": its[1:],
             "routine_count": sum(1 for r in rows if r["symbol"] == sym and r["tier"] == ROUTINE),
+            "folded": folded.get(sym, []),
         })
     cards.sort(key=lambda c: c["score"], reverse=True)
 
@@ -153,7 +169,7 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
         "window": {"start": start.isoformat(timespec="seconds"), "end": as_of.isoformat(timespec="seconds"), "hours": hours},
         "counts": {
             "total": len(rows),
-            "shown": sum(1 + len(c["items"]) for c in cards),
+            "shown": sum(1 + len(c["items"]) + len(c["folded"]) for c in cards),
             "hidden": sum(g["count"] for g in hidden_groups),
             "duplicates_dropped": len(in_window) - len(rows),
         },

@@ -1,0 +1,21 @@
+{
+ "id": "106834219",
+ "symbol": "INFY",
+ "url": "https://nsearchives.nseindia.com/corporate/INFY_29102026150417_PR_29102026.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "press_release",
+ "importance": "routine",
+ "summary": "Infosys announced the winners of the 13th edition of the Qorus-Infosys Finacle Banking Innovation Awards 2026.",
+ "quote": "Winners of Qorus-Infosys Finacle Banking Innovation Awards 2026 Announced",
+ "page": 2,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

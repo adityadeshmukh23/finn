@@ -1,0 +1,21 @@
+{
+ "id": "106819599",
+ "symbol": "POLYCAB",
+ "url": "https://nsearchives.nseindia.com/corporate/POLYCAB_16102026093958_CIRP15102026.pdf",
+ "rules": {
+  "category": "litigation",
+  "tier": "high"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "medium",
+ "summary": "The NCLAT heard the appeal in the matter of Asier Metals Private Limited versus Polycab India Limited and reserved for order.",
+ "quote": "The Hon'ble NCLAT has heard the matter and reserved for order.",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

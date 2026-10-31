@@ -1,0 +1,21 @@
+{
+ "id": "106834032",
+ "symbol": "BAJAJELEC",
+ "url": "https://nsearchives.nseindia.com/corporate/BAJAJELEC_29102026132341_SignedDraftSEIntimationJaipur28102026.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "high",
+ "summary": "Bajaj Electricals received two adverse appellate orders upholding gross demands amounting to Rs 2.83 crore and Rs 6.53 crore for FY 2018-19.",
+ "quote": "The Company has received two adverse appel late orders, both for FY 2018- 19, issued by the Office of the Commissioner (Appeals ), Customs, C entral Excise, S ervice Tax & CGST, J aipur",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

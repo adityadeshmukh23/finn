@@ -23,7 +23,22 @@ CASES = [
     ("Corporate Insolvency Resolution Process", "Order passed by NCLAT setting aside the order of NCLT", "litigation", HIGH),
     ("Credit Rating", "CRISIL has downgraded the long-term rating", "credit_rating", HIGH),
     ("Credit Rating", "Acme Ltd has informed the Exchange about Credit Rating", "credit_rating", ROUTINE),
-    ("Copy of Newspaper Publication", "Extract of unaudited financial results for the quarter", "unclassified", ROUTINE),
+    ("Copy of Newspaper Publication", "Extract of unaudited financial results for the quarter", "results", ROUTINE),
+    ("Copy of Newspaper Publication", "Notice of loss of share certificates", "unclassified", ROUTINE),
+    # Regressions found on the 30 Oct snapshot (names changed).
+    # KPIT: an independent chair of a subsidiary's board is a board change, not top management.
+    ("Appointment", "Acme Ltd has informed the Exchange regarding Appointment of Independent Director, Mr. A B - "
+     "Chairman of the Board, on the Board of Acme Inc., material subsidiary of the Company", "management_change", MEDIUM),
+    ("Appointment", "Appointment of Mr A B as Non-Executive Director", "management_change", MEDIUM),
+    # Reliance: a subsidiary's listing mentions the subsidiary's results; it's a listing.
+    ("General Updates", "Trading in equity shares of Acme Platforms Limited (APL) will commence from October 28, 2026."
+     "Further, a meeting of board of directors of APL is scheduled to consider and approve the unaudited financial "
+     "results of APL for the quarter and half year ended September 30, 2026.", "M&A", HIGH),
+    # Maruti: setting up a subsidiary is housekeeping, with or without "a".
+    ("Acquisition", "Acme Ltd has informed the Exchange about Incorporation of Wholly Owned Subsidiary", "M&A", ROUTINE),
+    # Results ads are results, never a results card on their own.
+    ("Copy of Newspaper Publication", "Acme Ltd has informed the Exchange about newspaper clippings of the Reviewed "
+     "Financial Results for the quarter and half year ended September 30, 2026", "results", ROUTINE),
     ("ESOP/ESOS/ESPS", "Allotment of 4675598 Shares", "unclassified", ROUTINE),
     ("Allotment of Securities", "allotment of 2,06,950 securities pursuant to Non Convertible Securities", "fund_raise", ROUTINE),
     ("Record Date", "Record date for the purpose of Dividend is 06-Nov-2026", "dividend", ROUTINE),
@@ -44,3 +59,16 @@ def test_classify(desc, text, category, tier):
 def test_unlabelled_filings_are_named_honestly():
     c = classify("General Updates", "General Updates")
     assert c.reason.startswith("Reg. 30 disclosures")
+
+
+@pytest.mark.parametrize("desc,text", [
+    ("Outcome of Board Meeting", "Outcome of the Board Meeting held on 28th October, 2026."),   # HUL
+    ("General Updates", "Disclosure under Regulation 30 of SEBI (LODR) Regulations, 2015"),
+    ("Corporate Insolvency Resolution Process", "Acme Ltd has informed the Exchange about Corporate Insolvency Resolution Process"),
+])
+def test_rules_hand_unreadable_filings_to_the_filing_reader(desc, text):
+    assert classify(desc, text).ambiguous
+
+
+def test_clear_filings_are_not_sent_to_a_model():
+    assert not classify("Outcome of Board Meeting", "approved the unaudited financial results for the quarter").ambiguous

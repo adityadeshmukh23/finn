@@ -1,0 +1,21 @@
+{
+ "id": "106832085",
+ "symbol": "BAJAJELEC",
+ "url": "https://nsearchives.nseindia.com/corporate/BAJAJELEC_28102026150849_SignedDraftSEIntimationPresentation281026.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "results",
+ "importance": "routine",
+ "summary": "Bajaj Electricals submitted the investor presentation on the unaudited financial results for the second quarter and half year ended September 30, 2026.",
+ "quote": "Presentation on the Unaudited Financial Results of Bajaj Electricals Limited (“Company”) for the second quarter and half year ended September 30, 2026",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

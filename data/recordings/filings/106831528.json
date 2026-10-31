@@ -1,0 +1,21 @@
+{
+ "id": "106831528",
+ "symbol": "HINDUNILVR",
+ "url": "https://nsearchives.nseindia.com/corporate/HINDUNILVR_28102026101021_SEIntimationMinimalistsigned.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "M&A",
+ "importance": "routine",
+ "summary": "Minimalist Importation and Trade of Cosmetics LTDA, a step-down subsidiary, has been voluntarily liquidated with effect from 8th September, 2026.",
+ "quote": "Minimalist Importation and Trade of Cosmetics LTDA , incorporated in Brazil, has been voluntarily liquidated with effect from  8th September, 2026.",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

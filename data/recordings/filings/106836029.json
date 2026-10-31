@@ -1,0 +1,21 @@
+{
+ "id": "106836029",
+ "symbol": "POLYCAB",
+ "url": "https://nsearchives.nseindia.com/corporate/POLYCAB_30102026121954_SECIRP30102026.pdf",
+ "rules": {
+  "category": "litigation",
+  "tier": "high"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "high",
+ "summary": "NCLAT allowed the appeal filed by the company and set aside the order of NCLT Ahmedabad Bench.",
+ "quote": "the Hon'ble NCLAT vide its order dated October 30, 2026 has allowed the Appeal filed by the Company and set aside the order of the Hon'ble National Company Law Tribunal, Ahmedabad Bench dated October 07, 2026.",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

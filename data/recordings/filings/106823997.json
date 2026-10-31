@@ -1,0 +1,21 @@
+{
+ "id": "106823997",
+ "symbol": "RELIANCE",
+ "url": "https://nsearchives.nseindia.com/corporate/kavinavora_21102026224413_SE_21102026.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "press_release",
+ "importance": "routine",
+ "summary": "Reliance Industries hosted US Secretary of State and US Ambassador at its Jamnagar refinery complex.",
+ "quote": "Reliance Industries Limited Chairman and Managing Director Shri Mukesh Ambani and Executive Director Mr Anant Ambani welcomed US Secretary of State Mr Marco Rubio and US Ambassador to India Mr Sergio Gor to Jamnagar",
+ "page": 2,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

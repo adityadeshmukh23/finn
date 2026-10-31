@@ -1,0 +1,21 @@
+{
+ "id": "106816873",
+ "symbol": "POLYCAB",
+ "url": "https://nsearchives.nseindia.com/corporate/POLYCAB_14102026112211_SEintimation14102026.pdf",
+ "rules": {
+  "category": "litigation",
+  "tier": "high"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "litigation",
+ "importance": "medium",
+ "summary": "The NCLAT granted an early hearing for the appeal involving Asier Metals Private Limited and Polycab India Limited on October 15, 2026.",
+ "quote": "The Hon'ble NCLAT has granted the request for early listing, and accordingly, the appeal is now scheduled to be heard on October 15, 2026.",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

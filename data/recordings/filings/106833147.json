@@ -1,0 +1,21 @@
+{
+ "id": "106833147",
+ "symbol": "AARTIPHARM",
+ "url": "https://nsearchives.nseindia.com/corporate/AARTIPHARMA_28102026202028_New_Website_Intimationsigned.pdf",
+ "rules": {
+  "category": "press_release",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "unclassified",
+ "importance": "routine",
+ "summary": "Aarti Pharmalabs Limited announced the revamp of its website to improve design, navigation, and accessibility.",
+ "quote": "the Company has revamped its website to improve its design, navigation, and accessibility",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

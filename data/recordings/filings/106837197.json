@@ -1,0 +1,21 @@
+{
+ "id": "106837197",
+ "symbol": "INFY",
+ "url": "https://nsearchives.nseindia.com/corporate/INFY_30102026185037_PR_30102026.pdf",
+ "rules": {
+  "category": "capex",
+  "tier": "medium"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "press_release",
+ "importance": "routine",
+ "summary": "Infosys expanded its Pocharam Development Center in Hyderabad with a new 1.1 million sq. ft. facility adding 10,000 seats.",
+ "quote": "Infosys Announces Expansion of Pocharam Development Center in Hyderabad",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "id": "106831823",
+ "symbol": "NAUKRI",
+ "url": "https://nsearchives.nseindia.com/corporate/NAUKRI2_28102026124934_SE_Intimation_Disinvestment_and_Acquistion.pdf",
+ "rules": {
+  "category": "unclassified",
+  "tier": "routine"
+ },
+ "status": "read",
+ "model_source": "live",
+ "category": "M&A",
+ "importance": "high",
+ "summary": "The company approved the divestment of its holdings in Medcords Healthcare Solutions and Unnati Online, and an investment of about Rs. 150 crores in Redstart Labs.",
+ "quote": "Proposal to divest its entire holding (i.e. 14.18%) held in Medcords Healthcare Solutions Private Limited",
+ "page": 1,
+ "verified": true,
+ "checks": {
+  "quote_found": true,
+  "summary_numbers_found": true
+ }
+}
