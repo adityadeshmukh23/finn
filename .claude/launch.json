@@ -27,6 +27,15 @@
         "cd web && PATH=$HOME/.local/node/bin:$PATH npm run build && PATH=$HOME/.local/node/bin:$PATH npx vite preview --port 4173 --strictPort"
       ],
       "port": 4173
+    },
+    {
+      "name": "web-static-alt",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "cd web && PATH=$HOME/.local/node/bin:$PATH npm run build && PATH=$HOME/.local/node/bin:$PATH npx vite preview --port 4180 --strictPort"
+      ],
+      "port": 4180
     }
   ]
 }

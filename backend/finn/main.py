@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import digest, filings, llm, market, mgmt, results
+from .research import pvd
 from .config import settings
 from .sources import nse, prices
 
@@ -73,6 +74,22 @@ def get_market(as_of: date | None = None):
     return {"source": status.source, "as_of": status.as_of, "through": last, "message": status.message,
             "provider": "Yahoo Finance (yfinance), NSE tickers, unadjusted close",
             "sessions": market.compact(bars, (end - timedelta(days=14)).isoformat())}
+
+
+@app.get("/api/research")
+def research_index():
+    return {"companies": pvd.catalog()}
+
+
+@app.get("/api/research/{symbol}")
+def research(symbol: str):
+    """Recorded promised-vs-delivered research. Generating it reads 5 transcripts and an annual report,
+    so it runs ahead of time (python -m scripts.research SYM), never inside a request."""
+    rec = pvd.load(symbol.upper())
+    if not rec:
+        raise HTTPException(404, f"No research recorded for {symbol.upper()} yet. "
+                                 f"Generate it locally: cd backend && python -m scripts.research {symbol.upper()}")
+    return rec
 
 
 @app.get("/api/ledger")

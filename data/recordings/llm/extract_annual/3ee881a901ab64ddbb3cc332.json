@@ -1,0 +1,36 @@
+{
+ "found": true,
+ "page": 171,
+ "basis": "consolidated",
+ "unit": "lakh",
+ "revenue": {
+  "current": 2761011.0,
+  "previous": 2376875.0
+ },
+ "other_income": {
+  "current": 56603.0,
+  "previous": 74236.0
+ },
+ "finance_costs": {
+  "current": 673.0,
+  "previous": 968.0
+ },
+ "depreciation": {
+  "current": 55567.0,
+  "previous": 46738.0
+ },
+ "pbt": {
+  "current": 805296.0,
+  "previous": 709900.0
+ },
+ "pat": {
+  "current": 606226.0,
+  "previous": 532268.0
+ },
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_annual",
+  "recorded_at": "2026-11-01T03:59:34",
+  "fell_back_from": []
+ }
+}

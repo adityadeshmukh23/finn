@@ -41,15 +41,15 @@ def main() -> int:
         print(f"{sym}: {', '.join(d.period for d in ds.calls)}; {ds.annual_report.title if ds.annual_report else 'no annual report'}")
         for s in ds.skipped:
             print(f"   skipped {s['listed_as']}: {s['why']}")
-        rec = pvd.run(ds, texts, name_of(sym) or docs.index(sym).get("name", ""))
+        rec = pvd.run(ds, texts, docs.index(sym).get("name") or name_of(sym))
         for stage, calls in rec["models"].items():
             for c in calls:
                 fb = f" (after {', '.join(f['model'] + ': ' + f['why'][:60] for f in c['fallbacks'])})" if c["fallbacks"] else ""
                 print(f"   {stage:16} {c.get('doc', ''):9} {c['source']:9} {c['model'] or c['note'][:80]}{fb}")
-        unread = [x for x in rec["dropped"] if x["stage"] in ("read",)]
+        unread = [c for calls in rec["models"].values() for c in calls if c["source"] not in ("live", "recorded")]
         if unread:
-            print(f"   NOT RECORDED: {len(unread)} call(s) couldn't be read this time ({unread[0]['why'][:120]}). "
-                  "Re-run later; calls already read replay from their recordings.")
+            print(f"   NOT RECORDED: {len(unread)} model step(s) didn't run this time ({unread[0]['note'][:120]}). "
+                  "Re-run later; steps already done replay from their recordings.")
             failed += 1
             continue
         if not rec["judged"]:

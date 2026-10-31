@@ -158,3 +158,21 @@ def test_every_recorded_claim_reverifies_against_its_page(path):
         assert r["verdict"] in pvd.VERDICTS
         assert r["promised"]["url"].endswith(f"#page={r['promised']['page']}")
     assert all(m["model"] for stage in rec["models"].values() for m in stage), "every model output names its model"
+
+
+def test_pl_page_finder_prefers_consolidated_and_skips_auditors():
+    standalone = "Standalone Statement of Profit and Loss (` in lakhs) For the year ended 31 March 2026 I Revenue from Operations 1.00 Profit before tax 2.00"
+    consolidated = ("Sl. No. Particulars For the year ended 31 March 2026 I Revenue from Operations 23.10 Profit before Tax 9.10 "
+                    + "x " * 300 + "Consolidated Statement of Profit and Loss for the year ended 31 March 2026")
+    auditor = "Independent Auditors' Report ... the Consolidated Statement of Profit and Loss, Revenue from operations, profit before tax"
+    assert pvd.pl_candidates([auditor, standalone, consolidated]) == [3, 2]
+
+
+def test_credibility_line_is_built_from_the_verdicts():
+    rows = [{"label": "QRSAM order", "verdict": "missed"}, {"label": "Capex", "verdict": "partially"},
+            {"label": "Revenue growth", "verdict": "met"}, {"label": "EBITDA margin", "verdict": "met"},
+            {"label": "Exports", "verdict": "not_found"}]
+    counts = {v: sum(r["verdict"] == v for r in rows) for v in pvd.VERDICTS}
+    c = pvd._credibility(None, rows, counts, [], None)
+    assert c["headline"] == "Met 2 of 4 checkable promises"
+    assert c["line"] == "Missed QRSAM order; short on capex; delivered revenue growth and EBITDA margin."

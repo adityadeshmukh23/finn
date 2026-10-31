@@ -6,7 +6,7 @@ from scripts import build_static
 def test_static_demo_covers_every_recorded_day(tmp_path):
     m = build_static.build(tmp_path)
     files = {p.name for p in tmp_path.iterdir()}
-    assert {f"digest-{d}-{h}.json" for d in m["days"] for h in m["windows"]} | {"manifest.json", "market.json"} == files
+    assert {f"digest-{d}-{h}.json" for d in m["days"] for h in m["windows"]} | {"manifest.json", "market.json", "research"} == files
     last = json.loads((tmp_path / f"digest-{m['to']}-168.json").read_text())
     assert last["source"]["source"] == "bundled" and last["source"]["as_of"] == m["fetched_at"]
     assert last["window"]["end"] == m["fetched_at"]            # latest day ends when the snapshot was taken
@@ -22,3 +22,13 @@ def test_bundled_prices_cover_the_demo_and_fire_the_default_alerts(tmp_path):
     assert chg <= -4 and vol_x >= 2
     # Every session in the demo range has a 20-session baseline (the snapshot starts early enough).
     assert all(r[3] is not None for rows in mk["sessions"].values() for r in rows if r[0] >= m["from"])
+
+
+def test_recorded_research_ships_with_the_demo(tmp_path):
+    m = build_static.build(tmp_path)
+    index = json.loads((tmp_path / "research" / "index.json").read_text())["companies"]
+    assert [c["symbol"] for c in index] == m["research"]
+    for c in index:
+        rec = json.loads((tmp_path / "research" / f"{c['symbol']}.json").read_text())
+        assert rec["scorecard"]["credibility"]["headline"] == c["headline"]
+    assert not list((tmp_path / "research").glob("*.gz"))     # page text stays out of the web build

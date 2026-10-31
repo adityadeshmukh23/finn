@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { applyAlerts, DEFAULT_PREFS, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
-import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, STATIC, type Card, type Digest, type Manifest } from './api'
+import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, fetchResearchIndex, STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from './api'
 import { AlertsSheet } from './components/AlertsSheet'
 import { BriefCard } from './components/BriefCard'
 import { HiddenRow } from './components/HiddenRow'
 import { LedgerSheet } from './components/LedgerSheet'
+import { Research } from './components/Research'
 import { Sheet } from './components/Sheet'
 import { clock, todayIST, usd } from './format'
 import type { Market } from './market'
@@ -15,6 +16,7 @@ const WINDOWS = [
   { hours: 168, label: '7 days' },
 ]
 const DISMISSED_KEY = 'finn.dismissed'
+const researchFromHash = () => decodeURIComponent(window.location.hash.match(/^#research\/([A-Za-z0-9&_-]+)$/)?.[1] ?? '').toUpperCase() || null
 
 function loadDismissed(): Set<string> {
   try {
@@ -88,6 +90,21 @@ export default function App() {
   const [alertsOpen, setAlertsOpen] = useState(false)
   const [manifest, setManifest] = useState<Manifest | null>(null)
   const [market, setMarket] = useState<Market | null>(null)
+  const [researchSym, setResearchSym] = useState<string | null>(researchFromHash)
+  const [researched, setResearched] = useState<ResearchEntry[]>([])
+
+  useEffect(() => { fetchResearchIndex().then(setResearched) }, [])
+  useEffect(() => {
+    const onHash = () => setResearchSym(researchFromHash())
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+  const openResearch = (sym: string) => { window.location.hash = `research/${sym}` }
+  const closeResearch = () => {
+    if (window.history.length > 1 && researchFromHash()) window.history.back()
+    else { window.location.hash = ''; setResearchSym(null) }
+  }
+  const askFinn = (c: Card) => (researched.some((r) => r.symbol === c.symbol) ? openResearch(c.symbol) : setAsk(c))
 
   useEffect(() => { if (STATIC) fetchManifest().then(setManifest).catch(() => setManifest(null)) }, [])
   const latestDay = STATIC ? manifest?.to ?? null : todayIST()
@@ -145,6 +162,8 @@ export default function App() {
   }
 
   const windowLabel = WINDOWS.find((w) => w.hours === hours)?.label ?? `${hours}h`
+
+  if (researchSym) return <Research symbol={researchSym} onBack={closeResearch} />
 
   return (
     <div className="mx-auto min-h-dvh max-w-xl px-4 pb-16 pt-[max(1rem,env(safe-area-inset-top))]">
@@ -247,7 +266,7 @@ export default function App() {
             <ul className="space-y-3">
               {cards.map((c, i) => (
                 <BriefCard key={c.lead.id} card={c} rank={i + 1} refTime={refTime}
-                           onDismiss={() => dismiss(c.lead.id)} onAsk={() => setAsk(c)} />
+                           onDismiss={() => dismiss(c.lead.id)} onAsk={() => askFinn(c)} />
               ))}
             </ul>
 
@@ -258,6 +277,31 @@ export default function App() {
             )}
 
             <HiddenRow groups={view.hidden} total={view.counts.hidden} refTime={refTime} />
+
+            {researched.length > 0 && (
+              <section className="rounded-2xl border border-line bg-surface">
+                <div className="px-4 pt-4">
+                  <h2 className="text-[15px] font-semibold text-ink">Promised vs delivered</h2>
+                  <p className="mt-0.5 text-[13px] leading-snug text-ink-2">
+                    Management's guidance over the last four quarters, against what it reported. Transcripts and annual reports only.
+                  </p>
+                </div>
+                <ul className="mt-2">
+                  {researched.map((r) => (
+                    <li key={r.symbol} className="border-t border-line">
+                      <button onClick={() => openResearch(r.symbol)} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left">
+                        <span className="min-w-0">
+                          <span className="text-[13px] font-semibold text-ink">{r.symbol}</span>
+                          <span className="text-[13px] text-ink-3"> · {r.name || r.symbol}</span>
+                          <span className="block text-xs text-ink-2">{r.headline}{r.counts.missed > 0 ? ` · ${r.counts.missed} missed` : ''}</span>
+                        </span>
+                        <span className="text-ink-3" aria-hidden="true">→</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             {view.quiet.length > 0 && (
               <p className="px-1 text-xs leading-relaxed text-ink-3">
@@ -280,13 +324,22 @@ export default function App() {
       {ask && (
         <Sheet title={`Ask FINN · ${ask.symbol}`} onClose={() => setAsk(null)}>
           <p className="text-[13px] leading-snug text-ink-2">
-            Research on {ask.company} will be grounded only in its annual reports and concall transcripts,
-            with a page citation on every claim. The first lens is <span className="font-semibold text-ink">promised vs delivered</span>:
-            what management guided over the last four quarters against what they reported.
+            Research on {ask.company} is grounded only in its earnings-call transcripts and annual report, with a page
+            citation on every claim: <span className="font-semibold text-ink">promised vs delivered</span> over the last four quarters.
           </p>
-          <p className="mt-3 rounded-xl bg-raised p-3 text-[13px] text-ink-2">
-            Not built yet. Research arrives in the next build phase{STATIC ? '; this demo will replay recorded answers' : ''}.
+          <p className="mt-3 rounded-xl bg-raised p-3 text-[13px] leading-snug text-ink-2">
+            {STATIC
+              ? <>Not recorded for {ask.symbol} in this demo. Recorded: {researched.map((r) => r.symbol).join(', ') || 'none'}. Any NSE ticker works locally.</>
+              : <>Not generated for {ask.symbol} yet. Run <code className="text-ink">python -m scripts.research {ask.symbol}</code> in backend/ (takes a few minutes, free-tier models).</>}
           </p>
+          {researched.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {researched.map((r) => (
+                <button key={r.symbol} onClick={() => { setAsk(null); openResearch(r.symbol) }}
+                        className="rounded-full border border-line px-3 py-1.5 text-xs font-medium text-ink-2">{r.symbol}</button>
+              ))}
+            </div>
+          )}
         </Sheet>
       )}
       {ledgerOpen && <LedgerSheet onClose={() => setLedgerOpen(false)} />}

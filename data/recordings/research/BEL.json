@@ -1,7 +1,7 @@
 {
  "symbol": "BEL",
- "name": "",
- "generated_at": "2026-11-01T03:47:29",
+ "name": "Bharat Electronics Ltd",
+ "generated_at": "2026-11-01T04:02:50",
  "status": "ok",
  "latest_period": "Q1 FY27",
  "docs": {
@@ -68,65 +68,65 @@
  },
  "financials": {
   "doc": "AR-FY26",
-  "page": 124,
-  "basis": "standalone",
+  "page": 171,
+  "basis": "consolidated",
   "unit": "lakh",
   "fy": "FY26",
   "prev_fy": "FY25",
   "figures": {
    "revenue": {
-    "current": 27479.63,
-    "previous": 23658.01
+    "current": 27610.11,
+    "previous": 23768.75
    },
    "other_income": {
-    "current": 590.39,
-    "previous": 767.59
+    "current": 566.03,
+    "previous": 742.36
    },
    "finance_costs": {
-    "current": 6.72,
-    "previous": 9.61
+    "current": 6.73,
+    "previous": 9.68
    },
    "depreciation": {
-    "current": 523.93,
-    "previous": 435.58
+    "current": 555.67,
+    "previous": 467.38
    },
    "pbt": {
-    "current": 8075.04,
-    "previous": 7089.99
+    "current": 8052.96,
+    "previous": 7099.0
    },
    "pat": {
-    "current": 6048.48,
-    "previous": 5288.25
+    "current": 6062.26,
+    "previous": 5322.68
    },
    "ebitda": {
-    "current": 8015.3,
-    "previous": 6767.59
+    "current": 8049.33,
+    "previous": 6833.7
    }
   },
   "printed": {
    "revenue": {
-    "current": 2747963.0,
-    "previous": 2365801.0
+    "current": 2761011.0,
+    "previous": 2376875.0
    },
    "other_income": {
-    "current": 59039.0,
-    "previous": 76759.0
+    "current": 56603.0,
+    "previous": 74236.0
    },
    "finance_costs": {
-    "current": 672.0,
-    "previous": 961.0
+    "current": 673.0,
+    "previous": 968.0
    },
    "depreciation": {
-    "current": 52393.0,
-    "previous": 43558.0
+    "current": 55567.0,
+    "previous": 46738.0
    },
    "pbt": {
-    "current": 807504.0,
-    "previous": 708999.0
+    "current": 805296.0,
+    "previous": 709900.0
    },
    "pat": {
-    "current": 604848.0,
-    "previous": 528825.0
+    "current": 606226.0,
+    "previous": 532268.0
    }
   },
   "lender": false
@@ -180,10 +180,15 @@
   ],
   "verdict": [
    {
-    "model": "gemini:gemini-3.8-flash",
+    "model": "gemini:gemini-3.7-flash",
     "source": "recorded",
     "note": "",
-    "fallbacks": []
+    "fallbacks": [
+     {
+      "model": "gemini:gemini-3.8-flash",
+      "why": "Gemini 504: Deadline expired before operation could complete."
+     }
+    ]
    }
   ]
  },
@@ -199,8 +204,8 @@
   "checkable": 6,
   "credibility": {
    "headline": "Met 3 of 6 checkable promises",
-   "line": "For FY26, the company delivered 16.2% revenue growth and 29.2% EBITDA margin, but booked INR 900 crores capex against INR 1,000-plus crores guided.",
-   "by": "gemini:gemini-3.8-flash"
+   "line": "Missed QRSAM order and order inflow including QRSAM; short on capex; delivered revenue growth, EBITDA margin and order inflow.",
+   "by": "FINN"
   },
   "rows": [
    {
@@ -210,7 +215,7 @@
     "kind": "milestone",
     "verdict": "missed",
     "verdict_by": "model",
-    "reason": "The QRSAM order was delayed past March due to procedural delays.",
+    "reason": "The QRSAM order was not secured in Q4 FY26 due to procedural delays.",
     "due": "Q4 FY26",
     "promised": {
      "call": "Q1 FY26",
@@ -338,12 +343,12 @@
      "period": "FY26",
      "label": "Revenue growth",
      "source": "annual_report",
-     "how": "computed: ₹27,479.63 cr vs ₹23,658.01 cr",
+     "how": "computed: ₹27,610.11 cr vs ₹23,768.75 cr",
      "speaker": "",
      "quote": "",
      "doc": "AR-FY26",
-     "page": 124,
-     "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe7510ea-01e4-4f93-99bd-b41007aebe1d.pdf#page=124",
+     "page": 171,
+     "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe7510ea-01e4-4f93-99bd-b41007aebe1d.pdf#page=171",
      "title": "Annual report FY26"
     }
    },
@@ -374,12 +379,12 @@
      "period": "FY26",
      "label": "EBITDA margin",
      "source": "annual_report",
-     "how": "computed: EBITDA ₹8,015.3 cr / revenue ₹27,479.63 cr",
+     "how": "computed: EBITDA ₹8,049.33 cr / revenue ₹27,610.11 cr",
      "speaker": "",
      "quote": "",
      "doc": "AR-FY26",
-     "page": 124,
-     "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe7510ea-01e4-4f93-99bd-b41007aebe1d.pdf#page=124",
+     "page": 171,
+     "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe7510ea-01e4-4f93-99bd-b41007aebe1d.pdf#page=171",
      "title": "Annual report FY26"
     }
    },

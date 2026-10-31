@@ -128,7 +128,9 @@ def parse_documents(page_html: str) -> dict:
         tr = re.search(r'href="([^"]+)"[^>]*title="Raw Transcript"', li) or re.search(r'href="([^"]+)"[^>]*>\s*Transcript\s*<', li)
         if month:
             calls.append({"month": month.group(1), "transcript": html.unescape(tr.group(1)) if tr else None})
-    return {"annual_reports": reports, "concalls": calls}
+    title = re.search(r"<title>\s*(.+?) share price", page_html)
+    name = html.unescape(title.group(1)).strip() if title else ""
+    return {"name": name, "annual_reports": reports, "concalls": calls}
 
 
 def _snapshot_path(symbol: str):

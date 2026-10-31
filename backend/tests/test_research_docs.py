@@ -4,7 +4,7 @@ import pytest
 
 from finn.research.docs import Period, parse_documents, transcript_kind, transcript_period
 
-SCREENER = """
+SCREENER = """<title>Bharat Electronics Ltd share price | About Bharat Electron | Key Insights - Screener</title>
 <div class="documents annual-reports flex-column"><h3>Annual reports</h3><ul class="list-links">
   <li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe75.pdf"
          class="plausible-event-name=Annual+Report" target="_blank">Annual Report 2026</a>
@@ -25,6 +25,7 @@ SCREENER = """
 
 def test_parse_documents_reads_links_only():
     d = parse_documents(SCREENER)
+    assert d["name"] == "Bharat Electronics Ltd"
     assert d["annual_reports"] == [
         {"year": 2026, "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe75.pdf"},
         {"year": 2025, "url": "https://www.bseindia.com/x/7387.pdf"},

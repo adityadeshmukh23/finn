@@ -162,15 +162,17 @@ TO_CRORE = {"crore": 1, "lakh": 0.01, "million": 0.1, "thousand": 0.0001, "rupee
 
 
 def pl_candidates(pages: list[str]) -> list[int]:
-    """Page numbers that look like the full-year statement of profit and loss, consolidated first."""
+    """Page numbers that look like the full-year statement of profit and loss, consolidated first.
+    Some reports print the title under the table, so it may sit anywhere on the page; auditors'
+    reports mention the statement too and are excluded."""
     scored = []
     for i, t in enumerate(pages, 1):
         z = re.sub(r"\s+", "", t.lower())
-        if "statementofprofitandloss" not in z[:600] or "revenuefromoperations" not in z or "beforetax" not in z:
+        if "statementofprofitandloss" not in z or "revenuefromoperations" not in z or "profitbefore" not in z:
             continue
-        if "notestothe" in z[:300] or "quarterended" in z:
+        if "auditor" in z or "auditevidence" in z or "notestothe" in z[:300] or "quarterended" in z:
             continue
-        s = 3 * ("consolidated" in z[:600]) + 2 * ("yearended" in z) + min(len(re.findall(r"\d[\d,]*\.\d{2}", t)) // 10, 3)
+        s = 4 * ("consolidatedstatementofprofit" in z) + 2 * ("yearended" in z) + min(len(re.findall(r"\d[\d,]*\.\d{2}", t)) // 10, 3)
         scored.append((s, i))
     return [i for _, i in sorted(scored, key=lambda x: (-x[0], x[1]))[:2]]
 
@@ -636,14 +638,21 @@ def _actual(a: dict, docs: dict[str, Doc]) -> dict:
 
 
 def _credibility(j: Judgement | None, rows, counts, items, res) -> dict:
+    """Headline and line are built from the verdicts by code. The judge's own sentence isn't shown:
+    a numbers check can't stop it calling a 'partially' row 'missed', and a line that contradicts the
+    rows below it is worse than none."""
     n = counts["met"] + counts["partially"] + counts["missed"]
     headline = f"Met {counts['met']} of {n} checkable promises" if n else "No promise could be checked yet"
-    line, by = "", None
-    if j and j.credibility:
-        allowed = allowed_numbers(items) | numbers(" ".join(str(v) for v in counts.values()))
-        if numbers(j.credibility) <= allowed:
-            line, by = j.credibility, res.model if res else None
-    return {"headline": headline, "line": line, "by": by}
+
+    def names(v):
+        labels = [r["label"] if r["label"][1:2].isupper() else r["label"][:1].lower() + r["label"][1:]
+                  for r in rows if r["verdict"] == v]
+        return labels[0] if len(labels) == 1 else ", ".join(labels[:-1]) + " and " + labels[-1] if labels else ""
+
+    parts = [f"{word} {names(v)}" for v, word in (("missed", "Missed"), ("partially", "short on"), ("met", "delivered"))
+             if names(v)]
+    line = "; ".join(parts) + "." if parts else ""
+    return {"headline": headline, "line": line[:1].upper() + line[1:], "by": "FINN"}
 
 
 # ---- recording --------------------------------------------------------------------------------
@@ -694,6 +703,18 @@ def reverify(rec: dict, cited: dict[str, dict[str, str]]) -> list[str]:
                 if v is not None and not number_in(abs(v), page):
                     bad.append(f"annual report {name} {col} not on p.{f['page']}")
     return bad
+
+
+def catalog() -> list[dict]:
+    """Recorded research, for the index the app shows and for deciding where Ask FINN can go."""
+    d = settings.data_dir / "recordings" / "research"
+    out = []
+    for p in sorted(d.glob("*.json")) if d.exists() else []:
+        r = json.loads(p.read_text())
+        out.append({"symbol": r["symbol"], "name": r["name"], "headline": r["scorecard"]["credibility"]["headline"],
+                    "counts": r["scorecard"]["counts"], "latest_period": r["latest_period"],
+                    "generated_at": r["generated_at"]})
+    return out
 
 
 def load(symbol: str) -> dict | None:

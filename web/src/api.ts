@@ -188,3 +188,98 @@ export async function fetchMarket(asOf: string | null): Promise<Market | null> {
 }
 
 export const fetchLedger = () => getJSON<Ledger>('/api/ledger', 10000)
+
+// ---- research (pull mode) ----
+
+export type Verdict = 'met' | 'partially' | 'missed' | 'too_vague' | 'not_found' | 'not_yet_due'
+
+export interface Claim {
+  call: string
+  speaker: string
+  quote: string
+  doc: string
+  page: number
+  url: string
+  target: string
+}
+
+export interface Delivered {
+  value: number | null
+  unit: string
+  text: string
+  period: string
+  label: string
+  source: 'transcript' | 'annual_report'
+  how: string
+  speaker: string
+  quote: string
+  doc: string
+  page: number
+  url: string
+  title: string
+}
+
+export interface ScoreRow {
+  id: string
+  metric: string
+  label: string
+  kind: 'numeric' | 'milestone' | 'qualitative'
+  verdict: Verdict
+  verdict_by: 'rule' | 'model'
+  reason: string
+  due: string
+  promised: Claim
+  revisions: Claim[]
+  restated: number
+  delivered: Delivered | null
+}
+
+export interface ModelCall { doc?: string; model: string; source: string; note: string; fallbacks: { model: string; why: string }[] }
+
+export interface ResearchDoc { id: string; kind: string; title: string; period: string; url: string; pages: number; listed_as: string }
+
+export interface Research {
+  symbol: string
+  name: string
+  generated_at: string
+  latest_period: string
+  docs: { calls: ResearchDoc[]; annual_report: ResearchDoc | null; skipped: { listed_as: string; why: string; url?: string }[]; index_source: string; index_as_of: string }
+  financials: null | {
+    doc: string; page: number; basis: string; unit: string; fy: string; prev_fy: string; lender: boolean
+    figures: Record<'revenue' | 'pat' | 'ebitda' | 'pbt', { current: number | null; previous: number | null }>
+  }
+  models: Record<'extract_guidance' | 'extract_annual' | 'verdict', ModelCall[]>
+  scorecard: {
+    counts: Record<Verdict, number>
+    checkable: number
+    credibility: { headline: string; line: string; by: string | null }
+    rows: ScoreRow[]
+  }
+  dropped: { stage: string; what: string; doc: string; page: number | null; why: string }[]
+}
+
+export interface ResearchEntry { symbol: string; name: string; headline: string; counts: Record<Verdict, number>; latest_period: string; generated_at: string }
+
+let researchIndex: Promise<ResearchEntry[]> | null = null
+/** Companies with recorded research. Never throws: no index means Ask FINN says research isn't recorded. */
+export function fetchResearchIndex(): Promise<ResearchEntry[]> {
+  const bundled = () => fetch('/demo/research/index.json').then((r) => (r.ok ? r.json() : { companies: [] }))
+  researchIndex ??= (STATIC ? bundled() : getJSON<{ companies: ResearchEntry[] }>('/api/research', 10000).catch(bundled))
+    .then((d: { companies: ResearchEntry[] }) => d.companies)
+    .catch(() => { researchIndex = null; return [] })
+  return researchIndex
+}
+
+export async function fetchResearch(symbol: string): Promise<Research> {
+  const bundled = async () => {
+    const r = await fetch(`/demo/research/${encodeURIComponent(symbol)}.json`)
+    if (!r.ok) throw new Error(`No research recorded for ${symbol} in this demo.`)
+    return (await r.json()) as Research
+  }
+  if (STATIC) return bundled()
+  try {
+    return await getJSON<Research>(`/api/research/${encodeURIComponent(symbol)}`)
+  } catch (err) {
+    return bundled().catch(() => { throw err })
+  }
+}
