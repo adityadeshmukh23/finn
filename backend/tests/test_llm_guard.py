@@ -174,3 +174,28 @@ def test_whole_chain_down_is_blocked_and_records_nothing(setup, tmp_path):
     assert r.source == "blocked" and r.output.label == "mock"
     assert [f["model"] for f in r.fallbacks] == ["fake:fake-pro", "fake:fake-backup"]
     assert not (tmp_path / "recordings" / "llm" / "verdict").exists()
+
+
+def test_unusable_output_hands_over_to_the_next_model(setup, monkeypatch):
+    fake = setup(fallbacks={"strong": (BACKUP,)})
+    real = fake.generate
+    def gen(model, *a):
+        if model == "fake-pro":
+            fake.calls.append(model)
+            return providers.Completion(None, 1000, 16000, note="Model output did not match the schema")
+        return real(model, *a)
+    monkeypatch.setattr(fake, "generate", gen)
+    r = ask("verdict")
+    assert (r.source, r.model) == ("live", "fake:fake-backup")
+    assert r.fallbacks == [{"model": "fake:fake-pro", "why": "Model output did not match the schema"}]
+
+
+def test_gemini_daily_quota_429_is_read_from_the_error_details():
+    class E:   # google-genai's ClientError carries the body as .details (no .response_json)
+        message = "quota"
+        details = {"error": {"details": [
+            {"@type": "type.googleapis.com/google.rpc.QuotaFailure",
+             "violations": [{"quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier"}]},
+            {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "28219s"}]}}
+    rl = providers._gemini_rate_limit(E())
+    assert rl.daily and rl.retry_after == 28219

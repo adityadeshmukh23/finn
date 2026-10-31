@@ -361,7 +361,7 @@ def judge(promises: list[dict], actuals: list[dict], latest: str, evidence: dict
 
     user = json.dumps({"latest_period_reported": latest, "promises": [p_line(p) for p in promises],
                        "reported": [a_line(a) for a in actuals]}, ensure_ascii=False, indent=0)
-    res = llm.call("verdict", JUDGE_SYSTEM, user, Judgement, mock=lambda: None, max_tokens=16000)
+    res = llm.call("verdict", JUDGE_SYSTEM, user, Judgement, mock=lambda: None, max_tokens=24000)
     return res.output, res
 
 

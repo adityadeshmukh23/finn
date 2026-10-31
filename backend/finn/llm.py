@@ -168,6 +168,10 @@ def call(
             tried.append({"model": _model_label(slot), "why": f"no {slot.provider} key"})
             continue
         res = _live(purpose, slot, system, user, schema, client, max_tokens, max_wait)
+        if res.source == "live" and res.output is None:
+            # Answered, but unusable (cut off or off-schema): hand over like an error, record nothing.
+            tried.append({"model": _model_label(slot), "why": res.note or "output didn't match the schema"})
+            continue
         if res.source == "live":
             res.fallbacks = tried
             if res.output is not None:

@@ -94,7 +94,8 @@ class GeminiProvider:
 
 def _gemini_rate_limit(e) -> RateLimited:
     """Read RetryInfo and QuotaFailure from a 429 body: how long to wait, and whether it's the daily cap."""
-    details = ((e.response_json or {}).get("error") or {}).get("details") or []
+    body = getattr(e, "response_json", None) or getattr(e, "details", None) or {}   # attribute name varies by SDK version
+    details = ((body.get("error") or {}).get("details") or []) if isinstance(body, dict) else []
     retry, daily = None, False
     for d in details:
         t = d.get("@type", "")

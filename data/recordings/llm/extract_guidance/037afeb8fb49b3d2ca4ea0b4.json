@@ -1,0 +1,184 @@
+{
+ "promises": [
+  {
+   "metric": "other",
+   "label": "ECMS approvals for display modules and enclosures",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "unspecified",
+   "speaker": "Atul Lall",
+   "quote": "We expect to receive ECMS approvals for display modules and enclosures shortly.",
+   "page": 4
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Smartphone camera modules",
+   "kind": "numeric",
+   "target_low": 190.0,
+   "target_high": 200.0,
+   "unit": "none",
+   "direction": "range",
+   "horizon": "FY26",
+   "speaker": "Atul Lall",
+   "quote": "and target to expand volumes of smartphone camera modules from 40 million units in this fiscal to 190 million to 200 million units per annum.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "PN3 approval for Vivo JV",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "unspecified",
+   "speaker": "Atul Lall",
+   "quote": "We remain confident of getting the PN3 approval for our Vivo JV soon.",
+   "page": 5
+  },
+  {
+   "metric": "revenue",
+   "label": "IT hardware revenue",
+   "kind": "numeric",
+   "target_low": 3500.0,
+   "target_high": 4000.0,
+   "unit": "crore",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Atul Lall",
+   "quote": "We feel that for next year, the numbers are going to be somewhere around INR3,500 crores to INR4,000 crores.",
+   "page": 17
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Consolidated operating revenues",
+   "period": "Q3 FY26",
+   "value": 10678.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Consolidated operating revenues for the quarter ended December 31, 2025, was INR10,678 crores against INR10,461 crores in the same period last year;",
+   "page": 3
+  },
+  {
+   "metric": "ebitda",
+   "label": "Consolidated operating EBITDA",
+   "period": "Q3 FY26",
+   "value": 421.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "consolidated operating EBITDA for the quarter was INR421 crores against INR398 crores in the same period last year.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Consolidated operating PAT",
+   "period": "Q3 FY26",
+   "value": 214.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Consolidated operating PAT for the quarter was INR214 crores against INR217 crores in the same period last year.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "ROCE",
+   "period": "Q3 FY26",
+   "value": 45.1,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "We maintain our return ratios with ROCE at 45.1% and ROE at 32% as on December 31, 2025, demonstrating the fundamental strength and stability.",
+   "page": 4
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "ROE",
+   "period": "Q3 FY26",
+   "value": 32.0,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "We maintain our return ratios with ROCE at 45.1% and ROE at 32% as on December 31, 2025, demonstrating the fundamental strength and stability.",
+   "page": 4
+  },
+  {
+   "metric": "revenue",
+   "label": "Mobile and EMS revenue",
+   "period": "Q3 FY26",
+   "value": 9750.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Mobile and EMS: Revenue for the quarter for Mobile and EMS business was INR9,750 crores and operating profit of INR1,050 crores.",
+   "page": 4
+  },
+  {
+   "metric": "revenue",
+   "label": "Consumer electronics revenue",
+   "period": "Q3 FY26",
+   "value": 567.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Consumer electronics: LED TVs and refrigerators revenue for the quarter was INR567 crores with an operating profit of INR24 crores.",
+   "page": 5
+  },
+  {
+   "metric": "revenue",
+   "label": "Home appliances revenue",
+   "period": "Q3 FY26",
+   "value": 355.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Home appliances: Revenue for the quarter was INR355 crores. Operating profit was INR41 crores with an operating margin of 11.5%.",
+   "page": 5
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Home appliances operating margin",
+   "period": "Q3 FY26",
+   "value": 11.5,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "Home appliances: Revenue for the quarter was INR355 crores. Operating profit was INR41 crores with an operating margin of 11.5%.",
+   "page": 5
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Smartphone volumes",
+   "period": "Q3 FY26",
+   "value": 6.9,
+   "unit": "none",
+   "speaker": "Saurabh Gupta",
+   "quote": "Yes. So, Ankur, the smartphone volumes for Q3 was around 6.9 million. And overall, in 9 months, we have done a volume of closer to 27 million.",
+   "page": 7
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Smartphone volumes",
+   "period": "9M FY26",
+   "value": 27.0,
+   "unit": "none",
+   "speaker": "Saurabh Gupta",
+   "quote": "Yes. So, Ankur, the smartphone volumes for Q3 was around 6.9 million. And overall, in 9 months, we have done a volume of closer to 27 million.",
+   "page": 7
+  },
+  {
+   "metric": "capex",
+   "label": "Capex outgo",
+   "period": "9M FY26",
+   "value": 720.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "So first 9 months, the capex outgo is INR720 crores. And we feel that in the overall fiscal, it should be somewhere between INR1,100 crores, INR1,200 crores.",
+   "page": 17
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:32:48",
+  "fell_back_from": []
+ }
+}

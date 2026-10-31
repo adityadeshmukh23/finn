@@ -2,7 +2,7 @@
 
 A mobile-first investor briefing. You open a ranked list of what changed across your portfolio, not a chatbox: one card per company, the routine paperwork collapsed into a count you can inspect.
 
-**Status:** push mode (ranked briefing, results and management-change cards, price/volume alerts) and pull mode's first lens, promised vs delivered, recorded for BEL, Asian Paints, Kaynes, Coforge and Dixon.
+**Status:** push mode (ranked briefing, results and management-change cards, price/volume alerts) and pull mode's first lens, promised vs delivered, recorded for BEL, Asian Paints, Kaynes and Coforge (Dixon's last step waits on the strong model's daily free quota).
 
 ## Run locally (live data, any ticker)
 

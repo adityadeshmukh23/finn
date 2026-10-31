@@ -114,3 +114,23 @@
 - **Strong-model fallback chain** (`LLM_STRONG_FALLBACKS`, default 3.8-flash → 3.7-flash → 3.6-flash). Each recording's `_meta` names the model that answered and the ones it fell back from; the research footnote says so. Over the session, 3.8-flash and 3.7-flash returned 504s several times and the chain caught it every time.
 - **Nothing incomplete is recorded.** If any model step is blocked (a 503 on one call, a 504 on the annual report), the run records nothing and says to re-run. Finished steps replay free. CI re-verifies every recorded claim against the stored text of its page, and the PDFs are never committed.
 - **BEL outcome:** 5 calls (Q1 FY26 to Q1 FY27) plus the FY26 annual report; consolidated P&L on p.171 (the title sits under the table). Met 3 of 6 checkable promises. Missed: the QRSAM order (due Q4 FY26; the Q1 FY27 call cites procedural delays) and order inflow including QRSAM (about ₹57,000 cr guided, ₹30,045 cr booked). Short on capex (₹900 cr against ₹1,000 cr+). Delivered: revenue growth 16.2%, EBITDA margin 29.2%, order inflow ex-QRSAM. 2 not found, 3 too vague, 6 not yet due (FY27 guidance), 3 claims dropped. Cost: 6 cheap and about 8 strong free-tier calls across reruns, $0.
+
+## Pull mode 2: four companies recorded, row rules from review (2026-11-01)
+
+- **Every row was read against its quotes before it shipped, and what failed became a deterministic rule.** The rules run after the judge, so applying them replays recorded output with no new model calls:
+  - **Unit must be stated in the quote.** Kaynes' "INR25,000 million" was read as ₹25,000 crore, and "70 to 85 days" as 70–85%.
+  - **A question isn't a promise.** "$2 billion by FY30" was an analyst's question on Kaynes' call.
+  - **A period written in the quote beats the model's label.** Coforge's "Q4 FY26 EBIT of the firm is 16.6%" was tagged Q1 FY26.
+  - **EBIT and EBITDA must agree,** read from the words in the quotes. They share a metric key, so 14% EBIT guidance could have been compared with an 18.6% EBITDA figure.
+  - **Statements due by the quarter the call reports aren't promises.** Coforge's merger "effective date is 1 April 2025" was scored met.
+  - **A lead statement whose quote has a figure the model didn't read is left out,** not called vague. Kaynes' "might exceed the guidance of 15.6%" was shown as too vague with no number.
+  - **Counts with no unit are left out.** Asian Paints' "almost 10 lakh people" showed as "10+".
+  - **"About" or "almost" in the quote makes a point target.**
+  - **A dated future commitment is not yet due,** even when worded.
+  - **When the judge lists no usable figure, code matches verified figures itself,** but only if exactly one value fits.
+- **Every later statement shows in the row,** labelled revised, restated or "no figure read". Kaynes cut ₹4,500 cr+ to "about INR4,000 crores minimum" on its Q3 call; the model didn't read that as a number, and the row would otherwise have said "same target restated".
+- **Revenue printed only as its parts is summed by code.** Asian Paints' P&L has no revenue total, and the model had added the lines itself.
+- **Credibility line from the verdicts,** not the judge's prose (see Pull mode 1).
+- **Strong-model calls:** `LLM_TIMEOUT=240` for offline research runs. The Gemini SDK sends the timeout to the server as the deadline, so at 90 s, 3.8-flash and 3.7-flash returned 504 while reasoning over a long judge prompt. With 240 s, 3.8-flash answered first time. Unusable output (cut off or off-schema) now hands over to the next model like an error.
+- **Our ledger undercounts Google's daily quota.** Google stopped gemini-3.8-flash at its 20/day limit when our ledger showed 11 calls for it: the SDK retries 503s itself, and timed-out attempts count on Google's side. Treat the ledger's per-model count as a lower bound. The 429 path also crashed reading the quota details (the SDK names the field `details`), which is now fixed and tested.
+- **Outcome:** BEL met 3 of 6 checkable promises. Kaynes is short on FY26 revenue (₹4,500 cr+ guided, ₹3,626.35 cr delivered, 80.6%, so partially). Coforge met 2 of 2 (FY26 EBIT 14.4% against 14%+, Q4 EBIT 16.6% against 15%+). Asian Paints has no checkable promise: its guidance is worded or a margin band with no year. Dixon's six cheap-model reads are recorded, and its judge step waits for tomorrow's quota.

@@ -1,0 +1,345 @@
+{
+ "promises": [
+  {
+   "metric": "volume_growth",
+   "label": "Mobile volume growth Q-o-Q",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "Q2 FY26",
+   "speaker": "Atul Lall",
+   "quote": "Ahead of the festive season we expect volume growth of at least 15% quarter-on-quarter.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Noida mobile campus completion",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q4 FY26",
+   "speaker": "Atul Lall",
+   "quote": "Construction of our 0.8 million square feet. mobile manufacturing campus is progressing well in Noida for our anchor customers with much higher capacity and is expected to be completed by March ‘26.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Q Tech financials consolidation",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q3 FY26",
+   "speaker": "Atul Lall",
+   "quote": "Tentative agreements pertaining to the transaction are expected to be closed in another couple of months, and we expect the financials to start consolidating from Q3 of the current financial year.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "HKC display trials",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q4 FY26",
+   "speaker": "Atul Lall",
+   "quote": "Construction of our facility for display modules in which we have a 74:26 JV with HKC for first phase underway for smartphones and notebooks with trials to be commenced from Q4 this fiscal and commencement of mass production by Q1 of next fiscal.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "HKC display mass production",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q1 FY27",
+   "speaker": "Atul Lall",
+   "quote": "Construction of our facility for display modules in which we have a 74:26 JV with HKC for first phase underway for smartphones and notebooks with trials to be commenced from Q4 this fiscal and commencement of mass production by Q1 of next fiscal.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Refrigerator business growth",
+   "kind": "numeric",
+   "target_low": 50.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Atul Lall",
+   "quote": "The outlook for ‘25, ‘26 is very promising with healthy order book, and we are confident of achieving 50% growth this fiscal.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "FATL Tirupati capacity expansion ready",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q2 FY26",
+   "speaker": "Atul Lall",
+   "quote": "Our construction for capacity expansion for FATL in Tirupati will be ready by August ‘25 to meet the increased order book for our customers.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "Semi-automatic washing machine launch",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q3 FY26",
+   "speaker": "Atul Lall",
+   "quote": "Launch of semi-automatic washing machine in higher capacity categories of 16 and 18 Kg has already been done, and product will be launched by Q3 of the current fiscal.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "Signify JV operations commencement",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q2 FY26",
+   "speaker": "Atul Lall",
+   "quote": "Our 50-50 JV with Signify that is Philips brand will commence operations from the first week of August ‘25 and expected to realize operating efficiencies through synergies",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Inventec JV operational",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q1 FY27",
+   "speaker": "Atul Lall",
+   "quote": "Our 60:40 JV with Inventec one of the world’s top 5 PC ODMs for manufacturing of notebook PC products, servers and desktop PCs is expected to be operational by Q1 of next fiscal.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Rexxam Chennai manufacturing location",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q4 FY26",
+   "speaker": "Atul Lall",
+   "quote": "We have finalized a new manufacturing location at Chennai for meeting the increased order book for our anchor customer, which is expected to become operational by Q4 of this fiscal.",
+   "page": 7
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Consolidated revenues",
+   "period": "Q1 FY26",
+   "value": 12838.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Consolidated revenues for the quarter ended June 30 th, 2025, was INR12,838 crores against INR6,588 crores in the same period last year, growth of 95%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated revenue growth",
+   "period": "Q1 FY26",
+   "value": 95.0,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "Consolidated revenues for the quarter ended June 30 th, 2025, was INR12,838 crores against INR6,588 crores in the same period last year, growth of 95%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda",
+   "label": "Consolidated EBITDA",
+   "period": "Q1 FY26",
+   "value": 484.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Consolidated EBITDA for the quarter was INR484 crores against INR256 crores in the same period last year, with a growth of 89%.",
+   "page": 3
+  },
+  {
+   "metric": "other",
+   "label": "Consolidated EBITDA growth",
+   "period": "Q1 FY26",
+   "value": 89.0,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "Consolidated EBITDA for the quarter was INR484 crores against INR256 crores in the same period last year, with a growth of 89%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Consolidated PAT",
+   "period": "Q1 FY26",
+   "value": 280.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "The consolidated PAT for the quarter was INR280 crores against INR140 crores in the same period last year, which is a growth of 10%.",
+   "page": 3
+  },
+  {
+   "metric": "other",
+   "label": "Consolidated PAT growth",
+   "period": "Q1 FY26",
+   "value": 10.0,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "The consolidated PAT for the quarter was INR280 crores against INR140 crores in the same period last year, which is a growth of 10%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue",
+   "label": "Mobile business revenue",
+   "period": "Q1 FY26",
+   "value": 11663.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "The revenue for the quarter from mobile business was INR11,663 crores, a growth of 125% year-on-year and operating profit of INR395 crores, which is a growth of 131%.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Mobile business revenue growth",
+   "period": "Q1 FY26",
+   "value": 125.0,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "The revenue for the quarter from mobile business was INR11,663 crores, a growth of 125% year-on-year and operating profit of INR395 crores, which is a growth of 131%.",
+   "page": 4
+  },
+  {
+   "metric": "revenue",
+   "label": "Telecom IT hardware revenue",
+   "period": "Q1 FY26",
+   "value": 1410.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Out of this, revenue for telecom IT hardware, hearables and wearables was INR1,410 crores, INR247 crores and INR175 crores, respectively.",
+   "page": 4
+  },
+  {
+   "metric": "revenue",
+   "label": "Consumer electronics revenue",
+   "period": "Q1 FY26",
+   "value": 672.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Revenue for the quarter was INR672 crores with operating profit and margin of 40 crs and 6% respectively.",
+   "page": 5
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consumer electronics operating margin",
+   "period": "Q1 FY26",
+   "value": 6.0,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "Revenue for the quarter was INR672 crores with operating profit and margin of 40 crs and 6% respectively.",
+   "page": 5
+  },
+  {
+   "metric": "revenue",
+   "label": "Refrigerator business revenue",
+   "period": "Q1 FY26",
+   "value": 328.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Out of this, the revenue for refrigerator business was INR328 crores.",
+   "page": 5
+  },
+  {
+   "metric": "revenue",
+   "label": "Home appliances revenue",
+   "period": "Q1 FY26",
+   "value": 313.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Revenue for the quarter is INR313 crores, operating profit of INR36 crores with a growth of 13% year-on-year with an operating margin of 11.5%.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Home appliances revenue growth",
+   "period": "Q1 FY26",
+   "value": 13.0,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "Revenue for the quarter is INR313 crores, operating profit of INR36 crores with a growth of 13% year-on-year with an operating margin of 11.5%.",
+   "page": 5
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Home appliances operating margin",
+   "period": "Q1 FY26",
+   "value": 11.5,
+   "unit": "%",
+   "speaker": "Atul Lall",
+   "quote": "Revenue for the quarter is INR313 crores, operating profit of INR36 crores with a growth of 13% year-on-year with an operating margin of 11.5%.",
+   "page": 5
+  },
+  {
+   "metric": "revenue",
+   "label": "Lighting revenue",
+   "period": "Q1 FY26",
+   "value": 188.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Revenue for the quarter was INR188 crores.",
+   "page": 6
+  },
+  {
+   "metric": "revenue",
+   "label": "Telecom and networking products revenue",
+   "period": "Q1 FY26",
+   "value": 1410.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "This segment witnessed a strong growth with revenues of INR1,410 crores which is more than 250% growth.",
+   "page": 6
+  },
+  {
+   "metric": "revenue",
+   "label": "Wearables and hearables revenue",
+   "period": "Q1 FY26",
+   "value": 175.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "Revenue for this segment was INR175 crores for the quarter with healthy operating margin and very good ROCE.",
+   "page": 7
+  },
+  {
+   "metric": "revenue",
+   "label": "Rexxam Dixon Electronics revenue",
+   "period": "Q1 FY26",
+   "value": 144.0,
+   "unit": "crore",
+   "speaker": "Atul Lall",
+   "quote": "The JV with Rexxam achieved highest quarterly revenue of INR144 crores with very healthy operating margin and high ROCE.",
+   "page": 7
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:32:32",
+  "fell_back_from": []
+ }
+}
