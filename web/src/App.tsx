@@ -197,8 +197,9 @@ export default function App() {
       {STATIC && (
         <p className="mt-2 rounded-xl bg-raised px-3 py-2 text-xs leading-snug text-ink-2">
           <span className="font-semibold text-ink">Replay mode.</span> Recorded NSE filings
-          {manifest && <> for {manifest.holdings} holdings, {manifest.from} to {manifest.to}</>}. Live fetching,
-          any-ticker briefings and research run locally (see README).
+          {manifest && <> for {manifest.holdings} holdings, {manifest.from} to {manifest.to}</>}
+          {researched.length > 0 && <>, and recorded research for {researched.length} {researched.length === 1 ? 'company' : 'companies'}</>}.
+          Live fetching and any-ticker briefings and research run locally (see README).
         </p>
       )}
 
