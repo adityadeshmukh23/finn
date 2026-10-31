@@ -9,9 +9,9 @@ import json
 import shutil
 from datetime import date, datetime, time, timedelta
 
-from finn import digest, filings
+from finn import digest, filings, market
 from finn.config import REPO_ROOT, settings
-from finn.sources import nse
+from finn.sources import nse, prices
 
 WINDOWS = (24, 72, 168)
 OUT = REPO_ROOT / "web" / "public" / "demo"
@@ -45,6 +45,15 @@ def build(out=OUT) -> dict:
             (out / f"digest-{d.isoformat()}-{hours}.json").write_text(json.dumps(dg, ensure_ascii=False))
         days.append(d.isoformat())
         d += timedelta(days=1)
+
+    # End-of-day signals for the same days (plus a week before, for 7-day windows on the first day).
+    psnap = prices.load_snapshot()
+    if psnap:
+        since = (first - timedelta(days=8)).isoformat()
+        (out / "market.json").write_text(json.dumps({
+            "source": "bundled", "as_of": psnap["fetched_at"], "through": psnap["to"], "provider": psnap["source"],
+            "sessions": market.compact({s: b for s, b in psnap["bars"].items() if s in meta}, since),
+        }, separators=(",", ":")))
 
     manifest = {"fetched_at": snap["fetched_at"], "from": snap["from"], "to": snap["to"],
                 "days": days, "windows": list(WINDOWS), "holdings": len(meta)}

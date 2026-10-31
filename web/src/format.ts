@@ -15,6 +15,7 @@ export const CATEGORY_LABEL: Record<string, string> = {
   investor_meetings: 'Meetings',
   agm_egm: 'AGM',
   unclassified: 'Other',
+  market: 'Price / volume',
 }
 
 const IST = 'Asia/Kolkata'

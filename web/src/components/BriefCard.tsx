@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
 import { CATEGORY_LABEL, when } from '../format'
+import { describe } from '../market'
 
 const TIER_DOT: Record<string, string> = { high: 'bg-hot', medium: 'bg-accent', routine: 'bg-ink-3' }
 
@@ -13,12 +14,12 @@ function Chip({ item }: { item: Item }) {
   )
 }
 
-function FilingLink({ url }: { url: string }) {
+function FilingLink({ url, label = 'Filing' }: { url: string; label?: string }) {
   if (!url) return null
   return (
     <a href={url} target="_blank" rel="noopener noreferrer"
        className="text-xs font-medium text-ink-2 underline decoration-line underline-offset-4 hover:text-ink">
-      Filing ↗
+      {label} ↗
     </a>
   )
 }
@@ -88,6 +89,12 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
           <span className="text-ink-3"> · </span>
           {card.company}
         </p>
+        {card.market && lead.category !== 'market' && (
+          <p className="tabular mt-1 text-xs font-semibold text-hot">
+            Stock {describe(card.market)}
+            <span className="font-normal text-ink-3"> · {new Date(card.market.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })} close</span>
+          </p>
+        )}
         <h3 className="mt-1 text-[15px] font-semibold leading-snug text-ink">{lead.headline}</h3>
         {lead.why && <p className="mt-1.5 text-[13px] leading-snug text-ink-2">{lead.why}</p>}
         {card.why_rank && (
@@ -97,7 +104,7 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
         )}
 
         <div className="mt-3 flex items-center gap-4">
-          <FilingLink url={lead.url} />
+          <FilingLink url={lead.url} label={lead.category === 'market' ? 'NSE quote' : 'Filing'} />
           {lead.read && (
             <span className="text-xs text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page}</span>
           )}

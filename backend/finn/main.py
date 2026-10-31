@@ -5,9 +5,9 @@ from datetime import date, datetime, time as dtime, timedelta
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import digest, filings, llm
+from . import digest, filings, llm, market
 from .config import settings
-from .sources import nse
+from .sources import nse, prices
 
 app = FastAPI(title="FINN API")
 app.add_middleware(
@@ -59,6 +59,19 @@ def get_digest(
     out["source"] = status.__dict__
     out["is_live_now"] = end is now
     return out
+
+
+@app.get("/api/market")
+def get_market(as_of: date | None = None):
+    """End-of-day signals (close, day move, volume multiple) for the last ~2 weeks of sessions.
+    Thresholds are applied in the browser, so the investor's settings never need a round trip."""
+    end = as_of or nse.now_ist().date()
+    syms = [p["symbol"] for p in _portfolio()["portfolio"]]
+    bars, status = prices.eod(syms, end - timedelta(days=60), end)
+    last = max((b[-1][0] for b in bars.values()), default=None)
+    return {"source": status.source, "as_of": status.as_of, "through": last, "message": status.message,
+            "provider": "Yahoo Finance (yfinance), NSE tickers, unadjusted close",
+            "sessions": market.compact(bars, (end - timedelta(days=14)).isoformat())}
 
 
 @app.get("/api/ledger")

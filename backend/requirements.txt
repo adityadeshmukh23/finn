@@ -7,3 +7,4 @@ anthropic==2.3.0
 pytest==8.3.5
 google-genai==2.34.0
 pypdf==6.21.4                 # filing text for the cheap-model reads (scripts only)
+yfinance==1.7.0               # end-of-day close and volume (Yahoo Finance)

@@ -1,3 +1,5 @@
+import type { Market, Signal } from './market'
+
 export type Tier = 'high' | 'medium' | 'routine'
 
 export interface Item {
@@ -27,6 +29,7 @@ export interface Card {
   routine_count: number
   folded: Item[]           // routine results satellites (newspaper ads) riding on this card
   why_rank?: string        // set in the browser: why this card sits at this rank
+  market?: Signal          // set in the browser: a price/volume threshold crossed in this window
 }
 
 export interface HiddenGroup {
@@ -48,6 +51,7 @@ export interface Digest {
   cards: Card[]
   hidden: HiddenGroup[]
   quiet: string[]
+  names: Record<string, string>
   source: SourceStatus
   is_live_now: boolean
 }
@@ -128,6 +132,26 @@ export async function fetchDigest(hours: number, asOf: string | null, refresh = 
       message: `Server unreachable (${(err as Error).message}). Showing recorded filings.`,
     }
     return d
+  }
+}
+
+let bundledMarket: Promise<Market> | null = null
+function fetchBundledMarket(): Promise<Market> {
+  bundledMarket ??= fetch('/demo/market.json').then((r) => {
+    if (!r.ok) throw new Error('No price data in this build')
+    return r.json() as Promise<Market>
+  }).catch((e) => { bundledMarket = null; throw e })
+  return bundledMarket
+}
+
+/** End-of-day signals. Never throws: no prices means no price alerts, and the badge says so. */
+export async function fetchMarket(asOf: string | null): Promise<Market | null> {
+  if (STATIC) return fetchBundledMarket().catch(() => null)
+  try {
+    return await getJSON<Market>(`/api/market${asOf ? `?as_of=${asOf}` : ''}`, 30000)
+  } catch {
+    return fetchBundledMarket().then((m) => ({ ...m, message: 'Price server unreachable. Showing recorded prices.' }))
+      .catch(() => null)
   }
 }
 

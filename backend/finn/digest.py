@@ -177,4 +177,5 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
         "cards": cards,
         "hidden": hidden_groups,
         "quiet": sorted(s for s in meta if s not in active),
+        "names": {s: m.get("name", s) for s, m in meta.items()},
     }

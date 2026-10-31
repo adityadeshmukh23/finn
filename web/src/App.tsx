@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { applyAlerts, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
-import { fetchDigest, fetchLedger, fetchManifest, STATIC, type Card, type Digest, type Manifest } from './api'
+import { applyAlerts, DEFAULT_PREFS, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
+import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, STATIC, type Card, type Digest, type Manifest } from './api'
 import { AlertsSheet } from './components/AlertsSheet'
 import { BriefCard } from './components/BriefCard'
 import { HiddenRow } from './components/HiddenRow'
 import { LedgerSheet } from './components/LedgerSheet'
 import { Sheet } from './components/Sheet'
 import { clock, todayIST, usd } from './format'
+import type { Market } from './market'
 
 const WINDOWS = [
   { hours: 24, label: '24h' },
@@ -44,6 +45,18 @@ function SourceBadge({ d }: { d: Digest }) {
   )
 }
 
+function PriceBadge({ m }: { m: Market | null }) {
+  if (!m) return <p className="mt-1 text-xs text-ink-3">Prices unavailable: price and volume alerts are off.</p>
+  const fresh = m.source === 'live' || m.source === 'cache'
+  const day = m.through ? new Date(m.through).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : '?'
+  return (
+    <p className="mt-1 text-xs text-ink-3">
+      <span className={`mr-1.5 inline-block h-1.5 w-1.5 rounded-full ${fresh ? 'bg-good' : 'bg-warn'}`} />
+      Prices to {day} close · Yahoo Finance{m.message ? ` · ${m.message}` : ''}
+    </p>
+  )
+}
+
 function Skeleton() {
   return (
     <ul className="space-y-3" aria-label="Loading briefing">
@@ -74,6 +87,7 @@ export default function App() {
   const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
   const [alertsOpen, setAlertsOpen] = useState(false)
   const [manifest, setManifest] = useState<Manifest | null>(null)
+  const [market, setMarket] = useState<Market | null>(null)
 
   useEffect(() => { if (STATIC) fetchManifest().then(setManifest).catch(() => setManifest(null)) }, [])
   const latestDay = STATIC ? manifest?.to ?? null : todayIST()
@@ -86,8 +100,11 @@ export default function App() {
     else setLoading(true)
     setError(null)
     try {
-      const d = await fetchDigest(hours, asOf, refresh)
-      if (seq === latest.current) setData(d)
+      const [d, m] = await Promise.all([fetchDigest(hours, asOf, refresh), fetchMarket(asOf)])
+      if (seq === latest.current) {
+        setData(d)
+        setMarket(m)
+      }
     } catch (e) {
       if (seq === latest.current) setError((e as Error).message)
     } finally {
@@ -104,9 +121,10 @@ export default function App() {
     fetchLedger().then((l) => setSpent(l.spent_usd)).catch(() => setSpent(null))
   }, [ledgerOpen])
 
-  const view = useMemo(() => (data ? applyAlerts(data, prefs) : null), [data, prefs])
+  const view = useMemo(() => (data ? applyAlerts(data, prefs, market) : null), [data, prefs, market])
   const changePrefs = (p: AlertPrefs) => { setPrefs(p); savePrefs(p) }
   const customised = prefs.minTier !== 'medium' || prefs.muted.length > 0
+    || prefs.volX !== DEFAULT_PREFS.volX || prefs.movePct !== DEFAULT_PREFS.movePct
   const refTime = useMemo(() => (data ? new Date(data.window.end) : new Date()), [data])
   const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
   const dismissedHere = (view?.cards.length ?? 0) - cards.length
@@ -201,10 +219,11 @@ export default function App() {
                 {cards.length === 1 ? 'company needs' : 'companies need'} a look
               </p>
               <p className="tabular mt-0.5 text-[13px] text-ink-2">
-                {data.counts.total} filings in the last {windowLabel} · {view.counts.hidden} hidden
+                {data.counts.total} filings in the last {windowLabel}
+                {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price/volume alerts`} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} duplicates dropped`}
               </p>
-              <div className="mt-2"><SourceBadge d={data} /></div>
+              <div className="mt-2"><SourceBadge d={data} /><PriceBadge m={market} /></div>
             </section>
 
             {cards.length === 0 && (
@@ -240,9 +259,9 @@ export default function App() {
 
             <HiddenRow groups={view.hidden} total={view.counts.hidden} refTime={refTime} />
 
-            {data.quiet.length > 0 && (
+            {view.quiet.length > 0 && (
               <p className="px-1 text-xs leading-relaxed text-ink-3">
-                No filings from {data.quiet.length} holdings: {data.quiet.join(', ')}
+                Nothing from {view.quiet.length} holdings (no filings, no price or volume alert): {view.quiet.join(', ')}
               </p>
             )}
           </>

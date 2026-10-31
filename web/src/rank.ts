@@ -1,9 +1,11 @@
 import type { Card } from './api'
+import { describe } from './market'
 
 /**
  * Card order and the one-line "why it ranks here". Deterministic, from three things the card carries:
  * the lead event's weight (set by the ranker on the server), other material filings from the same
- * company in the window (+3 each for high), and recency (up to +5 inside the window).
+ * company in the window (+3 each for high), recency (up to +5 inside the window), and a crossed
+ * price or volume threshold (+6 each, applied in market.ts).
  */
 
 const EVENT: Record<string, string> = {
@@ -20,6 +22,7 @@ const EVENT: Record<string, string> = {
   'Equity issuance': 'Equity issuance',
   'Order win': 'Order win',
   'Capex / expansion': 'Capex',
+  'Unusual move, no filing': 'Price/volume alert with no filing behind it',
 }
 
 const label = (reason: string) => EVENT[reason] ?? reason
@@ -53,15 +56,17 @@ export function rankCards(cards: Card[]): Card[] {
       if (prev.lead.base === c.lead.base) {
         const pe = prev.items.filter((it) => it.tier === 'high').length
         const ce = c.items.filter((it) => it.tier === 'high').length
-        tail = ce < pe ? `; fewer other high-priority filings than #${i}` : `; filed before #${i}`
+        tail = c.lead.category === 'market' ? `; a smaller move than #${i}`
+          : ce < pe ? `; fewer other high-priority filings than #${i}` : `; filed before #${i}`
       } else if (prev.lead.base < c.lead.base) {
-        tail = `; older than #${i}, which outscores it on recency`
+        tail = prev.market ? `; #${i}'s price/volume move lifts it above` : `; older than #${i}, which outscores it on recency`
       } else if (heavier > 0) {
         tail = `; below ${heavier} higher-weight ${heavier === 1 ? 'event' : 'events'}`
       }
     } else if (scored.length > 1) {
       tail = '; the heaviest event in this window'
     }
-    return { ...c, why_rank: `${label(c.lead.reason)}${alsoLine(c)}${tail}.` }
+    const moved = c.market && c.lead.category !== 'market' ? `; stock ${describe(c.market)}` : ''
+    return { ...c, why_rank: `${label(c.lead.reason)}${alsoLine(c)}${moved}${tail}.` }
   })
 }
