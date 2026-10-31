@@ -8,7 +8,13 @@
     <meta name="description" content="FINN: your portfolio's filings, ranked. What matters first, routine collapsed." />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <title>FINN</title>
+    <!-- Clears the caching service worker earlier builds registered; see public/sw.js. -->
+    <script>
+      if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then((rs) => rs.forEach((r) => r.unregister()))
+      if ('caches' in window) caches.keys().then((ks) => ks.forEach((k) => caches.delete(k)))
+    </script>
   </head>
   <body>
     <div id="root"></div>

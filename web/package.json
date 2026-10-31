@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:sw": "node scripts/check-sw.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -26,7 +27,6 @@
     "tailwindcss": "^4.3.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5",
-    "vite-plugin-pwa": "^2.0.0"
+    "vite": "^6.3.5"
   }
 }

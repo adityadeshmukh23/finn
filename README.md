@@ -85,7 +85,7 @@ flowchart LR
   CALC --> API
   VERD --> API
   REC --> STATIC["Static build: every day and window,<br/>pre-generated offline"]
-  API --> PWA["React PWA, mobile first"]
+  API --> PWA["React web app, mobile first"]
   STATIC --> PWA
   PWA --> VERCEL["Vercel: static replay"]
 ```
