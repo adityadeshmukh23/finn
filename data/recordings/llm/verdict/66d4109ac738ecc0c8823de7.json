@@ -1,0 +1,584 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ1FY26-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported data or transcript details available for Q2 FY26 quarter-on-quarter mobile volume growth."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-2",
+    "PQ2FY26-8"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q3FY26",
+    "page": 4,
+    "quote": "Construction of a 1 million square feet facility in Noida with higher capacities for our anchor customers is expected to be completed by Q1 of financial year '26-'27",
+    "value": null,
+    "unit": "none",
+    "period": "Q1 FY27"
+   },
+   "verdict": "partially",
+   "reason": "Completion was delayed from March 2026 (Q4 FY26) to Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q4FY26",
+    "page": 4,
+    "quote": "The trials will start from beginning of Q3 and mass production will commence from end of Q3, beginning of Q4 this fiscal.",
+    "value": null,
+    "unit": "none",
+    "period": "Q3 FY27"
+   },
+   "verdict": "missed",
+   "reason": "Trials were delayed from Q4 FY26 to Q3 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q4FY26",
+    "page": 4,
+    "quote": "The trials will start from beginning of Q3 and mass production will commence from end of Q3, beginning of Q4 this fiscal.",
+    "value": null,
+    "unit": "none",
+    "period": "Q4 FY27"
+   },
+   "verdict": "missed",
+   "reason": "Mass production was delayed from Q1 FY27 to Q3-Q4 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full year FY26 refrigerator growth figure is not provided in reported items or transcripts."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q2FY26",
+    "page": 6,
+    "quote": "Our construction for capacity expansion for FATL in Tirupati is ready for commencement of production by end of Q3",
+    "value": null,
+    "unit": "none",
+    "period": "Q3 FY26"
+   },
+   "verdict": "partially",
+   "reason": "Commencement was delayed from August 2025 to end of Q3 FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-8",
+    "PQ2FY26-12"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q4FY26",
+    "page": 6,
+    "quote": "We have started manufacturing semi-auto washing machines in 16 and 18 kg capacity, which is first across the industry.",
+    "value": null,
+    "unit": "none",
+    "period": "Q4 FY26"
+   },
+   "verdict": "partially",
+   "reason": "Manufacturing started in Q4 FY26 instead of the targeted Q3 FY26 launch."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-9"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q2FY26",
+    "page": 6,
+    "quote": "Operations in Lightanium Technologies, that is a 50:50 JV between Dixon and Signify, started in August '25.",
+    "value": null,
+    "unit": "none",
+    "period": "Q2 FY26"
+   },
+   "verdict": "met",
+   "reason": "Signify JV operations commenced in August 2025 as planned."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-10",
+    "PQ2FY26-14"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 5,
+    "quote": "Our new manufacturing facility addition to our current facility in Chennai for a 60 -40 joint venture with Inventec Corporation, one of the largest top 5 ODMs in IT space is expected to get operational from Q4 of this fiscal.",
+    "value": null,
+    "unit": "none",
+    "period": "Q4 FY27"
+   },
+   "verdict": "missed",
+   "reason": "Operational timeline was pushed from Q1 FY27 to Q4 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-11",
+    "PQ2FY26-15"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 7,
+    "quote": "Our new facility in Chennai will be operational starting August '26 with expa nded capacity to meet the demand of our anchor customer.",
+    "value": null,
+    "unit": "none",
+    "period": "Q2 FY27"
+   },
+   "verdict": "partially",
+   "reason": "Operational start was delayed from Q4 FY26 to August 2026."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No delivered capacity figure reported in available data."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No delivered capacity figure reported in available data."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Qualitative target without a specified period or quantifiable metric."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY28 is beyond the latest reported period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY28 is beyond the latest reported period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY29 is beyond the latest reported period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q4FY26",
+    "page": 5,
+    "quote": "Our 400,000 -square-foot facility for 74:26 Longcheer JV f or manufacturing of smartphones and other electronic products is expected to start opera tions by Q3, which will meaningfully strengthen our execution capabilities.",
+    "value": null,
+    "unit": "none",
+    "period": "Q3 FY27"
+   },
+   "verdict": "partially",
+   "reason": "Operational start shifted from April 2026 (Q1 FY27) to Q3 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-9"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported information on start of manufacturing for new ODM customer in Q4 FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-10"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Achieved operating margin of 11.7% in Q2 FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-11"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q3FY26",
+    "page": 6,
+    "quote": "Our new Tirupati facility for front -loading washing machine is read y and mass production to start by Q2 financial year '26-'27 with annual capacity of 300,000 units.",
+    "value": null,
+    "unit": "none",
+    "period": "Q2 FY27"
+   },
+   "verdict": "partially",
+   "reason": "Mass production start pushed to Q2 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-13"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q3FY26",
+    "page": 6,
+    "quote": "Production started for robotic vacuum cleaners for Eureka Forbes with healthy order book",
+    "value": null,
+    "unit": "none",
+    "period": "Q3 FY26"
+   },
+   "verdict": "met",
+   "reason": "Production started for Eureka Forbes in Q3 FY26 as committed."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-16"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-17"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Target has no specified completion period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-18"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-19"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY28 is beyond the latest reported period."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Target has no specified completion period."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 5,
+    "quote": "We are expanding the capacities of camera module in subsidiary Q Tech, which is an ECMS beneficiary for smartphones from 70 million annually to 180 million to 190 million annually over the next 15 to 18 months",
+    "value": null,
+    "unit": "none",
+    "period": "FY27"
+   },
+   "verdict": "missed",
+   "reason": "Volume expansion to 180-190 million delayed over 15 to 18 months rather than FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Target has no specified completion period."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-4",
+    "PQ4FY26-11"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-1",
+    "PQ1FY27-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period extends beyond the latest reported period."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-2",
+    "PQ1FY27-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3-Q4 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 4,
+    "quote": "Mobile volume performance was aligned with temporary demand contraction seen across the broader smartphone market by 10% to 12%",
+    "value": null,
+    "unit": "none",
+    "period": "Q1 FY27"
+   },
+   "verdict": "missed",
+   "reason": "Mobile volume contracted by 10% to 12% in Q1 FY27 instead of growing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q2 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-8"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-9"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q2 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-10",
+    "PQ4FY26-14"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-12"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-13",
+    "PQ1FY27-14"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-15"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-16"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q2 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q4 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-8"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-9"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-10"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-11"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q2/Q3 FY27 is ongoing."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-13"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period August 2026 is ongoing."
+  }
+ ],
+ "credibility": "Management delivered JV operational commitments for Signify and Eureka Forbes, but experienced timeline delays across mobile, IT hardware, and home appliances expansion facilities.",
+ "_meta": {
+  "model": "gemini:gemini-3.6-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T04:44:31",
+  "fell_back_from": [
+   {
+    "model": "gemini:gemini-3.7-flash",
+    "why": "gemini-3.7-flash: daily free-tier quota used up"
+   }
+  ]
+ }
+}

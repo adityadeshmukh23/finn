@@ -36,6 +36,9 @@ class Settings:
     rate_wait_max: float = float(os.getenv("LLM_RATE_WAIT_MAX", "20"))
     # Per-request timeout; the SDK's own silent retries otherwise stretch an overload to minutes.
     request_timeout: float = float(os.getenv("LLM_TIMEOUT", "90"))
+    # Extra tries per model on a 503 or a short rate limit. Each try counts against the free daily quota,
+    # so research runs that must spend exactly one request per model set LLM_RETRIES=0.
+    retries: int = int(os.getenv("LLM_RETRIES", "1"))
     # Public demo: serve cached/snapshot results; live LLM calls are rate-limited.
     public_demo: bool = _bool("PUBLIC_DEMO", False)
     budget_usd_total: float = float(os.getenv("BUDGET_USD_TOTAL", "5.0"))

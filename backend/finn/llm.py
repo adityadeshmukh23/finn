@@ -194,14 +194,15 @@ def _live(purpose, slot: Slot, system, user, schema, client, max_tokens, max_wai
         return LLMResult(None, "blocked", note=reason)
 
     provider = providers.get(slot.provider)
-    for attempt in (1, 2):
+    last = 1 + settings.retries
+    for attempt in range(1, last + 1):
         try:
             comp = provider.generate(slot.model, system, user, schema, max_tokens)
             break
         except providers.RateLimited as e:
             if e.daily:
                 _exhausted_until[_model_label(slot)] = _pacific_midnight(next_one=True)
-            if e.daily or attempt == 2 or (e.retry_after or 0) > settings.rate_wait_max:
+            if e.daily or attempt == last or (e.retry_after or 0) > settings.rate_wait_max:
                 _log(purpose, slot, "blocked", client)
                 why = "daily free-tier quota used up" if e.daily else "rate limited by the provider"
                 return LLMResult(None, "blocked", note=f"{slot.model}: {why}")

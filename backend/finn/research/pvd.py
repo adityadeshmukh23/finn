@@ -594,6 +594,10 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
                 verdict = "not_found"
                 reason = (f"FINN found no {horizon} figure for this in the later calls"
                           + (" or the annual report's profit and loss statement." if first["metric"] in AR_METRICS else "."))
+            elif g and g.verdict in ("partially", "missed") and aids and not _WHEN.search(by_a[aids[0]]["quote"] or ""):
+                # "We have started manufacturing…" shows it happened, not that it was late.
+                verdict, delivered = "not_found", by_a[aids[0]]
+                reason = "A later call says it happened but not when; FINN can't tell whether it was on time."
             elif g and g.verdict in ("met", "partially", "missed") and aids:
                 verdict, by, delivered = g.verdict, "model", by_a[aids[0]]
             elif g and g.verdict == "too_vague":
@@ -684,6 +688,8 @@ def row_problem(p: dict, lead: bool = True) -> str:
     return ""
 
 
+_WHEN = re.compile(r"\bQ[1-4]\b|quarter|\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b|\bFY|"
+                   r"\b20\d\d\b|fiscal|this year|next year|last year|\bH[12]\b|delay|slip|postpone|push", re.I)
 _QLABEL = re.compile(r"\b(Q[1-4]|H[12]|9M)\s*FY\s*'?\s*(\d{4}|\d{2})\b", re.I)
 
 

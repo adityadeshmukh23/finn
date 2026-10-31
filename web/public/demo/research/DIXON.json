@@ -1,0 +1,1529 @@
+{
+ "symbol": "DIXON",
+ "name": "Dixon Technologies (India) Ltd",
+ "generated_at": "2026-11-01T04:45:32",
+ "status": "ok",
+ "latest_period": "Q1 FY27",
+ "docs": {
+  "symbol": "DIXON",
+  "calls": [
+   {
+    "id": "T-Q1FY26",
+    "kind": "transcript",
+    "title": "Q1 FY26 earnings call",
+    "period": "Q1 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf",
+    "pages": 21,
+    "listed_as": "Jul 2025"
+   },
+   {
+    "id": "T-Q2FY26",
+    "kind": "transcript",
+    "title": "Q2 FY26 earnings call",
+    "period": "Q2 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf",
+    "pages": 21,
+    "listed_as": "Oct 2025"
+   },
+   {
+    "id": "T-Q3FY26",
+    "kind": "transcript",
+    "title": "Q3 FY26 earnings call",
+    "period": "Q3 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad6e72f1-b5f8-4a75-8e45-f2e88c7525e0.pdf",
+    "pages": 21,
+    "listed_as": "Feb 2026"
+   },
+   {
+    "id": "T-Q4FY26",
+    "kind": "transcript",
+    "title": "Q4 FY26 earnings call",
+    "period": "Q4 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf",
+    "pages": 21,
+    "listed_as": "May 2026"
+   },
+   {
+    "id": "T-Q1FY27",
+    "kind": "transcript",
+    "title": "Q1 FY27 earnings call",
+    "period": "Q1 FY27",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf",
+    "pages": 21,
+    "listed_as": "Aug 2026"
+   }
+  ],
+  "annual_report": {
+   "id": "AR-FY26",
+   "kind": "annual_report",
+   "title": "Annual report FY26",
+   "period": "FY26",
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/5ef88e3c-352d-4223-a8ec-bdd7d3aa31c1.pdf",
+   "pages": 520,
+   "listed_as": "Annual Report 2026"
+  },
+  "skipped": [
+   {
+    "listed_as": "Oct 2026",
+    "why": "no transcript link on screener"
+   }
+  ],
+  "index_source": "screener.in",
+  "index_as_of": "2026-11-01T04:31:44"
+ },
+ "financials": {
+  "doc": "AR-FY26",
+  "page": 419,
+  "basis": "consolidated",
+  "unit": "lakh",
+  "fy": "FY26",
+  "prev_fy": "FY25",
+  "figures": {
+   "revenue": {
+    "current": 48872.8,
+    "previous": 38860.1
+   },
+   "other_income": {
+    "current": 713.04,
+    "previous": 20.23
+   },
+   "finance_costs": {
+    "current": 137.47,
+    "previous": 154.35
+   },
+   "depreciation": {
+    "current": 392.98,
+    "previous": 281.02
+   },
+   "pbt": {
+    "current": 2070.56,
+    "previous": 1569.8
+   },
+   "pat": {
+    "current": 1644.25,
+    "previous": 1232.58
+   },
+   "ebitda": {
+    "current": 1887.97,
+    "previous": 1984.94
+   }
+  },
+  "printed": {
+   "revenue": {
+    "current": 4887280.0,
+    "previous": 3886010.0
+   },
+   "other_income": {
+    "current": 71304.0,
+    "previous": 2023.0
+   },
+   "finance_costs": {
+    "current": 13747.0,
+    "previous": 15435.0
+   },
+   "depreciation": {
+    "current": 39298.0,
+    "previous": 28102.0
+   },
+   "pbt": {
+    "current": 207056.0,
+    "previous": 156980.0
+   },
+   "pat": {
+    "current": 164425.0,
+    "previous": 123258.0
+   }
+  },
+  "lender": false
+ },
+ "models": {
+  "extract_guidance": [
+   {
+    "doc": "T-Q1FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q2FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q3FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q4FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q1FY27",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "extract_annual": [
+   {
+    "doc": "AR-FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "verdict": [
+   {
+    "model": "gemini:gemini-3.6-flash",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": [
+     {
+      "model": "gemini:gemini-3.7-flash",
+      "why": "gemini-3.7-flash: daily free-tier quota used up"
+     }
+    ]
+   }
+  ]
+ },
+ "scorecard": {
+  "counts": {
+   "met": 1,
+   "partially": 1,
+   "missed": 3,
+   "too_vague": 3,
+   "not_found": 9,
+   "not_yet_due": 25
+  },
+  "checkable": 5,
+  "credibility": {
+   "headline": "Met 1 of 5 checkable promises",
+   "line": "Missed HKC display trials, HKC display mass production and inventec JV operational; short on FATL Tirupati production commencement; delivered robo vacuum cleaners production start for Eureka Forbes.",
+   "by": "FINN"
+  },
+  "rows": [
+   {
+    "id": "PQ1FY26-4",
+    "metric": "other",
+    "label": "HKC display trials",
+    "kind": "milestone",
+    "verdict": "missed",
+    "verdict_by": "model",
+    "reason": "Trials were delayed from Q4 FY26 to Q3 FY27.",
+    "due": "Q4 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Construction of our facility for display modules in which we have a 74:26 JV with HKC for first phase underway for smartphones and notebooks with trials to be commenced from Q4 this fiscal and commencement of mass production by Q1 of next fiscal.",
+     "doc": "T-Q1FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q3 FY27",
+     "label": "HKC display trials",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "The trials will start from beginning of Q3 and mass production will commence from end of Q3, beginning of Q4 this fiscal.",
+     "doc": "T-Q4FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=4",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ1FY26-5",
+    "metric": "other",
+    "label": "HKC display mass production",
+    "kind": "milestone",
+    "verdict": "missed",
+    "verdict_by": "model",
+    "reason": "Mass production was delayed from Q1 FY27 to Q3-Q4 FY27.",
+    "due": "Q1 FY27",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Construction of our facility for display modules in which we have a 74:26 JV with HKC for first phase underway for smartphones and notebooks with trials to be commenced from Q4 this fiscal and commencement of mass production by Q1 of next fiscal.",
+     "doc": "T-Q1FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q4 FY27",
+     "label": "HKC display mass production",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "The trials will start from beginning of Q3 and mass production will commence from end of Q3, beginning of Q4 this fiscal.",
+     "doc": "T-Q4FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=4",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ1FY26-10",
+    "metric": "other",
+    "label": "Inventec JV operational",
+    "kind": "milestone",
+    "verdict": "missed",
+    "verdict_by": "model",
+    "reason": "Operational timeline was pushed from Q1 FY27 to Q4 FY27.",
+    "due": "Q1 FY27",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Our 60:40 JV with Inventec one of the world’s top 5 PC ODMs for manufacturing of notebook PC products, servers and desktop PCs is expected to be operational by Q1 of next fiscal.",
+     "doc": "T-Q1FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q2 FY26",
+      "speaker": "Atul Lall",
+      "quote": "It is one of the world's top five IT products, ODM, for manufacture of notebook PC products, servers, desktop PC, including its components like SSDs, memory and mechanicals in India, and is expected to be operational by Q1 of next fiscal, which will have a positive impact on the margins.",
+      "doc": "T-Q2FY26",
+      "page": 7,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=7",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q4 FY27",
+     "label": "Inventec JV operational",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "Our new manufacturing facility addition to our current facility in Chennai for a 60 -40 joint venture with Inventec Corporation, one of the largest top 5 ODMs in IT space is expected to get operational from Q4 of this fiscal.",
+     "doc": "T-Q1FY27",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=5",
+     "title": "Q1 FY27 earnings call"
+    }
+   },
+   {
+    "id": "PQ2FY26-11",
+    "metric": "other",
+    "label": "FATL Tirupati production commencement",
+    "kind": "milestone",
+    "verdict": "partially",
+    "verdict_by": "model",
+    "reason": "Mass production start pushed to Q2 FY27.",
+    "due": "Q3 FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Our construction for capacity expansion for FATL in Tirupati is ready for commencement of production by end of Q3 and are in the process of ordering additional production line, launch of SAWM, that is semi-automatic washing machine, in 16 kg and 18 kg capacity, which would be the first across the industry and expected to be launched by December '25.",
+     "doc": "T-Q2FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q2 FY27",
+     "label": "FATL Tirupati production commencement",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "Our new Tirupati facility for front -loading washing machine is read y and mass production to start by Q2 financial year '26-'27 with annual capacity of 300,000 units.",
+     "doc": "T-Q3FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad6e72f1-b5f8-4a75-8e45-f2e88c7525e0.pdf#page=6",
+     "title": "Q3 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ2FY26-13",
+    "metric": "other",
+    "label": "Robo vacuum cleaners production start for Eureka Forbes",
+    "kind": "milestone",
+    "verdict": "met",
+    "verdict_by": "model",
+    "reason": "Production started for Eureka Forbes in Q3 FY26 as committed.",
+    "due": "Q3 FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Production of robo vacuum cleaners to Eureka Forbes is to start by December '25.",
+     "doc": "T-Q2FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q3 FY26",
+     "label": "Robo vacuum cleaners production start for Eureka Forbes",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "Production started for robotic vacuum cleaners for Eureka Forbes with healthy order book",
+     "doc": "T-Q3FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad6e72f1-b5f8-4a75-8e45-f2e88c7525e0.pdf#page=6",
+     "title": "Q3 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ1FY26-1",
+    "metric": "volume_growth",
+    "label": "Mobile volume growth Q-o-Q",
+    "kind": "numeric",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "FINN found no Q2 FY26 figure for this in the later calls.",
+    "due": "Q2 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Ahead of the festive season we expect volume growth of at least 15% quarter-on-quarter.",
+     "doc": "T-Q1FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=4",
+     "target": "15%+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-2",
+    "metric": "other",
+    "label": "Noida mobile campus completion",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Verdict withheld: reasoning didn't check out.",
+    "due": "Q4 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Construction of our 0.8 million square feet. mobile manufacturing campus is progressing well in Noida for our anchor customers with much higher capacity and is expected to be completed by March ‘26.",
+     "doc": "T-Q1FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q2 FY26",
+      "speaker": "Atul Lall",
+      "quote": "Construction of a 1 Mn square feet of mobile manufacturing campus in Noida is on track for our anchor customer with much larger capacity and same is expected to be completed by March '26.",
+      "doc": "T-Q2FY26",
+      "page": 5,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=5",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-6",
+    "metric": "revenue_growth",
+    "label": "Refrigerator business growth",
+    "kind": "numeric",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "FINN found no FY26 figure for this in the later calls or the annual report's profit and loss statement.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "The outlook for ‘25, ‘26 is very promising with healthy order book, and we are confident of achieving 50% growth this fiscal.",
+     "doc": "T-Q1FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=5",
+     "target": "about 50%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-7",
+    "metric": "other",
+    "label": "FATL Tirupati capacity expansion ready",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Verdict withheld: reasoning didn't check out.",
+    "due": "Q2 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Our construction for capacity expansion for FATL in Tirupati will be ready by August ‘25 to meet the increased order book for our customers.",
+     "doc": "T-Q1FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-8",
+    "metric": "other",
+    "label": "Semi-automatic washing machine launch",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "A later call says it happened but not when; FINN can't tell whether it was on time.",
+    "due": "Q3 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Launch of semi-automatic washing machine in higher capacity categories of 16 and 18 Kg has already been done, and product will be launched by Q3 of the current fiscal.",
+     "doc": "T-Q1FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q2 FY26",
+      "speaker": "Atul Lall",
+      "quote": "Our construction for capacity expansion for FATL in Tirupati is ready for commencement of production by end of Q3 and are in the process of ordering additional production line, launch of SAWM, that is semi-automatic washing machine, in 16 kg and 18 kg capacity, which would be the first across the industry and expected to be launched by December '25.",
+      "doc": "T-Q2FY26",
+      "page": 6,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=6",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q4 FY26",
+     "label": "Semi-automatic washing machine launch",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "We have started manufacturing semi-auto washing machines in 16 and 18 kg capacity, which is first across the industry.",
+     "doc": "T-Q4FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=6",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ1FY26-9",
+    "metric": "other",
+    "label": "Signify JV operations commencement",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Verdict withheld: reasoning didn't check out.",
+    "due": "Q2 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Our 50-50 JV with Signify that is Philips brand will commence operations from the first week of August ‘25 and expected to realize operating efficiencies through synergies",
+     "doc": "T-Q1FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-11",
+    "metric": "other",
+    "label": "Rexxam Chennai manufacturing location",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Verdict withheld: reasoning didn't check out.",
+    "due": "Q4 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We have finalized a new manufacturing location at Chennai for meeting the increased order book for our anchor customer, which is expected to become operational by Q4 of this fiscal.",
+     "doc": "T-Q1FY26",
+     "page": 7,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=fe83e870-4ca3-462a-addd-5c85ec513959.pdf#page=7",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q2 FY26",
+      "speaker": "Atul Lall",
+      "quote": "Our new facility in Chennai will be operational by Q4 of this fiscal.",
+      "doc": "T-Q2FY26",
+      "page": 7,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=7",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-7",
+    "metric": "other",
+    "label": "JV with Longcheer facility operational date",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Verdict withheld: reasoning didn't check out.",
+    "due": "Q1 FY27",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We have received the PN3 approval for 74:26 joint venture with Longcheer and have finalized a new 400,000 square feet facility for the JV, which is expected to be operational by April '26 and PN3 appraisal process for 51:49 JV with Vivo and 74:26 JV with HKC is progressing well, and we expect the approvals in the coming weeks.",
+     "doc": "T-Q2FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-9",
+    "metric": "other",
+    "label": "Manufacturing start for new ODM smartphone customer",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Later calls mention it; FINN found none that says whether it happened.",
+    "due": "Q4 FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We are in active discussion with another large ODM of smartphones and the manufacturing for them should start by Q4 of FY 25-26.",
+     "doc": "T-Q2FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-3",
+    "metric": "ebitda_margin",
+    "label": "Display segment margins",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "The margins in this segment will be in higher double digits.",
+     "doc": "T-Q2FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-1",
+    "metric": "other",
+    "label": "ECMS approvals for display modules and enclosures",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We expect to receive ECMS approvals for display modules and enclosures shortly.",
+     "doc": "T-Q3FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad6e72f1-b5f8-4a75-8e45-f2e88c7525e0.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-3",
+    "metric": "other",
+    "label": "PN3 approval for Vivo JV",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We remain confident of getting the PN3 approval for our Vivo JV soon.",
+     "doc": "T-Q3FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad6e72f1-b5f8-4a75-8e45-f2e88c7525e0.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-4",
+    "metric": "revenue",
+    "label": "Smartphone camera modules revenue potential in 2 to 3 years",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY28",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "And we feel confident that the volume of smartphone camera modules can increase from 40 million units and revenues by INR 2,000 crores in large financial years to 190 to 200 million units per annum with the revenue closer to INR 6,000 crores to INR 7,000 crores and sub-10% EBITDA margins in the next two to three years.",
+     "doc": "T-Q2FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=4",
+     "target": "₹6,000 cr–₹7,000 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-5",
+    "metric": "ebitda_margin",
+    "label": "Smartphone camera modules EBITDA margin",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY28",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "And we feel confident that the volume of smartphone camera modules can increase from 40 million units and revenues by INR 2,000 crores in large financial years to 190 to 200 million units per annum with the revenue closer to INR 6,000 crores to INR 7,000 crores and sub-10% EBITDA margins in the next two to three years.",
+     "doc": "T-Q2FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=4",
+     "target": "under 10%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-6",
+    "metric": "capex",
+    "label": "Components ECMS applications investment commitment",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY29",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We have filed a components ECMS applications for display modules, camera module enclosures, lithium-ion batteries, optical transceiver - SFP and also mechanical enclosures with investment commitment of approximately INR 3,000 crores over the next three years.",
+     "doc": "T-Q2FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=4",
+     "target": "about ₹3,000 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-19",
+    "metric": "revenue",
+    "label": "IT business target in next two years",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY28",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We feel that the IT business for us in next two years should be around Rs. 4,000 crores to Rs. 5,000 crores business.",
+     "doc": "T-Q2FY26",
+     "page": 14,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95dbb3ac-5662-4cd9-a145-78effb6c373c.pdf#page=14",
+     "target": "₹4,000 cr–₹5,000 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-4",
+    "metric": "revenue",
+    "label": "IT hardware revenue",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We feel that for next year, the numbers are going to be somewhere around INR3,500 crores to INR4,000 crores.",
+     "doc": "T-Q3FY26",
+     "page": 17,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad6e72f1-b5f8-4a75-8e45-f2e88c7525e0.pdf#page=17",
+     "target": "₹3,500 cr–₹4,000 cr"
+    },
+    "revisions": [
+     {
+      "call": "Q4 FY26",
+      "speaker": "Atul Lall",
+      "quote": "We feel that our revenue in this fiscal is going to be more than INR4,000 crores.",
+      "doc": "T-Q4FY26",
+      "page": 9,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=9",
+      "target": "₹4,000 cr+"
+     }
+    ],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q4 FY26",
+      "speaker": "Atul Lall",
+      "quote": "We feel that our revenue in this fiscal is going to be more than INR4,000 crores.",
+      "doc": "T-Q4FY26",
+      "page": 9,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=9",
+      "target": "₹4,000 cr+",
+      "change": "revised"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-2",
+    "metric": "other",
+    "label": "Display module JV trials and production",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q4 FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "The trials will start from beginning of Q3 and mass production will commence from end of Q3, beginning of Q4 this fiscal.",
+     "doc": "T-Q4FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Atul Lall",
+      "quote": "The response from various brands is very encouraging and the trial will start from the beginning of Q3 and mass production to commence from end of Q3 and beginning of Q4 this fiscal year.",
+      "doc": "T-Q1FY27",
+      "page": 5,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=5",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-4",
+    "metric": "other",
+    "label": "Longcheer JV operation start",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Our 400,000-square-foot facility for 74:26 Longcheer JV for manufacturing of smartphones and other electronic products is expected to start operations by Q3, which will meaningfully strengthen our execution capabilities.",
+     "doc": "T-Q4FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-5",
+    "metric": "other",
+    "label": "Noida facility operation start",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Construction of our 1 million square feet facility in Noida with higher capacities for our anchor customers is nearing completion, and we expect the operation to commence by Q2 this fiscal.",
+     "doc": "T-Q4FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-6",
+    "metric": "revenue_growth",
+    "label": "Telecom vertical revenue growth",
+    "kind": "qualitative",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We expect this vertical to deliver high double-digit revenue growth in the current fiscal.",
+     "doc": "T-Q4FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-8",
+    "metric": "other",
+    "label": "Inventec JV mass production start",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Our new facility adjacent to our existing facility under our 60:40 JV within Inventec, Taiwan is progressing well and expected to go into mass production in Q3 of the current fiscal.",
+     "doc": "T-Q4FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-9",
+    "metric": "other",
+    "label": "Washing machine front-loading facility launch",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Addition of a new manufacturing facility in Tirupati will expand our capacities from 0.6 million units per annum by another 0.3 million units, including fully automatic front-loading washing machine, which will be launched by end of Q2 this financial year.",
+     "doc": "T-Q4FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-14",
+    "metric": "revenue",
+    "label": "Lighting revenue target",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "The next year target is almost INR1,700 crores. We expect 2x after we have formed the JV with Signify.",
+     "doc": "T-Q4FY26",
+     "page": 9,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=9",
+     "target": "about ₹1,700 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-12",
+    "metric": "revenue",
+    "label": "Q Tech camera module revenue target",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Last year, on an annualized basis, we did a revenue of INR1,700 crores. We are targeting a revenue of almost INR2,500 crores in that business.",
+     "doc": "T-Q4FY26",
+     "page": 9,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=9",
+     "target": "about ₹2,500 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-13",
+    "metric": "revenue",
+    "label": "Telecom network revenue target",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "We are targeting almost INR7,500 crores, INR8,000 crores in '26, '27. That's another major trigger of growth.",
+     "doc": "T-Q4FY26",
+     "page": 9,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=9",
+     "target": "₹7,500 cr–₹8,000 cr"
+    },
+    "revisions": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Atul Lall",
+      "quote": "So, telecom revenues, please appreciate, we have grown from INR700 crores to INR 3,600 crores to INR5,000 crores and we feel, as I mentioned earlier, we're going to be somewhere between INR6,700 crores to INR7,000 crores in this fiscal.",
+      "doc": "T-Q1FY27",
+      "page": 20,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=20",
+      "target": "₹6,700 cr–₹7,000 cr"
+     }
+    ],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Atul Lall",
+      "quote": "So, telecom revenues, please appreciate, we have grown from INR700 crores to INR 3,600 crores to INR5,000 crores and we feel, as I mentioned earlier, we're going to be somewhere between INR6,700 crores to INR7,000 crores in this fiscal.",
+      "doc": "T-Q1FY27",
+      "page": 20,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=20",
+      "target": "₹6,700 cr–₹7,000 cr",
+      "change": "revised"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-15",
+    "metric": "revenue_growth",
+    "label": "Mobile revenue vs volume growth difference",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Saurabh Gupta",
+     "quote": "So we expect Pankaj to -- that the revenue growth should be at least 12% to 15% higher, if not more.",
+     "doc": "T-Q4FY26",
+     "page": 10,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=10",
+     "target": "12%–15%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-16",
+    "metric": "revenue_growth",
+    "label": "Overall company revenue growth target",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Atul Lall",
+     "quote": "Next year, we are targeting almost INR56,000 crores without the Vivo numbers, and mobile volume being flat. If Vivo comes in, then it's a very major trigger. We feel that without the Vivo also, the company will keep growing at almost 15% to 17%.",
+     "doc": "T-Q4FY26",
+     "page": 15,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf#page=15",
+     "target": "15%–17%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-1",
+    "metric": "volume_growth",
+    "label": "Mobile volume growth Q2",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "Our market position, customer engagement and manufacturing capabilities remain intact, and we expect 20% to 25% volume growth quarter-on-quarter growth as consumer demand strengthens and we have a strong order book.",
+     "doc": "T-Q1FY27",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=4",
+     "target": "20%–25%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-2",
+    "metric": "other",
+    "label": "Vivo JV operations commencement",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "We expect the JV to commence operations and start reflecting in our revenues from Q3 of the current fiscal.",
+     "doc": "T-Q1FY27",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-6",
+    "metric": "other",
+    "label": "Microwave backhaul radios export",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "Production of complex microwave backhaul radios for large global brand has scaled up successfully, and we expect to also commence exports of these products during the current fiscal year.",
+     "doc": "T-Q1FY27",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-7",
+    "metric": "other",
+    "label": "Inventec joint venture operational",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q4 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "Our new manufacturing facility addition to our current facility in Chennai for a 60-40 joint venture with Inventec Corporation, one of the largest top 5 ODMs in IT space is expected to get operational from Q4 of this fiscal.",
+     "doc": "T-Q1FY27",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-8",
+    "metric": "other",
+    "label": "SSD manufacturing start",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "Moving strategically beyond traditional end computing, and we are actively discussing with a joint venture partner to tap into the growth into the high-growth enterprise server and data center hardware ecosystem, which allows us to address a surge in cloud and AI infrastructure demand and will start manufacturing SSD from Q3 and also exploring other critical components such as power supplies and mechanicals, which will enhance value addition and margins.",
+     "doc": "T-Q1FY27",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-9",
+    "metric": "other",
+    "label": "Tirupati facility expansion and fully automatic front-loading washing machine 9 launch",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "Addition of our new manufacturing facility in Tirupati will expand our capacities from 0.6 million units per annum by another 0.3 million units per annum, including fully automatic front-loading washing machine 9, which will be launched in Q3 of this fiscal.",
+     "doc": "T-Q1FY27",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-10",
+    "metric": "other",
+    "label": "Dishwashers and microwave ovens production start",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "We have started production of robotic vacuum cleaners with healthy order book and are on track to start production of dishwashers and microwave ovens in Q3 of this fiscal.",
+     "doc": "T-Q1FY27",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-11",
+    "metric": "other",
+    "label": "Lighting export deliveries to U.S. and Germany",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "We expect to start export deliveries to the largest retail chain in U.S. and Germany in Q2 and Q3 of this fiscal.",
+     "doc": "T-Q1FY27",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-13",
+    "metric": "other",
+    "label": "Rexxam Chennai facility operational",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Atul Lall",
+     "quote": "Our new facility in Chennai will be operational starting August '26 with expanded capacity to meet the demand of our anchor customer.",
+     "doc": "T-Q1FY27",
+     "page": 7,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf#page=7",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   }
+  ]
+ },
+ "dropped": [
+  {
+   "stage": "promise",
+   "what": "Q Tech financials consolidation",
+   "doc": "T-Q1FY26",
+   "page": 5,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "Sales target in next 3 to 4 years",
+   "doc": "T-Q2FY26",
+   "page": 17,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "reported",
+   "what": "Telecom business revenue",
+   "doc": "T-Q2FY26",
+   "page": 5,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "reported",
+   "what": "IT hardware business revenue",
+   "doc": "T-Q2FY26",
+   "page": 5,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "reported",
+   "what": "Hearables and wearables business revenue",
+   "doc": "T-Q2FY26",
+   "page": 5,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "Noida facility operations",
+   "doc": "T-Q1FY27",
+   "page": 4,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "Mini LED transition to OEM model",
+   "doc": "T-Q1FY27",
+   "page": 6,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "evidence",
+   "what": "Mobile revenue and volume growth outlook",
+   "doc": "T-Q1FY27",
+   "page": 4,
+   "why": "evidence cited a page that wasn't among the passages searched"
+  },
+  {
+   "stage": "verdict",
+   "what": "Noida mobile campus completion",
+   "doc": "T-Q1FY26",
+   "page": 4,
+   "why": "judge's reason used a number not in the cited items; verdict withheld"
+  },
+  {
+   "stage": "verdict",
+   "what": "FATL Tirupati capacity expansion ready",
+   "doc": "T-Q1FY26",
+   "page": 5,
+   "why": "judge's reason used a number not in the cited items; verdict withheld"
+  },
+  {
+   "stage": "verdict",
+   "what": "Signify JV operations commencement",
+   "doc": "T-Q1FY26",
+   "page": 6,
+   "why": "judge's reason used a number not in the cited items; verdict withheld"
+  },
+  {
+   "stage": "verdict",
+   "what": "Rexxam Chennai manufacturing location",
+   "doc": "T-Q1FY26",
+   "page": 7,
+   "why": "judge's reason used a number not in the cited items; verdict withheld"
+  },
+  {
+   "stage": "promise",
+   "what": "Capacity for smartphones and notebooks in HKC JV Phase 1",
+   "doc": "T-Q2FY26",
+   "page": 4,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  },
+  {
+   "stage": "promise",
+   "what": "Capacity for smartphones, LED TVs and automotive in HKC JV Phase 2",
+   "doc": "T-Q2FY26",
+   "page": 4,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  },
+  {
+   "stage": "verdict",
+   "what": "JV with Longcheer facility operational date",
+   "doc": "T-Q2FY26",
+   "page": 5,
+   "why": "judge's reason used a number not in the cited items; verdict withheld"
+  },
+  {
+   "stage": "promise",
+   "what": "FATL Home appliances operating margin",
+   "doc": "T-Q2FY26",
+   "page": 6,
+   "why": "due by the quarter the call itself reports, so it isn't a forward-looking promise"
+  },
+  {
+   "stage": "promise",
+   "what": "Next year mobile volume guidance",
+   "doc": "T-Q2FY26",
+   "page": 9,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  },
+  {
+   "stage": "promise",
+   "what": "Front load washing machine initial capacity",
+   "doc": "T-Q2FY26",
+   "page": 9,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  },
+  {
+   "stage": "promise",
+   "what": "Longcheer JV volumes for next fiscal",
+   "doc": "T-Q2FY26",
+   "page": 11,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  },
+  {
+   "stage": "promise",
+   "what": "Smartphone camera modules",
+   "doc": "T-Q3FY26",
+   "page": 5,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  },
+  {
+   "stage": "promise",
+   "what": "Camera module capacity expansion",
+   "doc": "T-Q4FY26",
+   "page": 4,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  },
+  {
+   "stage": "promise",
+   "what": "Mobile revenue and volume growth outlook",
+   "doc": "T-Q4FY26",
+   "page": 4,
+   "why": "the quote states a figure that wasn't read as the target; not judged"
+  },
+  {
+   "stage": "promise",
+   "what": "IT hardware revenue growth multiple",
+   "doc": "T-Q4FY26",
+   "page": 5,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  }
+ ],
+ "judged": true
+}

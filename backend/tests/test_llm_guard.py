@@ -199,3 +199,10 @@ def test_gemini_daily_quota_429_is_read_from_the_error_details():
             {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "28219s"}]}}
     rl = providers._gemini_rate_limit(E())
     assert rl.daily and rl.retry_after == 28219
+
+
+def test_retries_zero_means_one_request_per_model(setup):
+    fake = setup(script=[providers.RateLimited(1, False), providers.RateLimited(1, False)],
+                 fallbacks={"strong": (BACKUP,)}, retries=0, rate_wait_max=30)
+    r = ask("verdict")
+    assert fake.calls == ["fake-pro", "fake-backup"] and r.source == "blocked"   # no second try on either

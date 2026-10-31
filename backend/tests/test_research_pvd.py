@@ -292,3 +292,16 @@ def test_a_promise_about_the_quarter_being_reported_is_not_a_promise():
     p = _promise(horizon="Q2 FY26", call="Q2 FY26", kind="milestone", target_low=None,
                  quote="effective date of the merger is 1st April 2025 as approved")
     assert pvd.row_problem(p).startswith("due by the quarter the call itself reports")
+
+
+def test_late_needs_evidence_that_says_when():
+    ms = _promise(id="P1", kind="milestone", metric="other", label="Washing machine launch", target_low=None, horizon="Q3 FY26",
+                  quote="product will be launched by Q3 of the current fiscal year as planned")
+    ev = _reported(id="R1", metric="other", value=None, unit="none", period="Q4 FY26",
+                   quote="We have started manufacturing semi-auto washing machines in 16 and 18 kg capacity")
+    rows, _ = _assemble([ms], [ev], [dict(promise_ids=["P1"], actual_ids=["R1"], verdict="partially",
+                                          reason="Started in Q4 FY26 instead of Q3 FY26.", evidence=None)])
+    assert rows[0]["verdict"] == "not_found" and "not when" in rows[0]["reason"]
+    dated = ev | {"quote": "mass production to start by Q2 financial year '26-'27 with annual capacity"}
+    rows, _ = _assemble([ms], [dated], [dict(promise_ids=["P1"], actual_ids=["R1"], verdict="missed", reason="Pushed out.", evidence=None)])
+    assert rows[0]["verdict"] == "missed"

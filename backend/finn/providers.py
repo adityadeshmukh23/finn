@@ -50,7 +50,7 @@ class GeminiProvider:
             http_options=types.HttpOptions(
                 timeout=int(self._timeout * 1000),
                 retry_options=types.HttpRetryOptions(
-                    attempts=2, initial_delay=2, max_delay=8, http_status_codes=[500, 502, 503],
+                    attempts=1 + settings.retries, initial_delay=2, max_delay=8, http_status_codes=[500, 502, 503],
                 ),
             ),
         )

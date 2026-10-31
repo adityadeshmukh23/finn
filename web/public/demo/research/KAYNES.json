@@ -1,7 +1,7 @@
 {
  "symbol": "KAYNES",
  "name": "Kaynes Technology India Ltd",
- "generated_at": "2026-11-01T04:31:29",
+ "generated_at": "2026-11-01T04:45:42",
  "status": "ok",
  "latest_period": "Q1 FY27",
  "docs": {
@@ -264,7 +264,7 @@
     "kind": "milestone",
     "verdict": "not_found",
     "verdict_by": "rule",
-    "reason": "Verdict withheld: reasoning didn't check out.",
+    "reason": "A later call says it happened but not when; FINN can't tell whether it was on time.",
     "due": "Q3 FY26",
     "promised": {
      "call": "Q1 FY26",
@@ -278,7 +278,21 @@
     "revisions": [],
     "restated": 0,
     "later": [],
-    "delivered": null
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q1 FY27",
+     "label": "OSAT commercial production",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "Added to what Dr. Muthukumar told, our OSAT, all the trials and validation is getting over now. We will start the commercial billings.",
+     "doc": "T-Q1FY27",
+     "page": 10,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf#page=10",
+     "title": "Q1 FY27 earnings call"
+    }
    },
    {
     "id": "PQ1FY26-4",
@@ -753,13 +767,6 @@
    "doc": "T-Q1FY26",
    "page": 13,
    "why": "the quote states a figure that wasn't read as the target; not judged"
-  },
-  {
-   "stage": "verdict",
-   "what": "OSAT commercial production",
-   "doc": "T-Q1FY26",
-   "page": 4,
-   "why": "judge's reason used a number not in the cited items; verdict withheld"
   },
   {
    "stage": "promise",
