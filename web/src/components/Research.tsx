@@ -110,7 +110,8 @@ function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc
               <p className="text-xs font-semibold text-ink-2">
                 Delivered{d.text ? `: ${d.text} ${d.period}` : ''}{d.label && d.label !== r.label ? ` · ${d.label}` : ''}
               </p>
-              {d.quote ? <Quote text={d.quote} /> : <p className="text-[13px] text-ink-2">{d.how}</p>}
+              {d.quote ? <Quote text={d.quote} />
+                : <p className="text-[13px] text-ink-2">{d.how === 'printed' ? 'As printed in the statement of profit and loss.' : `${d.how.charAt(0).toUpperCase()}${d.how.slice(1)}.`}</p>}
               <p className="text-xs text-ink-3">
                 {d.how === 'found by searching later calls' && 'Found by searching later calls · '}
                 <Src docs={docs} doc={d.doc} page={d.page} />
