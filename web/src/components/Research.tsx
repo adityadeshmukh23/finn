@@ -25,6 +25,9 @@ const STAGE: Record<string, string> = {
 }
 
 const model = (m: string | null | undefined) => (m ?? '').replace(/^[a-z]+:/, '')
+const why = (w: string) =>
+  /504|deadline|timed out/i.test(w) ? 'timed out' : /503|demand|overload/i.test(w) ? 'overloaded'
+    : /quota/i.test(w) ? 'out of quota' : /429|rate/i.test(w) ? 'rate-limited' : 'unavailable'
 const inr = (v: number | null) => (v === null ? '–' : v.toLocaleString('en-IN', { maximumFractionDigits: Math.abs(v) >= 100 ? 0 : 1 }))
 
 function Pill({ v }: { v: Verdict }) {
@@ -303,7 +306,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
               <span className="font-semibold text-ink-2">How verdicts are set.</span> Every numeric verdict is computed by FINN against the first
               stated target: met at or above it; partially within 1 point of a margin target or at least 80% of a growth or amount target;
               otherwise missed. Milestones are judged{judge ? ` by ${judge}` : ''} from verbatim quotes.
-              {judgeCall && judgeCall.fallbacks.length > 0 && <> {judge} answered after {judgeCall.fallbacks.map((f) => `${model(f.model)} (${f.why.replace(/^Gemini /, '').slice(0, 40)})`).join(' and ')} couldn't.</>}
+              {judgeCall && judgeCall.fallbacks.length > 0 && <> {judge} answered because {judgeCall.fallbacks.map((f) => `${model(f.model)} ${why(f.why)}`).join(' and ')}.</>}
               {' '}Promises and figures were read by {model(data.models.extract_guidance[0]?.model)}.
             </p>
             <p>
