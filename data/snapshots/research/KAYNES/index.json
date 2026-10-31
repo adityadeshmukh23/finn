@@ -1,0 +1,111 @@
+{
+ "symbol": "KAYNES",
+ "source": "screener.in",
+ "as_of": "2026-11-01T04:18:50",
+ "page": "https://www.screener.in/company/KAYNES/consolidated/",
+ "name": "Kaynes Technology India Ltd",
+ "annual_reports": [
+  {
+   "year": 2026,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/7b3ec474-8dc9-46bc-bf3b-64d55d3b6c30.pdf"
+  },
+  {
+   "year": 2025,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/d52aa183-1714-43c2-86fa-26c06bec250a.pdf"
+  },
+  {
+   "year": 2024,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/371bc508-0d39-44a6-9a12-6216bab594ab.pdf"
+  },
+  {
+   "year": 2023,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/07e3690f-c8e7-480c-84d1-412e41d47010.pdf"
+  }
+ ],
+ "concalls": [
+  {
+   "month": "Aug 2026",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf"
+  },
+  {
+   "month": "May 2026",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf"
+  },
+  {
+   "month": "Feb 2026",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7fcb06f1-08f9-4ebd-a6ac-783e8abfda40.pdf"
+  },
+  {
+   "month": "Dec 2025",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d42ff5a9-4c9e-4163-ae33-ed915881baa4.pdf"
+  },
+  {
+   "month": "Nov 2025",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=13fd5473-73b9-41c4-a782-70e6608354f9.pdf"
+  },
+  {
+   "month": "Aug 2025",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9ed5c7b3-510f-4570-8d68-92c16e782894.pdf"
+  },
+  {
+   "month": "May 2025",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=2189aa12-5b09-4c30-9c69-e58597b92840.pdf"
+  },
+  {
+   "month": "Feb 2025",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=2cf46e32-c51c-4842-8a96-2f079f7ef3e5.pdf"
+  },
+  {
+   "month": "Nov 2024",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=b6f72e40-5327-46bf-905a-687c7ee9152b.pdf"
+  },
+  {
+   "month": "Oct 2024",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=2a60eee8-1204-4673-ad5f-d61dae8adc33.pdf"
+  },
+  {
+   "month": "Jul 2024",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f09d09d6-a2f6-4b60-81dc-698fbea1ed3c.pdf"
+  },
+  {
+   "month": "May 2024",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e237dd20-c481-4872-ac75-75897012799a.pdf"
+  },
+  {
+   "month": "Feb 2024",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=76879f42-92b1-40ab-a5b8-c2bc62d7978a.pdf"
+  },
+  {
+   "month": "Feb 2024",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9c7321c8-53c8-4c72-b57a-d30424a91581.pdf"
+  },
+  {
+   "month": "Nov 2023",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=69e62675-ca98-4881-8efc-87e155b25805.pdf"
+  },
+  {
+   "month": "Oct 2023",
+   "transcript": null
+  },
+  {
+   "month": "Aug 2023",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=a7153ea0-3572-44de-a429-d3a362d9221a.pdf"
+  },
+  {
+   "month": "May 2023",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=62ca90cd-2f82-4596-ab07-495c54f714c6.pdf"
+  },
+  {
+   "month": "Mar 2023",
+   "transcript": null
+  },
+  {
+   "month": "Feb 2023",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=07a9342e-9a2b-42a7-a6c9-cd5e74c2e475.pdf"
+  },
+  {
+   "month": "Dec 2022",
+   "transcript": null
+  }
+ ]
+}

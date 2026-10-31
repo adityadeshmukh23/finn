@@ -1,0 +1,226 @@
+{
+ "promises": [
+  {
+   "metric": "other",
+   "label": "OSAT Unit 2 commercialization",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q2 FY27",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Unit 1 is fully operational, and Unit 2 is in commercialization by Q2 '26.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Rail business revenue growth",
+   "kind": "numeric",
+   "target_low": 20.0,
+   "target_high": 25.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "So rail business, I'm expecting this year to grow by around 20%, 25% because of these coming in.",
+   "page": 14
+  },
+  {
+   "metric": "pat",
+   "label": "Rail business margins",
+   "kind": "numeric",
+   "target_low": 30.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "And the margins are going to be north of current 30% plus.",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Market outperformance growth target",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "%",
+   "direction": "about",
+   "horizon": "unspecified",
+   "speaker": "N. Muthukumar",
+   "quote": "That is one of the reasons that why we chose to say this time that we'll be outgrowing the market and we'll be doubling the market growth, so that our penetration is much more.",
+   "page": 8
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "NPD contribution to total revenue",
+   "kind": "numeric",
+   "target_low": 30.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "about",
+   "horizon": "unspecified",
+   "speaker": "N. Muthukumar",
+   "quote": "And our goal is to steadily increase the contribution of NPD -led and value-added solutions to nearly 30% of the total revenue in the coming years.",
+   "page": 6
+  },
+  {
+   "metric": "revenue",
+   "label": "OSAT revenue visibility",
+   "kind": "numeric",
+   "target_low": 25000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "In OSAT, the order outlook for both the current year and the medium term remains strong with revenue visibility of over INR25,000 million over the next 5 years.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "PCB revenue target",
+   "kind": "numeric",
+   "target_low": 300.0,
+   "target_high": 400.0,
+   "unit": "crore",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "I'm sure and certain we will do a good number of PCB of around INR300 crores to INR400 crores, and OSAT of around INR250 crores to INR300 crores.",
+   "page": 19
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "OSAT revenue target",
+   "kind": "numeric",
+   "target_low": 250.0,
+   "target_high": 300.0,
+   "unit": "crore",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "I'm sure and certain we will do a good number of PCB of around INR300 crores to INR400 crores, and OSAT of around INR250 crores to INR300 crores.",
+   "page": 19
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Consolidated total revenue",
+   "period": "FY26",
+   "value": 3626.4,
+   "unit": "crore",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Our total revenue stood at INR3,626.4 crores, reflecting a year -on-year growth of 33.2%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated total revenue growth",
+   "period": "FY26",
+   "value": 33.2,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Our total revenue stood at INR3,626.4 crores, reflecting a year -on-year growth of 33.2%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda",
+   "label": "Consolidated EBITDA",
+   "period": "FY26",
+   "value": 5741.0,
+   "unit": "none",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Our EBITDA for the period FY '26 was INR5,741 million, registering a growth of 39.8% over the same period last year.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated EBITDA margin",
+   "period": "FY26",
+   "value": 15.8,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "This translates into an EBITDA margin of 15.8% for FY '26, while profit after tax came in at INR3,639 million, representing a PAT margin of 10% for FY '26.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Consolidated PAT",
+   "period": "FY26",
+   "value": 3639.0,
+   "unit": "none",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "This translates into an EBITDA margin of 15.8% for FY '26, while profit after tax came in at INR3,639 million, representing a PAT margin of 10% for FY '26.",
+   "page": 3
+  },
+  {
+   "metric": "pat_margin",
+   "label": "Consolidated PAT margin",
+   "period": "FY26",
+   "value": 10.0,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "This translates into an EBITDA margin of 15.8% for FY '26, while profit after tax came in at INR3,639 million, representing a PAT margin of 10% for FY '26.",
+   "page": 3
+  },
+  {
+   "metric": "revenue",
+   "label": "Q4 revenue",
+   "period": "Q4 FY26",
+   "value": 12426.0,
+   "unit": "none",
+   "speaker": "N. Muthukumar",
+   "quote": "For Q4 FY '26, our total revenue stood at INR12,426 million, reflecting a year-on-year growth of 26% for this quarter.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Q4 revenue growth",
+   "period": "Q4 FY26",
+   "value": 26.0,
+   "unit": "%",
+   "speaker": "N. Muthukumar",
+   "quote": "For Q4 FY '26, our total revenue stood at INR12,426 million, reflecting a year-on-year growth of 26% for this quarter.",
+   "page": 5
+  },
+  {
+   "metric": "ebitda",
+   "label": "Q4 operational EBITDA",
+   "period": "Q4 FY26",
+   "value": 1937.0,
+   "unit": "none",
+   "speaker": "N. Muthukumar",
+   "quote": "And overall, for the year, we've grown at 33%, while the operational EBITDA for Q4 '26 came up to INR1,937 million, translating into an EBITDA margin of 15.6%",
+   "page": 5
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Q4 EBITDA margin",
+   "period": "Q4 FY26",
+   "value": 15.6,
+   "unit": "%",
+   "speaker": "N. Muthukumar",
+   "quote": "And overall, for the year, we've grown at 33%, while the operational EBITDA for Q4 '26 came up to INR1,937 million, translating into an EBITDA margin of 15.6%",
+   "page": 5
+  },
+  {
+   "metric": "pat",
+   "label": "Q4 profit after tax",
+   "period": "Q4 FY26",
+   "value": 912.0,
+   "unit": "none",
+   "speaker": "N. Muthukumar",
+   "quote": "The profit after tax for the quarter stood at INR912 million.",
+   "page": 5
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:19:42",
+  "fell_back_from": []
+ }
+}

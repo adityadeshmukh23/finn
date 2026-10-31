@@ -558,24 +558,26 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
     latest_due = due_of(latest)
     rows = []
     for ids, aids, g in groups:
-        first, last = by_p[ids[0]], by_p[ids[-1]]
-        if first["kind"] == "numeric" and first["unit"] == "none" and first["target_low"] is not None:
-            # "almost 10 lakh people" arrives as 10 with no unit; shown as "10+" it would mislead.
-            dropped.append({"stage": "promise", "what": first["label"], "doc": first["doc"], "page": first["page"],
-                            "why": "a count with no unit FINN can show; left out rather than shown as a bare number"})
+        # A later statement with a figure the model didn't read stays: it may be the cut.
+        ids = [i for n, i in enumerate(ids) if not row_problem(by_p[i], lead=n == 0)] or ids
+        first, last = settle_direction(by_p[ids[0]]), by_p[ids[-1]]
+        why = row_problem(first)
+        if why:
+            dropped.append({"stage": "promise", "what": first["label"], "doc": first["doc"], "page": first["page"], "why": why})
             continue
         horizon = last["horizon"] if last["horizon"] != "unspecified" else first["horizon"]
         due = due_of(horizon)
         verdict, by, reason, delivered = None, "rule", "", None
-        if first["kind"] == "qualitative" or (first["kind"] == "numeric" and first["target_low"] is None
-                                              and first["target_high"] is None) or due is None:
+        if due is not None and due > latest_due:
+            verdict = "not_yet_due"
+        elif first["kind"] == "qualitative" or (first["kind"] == "numeric" and first["target_low"] is None
+                                                and first["target_high"] is None) or due is None:
             verdict = "too_vague"
             reason = "No number or milestone to check against." if due else "No fixed date to check against."
-        elif due > latest_due:
-            verdict = "not_yet_due"
         else:
             comparable = [by_a[a] for a in aids if by_a[a]["metric"] == first["metric"] and by_a[a]["unit"] == first["unit"]
-                          and by_a[a]["value"] is not None and due_of(by_a[a]["period"]) == due]
+                          and by_a[a]["value"] is not None and due_of(by_a[a]["period"]) == due
+                          and (by_a[a]["source"] == "annual_report" or unit_stated(by_a[a], "value"))]
             comparable.sort(key=lambda a: a["source"] != "annual_report")
             if first["kind"] == "numeric" and comparable:
                 a = comparable[0]
@@ -606,8 +608,13 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
             "verdict": verdict, "verdict_by": by, "reason": reason, "due": horizon,
             "promised": _claim(first, docs) | {"target": format_target(first)},
             "revisions": [_claim(by_p[i], docs) | {"target": format_target(by_p[i])} for i in ids[1:]
-                          if _target(by_p[i]) != _target(first)],
+                          if format_target(by_p[i]) and _target(by_p[i]) != _target(first)],
             "restated": len(ids) - 1,
+            # Every later statement, so a cut the model didn't read as a number still shows its quote.
+            "later": [_claim(by_p[i], docs) | {"target": format_target(by_p[i]),
+                                               "change": ("no figure read" if not format_target(by_p[i])
+                                                          else "revised" if _target(by_p[i]) != _target(first) else "restated")}
+                      for i in ids[1:]],
             "delivered": _actual(delivered, docs) if delivered else None,
         })
     rank = {"missed": 0, "partially": 1, "met": 2, "not_found": 3, "too_vague": 4, "not_yet_due": 5}
@@ -631,6 +638,46 @@ def _evidence_item(e: Evidence, first: dict, ids: list[str], evidence: dict[str,
             "period": period if due_of(period) else first["horizon"], "value": e.value, "unit": e.unit,
             "speaker": "", "quote": e.quote, "doc": e.doc, "page": e.page, "source": "transcript",
             "how": "found by searching later calls"}, ""
+
+
+_UNIT_WORDS = {"%": r"%|per ?cent", "crore": r"crore|\bcr\b|\bcrs?\.", "usd_million": r"\$|dollar|usd",
+               "usd_billion": r"\$|dollar|usd"}
+_FIGURE = re.compile(r"\d[\d,.]*\s*(%|per ?cent|crore|\bcr\b|million|billion|lakh)|(₹|rs\.?|inr|\$)\s*\d", re.I)
+_ABOUT = re.compile(r"\b(about|around|approximately|nearly|close to|roughly)\b", re.I)
+_AT_LEAST = re.compile(r"\+|plus|more than|at least|minimum|north of|over|above|exceed|cross", re.I)
+
+
+def unit_stated(item: dict, value_key: str) -> bool:
+    """The quote must say the unit the figure is read in: '70 to 85 days' isn't 70%, and
+    'INR25,000 million' isn't ₹25,000 crore."""
+    if item.get(value_key) is None or item["unit"] == "none":
+        return True
+    q = item["quote"]
+    if item["unit"] == "crore" and re.search(r"million|billion", q, re.I) and not re.search(r"crore", q, re.I):
+        return False
+    return bool(re.search(_UNIT_WORDS[item["unit"]], q, re.I))
+
+
+def row_problem(p: dict, lead: bool = True) -> str:
+    """Why a promise can't be shown honestly as extracted, or ''. Applied after the judge, so a rule
+    change replays recorded model output instead of calling the model again."""
+    has_target = p["target_low"] is not None or p["target_high"] is not None
+    if "?" in p["quote"]:
+        return "the quote is a question, not a promise"
+    if has_target and p["unit"] == "none":
+        return "a figure with no unit FINN can show; left out rather than shown as a bare number"
+    if has_target and not unit_stated(p, "target_low" if p["target_low"] is not None else "target_high"):
+        return "the quote doesn't state the unit the target was read in"
+    if lead and not has_target and p["kind"] != "milestone" and _FIGURE.search(p["quote"]):
+        return "the quote states a figure that wasn't read as the target; not judged"
+    return ""
+
+
+def settle_direction(p: dict) -> dict:
+    """'about INR300 crores' is a point target, not '₹300 cr+'."""
+    if p["direction"] == "at_least" and _ABOUT.search(p["quote"]) and not _AT_LEAST.search(p["quote"]):
+        return p | {"direction": "about"}
+    return p
 
 
 def _target(p: dict) -> tuple:
@@ -689,7 +736,7 @@ def save(rec: dict, texts: dict[str, list[str]]) -> None:
     without the PDFs (which are never committed)."""
     cited: dict[str, dict[str, str]] = {}
     for r in rec["scorecard"]["rows"]:
-        for c in [r["promised"], *r["revisions"], *( [r["delivered"]] if r["delivered"] else [])]:
+        for c in [r["promised"], *r["revisions"], *r.get("later", []), *([r["delivered"]] if r["delivered"] else [])]:
             cited.setdefault(c["doc"], {})[str(c["page"])] = texts[c["doc"]][c["page"] - 1]
     if rec.get("financials"):
         f = rec["financials"]
@@ -704,7 +751,7 @@ def reverify(rec: dict, cited: dict[str, dict[str, str]]) -> list[str]:
     """Every recorded claim re-checked against the stored page text. Returns the failures (should be none)."""
     bad = []
     for r in rec["scorecard"]["rows"]:
-        for c in [r["promised"], *r["revisions"]]:
+        for c in [r["promised"], *r["revisions"], *r.get("later", [])]:
             if not quote_on_page(c["quote"], cited[c["doc"]][str(c["page"])]):
                 bad.append(f"{r['label']}: promise quote not on {c['doc']} p.{c['page']}")
         d = r["delivered"]

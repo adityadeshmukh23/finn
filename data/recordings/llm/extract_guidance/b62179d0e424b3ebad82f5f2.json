@@ -1,0 +1,147 @@
+{
+ "promises": [
+  {
+   "metric": "revenue",
+   "label": "Consolidated revenue",
+   "kind": "numeric",
+   "target_low": 4500.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Jairam Sampath",
+   "quote": "So we maintain our what I call the guidance of INR4,500 crores plus on a consol basis.",
+   "page": 6
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated EBITDA margin",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Jairam Sampath",
+   "quote": "We are saying that looking at the first quarter, the EBITDA might exceed the guidance of 15.6%.",
+   "page": 13
+  },
+  {
+   "metric": "other",
+   "label": "OSAT commercial production",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "Q3 FY26",
+   "speaker": "Ramesh Kannan",
+   "quote": "Our OSAT facility in Sanand is almost there with proto products for AOS and is on track to be fully operational for commercial production by December '25.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Chennai PCB plant operational readiness",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "Q4 FY26",
+   "speaker": "Ramesh Kannan",
+   "quote": "Similarly, the multilayer HDI PCB plant in Chennai has also reached the final stages with building construction complete and operational readiness expected by January 2026.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Net working capital days",
+   "kind": "numeric",
+   "target_low": 70.0,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_most",
+   "horizon": "FY26",
+   "speaker": "Jairam Sampath",
+   "quote": "So by the time we reach the end of the year, I think we would probably perform on the expectations in terms of both OCF and as well as the working capital days, let's say, sub-70.",
+   "page": 7
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Total revenue",
+   "period": "Q1 FY26",
+   "value": 6735.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kannan",
+   "quote": "Our total revenue stood at INR6,735 million, reflecting a year -on-year growth of 34%",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Total revenue year-on-year growth",
+   "period": "Q1 FY26",
+   "value": 34.0,
+   "unit": "%",
+   "speaker": "Ramesh Kannan",
+   "quote": "Our total revenue stood at INR6,735 million, reflecting a year -on-year growth of 34%",
+   "page": 3
+  },
+  {
+   "metric": "ebitda",
+   "label": "Operational EBITDA",
+   "period": "Q1 FY26",
+   "value": 1130.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kannan",
+   "quote": "Operational EBITDA for the quarter was INR1,130 million, marking a strong growth of 69% compared to same period last year.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "period": "Q1 FY26",
+   "value": 16.8,
+   "unit": "%",
+   "speaker": "Jairam Sampath",
+   "quote": "EBITDA margin for Q1 FY '26 stood at 16.8%.",
+   "page": 5
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax",
+   "period": "Q1 FY26",
+   "value": 746.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kannan",
+   "quote": "Similarly, our profit after tax came in at INR746 million, representing a PAT margin of 11.1%",
+   "page": 3
+  },
+  {
+   "metric": "pat_margin",
+   "label": "PAT margin",
+   "period": "Q1 FY26",
+   "value": 11.1,
+   "unit": "%",
+   "speaker": "Ramesh Kannan",
+   "quote": "Similarly, our profit after tax came in at INR746 million, representing a PAT margin of 11.1%",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book",
+   "period": "Q1 FY26",
+   "value": 74011.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kannan",
+   "quote": "Our order book continues to show steady and healthy growth, increasing from INR50,386 million in Q1 FY '25 to INR74,011 million in Q1 FY '26",
+   "page": 3
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:19:27",
+  "fell_back_from": []
+ }
+}

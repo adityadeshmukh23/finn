@@ -53,6 +53,7 @@ function Quote({ text }: { text: string }) {
 function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc>; judge: string }) {
   const [open, setOpen] = useState(false)
   const d = r.delivered
+  const later = r.later ?? r.revisions.map((v) => ({ ...v, change: 'revised' as const }))
   return (
     <li className="border-t border-line py-3 first:border-0">
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full text-left">
@@ -79,9 +80,11 @@ function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc
           )}
         </dl>
         {r.reason && <p className="mt-1 text-[13px] leading-snug text-ink-2">{r.reason}</p>}
-        {(r.revisions.length > 0 || r.restated > 0) && !open && (
+        {r.restated > 0 && !open && (
           <p className="mt-1 text-xs text-ink-3">
-            {r.revisions.length > 0 ? `Revised ${r.revisions.length}×` : `Restated on ${r.restated} later ${r.restated === 1 ? 'call' : 'calls'}`}
+            {r.revisions.length > 0 ? `Revised ${r.revisions.length}× on later calls`
+              : later.every((x) => x.change === 'restated') ? `Restated on ${r.restated} later ${r.restated === 1 ? 'call' : 'calls'}`
+                : `Discussed again on ${r.restated} later ${r.restated === 1 ? 'call' : 'calls'}`}
           </p>
         )}
       </button>
@@ -92,16 +95,16 @@ function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc
           <p className="text-xs text-ink-3">
             {r.promised.speaker && <>{r.promised.speaker}, </>}<Src docs={docs} doc={r.promised.doc} page={r.promised.page} />
           </p>
-          {r.revisions.map((v) => (
+          {later.map((v) => (
             <div key={`${v.doc}-${v.page}`} className="space-y-1">
-              <p className="text-xs font-semibold text-ink-2">Revised to {v.target} on the {v.call} call</p>
+              <p className="text-xs font-semibold text-ink-2">
+                {v.change === 'revised' ? `Revised to ${v.target}` : v.change === 'restated' ? 'Restated' : 'Said again (no figure read from it)'} on the {v.call} call
+              </p>
               <Quote text={v.quote} />
               <p className="text-xs text-ink-3"><Src docs={docs} doc={v.doc} page={v.page} /></p>
             </div>
           ))}
-          {r.restated > r.revisions.length && (
-            <p className="text-xs text-ink-3">Same target restated on {r.restated - r.revisions.length} later {r.restated - r.revisions.length === 1 ? 'call' : 'calls'}. Verdict is against the first statement.</p>
-          )}
+          {later.length > 0 && <p className="text-xs text-ink-3">The verdict is against the first statement.</p>}
           {d && (
             <div className="space-y-1 rounded-xl bg-raised p-2.5">
               <p className="text-xs font-semibold text-ink-2">

@@ -1,0 +1,268 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ1FY26-1",
+    "PQ3FY26-1"
+   ],
+   "actual_ids": [
+    "AR:revenue:FY26",
+    "RQ4FY26-1"
+   ],
+   "evidence": null,
+   "verdict": "missed",
+   "reason": "Revenue for FY26 was ₹3,626.35 crores, missing the initial target of ₹4,500 crores plus and revised target of ₹4,000 crores."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-2"
+   ],
+   "actual_ids": [
+    "AR:ebitda_margin:FY26",
+    "RQ4FY26-4"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Consolidated EBITDA margin for FY26 was 15.8%, exceeding the target of 15.6%."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 10,
+    "quote": "Added to what Dr. Muthukumar told, our OSAT, all the trials and validation is getting over now. We will start the commercial billings.",
+    "value": null,
+    "unit": "none",
+    "period": "Q1 FY27"
+   },
+   "verdict": "missed",
+   "reason": "Commercial billing was not started by December 2025, with trials and validation still concluding in Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-4",
+    "PQ2FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Available passages do not report whether operational readiness of the Chennai PCB plant was achieved by January 2026."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY28 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-2",
+    "PQ3FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY28 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY30 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "No target timeframe was specified for the ₹1,500 crores revenue potential."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "No target timeframe was specified for the ₹1,000 crores revenue potential."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 6,
+    "quote": "In terms of working capital, even though the number of days has moved from 190 days for the quarter standalone, and if you look at the 12 -month rolling, it is about 163 days",
+    "value": 163.0,
+    "unit": "none",
+    "period": "FY26"
+   },
+   "verdict": "missed",
+   "reason": "Working capital reached 163 days rolling and 190 days standalone, well above the 70 to 85 days target."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The provided documents do not state full-year consolidated operating cash flow for FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The due period Q2 FY27 has not yet been reported."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The due period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "No target date or timeframe was provided for the margin target."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "No timeframe or measurable metric was given."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Target specified only coming years without a checkable date."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "No specific annual target or checkable milestone period was provided."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-8"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period Q3 FY27 has not arrived as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period FY27 has not concluded as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-8"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "The target period Q2 FY28 has not arrived as of Q1 FY27."
+  }
+ ],
+ "credibility": "Kaynes met its FY26 EBITDA margin target at 15.8%, but missed its revenue guidance of ₹4,500 crores and OSAT commercial launch timeline.",
+ "_meta": {
+  "model": "gemini:gemini-3.8-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T04:21:18",
+  "fell_back_from": []
+ }
+}

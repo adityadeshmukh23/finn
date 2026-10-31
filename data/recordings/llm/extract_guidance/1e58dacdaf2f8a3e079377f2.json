@@ -1,0 +1,160 @@
+{
+ "promises": [
+  {
+   "metric": "revenue",
+   "label": "Full year revenue target",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Jairam Sampath",
+   "quote": "So, in terms of revenue, I think last quarter is going to be a busy quarter for us, and including the last quarter for FY '26, we'll cross about INR4,000 crores minimum and mainly driven by EMS revenues.",
+   "page": 8
+  },
+  {
+   "metric": "revenue",
+   "label": "FY28 revenue target",
+   "kind": "numeric",
+   "target_low": 1.0,
+   "target_high": null,
+   "unit": "usd_billion",
+   "direction": "at_least",
+   "horizon": "FY28",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "See, on the growth, what we have projected $1 billion, we are still sticking on to that because for us, from our bare board, from our OSAT, additional buildings are going to take place.",
+   "page": 9
+  },
+  {
+   "metric": "revenue",
+   "label": "OSAT business revenue potential",
+   "kind": "numeric",
+   "target_low": 1500.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Jairam Sampath",
+   "quote": "So, at the minimum, you can expect INR1,500 crores from our OSAT business. Similarly, you can expect about INR1,000 crores from PC Board business.",
+   "page": 10
+  },
+  {
+   "metric": "revenue",
+   "label": "PC Board business revenue potential",
+   "kind": "numeric",
+   "target_low": 1000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Jairam Sampath",
+   "quote": "Similarly, you can expect about INR1,000 crores from PC Board business. Now beyond just fine-tuning at this point in time, when they start delivering, then we can probably fine -tune these when we start managing the order book, et cetera.",
+   "page": 10
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Net working capital days target",
+   "kind": "numeric",
+   "target_low": 70.0,
+   "target_high": 85.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY26",
+   "speaker": "Jairam Sampath",
+   "quote": "So typically, what we expect is about between 70 to 85 days. Last year, it was 85 days. We have not made significant improvements, because we have to contend with our delivery schedule for customers and be ready to deliver sometimes a little more inefficiently.",
+   "page": 7
+  },
+  {
+   "metric": "other",
+   "label": "Consolidated operating cash flow",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Jairam Sampath",
+   "quote": "So this year, you can expect at consol level, definitely a significant positive operating cash flow.",
+   "page": 13
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Total revenue for 9M",
+   "period": "9M FY26",
+   "value": 23837.0,
+   "unit": "none",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Our total revenue stood at INR23,837 million, reflecting a year -on-year growth of 37%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth year-on-year for 9M",
+   "period": "9M FY26",
+   "value": 37.0,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Our total revenue stood at INR23,837 million, reflecting a year -on-year growth of 37%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda",
+   "label": "Operational EBITDA for Q3",
+   "period": "Q3 FY26",
+   "value": 3778.0,
+   "unit": "none",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Operational EBITDA for the quarter was INR3,778 million, registering a growth of 55% over the same period last year.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin for Q3",
+   "period": "Q3 FY26",
+   "value": 15.9,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "This translates into an EBITDA margin of 15.9%, an expansion of 190 basis points year-on-year.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax for 9M",
+   "period": "9M FY26",
+   "value": 2726.0,
+   "unit": "none",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Profit after tax came in at INR2,726 million, representing a PAT margin of 11.4%.",
+   "page": 3
+  },
+  {
+   "metric": "pat_margin",
+   "label": "PAT margin for 9M",
+   "period": "9M FY26",
+   "value": 11.4,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Profit after tax came in at INR2,726 million, representing a PAT margin of 11.4%.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book",
+   "period": "Q3 FY26",
+   "value": 90000.0,
+   "unit": "none",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "We have an order book of around INR90,000 million, which is pending with us.",
+   "page": 3
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:19:37",
+  "fell_back_from": []
+ }
+}

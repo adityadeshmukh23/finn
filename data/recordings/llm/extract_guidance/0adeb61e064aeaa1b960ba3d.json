@@ -1,0 +1,206 @@
+{
+ "promises": [
+  {
+   "metric": "other",
+   "label": "Turn cash positive",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "N. Muthukumar",
+   "quote": "gives us the confidence that whatever the commitment that we have given to you as a leadership team, that by end of the financial year we'll turn the cash positive, we are pretty confident on that.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Kaynes Semicon Unit 2 and Kaynes Circuit Chennai operational",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "Q3 FY27",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Both Kaynes Semicon Unit 2 and Kaynes Circuit Chennai remain on the track to be operational by quarter 3 FY27, and we will continue to update you transparently on our progress every quarter.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Market growth multiplier",
+   "kind": "qualitative",
+   "target_low": 2.0,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "N. Muthukumar",
+   "quote": "Sir, revenue growth, we have committed the 2x of the market growth. The first quarter the market has grown at 17% and we have grown at more than 45% in our -- 48% in our EMS business.",
+   "page": 14
+  },
+  {
+   "metric": "revenue",
+   "label": "OSAT and PCB full year revenue",
+   "kind": "numeric",
+   "target_low": 450.0,
+   "target_high": 500.0,
+   "unit": "crore",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "N. Muthukumar",
+   "quote": "As far as OSAT and PCB is concerned, we already told from third quarter the revenue starts in both the business, and we have committed a full year revenue of totally INR500 crores between both, INR450 to INR500 crores, which is what we are targeting at this point in time, we are on the target.",
+   "page": 14
+  },
+  {
+   "metric": "capex",
+   "label": "OSAT capex",
+   "kind": "numeric",
+   "target_low": 300.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "N. Muthukumar",
+   "quote": "We said we will be funding for this capex for this year is about INR300 crores for OSAT, INR300 crores for PCB, and about INR250 crores for EMS business.",
+   "page": 16
+  },
+  {
+   "metric": "capex",
+   "label": "PCB capex",
+   "kind": "numeric",
+   "target_low": 300.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "N. Muthukumar",
+   "quote": "We said we will be funding for this capex for this year is about INR300 crores for OSAT, INR300 crores for PCB, and about INR250 crores for EMS business.",
+   "page": 16
+  },
+  {
+   "metric": "capex",
+   "label": "EMS business capex",
+   "kind": "numeric",
+   "target_low": 250.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "N. Muthukumar",
+   "quote": "We said we will be funding for this capex for this year is about INR300 crores for OSAT, INR300 crores for PCB, and about INR250 crores for EMS business.",
+   "page": 16
+  },
+  {
+   "metric": "other",
+   "label": "First 3U satellite ready to launch",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "Q2 FY28",
+   "speaker": "N. Muthukumar",
+   "quote": "Our first 3U satellite is currently in the prototype development phase, and we expect it to be ready to launch in middle of next year, once the required regulatory testing is complete.",
+   "page": 8
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Total revenue",
+   "period": "Q1 FY27",
+   "value": 946.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Let me begin with a brief overview of our financial performance for Q1 FY27. Our total revenue stood at INR946 crores, reflecting an year -on-year growth of 40%, which is largely driven by EMS business.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Total revenue year-on-year growth",
+   "period": "Q1 FY27",
+   "value": 40.0,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "Our total revenue stood at INR946 crores, reflecting an year -on-year growth of 40%, which is largely driven by EMS business.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda",
+   "label": "EBITDA",
+   "period": "Q1 FY27",
+   "value": 147.6,
+   "unit": "crore",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "EBITDA for the quarter was INR147.6 crores, translati ng into an EBITDA margin of 15.6% and 31% year -on-year growth.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "period": "Q1 FY27",
+   "value": 15.6,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "EBITDA for the quarter was INR147.6 crores, translati ng into an EBITDA margin of 15.6% and 31% year -on-year growth.",
+   "page": 3
+  },
+  {
+   "metric": "other",
+   "label": "EBITDA year-on-year growth",
+   "period": "Q1 FY27",
+   "value": 31.0,
+   "unit": "%",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "EBITDA for the quarter was INR147.6 crores, translati ng into an EBITDA margin of 15.6% and 31% year -on-year growth.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book",
+   "period": "Q1 FY27",
+   "value": 9000.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kunhikannan",
+   "quote": "We have a robust order book of around INR9,000 crores.",
+   "page": 3
+  },
+  {
+   "metric": "capex",
+   "label": "OSAT capex spent",
+   "period": "FY26",
+   "value": 473.0,
+   "unit": "crore",
+   "speaker": "N. Muthukumar",
+   "quote": "The capex done in FY26 was INR473 crores for OSAT and INR324 crores for PCB.",
+   "page": 7
+  },
+  {
+   "metric": "capex",
+   "label": "PCB capex spent",
+   "period": "FY26",
+   "value": 324.0,
+   "unit": "crore",
+   "speaker": "N. Muthukumar",
+   "quote": "The capex done in FY26 was INR473 crores for OSAT and INR324 crores for PCB.",
+   "page": 7
+  },
+  {
+   "metric": "other",
+   "label": "Government subsidy received for OSAT",
+   "period": "Q1 FY27",
+   "value": 170.0,
+   "unit": "crore",
+   "speaker": "N. Muthukumar",
+   "quote": "We also received, happy to say that we also received the gover nment subsidy to the tune of INR170 crores in OSAT business till July 26.",
+   "page": 8
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:19:48",
+  "fell_back_from": []
+ }
+}

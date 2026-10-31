@@ -231,6 +231,7 @@ export interface ScoreRow {
   promised: Claim
   revisions: Claim[]
   restated: number
+  later?: (Claim & { change: 'revised' | 'restated' | 'no figure read' })[]
   delivered: Delivered | null
 }
 

@@ -101,7 +101,8 @@ def test_code_overrules_the_model_on_numeric_promises():
 
 def test_not_yet_due_and_too_vague_are_rules():
     rows, _ = _assemble(
-        [_promise(id="P1", horizon="FY27"), _promise(id="P2", kind="qualitative", target_low=None, metric="other")],
+        [_promise(id="P1", horizon="FY27"), _promise(id="P2", kind="qualitative", target_low=None, metric="other",
+                                                     quote="we will look at possibly very strong ways to keep on growing")],
         [], [dict(promise_ids=["P1"], actual_ids=[], verdict="met", reason="", evidence=None),
              dict(promise_ids=["P2"], actual_ids=[], verdict="met", reason="", evidence=None)])
     assert {r["id"]: r["verdict"] for r in rows} == {"P1": "not_yet_due", "P2": "too_vague"}
@@ -124,7 +125,8 @@ def test_model_reason_with_an_unsourced_number_is_withheld():
 
 
 def test_evidence_must_come_from_a_searched_page_and_be_verbatim():
-    ms = _promise(id="P1", kind="milestone", metric="other", label="QRSAM order", target_low=None, horizon="Q4 FY26")
+    ms = _promise(id="P1", kind="milestone", metric="other", label="QRSAM order", target_low=None, horizon="Q4 FY26",
+                  quote="We are confident we may get in the Q4 of this year itself QRSAM")
     page = "And QRSAM, we told we were highly optimistic to get it by March, but procedural delays we knew."
     texts = {"T-Q4FY26": ["", page]}
     searched = {"P1": [{"doc": "T-Q4FY26", "page": 2, "call": "Q4 FY26", "text": page}]}
@@ -140,13 +142,20 @@ def test_evidence_must_come_from_a_searched_page_and_be_verbatim():
 
 
 def test_restating_a_target_in_other_words_is_not_a_revision():
-    a = _promise(id="P1", metric="revenue_growth", unit="%", target_low=15, target_high=17, direction="range", horizon="FY26")
-    b = _promise(id="P2", metric="revenue_growth", unit="%", target_low=15, direction="at_least", call="Q4 FY26", doc="T-Q4FY26")
-    c = _promise(id="P3", metric="revenue_growth", unit="%", target_low=12, direction="at_least", call="Q4 FY26", doc="T-Q4FY26")
+    a = _promise(id="P1", metric="revenue_growth", unit="%", target_low=15, target_high=17, direction="range", horizon="FY26",
+                 quote="It will be between 15% to 17% growth this year")
+    b = _promise(id="P2", metric="revenue_growth", unit="%", target_low=15, direction="at_least", call="Q4 FY26", doc="T-Q4FY26",
+                 quote="Revenue growth more than 15%, EBITDA margin more than 27%")
+    c = _promise(id="P3", metric="revenue_growth", unit="%", target_low=12, direction="at_least", call="Q4 FY26", doc="T-Q4FY26",
+                 quote="Revenue growth now more than 12% for the year")
     rows, _ = _assemble([a, b], [], [dict(promise_ids=["P1", "P2"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
     assert rows[0]["restated"] == 1 and rows[0]["revisions"] == []
     rows, _ = _assemble([a, c], [], [dict(promise_ids=["P1", "P3"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
     assert [r["target"] for r in rows[0]["revisions"]] == ["12%+"]
+    d = _promise(id="P4", metric="revenue_growth", unit="%", target_low=None, call="Q4 FY26", doc="T-Q4FY26",
+                 quote="we'll cross about the earlier number, mainly driven by EMS revenue")
+    rows, _ = _assemble([a, b, d], [], [dict(promise_ids=["P1", "P2", "P4"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
+    assert [x["change"] for x in rows[0]["later"]] == ["restated", "no figure read"]
 
 
 @pytest.mark.parametrize("path", sorted((settings.data_dir / "recordings" / "research").glob("*.json")), ids=lambda p: p.stem)
@@ -204,3 +213,43 @@ def test_a_count_without_a_unit_is_left_out():
                  quote="we are gunning for training almost 10 lakh people")
     rows, dropped = _assemble([p], [], [dict(promise_ids=["P1"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
     assert rows == [] and dropped[0]["what"] == "People skilling"
+
+
+@pytest.mark.parametrize("kw,why", [
+    (dict(unit="crore", target_low=25000.0, quote="revenue visibility of over INR25,000 million over the next 5 years"),
+     "the quote doesn't state the unit the target was read in"),
+    (dict(unit="%", target_low=70.0, target_high=85.0, quote="what we expect is about between 70 to 85 days. Last year, it was 85 days."),
+     "the quote doesn't state the unit the target was read in"),
+    (dict(unit="usd_billion", target_low=2.0, quote="Do we still hold at $1 billion revenue guidance by FY '28 and $2 billion by FY '30?"),
+     "the quote is a question, not a promise"),
+    (dict(kind="qualitative", target_low=None, unit="%", quote="the EBITDA might exceed the guidance of 15.6%."),
+     "the quote states a figure that wasn't read as the target; not judged"),
+    (dict(kind="qualitative", target_low=2.0, unit="none", quote="we have committed the 2x of the market growth"),
+     "a figure with no unit FINN can show; left out rather than shown as a bare number"),
+    (dict(unit="crore", target_low=4500.0, quote="So we maintain our what I call the guidance of INR4,500 crores plus on a consol basis."), ""),
+    (dict(kind="qualitative", target_low=None, unit="none", quote="we will look at possibly very strong ways to keep on growing"), ""),
+])
+def test_row_problems(kw, why):
+    assert pvd.row_problem(_promise() | kw) == why
+
+
+def test_about_in_the_quote_makes_a_point_target():
+    p = _promise(target_low=300.0, quote="this year is about INR300 crores for OSAT, INR300 crores for PCB")
+    assert pvd.format_target(pvd.settle_direction(p)) == "about ₹300 cr"
+    assert pvd.settle_direction(_promise())["direction"] == "at_least"      # "INR1,000-plus crores"
+
+
+def test_a_dated_future_commitment_is_not_yet_due_even_if_worded():
+    p = _promise(id="P1", kind="qualitative", target_low=None, metric="other", horizon="FY27",
+                 quote="by end of the financial year we'll turn the cash positive, we are pretty confident on that")
+    rows, _ = _assemble([p], [], [dict(promise_ids=["P1"], actual_ids=[], verdict="too_vague", reason="", evidence=None)])
+    assert rows[0]["verdict"] == "not_yet_due"
+
+
+def test_an_analyst_question_first_in_a_group_gives_way_to_managements_statement():
+    q = _promise(id="P1", unit="usd_billion", target_low=1.0, metric="revenue", horizon="FY28",
+                 quote="Do we still hold at $1 billion revenue guidance by FY '28 and $2 billion by FY '30?")
+    m = _promise(id="P2", unit="usd_billion", target_low=1.0, metric="revenue", horizon="FY28", call="Q4 FY26", doc="T-Q4FY26",
+                 quote="So $1 billion by FY '28, certainly visibility is there, and we are sure we'll do it.")
+    rows, dropped = _assemble([q, m], [], [dict(promise_ids=["P1", "P2"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
+    assert rows[0]["promised"]["quote"].startswith("So $1 billion") and not dropped

@@ -1,7 +1,7 @@
 {
  "symbol": "ASIANPAINT",
  "name": "Asian Paints Ltd",
- "generated_at": "2026-11-01T04:18:29",
+ "generated_at": "2026-11-01T04:24:19",
  "status": "ok",
  "latest_period": "Q1 FY27",
  "docs": {
@@ -250,6 +250,7 @@
     },
     "revisions": [],
     "restated": 0,
+    "later": [],
     "delivered": null
    },
    {
@@ -272,6 +273,38 @@
     },
     "revisions": [],
     "restated": 3,
+    "later": [
+     {
+      "call": "Q2 FY26",
+      "speaker": "Amit Syngle",
+      "quote": "Given all this, it is okay to maintain the whole guidance of 18 to 20% PBDIT margin band. I would not qualify whether it should be at an 18% level or a higher level. But it's good to maintain 18-20% margin as we go ahead.",
+      "doc": "T-Q2FY26",
+      "page": 27,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=99e65c90-6bb0-4984-ac71-2a0f0eb4cc7f.pdf#page=27",
+      "target": "18%–20%",
+      "change": "restated"
+     },
+     {
+      "call": "Q3 FY26",
+      "speaker": "Amit Syngle",
+      "quote": "So, I would say that we would keep the guidance between that 18 and 20% band as we go ahead and that is something which we will endeavour to maintain.",
+      "doc": "T-Q3FY26",
+      "page": 35,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=8bc8c7dd-23d0-4cf2-bcdf-620769ed0d1a.pdf#page=35",
+      "target": "18%–20%",
+      "change": "restated"
+     },
+     {
+      "call": "Q1 FY27",
+      "speaker": "Amit Syngle",
+      "quote": "We are still garnering around the guidance of 18-20% of our PBDIT margins holds.",
+      "doc": "T-Q1FY27",
+      "page": 20,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=6e0d5627-2b8b-4bf1-a7ce-9d0160833a0f.pdf#page=20",
+      "target": "18%–20%",
+      "change": "restated"
+     }
+    ],
     "delivered": null
    },
    {
@@ -294,6 +327,7 @@
     },
     "revisions": [],
     "restated": 0,
+    "later": [],
     "delivered": null
    },
    {
@@ -316,6 +350,7 @@
     },
     "revisions": [],
     "restated": 0,
+    "later": [],
     "delivered": null
    },
    {
@@ -338,6 +373,7 @@
     },
     "revisions": [],
     "restated": 0,
+    "later": [],
     "delivered": null
    },
    {
@@ -360,6 +396,7 @@
     },
     "revisions": [],
     "restated": 0,
+    "later": [],
     "delivered": null
    },
    {
@@ -382,6 +419,7 @@
     },
     "revisions": [],
     "restated": 0,
+    "later": [],
     "delivered": null
    },
    {
@@ -404,6 +442,18 @@
     },
     "revisions": [],
     "restated": 1,
+    "later": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Amit Syngle",
+      "quote": "The first phase of this initiative will commence by August. We believe this is a very significant area that we will be entering.",
+      "doc": "T-Q1FY27",
+      "page": 9,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=6e0d5627-2b8b-4bf1-a7ce-9d0160833a0f.pdf#page=9",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
     "delivered": null
    },
    {
@@ -426,6 +476,7 @@
     },
     "revisions": [],
     "restated": 0,
+    "later": [],
     "delivered": null
    }
   ]
@@ -471,7 +522,7 @@
    "what": "People skilling target",
    "doc": "T-Q3FY26",
    "page": 28,
-   "why": "a count with no unit FINN can show; left out rather than shown as a bare number"
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
   }
  ],
  "judged": true

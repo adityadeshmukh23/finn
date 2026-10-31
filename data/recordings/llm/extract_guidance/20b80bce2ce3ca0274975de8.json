@@ -1,0 +1,194 @@
+{
+ "promises": [
+  {
+   "metric": "revenue_growth",
+   "label": "revenue guidance FY28 and FY30",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "FY28",
+   "speaker": "Jairam Sampath",
+   "quote": "There is good traction and there is good momentum in the business. So $1 billion by FY '28, certainly visibility is there, and we are sure we'll do it.",
+   "page": 17
+  },
+  {
+   "metric": "revenue",
+   "label": "revenue target FY28",
+   "kind": "numeric",
+   "target_low": 1.0,
+   "target_high": null,
+   "unit": "usd_billion",
+   "direction": "about",
+   "horizon": "FY28",
+   "speaker": "Jairam Sampath",
+   "quote": "So $1 billion by FY '28, certainly visibility is there, and we are sure we'll do it. And you and I will discuss of course, the profile, etc., I can't tell you without I mean, there are lots of confidential agreements, et c., but you can look at the way in which the order inflow is there.",
+   "page": 17
+  },
+  {
+   "metric": "revenue",
+   "label": "revenue target FY30",
+   "kind": "numeric",
+   "target_low": 2.0,
+   "target_high": null,
+   "unit": "usd_billion",
+   "direction": "about",
+   "horizon": "FY30",
+   "speaker": "Jairam Sampath",
+   "quote": "Do we still hold at $1 billion revenue guidance by FY '28 and $2 billion by FY '30?",
+   "page": 17
+  },
+  {
+   "metric": "other",
+   "label": "PCB plant readiness",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Jairam Sampath",
+   "quote": "And we think that by the end of this year, th e plant should be ready and at least the Phase 1 in the Oragadam area.",
+   "page": 10
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Total revenue Q2 FY26",
+   "period": "Q2 FY26",
+   "value": 9062.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kannan",
+   "quote": "Our total revenue stood at INR9,062 million, reflecting a year -on-year growth of 58%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth Q2 FY26",
+   "period": "Q2 FY26",
+   "value": 58.0,
+   "unit": "%",
+   "speaker": "Ramesh Kannan",
+   "quote": "Our total revenue stood at INR9,062 million, reflecting a year -on-year growth of 58%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda",
+   "label": "Operational EBITDA Q2 FY26",
+   "period": "Q2 FY26",
+   "value": 1480.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kannan",
+   "quote": "Operational EBITDA for the quarter was INR1,480 million, registering a growth of 80% over the same period last year.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin Q2 FY26",
+   "period": "Q2 FY26",
+   "value": 16.3,
+   "unit": "%",
+   "speaker": "Ramesh Kannan",
+   "quote": "This translates into an EBITDA margin of 16.3%, an -- expansion of 190 basis points year-on-year.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax Q2 FY26",
+   "period": "Q2 FY26",
+   "value": 1214.0,
+   "unit": "crore",
+   "speaker": "Ramesh Kannan",
+   "quote": "Profit after tax came in at INR1,214 million, representing a PAT margin of 13.4%.",
+   "page": 3
+  },
+  {
+   "metric": "pat_margin",
+   "label": "PAT margin Q2 FY26",
+   "period": "Q2 FY26",
+   "value": 13.4,
+   "unit": "%",
+   "speaker": "Ramesh Kannan",
+   "quote": "Profit after tax came in at INR1,214 million, representing a PAT margin of 13.4%.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book Q2 FY26",
+   "period": "Q2 FY26",
+   "value": 80994.0,
+   "unit": "crore",
+   "speaker": "Jairam Sampath",
+   "quote": "Our current order book for Q2 FY '26, which stands at INR80,994 million compared to INR54,228 million in Q2 of FY '25.",
+   "page": 6
+  },
+  {
+   "metric": "revenue",
+   "label": "Total revenue H1 FY26",
+   "period": "H1 FY26",
+   "value": 15797.0,
+   "unit": "crore",
+   "speaker": "Jairam Sampath",
+   "quote": "The total revenue for H1 FY '26 stood at INR15,797 million, demonstrating a year-on-year growth of 47%.",
+   "page": 6
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth H1 FY26",
+   "period": "H1 FY26",
+   "value": 47.0,
+   "unit": "%",
+   "speaker": "Jairam Sampath",
+   "quote": "The total revenue for H1 FY '26 stood at INR15,797 million, demonstrating a year-on-year growth of 47%.",
+   "page": 6
+  },
+  {
+   "metric": "ebitda",
+   "label": "Operating EBITDA H1 FY26",
+   "period": "H1 FY26",
+   "value": 2610.0,
+   "unit": "crore",
+   "speaker": "Jairam Sampath",
+   "quote": "Operating EBITDA came in at INR2,610 million, making it an increase of 75% year-on-year and resulting in an EBITDA margin of 16.5%",
+   "page": 6
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin H1 FY26",
+   "period": "H1 FY26",
+   "value": 16.5,
+   "unit": "%",
+   "speaker": "Jairam Sampath",
+   "quote": "Operating EBITDA came in at INR2,610 million, making it an increase of 75% year-on-year and resulting in an EBITDA margin of 16.5%, an expansion of 270 basis points over last year for the first half.",
+   "page": 7
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax H1 FY26",
+   "period": "H1 FY26",
+   "value": 1960.0,
+   "unit": "crore",
+   "speaker": "Jairam Sampath",
+   "quote": "Profit after tax reached INR1,960 million, corresponding to a PAT margin of 12.4%.",
+   "page": 7
+  },
+  {
+   "metric": "pat_margin",
+   "label": "PAT margin H1 FY26",
+   "period": "H1 FY26",
+   "value": 12.4,
+   "unit": "%",
+   "speaker": "Jairam Sampath",
+   "quote": "Profit after tax reached INR1,960 million, corresponding to a PAT margin of 12.4%.",
+   "page": 7
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:19:32",
+  "fell_back_from": []
+ }
+}

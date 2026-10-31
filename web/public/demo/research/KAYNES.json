@@ -1,0 +1,801 @@
+{
+ "symbol": "KAYNES",
+ "name": "Kaynes Technology India Ltd",
+ "generated_at": "2026-11-01T04:24:19",
+ "status": "ok",
+ "latest_period": "Q1 FY27",
+ "docs": {
+  "symbol": "KAYNES",
+  "calls": [
+   {
+    "id": "T-Q1FY26",
+    "kind": "transcript",
+    "title": "Q1 FY26 earnings call",
+    "period": "Q1 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9ed5c7b3-510f-4570-8d68-92c16e782894.pdf",
+    "pages": 19,
+    "listed_as": "Aug 2025"
+   },
+   {
+    "id": "T-Q2FY26",
+    "kind": "transcript",
+    "title": "Q2 FY26 earnings call",
+    "period": "Q2 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=13fd5473-73b9-41c4-a782-70e6608354f9.pdf",
+    "pages": 19,
+    "listed_as": "Nov 2025"
+   },
+   {
+    "id": "T-Q3FY26",
+    "kind": "transcript",
+    "title": "Q3 FY26 earnings call",
+    "period": "Q3 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7fcb06f1-08f9-4ebd-a6ac-783e8abfda40.pdf",
+    "pages": 19,
+    "listed_as": "Feb 2026"
+   },
+   {
+    "id": "T-Q4FY26",
+    "kind": "transcript",
+    "title": "Q4 FY26 earnings call",
+    "period": "Q4 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf",
+    "pages": 20,
+    "listed_as": "May 2026"
+   },
+   {
+    "id": "T-Q1FY27",
+    "kind": "transcript",
+    "title": "Q1 FY27 earnings call",
+    "period": "Q1 FY27",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf",
+    "pages": 20,
+    "listed_as": "Aug 2026"
+   }
+  ],
+  "annual_report": {
+   "id": "AR-FY26",
+   "kind": "annual_report",
+   "title": "Annual report FY26",
+   "period": "FY26",
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/7b3ec474-8dc9-46bc-bf3b-64d55d3b6c30.pdf",
+   "pages": 321,
+   "listed_as": "Annual Report 2026"
+  },
+  "skipped": [
+   {
+    "listed_as": "Dec 2025",
+    "why": "not an earnings call (business update, acquisition or other)",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d42ff5a9-4c9e-4163-ae33-ed915881baa4.pdf"
+   }
+  ],
+  "index_source": "screener.in",
+  "index_as_of": "2026-11-01T04:18:50"
+ },
+ "financials": {
+  "doc": "AR-FY26",
+  "page": 239,
+  "basis": "consolidated",
+  "unit": "million",
+  "fy": "FY26",
+  "prev_fy": "FY25",
+  "figures": {
+   "revenue": {
+    "current": 3626.35,
+    "previous": 2721.75
+   },
+   "other_income": {
+    "current": 156.83,
+    "previous": 106.96
+   },
+   "finance_costs": {
+    "current": 116.93,
+    "previous": 101.3
+   },
+   "depreciation": {
+    "current": 107.07,
+    "previous": 44.74
+   },
+   "pbt": {
+    "current": 504.31,
+    "previous": 371.62
+   },
+   "pat": {
+    "current": 363.89,
+    "previous": 293.43
+   },
+   "ebitda": {
+    "current": 571.48,
+    "previous": 410.7
+   }
+  },
+  "printed": {
+   "revenue": {
+    "current": 36263.54,
+    "previous": 27217.52
+   },
+   "other_income": {
+    "current": 1568.3,
+    "previous": 1069.63
+   },
+   "finance_costs": {
+    "current": 1169.27,
+    "previous": 1012.98
+   },
+   "depreciation": {
+    "current": 1070.68,
+    "previous": 447.4
+   },
+   "pbt": {
+    "current": 5043.14,
+    "previous": 3716.24
+   },
+   "pat": {
+    "current": 3638.9,
+    "previous": 2934.33
+   }
+  },
+  "lender": false
+ },
+ "models": {
+  "extract_guidance": [
+   {
+    "doc": "T-Q1FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q2FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q3FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q4FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q1FY27",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "extract_annual": [
+   {
+    "doc": "AR-FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "verdict": [
+   {
+    "model": "gemini:gemini-3.8-flash",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ]
+ },
+ "scorecard": {
+  "counts": {
+   "met": 0,
+   "partially": 1,
+   "missed": 0,
+   "too_vague": 6,
+   "not_found": 2,
+   "not_yet_due": 11
+  },
+  "checkable": 1,
+  "credibility": {
+   "headline": "Met 0 of 1 checkable promises",
+   "line": "Short on consolidated revenue.",
+   "by": "FINN"
+  },
+  "rows": [
+   {
+    "id": "PQ1FY26-1",
+    "metric": "revenue",
+    "label": "Consolidated revenue",
+    "kind": "numeric",
+    "verdict": "partially",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Jairam Sampath",
+     "quote": "So we maintain our what I call the guidance of INR4,500 crores plus on a consol basis.",
+     "doc": "T-Q1FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9ed5c7b3-510f-4570-8d68-92c16e782894.pdf#page=6",
+     "target": "₹4,500 cr+"
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q3 FY26",
+      "speaker": "Jairam Sampath",
+      "quote": "So, in terms of revenue, I think last quarter is going to be a busy quarter for us, and including the last quarter for FY '26, we'll cross about INR4,000 crores minimum and mainly driven by EMS revenues.",
+      "doc": "T-Q3FY26",
+      "page": 8,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7fcb06f1-08f9-4ebd-a6ac-783e8abfda40.pdf#page=8",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": {
+     "value": 3626.35,
+     "unit": "crore",
+     "text": "₹3,626.35 cr",
+     "period": "FY26",
+     "label": "Revenue from operations",
+     "source": "annual_report",
+     "how": "printed",
+     "speaker": "",
+     "quote": "",
+     "doc": "AR-FY26",
+     "page": 239,
+     "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/7b3ec474-8dc9-46bc-bf3b-64d55d3b6c30.pdf#page=239",
+     "title": "Annual report FY26"
+    }
+   },
+   {
+    "id": "PQ1FY26-3",
+    "metric": "other",
+    "label": "OSAT commercial production",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Verdict withheld: reasoning didn't check out.",
+    "due": "Q3 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Ramesh Kannan",
+     "quote": "Our OSAT facility in Sanand is almost there with proto products for AOS and is on track to be fully operational for commercial production by December '25.",
+     "doc": "T-Q1FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9ed5c7b3-510f-4570-8d68-92c16e782894.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-4",
+    "metric": "other",
+    "label": "Chennai PCB plant operational readiness",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Later calls mention it but don't say whether it happened.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Ramesh Kannan",
+     "quote": "Similarly, the multilayer HDI PCB plant in Chennai has also reached the final stages with building construction complete and operational readiness expected by January 2026.",
+     "doc": "T-Q1FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9ed5c7b3-510f-4570-8d68-92c16e782894.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q2 FY26",
+      "speaker": "Jairam Sampath",
+      "quote": "And we think that by the end of this year, th e plant should be ready and at least the Phase 1 in the Oragadam area.",
+      "doc": "T-Q2FY26",
+      "page": 10,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=13fd5473-73b9-41c4-a782-70e6608354f9.pdf#page=10",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-3",
+    "metric": "revenue",
+    "label": "OSAT business revenue potential",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Jairam Sampath",
+     "quote": "So, at the minimum, you can expect INR1,500 crores from our OSAT business. Similarly, you can expect about INR1,000 crores from PC Board business.",
+     "doc": "T-Q3FY26",
+     "page": 10,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7fcb06f1-08f9-4ebd-a6ac-783e8abfda40.pdf#page=10",
+     "target": "₹1,500 cr+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-4",
+    "metric": "revenue",
+    "label": "PC Board business revenue potential",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Jairam Sampath",
+     "quote": "Similarly, you can expect about INR1,000 crores from PC Board business. Now beyond just fine-tuning at this point in time, when they start delivering, then we can probably fine -tune these when we start managing the order book, et cetera.",
+     "doc": "T-Q3FY26",
+     "page": 10,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7fcb06f1-08f9-4ebd-a6ac-783e8abfda40.pdf#page=10",
+     "target": "about ₹1,000 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-6",
+    "metric": "other",
+    "label": "Consolidated operating cash flow",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No number or milestone to check against.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Jairam Sampath",
+     "quote": "So this year, you can expect at consol level, definitely a significant positive operating cash flow.",
+     "doc": "T-Q3FY26",
+     "page": 14,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7fcb06f1-08f9-4ebd-a6ac-783e8abfda40.pdf#page=14",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-3",
+    "metric": "pat",
+    "label": "Rail business margins",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Ramesh Kunhikannan",
+     "quote": "And the margins are going to be north of current 30% plus.",
+     "doc": "T-Q4FY26",
+     "page": 14,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf#page=14",
+     "target": "30%+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-4",
+    "metric": "revenue_growth",
+    "label": "Market outperformance growth target",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "N. Muthukumar",
+     "quote": "That is one of the reasons that why we chose to say this time that we'll be outgrowing the market and we'll be doubling the market growth, so that our penetration is much more.",
+     "doc": "T-Q4FY26",
+     "page": 8,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf#page=8",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-5",
+    "metric": "revenue_growth",
+    "label": "NPD contribution to total revenue",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "N. Muthukumar",
+     "quote": "And our goal is to steadily increase the contribution of NPD -led and value-added solutions to nearly 30% of the total revenue in the coming years.",
+     "doc": "T-Q4FY26",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf#page=6",
+     "target": "about 30%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-2",
+    "metric": "revenue",
+    "label": "revenue target FY28",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY28",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Jairam Sampath",
+     "quote": "So $1 billion by FY '28, certainly visibility is there, and we are sure we'll do it. And you and I will discuss of course, the profile, etc., I can't tell you without I mean, there are lots of confidential agreements, et c., but you can look at the way in which the order inflow is there.",
+     "doc": "T-Q2FY26",
+     "page": 18,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=13fd5473-73b9-41c4-a782-70e6608354f9.pdf#page=18",
+     "target": "about $1 bn"
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q3 FY26",
+      "speaker": "Ramesh Kunhikannan",
+      "quote": "See, on the growth, what we have projected $1 billion, we are still sticking on to that because for us, from our bare board, from our OSAT, additional buildings are going to take place.",
+      "doc": "T-Q3FY26",
+      "page": 9,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7fcb06f1-08f9-4ebd-a6ac-783e8abfda40.pdf#page=9",
+      "target": "$1 bn+",
+      "change": "restated"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-1",
+    "metric": "other",
+    "label": "OSAT Unit 2 commercialization",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Ramesh Kunhikannan",
+     "quote": "Unit 1 is fully operational, and Unit 2 is in commercialization by Q2 '26.",
+     "doc": "T-Q4FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-2",
+    "metric": "revenue_growth",
+    "label": "Rail business revenue growth",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Ramesh Kunhikannan",
+     "quote": "So rail business, I'm expecting this year to grow by around 20%, 25% because of these coming in.",
+     "doc": "T-Q4FY26",
+     "page": 14,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf#page=14",
+     "target": "20%–25%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-7",
+    "metric": "revenue_growth",
+    "label": "PCB revenue target",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Ramesh Kunhikannan",
+     "quote": "I'm sure and certain we will do a good number of PCB of around INR300 crores to INR400 crores, and OSAT of around INR250 crores to INR300 crores.",
+     "doc": "T-Q4FY26",
+     "page": 19,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf#page=19",
+     "target": "₹300 cr–₹400 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-8",
+    "metric": "revenue_growth",
+    "label": "OSAT revenue target",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Ramesh Kunhikannan",
+     "quote": "I'm sure and certain we will do a good number of PCB of around INR300 crores to INR400 crores, and OSAT of around INR250 crores to INR300 crores.",
+     "doc": "T-Q4FY26",
+     "page": 19,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c2aa16ac-08ab-430a-819a-833f94c09dde.pdf#page=19",
+     "target": "₹250 cr–₹300 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-1",
+    "metric": "other",
+    "label": "Turn cash positive",
+    "kind": "qualitative",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "N. Muthukumar",
+     "quote": "gives us the confidence that whatever the commitment that we have given to you as a leadership team, that by end of the financial year we'll turn the cash positive, we are pretty confident on that.",
+     "doc": "T-Q1FY27",
+     "page": 6,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-2",
+    "metric": "other",
+    "label": "Kaynes Semicon Unit 2 and Kaynes Circuit Chennai operational",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Ramesh Kunhikannan",
+     "quote": "Both Kaynes Semicon Unit 2 and Kaynes Circuit Chennai remain on the track to be operational by quarter 3 FY27, and we will continue to update you transparently on our progress every quarter.",
+     "doc": "T-Q1FY27",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-5",
+    "metric": "capex",
+    "label": "OSAT capex",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "N. Muthukumar",
+     "quote": "We said we will be funding for this capex for this year is about INR300 crores for OSAT, INR300 crores for PCB, and about INR250 crores for EMS business.",
+     "doc": "T-Q1FY27",
+     "page": 16,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf#page=16",
+     "target": "about ₹300 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-6",
+    "metric": "capex",
+    "label": "PCB capex",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "N. Muthukumar",
+     "quote": "We said we will be funding for this capex for this year is about INR300 crores for OSAT, INR300 crores for PCB, and about INR250 crores for EMS business.",
+     "doc": "T-Q1FY27",
+     "page": 16,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf#page=16",
+     "target": "about ₹300 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-7",
+    "metric": "capex",
+    "label": "EMS business capex",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "N. Muthukumar",
+     "quote": "We said we will be funding for this capex for this year is about INR300 crores for OSAT, INR300 crores for PCB, and about INR250 crores for EMS business.",
+     "doc": "T-Q1FY27",
+     "page": 16,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf#page=16",
+     "target": "about ₹250 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-8",
+    "metric": "other",
+    "label": "First 3U satellite ready to launch",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY28",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "N. Muthukumar",
+     "quote": "Our first 3U satellite is currently in the prototype development phase, and we expect it to be ready to launch in middle of next year, once the required regulatory testing is complete.",
+     "doc": "T-Q1FY27",
+     "page": 8,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e8d82234-f369-467f-a76f-75bb2747aaa1.pdf#page=8",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   }
+  ]
+ },
+ "dropped": [
+  {
+   "stage": "promise",
+   "what": "Net working capital days",
+   "doc": "T-Q1FY26",
+   "page": 7,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "reported",
+   "what": "Operating EBITDA H1 FY26",
+   "doc": "T-Q2FY26",
+   "page": 6,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "reported",
+   "what": "EBITDA margin H1 FY26",
+   "doc": "T-Q2FY26",
+   "page": 7,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "OSAT and PCB full year revenue",
+   "doc": "T-Q1FY27",
+   "page": 14,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "Consolidated EBITDA margin",
+   "doc": "T-Q1FY26",
+   "page": 13,
+   "why": "the quote states a figure that wasn't read as the target; not judged"
+  },
+  {
+   "stage": "verdict",
+   "what": "OSAT commercial production",
+   "doc": "T-Q1FY26",
+   "page": 4,
+   "why": "judge's reason used a number not in the cited items; verdict withheld"
+  },
+  {
+   "stage": "promise",
+   "what": "revenue guidance FY28 and FY30",
+   "doc": "T-Q2FY26",
+   "page": 18,
+   "why": "the quote states a figure that wasn't read as the target; not judged"
+  },
+  {
+   "stage": "promise",
+   "what": "revenue target FY30",
+   "doc": "T-Q2FY26",
+   "page": 18,
+   "why": "the quote is a question, not a promise"
+  },
+  {
+   "stage": "promise",
+   "what": "Net working capital days target",
+   "doc": "T-Q3FY26",
+   "page": 7,
+   "why": "the quote doesn't state the unit the target was read in"
+  },
+  {
+   "stage": "promise",
+   "what": "OSAT revenue visibility",
+   "doc": "T-Q4FY26",
+   "page": 4,
+   "why": "the quote doesn't state the unit the target was read in"
+  },
+  {
+   "stage": "promise",
+   "what": "Market growth multiplier",
+   "doc": "T-Q1FY27",
+   "page": 14,
+   "why": "a figure with no unit FINN can show; left out rather than shown as a bare number"
+  }
+ ],
+ "judged": true
+}
