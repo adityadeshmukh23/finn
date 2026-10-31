@@ -44,6 +44,12 @@ class Settings:
     prices_ttl: int = int(os.getenv("PRICES_TTL", "21600"))
     # Polite fetching
     min_seconds_between_requests: float = float(os.getenv("FETCH_MIN_INTERVAL", "1.0"))
+    # Hosts we fetch research documents from get a wider gap (robots.txt sets no crawl-delay; this is ours).
+    slow_hosts: dict[str, float] = field(default_factory=lambda: {
+        h: float(os.getenv("RESEARCH_FETCH_INTERVAL", "3.0"))
+        for h in ("www.screener.in", "www.bseindia.com")
+    })
+    screener_ttl: int = int(os.getenv("SCREENER_TTL", "86400"))
     # Extra NSE tickers to brief on top of data/portfolio.json, e.g. "TATAMOTORS,ZOMATO" (./run.sh takes them as args).
     extra_symbols: tuple[str, ...] = tuple(
         s.strip().upper() for s in os.getenv("FINN_SYMBOLS", "").split(",") if s.strip()

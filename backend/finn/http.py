@@ -34,8 +34,9 @@ class Fetched:
 
 
 def _wait_turn(host: str) -> None:
+    gap = settings.slow_hosts.get(host, settings.min_seconds_between_requests)
     with _host_lock:
-        wait = _last_hit.get(host, 0) + settings.min_seconds_between_requests - time.time()
+        wait = _last_hit.get(host, 0) + gap - time.time()
         if wait > 0:
             time.sleep(wait)
         _last_hit[host] = time.time()

@@ -19,5 +19,5 @@
     {"symbol": "AARTIPHARM", "name": "Aarti Pharmalabs", "sector": "Pharma", "size": "small"},
     {"symbol": "STERTOOLS", "name": "Sterling Tools", "sector": "Auto components", "size": "small"}
   ],
-  "research": ["PERSISTENT", "POLYCAB", "COFORGE", "KAYNES"]
+  "research": ["BEL", "KAYNES", "COFORGE", "DIXON", "ASIANPAINT"]
 }
