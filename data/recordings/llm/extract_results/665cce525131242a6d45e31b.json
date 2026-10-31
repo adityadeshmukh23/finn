@@ -1,0 +1,38 @@
+{
+ "found": true,
+ "page": 22,
+ "basis": "standalone",
+ "unit": "million",
+ "quarter_label": "30 September 2026",
+ "revenue_label": "Revenue from operat ions",
+ "revenue": {
+  "current": 7271.91,
+  "previous": 6654.85,
+  "year_ago": 6586.44
+ },
+ "other_income": {
+  "current": 12.61,
+  "previous": 11.82,
+  "year_ago": 22.29
+ },
+ "finance_costs": {
+  "current": 38.58,
+  "previous": 42.32,
+  "year_ago": 52.8
+ },
+ "depreciation": {
+  "current": 431.1,
+  "previous": 397.56,
+  "year_ago": 407.55
+ },
+ "pbt": {
+  "current": 1721.46,
+  "previous": 1271.35,
+  "year_ago": 1541.76
+ },
+ "pat": {
+  "current": 1304.83,
+  "previous": 966.93,
+  "year_ago": 1193.33
+ }
+}

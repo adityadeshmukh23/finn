@@ -1,0 +1,88 @@
+{
+ "id": "106831828",
+ "symbol": "KPITTECH",
+ "url": "https://nsearchives.nseindia.com/corporate/KPITTECH_28102026124748_Outcome_NSE.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 9,
+  "basis": "consolidated",
+  "unit": "million",
+  "quarter_label": "30 September 2026",
+  "revenue_label": "Revenue from operations",
+  "revenue": {
+   "current": 16909.66,
+   "previous": 16749.94,
+   "year_ago": 15877.11
+  },
+  "other_income": {
+   "current": 81.32,
+   "previous": 83.38,
+   "year_ago": 235.79
+  },
+  "finance_costs": {
+   "current": 214.46,
+   "previous": 229.51,
+   "year_ago": 162.51
+  },
+  "depreciation": {
+   "current": 859.13,
+   "previous": 825.37,
+   "year_ago": 747.06
+  },
+  "pbt": {
+   "current": 1680.37,
+   "previous": 1602.98,
+   "year_ago": 2305.65
+  },
+  "pat": {
+   "current": 1206.57,
+   "previous": 1164.12,
+   "year_ago": 1690.87
+  }
+ },
+ "candidates": [
+  9,
+  22,
+  11
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 1690.97,
+   "previous": 1674.99,
+   "year_ago": 1587.71,
+   "qoq_pct": 1.0,
+   "yoy_pct": 6.5
+  },
+  "pbt": {
+   "current": 168.04,
+   "previous": 160.3,
+   "year_ago": 230.57,
+   "qoq_pct": 4.8,
+   "yoy_pct": -27.1
+  },
+  "pat": {
+   "current": 120.66,
+   "previous": 116.41,
+   "year_ago": 169.09,
+   "qoq_pct": 3.7,
+   "yoy_pct": -28.6
+  },
+  "ebitda": {
+   "current": 267.26,
+   "previous": 257.45,
+   "year_ago": 297.94,
+   "qoq_pct": 3.8,
+   "yoy_pct": -10.3
+  }
+ },
+ "margins": {
+  "ebitda": 15.8,
+  "pat": 7.1
+ },
+ "confidence": "high",
+ "confidence_note": "Every figure shown was found on the cited page.",
+ "dropped": [],
+ "unit_note": "₹ crore (converted from million)"
+}

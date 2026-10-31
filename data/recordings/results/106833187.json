@@ -1,0 +1,87 @@
+{
+ "id": "106833187",
+ "symbol": "AARTIPHARM",
+ "url": "https://nsearchives.nseindia.com/corporate/AARTIPHARMA_28102026210128_finaloutcomesigned.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 13,
+  "basis": "consolidated",
+  "unit": "lakh",
+  "quarter_label": "30th Sept 2026",
+  "revenue_label": "Revenue from Operations (Net)",
+  "revenue": {
+   "current": 61045.1,
+   "previous": 53579.69,
+   "year_ago": 41833.48
+  },
+  "other_income": {
+   "current": 46.55,
+   "previous": 45.27,
+   "year_ago": 48.25
+  },
+  "finance_costs": {
+   "current": 1494.94,
+   "previous": 1287.51,
+   "year_ago": 1066.52
+  },
+  "depreciation": {
+   "current": 3052.67,
+   "previous": 3002.82,
+   "year_ago": 2476.92
+  },
+  "pbt": {
+   "current": 9499.01,
+   "previous": 10106.02,
+   "year_ago": 2876.28
+  },
+  "pat": {
+   "current": 7147.23,
+   "previous": 7614.27,
+   "year_ago": 2049.27
+  }
+ },
+ "candidates": [
+  13,
+  7
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 610.45,
+   "previous": 535.8,
+   "year_ago": 418.33,
+   "qoq_pct": 13.9,
+   "yoy_pct": 45.9
+  },
+  "pbt": {
+   "current": 94.99,
+   "previous": 101.06,
+   "year_ago": 28.76,
+   "qoq_pct": -6.0,
+   "yoy_pct": 230.3
+  },
+  "pat": {
+   "current": 71.47,
+   "previous": 76.14,
+   "year_ago": 20.49,
+   "qoq_pct": -6.1,
+   "yoy_pct": 248.8
+  },
+  "ebitda": {
+   "current": 140.0,
+   "previous": 143.51,
+   "year_ago": 63.71,
+   "qoq_pct": -2.4,
+   "yoy_pct": 119.7
+  }
+ },
+ "margins": {
+  "ebitda": 22.9,
+  "pat": 11.7
+ },
+ "confidence": "high",
+ "confidence_note": "Every figure shown was found on the cited page.",
+ "dropped": [],
+ "unit_note": "₹ crore (converted from lakh)"
+}

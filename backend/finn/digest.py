@@ -6,7 +6,7 @@ import re
 from collections import defaultdict
 from datetime import datetime, timedelta
 
-from . import filings
+from . import filings, results as results_mod
 from .classify import HIGH, MEDIUM, ROUTINE, Classified, classify
 from .sources.nse import Announcement
 
@@ -115,8 +115,8 @@ def _item(a: Announcement, c: Classified, window_start: datetime, window_end: da
 
 
 def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str, dict],
-          reads: dict[str, dict] | None = None) -> dict:
-    reads = reads or {}
+          reads: dict[str, dict] | None = None, results: dict[str, dict] | None = None) -> dict:
+    reads, results = reads or {}, results or {}
     start = as_of - timedelta(hours=hours)
     in_window = [a for a in items if start < a.dt <= as_of]
 
@@ -148,6 +148,9 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
         its.sort(key=lambda r: r["score"], reverse=True)
         extra_high = sum(1 for r in its[1:] if r["tier"] == HIGH)
         m = meta.get(sym, {})
+        res = next((results_mod.card_view(results[r["id"]]) for r in [*its, *folded.get(sym, [])] if r["id"] in results), None)
+        if res and its[0]["category"] == "results" and (h := results_mod.headline(res)):
+            its[0] = {**its[0], "headline": h}
         cards.append({
             "symbol": sym,
             "company": m.get("name", sym),
@@ -158,6 +161,7 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
             "items": its[1:],
             "routine_count": sum(1 for r in rows if r["symbol"] == sym and r["tier"] == ROUTINE),
             "folded": folded.get(sym, []),
+            "results": res,
         })
     cards.sort(key=lambda c: c["score"], reverse=True)
 

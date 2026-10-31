@@ -1,0 +1,97 @@
+{
+ "id": "106836275",
+ "symbol": "SUNPHARMA",
+ "url": "https://nsearchives.nseindia.com/corporate/SUNSEC_30102026141321_BMOutcomeFinancialoct26signed.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 12,
+  "basis": "consolidated",
+  "unit": "million",
+  "quarter_label": "30.09.2026",
+  "revenue_label": "Total revenue from operations (I)",
+  "revenue": {
+   "current": 161987.1,
+   "previous": 152998.8,
+   "year_ago": 144783.1
+  },
+  "other_income": {
+   "current": 5173.2,
+   "previous": 7236.2,
+   "year_ago": 4699.2
+  },
+  "finance_costs": {
+   "current": 746.7,
+   "previous": 996.7,
+   "year_ago": 998.6
+  },
+  "depreciation": {
+   "current": 7583.4,
+   "previous": 7387.2,
+   "year_ago": 7295.0
+  },
+  "pbt": {
+   "current": 31593.7,
+   "previous": 40988.1,
+   "year_ago": 41676.1
+  },
+  "pat": {
+   "current": 19885.3,
+   "previous": 28947.9,
+   "year_ago": 31179.5
+  }
+ },
+ "candidates": [
+  12,
+  3
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 16198.71,
+   "previous": 15299.88,
+   "year_ago": 14478.31,
+   "qoq_pct": 5.9,
+   "yoy_pct": 11.9
+  },
+  "pbt": {
+   "current": 3159.37,
+   "previous": 4098.81,
+   "year_ago": 4167.61,
+   "qoq_pct": -22.9,
+   "yoy_pct": -24.2
+  },
+  "pat": {
+   "current": null,
+   "previous": null,
+   "year_ago": 3117.95,
+   "qoq_pct": null,
+   "yoy_pct": null
+  },
+  "ebitda": {
+   "current": null,
+   "previous": null,
+   "year_ago": null,
+   "qoq_pct": null,
+   "yoy_pct": null
+  }
+ },
+ "margins": {
+  "ebitda": null,
+  "pat": null
+ },
+ "confidence": "low",
+ "confidence_note": "Some headline figures couldn't be matched to the page or the unit is unclear.",
+ "dropped": [
+  "other_income.current",
+  "other_income.previous",
+  "other_income.year_ago",
+  "finance_costs.year_ago",
+  "depreciation.current",
+  "depreciation.previous",
+  "depreciation.year_ago",
+  "pat.current",
+  "pat.previous"
+ ],
+ "unit_note": "₹ crore (converted from million)"
+}

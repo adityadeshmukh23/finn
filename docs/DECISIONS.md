@@ -82,3 +82,13 @@
 - **A session belongs to a window if its 15:30 IST close does.** The card shows the most unusual crossing session in the window, against both thresholds.
 - **A move with no filing gets its own card** ("−6.3% on 42× volume; no EQUITASBNK filing in this window") with a link to the NSE quote page. It ranks at 65 plus up to 20 by how far past the threshold it went, so 40×+ volume sits with results, and a 4% wobble sits with board changes. On a card that also has filings, each crossed threshold adds 6 and the "why #N" line says so ("stock −12.2% on 49× volume").
 - **Known gap:** we can't yet say *why* volume spiked (block or bulk deals); BAJAJELEC's 88× day on 15 Oct with a 0.4% move looks like a block deal, and the card says to check for exactly that instead of guessing.
+
+## Push mode 4: quarterly-results card, verified figures or none (2026-11-01)
+
+- **Division of labour:** code finds candidate pages (whitespace-stripped text, since PDF extraction splits "Pro fit"; consolidated preferred), the cheap model copies figures off up to three pages with the page it used, and code does everything else: verifies each figure is printed on that page, converts to ₹ crore, computes EBITDA, QoQ, YoY and margins, and grades confidence.
+- **EBITDA is computed, labelled, and only where it means something:** PBT + finance costs + D&A − other income, and only when all four parts verified. Lenders (bank/NBFC/housing finance) show "n/a for lenders": their finance cost is the cost of the product.
+- **Growth off a loss or zero is "n.m."**, not a percentage that reads backwards.
+- **The verifier had to learn PDF number splitting** ("9 ,976 .51", "1,391.5 2", "2 ,8 25.61") without ever gluing adjacent columns; both directions are tested on Asian Paints' real extracted text.
+- **Confidence:** high = consolidated and every figure found on the page; medium = standalone only, or a non-headline figure dropped; low = a headline figure (revenue, PBT or PAT) missing or the unit unclear. **Low shows no numbers**, only the reason and the page link: a wrong number on a briefing card is worse than none.
+- **Outcome on the snapshot (18 holdings, 18 cheap-model calls, $0):** 7 high (Aarti, Asian Paints, HUL, KPIT, L&T, Polycab, Reliance), 3 medium (Bajaj Finance; Equitas and Infosys standalone), 6 low (Maruti's PDF is OCR'd with misread digits; Sun Pharma's text merges columns; HDFC Bank, Home First, Sterling Tools partly), 2 none (Deepak Nitrite is a scanned image; no table found for Info Edge). Stopped tuning there: the remaining failures are source quality, and they fail honestly.
+- **Confident cards lead with the number:** "PAT ₹29,250 cr, +32.1% YoY; revenue +28.6%".

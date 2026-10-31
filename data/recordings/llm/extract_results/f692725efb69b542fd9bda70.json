@@ -1,0 +1,38 @@
+{
+ "found": true,
+ "page": 8,
+ "basis": "consolidated",
+ "unit": "lakh",
+ "quarter_label": "30 September 2026",
+ "revenue_label": "Revenue from operations",
+ "revenue": {
+  "current": 25035.36,
+  "previous": 21407.13,
+  "year_ago": 20790.74
+ },
+ "other_income": {
+  "current": 228.75,
+  "previous": 253.3,
+  "year_ago": 299.1
+ },
+ "finance_costs": {
+  "current": 315.2,
+  "previous": 232.92,
+  "year_ago": 241.12
+ },
+ "depreciation": {
+  "current": 1021.72,
+  "previous": 1001.88,
+  "year_ago": 976.5
+ },
+ "pbt": {
+  "current": 868.9,
+  "previous": 1285.53,
+  "year_ago": 2392.27
+ },
+ "pat": {
+  "current": 296.68,
+  "previous": 585.82,
+  "year_ago": 1718.57
+ }
+}

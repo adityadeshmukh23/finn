@@ -1,0 +1,38 @@
+{
+ "found": false,
+ "page": 0,
+ "basis": "unknown",
+ "unit": "unknown",
+ "quarter_label": "",
+ "revenue_label": "",
+ "revenue": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "other_income": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "finance_costs": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "depreciation": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "pbt": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "pat": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ }
+}

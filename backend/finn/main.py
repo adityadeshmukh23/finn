@@ -5,7 +5,7 @@ from datetime import date, datetime, time as dtime, timedelta
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import digest, filings, llm, market
+from . import digest, filings, llm, market, results
 from .config import settings
 from .sources import nse, prices
 
@@ -55,7 +55,8 @@ def get_digest(
     pf = _portfolio()["portfolio"]
     meta = {p["symbol"]: p for p in pf}
     items, status = nse.announcements(start.date(), end.date(), set(meta), force=refresh)
-    out = digest.build(items, end, hours, meta, filings.load_reads())   # recorded reads only; reading is offline
+    # Recorded reads and results tables only; reading filings happens offline, never on a request.
+    out = digest.build(items, end, hours, meta, filings.load_reads(), results.load_all())
     out["source"] = status.__dict__
     out["is_live_now"] = end is now
     return out

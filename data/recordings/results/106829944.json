@@ -1,0 +1,89 @@
+{
+ "id": "106829944",
+ "symbol": "STERTOOLS",
+ "url": "https://nsearchives.nseindia.com/corporate/STERTOOLS_27102026130202_Outcomesign.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 8,
+  "basis": "consolidated",
+  "unit": "lakh",
+  "quarter_label": "30 September 2026",
+  "revenue_label": "Revenue from operations",
+  "revenue": {
+   "current": 25035.36,
+   "previous": 21407.13,
+   "year_ago": 20790.74
+  },
+  "other_income": {
+   "current": 228.75,
+   "previous": 253.3,
+   "year_ago": 299.1
+  },
+  "finance_costs": {
+   "current": 315.2,
+   "previous": 232.92,
+   "year_ago": 241.12
+  },
+  "depreciation": {
+   "current": 1021.72,
+   "previous": 1001.88,
+   "year_ago": 976.5
+  },
+  "pbt": {
+   "current": 868.9,
+   "previous": 1285.53,
+   "year_ago": 2392.27
+  },
+  "pat": {
+   "current": 296.68,
+   "previous": 585.82,
+   "year_ago": 1718.57
+  }
+ },
+ "candidates": [
+  8,
+  2
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": null,
+   "previous": 214.07,
+   "year_ago": 207.91,
+   "qoq_pct": null,
+   "yoy_pct": null
+  },
+  "pbt": {
+   "current": 8.69,
+   "previous": 12.86,
+   "year_ago": 23.92,
+   "qoq_pct": -32.4,
+   "yoy_pct": -63.7
+  },
+  "pat": {
+   "current": 2.97,
+   "previous": 5.86,
+   "year_ago": 17.19,
+   "qoq_pct": -49.3,
+   "yoy_pct": -82.7
+  },
+  "ebitda": {
+   "current": 19.77,
+   "previous": 22.67,
+   "year_ago": 33.11,
+   "qoq_pct": -12.8,
+   "yoy_pct": -40.3
+  }
+ },
+ "margins": {
+  "ebitda": null,
+  "pat": null
+ },
+ "confidence": "low",
+ "confidence_note": "Some headline figures couldn't be matched to the page or the unit is unclear.",
+ "dropped": [
+  "revenue.current"
+ ],
+ "unit_note": "₹ crore (converted from lakh)"
+}

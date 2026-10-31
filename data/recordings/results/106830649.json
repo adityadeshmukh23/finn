@@ -1,0 +1,92 @@
+{
+ "id": "106830649",
+ "symbol": "HOMEFIRST",
+ "url": "https://nsearchives.nseindia.com/corporate/HOMEFIRST_27102026175410_Outcome_of_BM_merged.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 5,
+  "basis": "consolidated",
+  "unit": "million",
+  "quarter_label": "491271",
+  "revenue_label": "Total revenue from operations",
+  "revenue": {
+   "current": 5669.93,
+   "previous": 5380.11,
+   "year_ago": 4773.2
+  },
+  "other_income": {
+   "current": 0.09,
+   "previous": 18.3,
+   "year_ago": 17.27
+  },
+  "finance_costs": {
+   "current": 2246.14,
+   "previous": 2088.46,
+   "year_ago": 2026.23
+  },
+  "depreciation": {
+   "current": 56.55,
+   "previous": 53.04,
+   "year_ago": 45.37
+  },
+  "pbt": {
+   "current": 2222.11,
+   "previous": 2076.35,
+   "year_ago": 1732.3
+  },
+  "pat": {
+   "current": 1701.92,
+   "previous": 1598.51,
+   "year_ago": 1318.47
+  }
+ },
+ "candidates": [
+  5
+ ],
+ "lender": true,
+ "rows": {
+  "revenue": {
+   "current": 566.99,
+   "previous": null,
+   "year_ago": 477.32,
+   "qoq_pct": null,
+   "yoy_pct": 18.8
+  },
+  "pbt": {
+   "current": null,
+   "previous": 207.63,
+   "year_ago": null,
+   "qoq_pct": null,
+   "yoy_pct": null
+  },
+  "pat": {
+   "current": 170.19,
+   "previous": null,
+   "year_ago": null,
+   "qoq_pct": null,
+   "yoy_pct": null
+  },
+  "ebitda": null
+ },
+ "margins": {
+  "ebitda": null,
+  "pat": 30.0
+ },
+ "confidence": "low",
+ "confidence_note": "Some headline figures couldn't be matched to the page or the unit is unclear.",
+ "dropped": [
+  "revenue.previous",
+  "other_income.current",
+  "other_income.previous",
+  "other_income.year_ago",
+  "finance_costs.year_ago",
+  "depreciation.current",
+  "depreciation.year_ago",
+  "pbt.current",
+  "pbt.year_ago",
+  "pat.previous",
+  "pat.year_ago"
+ ],
+ "unit_note": "₹ crore (converted from million)"
+}

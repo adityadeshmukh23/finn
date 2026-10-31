@@ -1,0 +1,84 @@
+{
+ "id": "106822125",
+ "symbol": "BAJFINANCE",
+ "url": "https://nsearchives.nseindia.com/corporate/BAJFINANCE_19102026172017_BMOutcome_19102026.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 14,
+  "basis": "consolidated",
+  "unit": "crore",
+  "quarter_label": "30.09.2026",
+  "revenue_label": "Total revenue from operations",
+  "revenue": {
+   "current": 24546.37,
+   "previous": 23165.45,
+   "year_ago": 19990.42
+  },
+  "other_income": {
+   "current": 29.45,
+   "previous": 0.97,
+   "year_ago": 1.96
+  },
+  "finance_costs": {
+   "current": 8601.73,
+   "previous": 7942.09,
+   "year_ago": 7010.6
+  },
+  "depreciation": {
+   "current": 321.07,
+   "previous": 287.55,
+   "year_ago": 258.06
+  },
+  "pbt": {
+   "current": 8537.2,
+   "previous": 8149.0,
+   "year_ago": 6608.13
+  },
+  "pat": {
+   "current": 6366.57,
+   "previous": 6080.6,
+   "year_ago": 4947.76
+  }
+ },
+ "candidates": [
+  14,
+  4,
+  20
+ ],
+ "lender": true,
+ "rows": {
+  "revenue": {
+   "current": 24546.37,
+   "previous": 23165.45,
+   "year_ago": 19990.42,
+   "qoq_pct": 6.0,
+   "yoy_pct": 22.8
+  },
+  "pbt": {
+   "current": 8537.2,
+   "previous": 8149.0,
+   "year_ago": 6608.13,
+   "qoq_pct": 4.8,
+   "yoy_pct": 29.2
+  },
+  "pat": {
+   "current": 6366.57,
+   "previous": 6080.6,
+   "year_ago": 4947.76,
+   "qoq_pct": 4.7,
+   "yoy_pct": 28.7
+  },
+  "ebitda": null
+ },
+ "margins": {
+  "ebitda": null,
+  "pat": 25.9
+ },
+ "confidence": "medium",
+ "confidence_note": "1 figure(s) not found on the page were dropped.",
+ "dropped": [
+  "other_income.previous"
+ ],
+ "unit_note": "₹ crore"
+}

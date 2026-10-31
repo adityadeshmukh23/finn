@@ -21,10 +21,20 @@ def quote_in(quote: str, text: str) -> bool:
     return len(q.split()) >= 4 and q.replace(" ", "") in norm(text).replace(" ", "")
 
 
+def rejoin_numbers(s: str) -> str:
+    """Undo PDF extraction splitting a printed number: '9 ,976 .51' -> '9,976.51', '1,391.5 2' -> '1,391.52',
+    '2 ,8 25.61' -> '2,825.61'. A number that already has its two decimals is never joined to the next
+    one, so adjacent table columns stay separate."""
+    s = re.sub(r"(?<=\d)\s*([,.])\s*(?=\d)", r"\1", s)
+    s = re.sub(r"(\.\d)\s+(\d)(?!\d)", r"\1\2", s)          # split decimals
+    s = re.sub(r"(,\d{1,2})\s+(\d)", r"\1\2", s)              # split digit group after a comma
+    return s
+
+
 def numbers(s: str) -> set[str]:
     """'1,23,456.70' -> '123456.7'; years and single digits are kept too, they must match as well."""
     out = set()
-    for m in _NUM.findall(s):
+    for m in _NUM.findall(rejoin_numbers(s)):
         n = m.replace(",", "")
         if "." in n:
             n = n.rstrip("0").rstrip(".")

@@ -1,0 +1,87 @@
+{
+ "id": "106834087",
+ "symbol": "ASIANPAINT",
+ "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_29102026140213_OutcomeofBM29102026signed.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 12,
+  "basis": "consolidated",
+  "unit": "crore",
+  "quarter_label": "30.09.2026",
+  "revenue_label": "Revenue from operations",
+  "revenue": {
+   "current": 9976.51,
+   "previous": 10541.94,
+   "year_ago": 8531.27
+  },
+  "other_income": {
+   "current": 247.79,
+   "previous": 240.85,
+   "year_ago": 198.64
+  },
+  "finance_costs": {
+   "current": 55.4,
+   "previous": 47.83,
+   "year_ago": 43.87
+  },
+  "depreciation": {
+   "current": 313.67,
+   "previous": 304.19,
+   "year_ago": 304.93
+  },
+  "pbt": {
+   "current": 1477.78,
+   "previous": 2095.75,
+   "year_ago": 1391.52
+  },
+  "pat": {
+   "current": 1085.35,
+   "previous": 1559.45,
+   "year_ago": 1018.23
+  }
+ },
+ "candidates": [
+  12,
+  5
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 9976.51,
+   "previous": 10541.94,
+   "year_ago": 8531.27,
+   "qoq_pct": -5.4,
+   "yoy_pct": 16.9
+  },
+  "pbt": {
+   "current": 1477.78,
+   "previous": 2095.75,
+   "year_ago": 1391.52,
+   "qoq_pct": -29.5,
+   "yoy_pct": 6.2
+  },
+  "pat": {
+   "current": 1085.35,
+   "previous": 1559.45,
+   "year_ago": 1018.23,
+   "qoq_pct": -30.4,
+   "yoy_pct": 6.6
+  },
+  "ebitda": {
+   "current": 1599.06,
+   "previous": 2206.92,
+   "year_ago": 1541.68,
+   "qoq_pct": -27.5,
+   "yoy_pct": 3.7
+  }
+ },
+ "margins": {
+  "ebitda": 16.0,
+  "pat": 10.9
+ },
+ "confidence": "high",
+ "confidence_note": "Every figure shown was found on the cited page.",
+ "dropped": [],
+ "unit_note": "₹ crore"
+}

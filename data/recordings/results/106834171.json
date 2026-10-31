@@ -1,0 +1,81 @@
+{
+ "id": "106834171",
+ "symbol": "EQUITASBNK",
+ "url": "https://nsearchives.nseindia.com/corporate/EQUITASBNK_29102026145000_final29102026.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 3,
+  "basis": "standalone",
+  "unit": "lakh",
+  "quarter_label": "30-Sep-26",
+  "revenue_label": "Total Income (1)+(2)",
+  "revenue": {
+   "current": 235751.03,
+   "previous": 221549.99,
+   "year_ago": 184629.26
+  },
+  "other_income": {
+   "current": 29151.5,
+   "previous": 25510.2,
+   "year_ago": 22894.72
+  },
+  "finance_costs": {
+   "current": 104028.25,
+   "previous": 93080.52,
+   "year_ago": 84366.93
+  },
+  "depreciation": {
+   "current": null,
+   "previous": null,
+   "year_ago": null
+  },
+  "pbt": {
+   "current": 28738.39,
+   "previous": 24407.3,
+   "year_ago": 3353.81
+  },
+  "pat": {
+   "current": 18360.69,
+   "previous": null,
+   "year_ago": 2413.53
+  }
+ },
+ "candidates": [
+  3,
+  4
+ ],
+ "lender": true,
+ "rows": {
+  "revenue": {
+   "current": 2357.51,
+   "previous": 2215.5,
+   "year_ago": 1846.29,
+   "qoq_pct": 6.4,
+   "yoy_pct": 27.7
+  },
+  "pbt": {
+   "current": 287.38,
+   "previous": 244.07,
+   "year_ago": 33.54,
+   "qoq_pct": 17.7,
+   "yoy_pct": 756.8
+  },
+  "pat": {
+   "current": 183.61,
+   "previous": null,
+   "year_ago": 24.14,
+   "qoq_pct": null,
+   "yoy_pct": 660.6
+  },
+  "ebitda": null
+ },
+ "margins": {
+  "ebitda": null,
+  "pat": 7.8
+ },
+ "confidence": "medium",
+ "confidence_note": "Standalone figures; no consolidated table in the pages read.",
+ "dropped": [],
+ "unit_note": "₹ crore (converted from lakh)"
+}

@@ -1,0 +1,88 @@
+{
+ "id": "106837394",
+ "symbol": "RELIANCE",
+ "url": "https://nsearchives.nseindia.com/corporate/kavinavora_30102026193935_SE_30102026_Results.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 10,
+  "basis": "consolidated",
+  "unit": "crore",
+  "quarter_label": "30th Sep'26",
+  "revenue_label": "Revenue from Operations",
+  "revenue": {
+   "current": 332861.0,
+   "previous": 311850.0,
+   "year_ago": 258898.0
+  },
+  "other_income": {
+   "current": 5793.0,
+   "previous": 6550.0,
+   "year_ago": 4482.0
+  },
+  "finance_costs": {
+   "current": 8481.0,
+   "previous": 8337.0,
+   "year_ago": 6827.0
+  },
+  "depreciation": {
+   "current": 15315.0,
+   "previous": 15100.0,
+   "year_ago": 14416.0
+  },
+  "pbt": {
+   "current": 38613.0,
+   "previous": 30630.0,
+   "year_ago": 29124.0
+  },
+  "pat": {
+   "current": 29250.0,
+   "previous": 23001.0,
+   "year_ago": 22146.0
+  }
+ },
+ "candidates": [
+  10,
+  17,
+  22
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 332861.0,
+   "previous": 311850.0,
+   "year_ago": 258898.0,
+   "qoq_pct": 6.7,
+   "yoy_pct": 28.6
+  },
+  "pbt": {
+   "current": 38613.0,
+   "previous": 30630.0,
+   "year_ago": 29124.0,
+   "qoq_pct": 26.1,
+   "yoy_pct": 32.6
+  },
+  "pat": {
+   "current": 29250.0,
+   "previous": 23001.0,
+   "year_ago": 22146.0,
+   "qoq_pct": 27.2,
+   "yoy_pct": 32.1
+  },
+  "ebitda": {
+   "current": 56616.0,
+   "previous": 47517.0,
+   "year_ago": 45885.0,
+   "qoq_pct": 19.1,
+   "yoy_pct": 23.4
+  }
+ },
+ "margins": {
+  "ebitda": 17.0,
+  "pat": 8.8
+ },
+ "confidence": "high",
+ "confidence_note": "Every figure shown was found on the cited page.",
+ "dropped": [],
+ "unit_note": "₹ crore"
+}

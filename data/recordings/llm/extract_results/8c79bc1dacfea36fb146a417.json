@@ -1,0 +1,38 @@
+{
+ "found": true,
+ "page": 9,
+ "basis": "consolidated",
+ "unit": "crore",
+ "quarter_label": "30.09.2026",
+ "revenue_label": "Interest earned (a)+(b)+(c)+(d)",
+ "revenue": {
+  "current": 90575.33,
+  "previous": 86993.84,
+  "year_ago": 174365.71
+ },
+ "other_income": {
+  "current": 42535.03,
+  "previous": 31566.79,
+  "year_ago": 77249.89
+ },
+ "finance_costs": {
+  "current": 47625.63,
+  "previous": 46740.86,
+  "year_ago": 94449.37
+ },
+ "depreciation": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "pbt": {
+  "current": 27193.16,
+  "previous": 26658.89,
+  "year_ago": 47508.72
+ },
+ "pat": {
+  "current": 19244.71,
+  "previous": 19610.67,
+  "year_ago": 35868.58
+ }
+}

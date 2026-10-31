@@ -1,0 +1,88 @@
+{
+ "id": "106830479",
+ "symbol": "LT",
+ "url": "https://nsearchives.nseindia.com/corporate/PAM_27102026171156_LTSep2026.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 11,
+  "basis": "consolidated",
+  "unit": "crore",
+  "quarter_label": "September 30, 2026",
+  "revenue_label": "Revenue from operations",
+  "revenue": {
+   "current": 78749.94,
+   "previous": 67941.74,
+   "year_ago": 67983.53
+  },
+  "other_income": {
+   "current": 2306.26,
+   "previous": 2376.73,
+   "year_ago": 1384.28
+  },
+  "finance_costs": {
+   "current": 472.94,
+   "previous": 538.67,
+   "year_ago": 762.81
+  },
+  "depreciation": {
+   "current": 1036.91,
+   "previous": 1032.28,
+   "year_ago": 1091.77
+  },
+  "pbt": {
+   "current": 7641.06,
+   "previous": 6922.26,
+   "year_ago": 6336.11
+  },
+  "pat": {
+   "current": 5915.15,
+   "previous": 4982.85,
+   "year_ago": 4687.09
+  }
+ },
+ "candidates": [
+  11,
+  12,
+  16
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 78749.94,
+   "previous": 67941.74,
+   "year_ago": 67983.53,
+   "qoq_pct": 15.9,
+   "yoy_pct": 15.8
+  },
+  "pbt": {
+   "current": 7641.06,
+   "previous": 6922.26,
+   "year_ago": 6336.11,
+   "qoq_pct": 10.4,
+   "yoy_pct": 20.6
+  },
+  "pat": {
+   "current": 5915.15,
+   "previous": 4982.85,
+   "year_ago": 4687.09,
+   "qoq_pct": 18.7,
+   "yoy_pct": 26.2
+  },
+  "ebitda": {
+   "current": 6844.65,
+   "previous": 6116.48,
+   "year_ago": 6806.41,
+   "qoq_pct": 11.9,
+   "yoy_pct": 0.6
+  }
+ },
+ "margins": {
+  "ebitda": 8.7,
+  "pat": 7.5
+ },
+ "confidence": "high",
+ "confidence_note": "Every figure shown was found on the cited page.",
+ "dropped": [],
+ "unit_note": "₹ crore"
+}

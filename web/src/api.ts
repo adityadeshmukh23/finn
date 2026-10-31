@@ -18,6 +18,25 @@ export interface Item {
   read: { page: number; quote: string } | null   // headline came from the filing, verified quote
 }
 
+export interface ResultRow { current: number | null; previous: number | null; year_ago: number | null; qoq_pct: number | null; yoy_pct: number | null }
+
+export type Results =
+  | { status: 'no_table' | 'unavailable' | 'skipped'; note: string }
+  | {
+      status: 'extracted'
+      basis: 'consolidated' | 'standalone' | 'unknown'
+      quarter: string
+      page: number
+      unit: string
+      revenue_label: string
+      lender: boolean
+      rows: { revenue: ResultRow; ebitda: ResultRow | null; pbt: ResultRow; pat: ResultRow }
+      margins: { ebitda: number | null; pat: number | null }
+      confidence: 'high' | 'medium' | 'low'
+      confidence_note: string
+      url: string
+    }
+
 export interface Card {
   symbol: string
   company: string
@@ -28,6 +47,7 @@ export interface Card {
   items: Item[]
   routine_count: number
   folded: Item[]           // routine results satellites (newspaper ads) riding on this card
+  results?: Results | null // quarterly table read from the results filing, figures verified on the page
   why_rank?: string        // set in the browser: why this card sits at this rank
   market?: Signal          // set in the browser: a price/volume threshold crossed in this window
 }

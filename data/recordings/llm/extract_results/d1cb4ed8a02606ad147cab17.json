@@ -1,0 +1,38 @@
+{
+ "found": true,
+ "page": 2,
+ "basis": "standalone",
+ "unit": "million",
+ "quarter_label": "September 30, 2026",
+ "revenue_label": "Total revenue from operalions",
+ "revenue": {
+  "current": 533402.0,
+  "previous": 524551.0,
+  "year_ago": 423323.0
+ },
+ "other_income": {
+  "current": 4294.0,
+  "previous": 18731.0,
+  "year_ago": 9661.0
+ },
+ "finance_costs": {
+  "current": 677.0,
+  "previous": 635.0,
+  "year_ago": 572.0
+ },
+ "depreciation": {
+  "current": 19596.0,
+  "previous": 17800.0,
+  "year_ago": 17028.0
+ },
+ "pbt": {
+  "current": 31658.0,
+  "previous": 43413.0,
+  "year_ago": 42909.0
+ },
+ "pat": {
+  "current": 24149.0,
+  "previous": 33521.0,
+  "year_ago": 33028.0
+ }
+}

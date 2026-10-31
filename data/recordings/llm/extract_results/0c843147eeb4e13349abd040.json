@@ -1,0 +1,38 @@
+{
+ "found": true,
+ "page": 22,
+ "basis": "standalone",
+ "unit": "crore",
+ "quarter_label": "September 30, 2026",
+ "revenue_label": "Revenue from operations",
+ "revenue": {
+  "current": 40719.0,
+  "previous": 39957.0,
+  "year_ago": 36907.0
+ },
+ "other_income": {
+  "current": 1702.0,
+  "previous": 874.0,
+  "year_ago": 2268.0
+ },
+ "finance_costs": {
+  "current": 58.0,
+  "previous": 61.0,
+  "year_ago": 52.0
+ },
+ "depreciation": {
+  "current": 662.0,
+  "previous": 613.0,
+  "year_ago": 595.0
+ },
+ "pbt": {
+  "current": 10905.0,
+  "previous": 10161.0,
+  "year_ago": 10469.0
+ },
+ "pat": {
+  "current": 7893.0,
+  "previous": 7249.0,
+  "year_ago": 7759.0
+ }
+}

@@ -77,3 +77,21 @@ def test_results_summary_without_a_number_keeps_the_period_headline():
     assert summary is None
     _, summary = filings.apply(c, _rec(summary="Board approved results for the quarter ended September 30, 2026"))
     assert summary is None   # a date is not a figure
+
+
+# Asian Paints Q2 consolidated statement as pypdf extracts it (spaces inside printed numbers).
+AP_ROWS = """Revenue from operations 9 ,976 .51 10,541.94 8 ,531.27 20,518 .45 17,469 .82
+Profit before exceptional items and tax (5+6) 1,477 .78 2 ,095.75 1,391.5 2 3,573 .53 2 ,900 .23
+Profit before share of profit 1,435 .79 2 ,057.59 1,353.22 3,493.38 2 ,8 25.61
+Purchases of stock -in-trade 1, 111.58 1,094 .99"""
+
+
+def test_numbers_split_by_pdf_extraction_still_verify():
+    for v in (9976.51, 10541.94, 8531.27, 1391.52, 2825.61, 1111.58, 1094.99):
+        assert number_in(v, AP_ROWS), v
+
+
+def test_rejoining_never_merges_adjacent_columns():
+    assert not number_in(10541.948, AP_ROWS)
+    assert not number_in(5110541.94, AP_ROWS)            # tail of one column glued to the next
+    assert not number_in(9976.52, AP_ROWS)

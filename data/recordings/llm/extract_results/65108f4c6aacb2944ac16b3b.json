@@ -1,0 +1,38 @@
+{
+ "found": false,
+ "page": 3,
+ "basis": "standalone",
+ "unit": "crore",
+ "quarter_label": "30.09.2026",
+ "revenue_label": "Income from Operations",
+ "revenue": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "other_income": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "finance_costs": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "depreciation": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "pbt": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ },
+ "pat": {
+  "current": null,
+  "previous": null,
+  "year_ago": null
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "found": true,
+ "page": 9,
+ "basis": "consolidated",
+ "unit": "million",
+ "quarter_label": "30 September 2026",
+ "revenue_label": "Revenue from operations",
+ "revenue": {
+  "current": 16909.66,
+  "previous": 16749.94,
+  "year_ago": 15877.11
+ },
+ "other_income": {
+  "current": 81.32,
+  "previous": 83.38,
+  "year_ago": 235.79
+ },
+ "finance_costs": {
+  "current": 214.46,
+  "previous": 229.51,
+  "year_ago": 162.51
+ },
+ "depreciation": {
+  "current": 859.13,
+  "previous": 825.37,
+  "year_ago": 747.06
+ },
+ "pbt": {
+  "current": 1680.37,
+  "previous": 1602.98,
+  "year_ago": 2305.65
+ },
+ "pat": {
+  "current": 1206.57,
+  "previous": 1164.12,
+  "year_ago": 1690.87
+ }
+}

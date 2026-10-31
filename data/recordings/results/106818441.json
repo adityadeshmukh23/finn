@@ -1,0 +1,88 @@
+{
+ "id": "106818441",
+ "symbol": "POLYCAB",
+ "url": "https://nsearchives.nseindia.com/corporate/POLYCAB_15102026125737_OutcomeofBoardMeeting.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 4,
+  "basis": "consolidated",
+  "unit": "million",
+  "quarter_label": "30 Sep 26",
+  "revenue_label": "Revenue from operations",
+  "revenue": {
+   "current": 98989.01,
+   "previous": 82097.32,
+   "year_ago": 64772.11
+  },
+  "other_income": {
+   "current": 883.67,
+   "previous": 1049.15,
+   "year_ago": 454.33
+  },
+  "finance_costs": {
+   "current": 936.04,
+   "previous": 800.21,
+   "year_ago": 484.05
+  },
+  "depreciation": {
+   "current": 1110.41,
+   "previous": 1028.7,
+   "year_ago": 967.76
+  },
+  "pbt": {
+   "current": 13062.2,
+   "previous": 10582.23,
+   "year_ago": 9210.01
+  },
+  "pat": {
+   "current": 9899.97,
+   "previous": 7966.54,
+   "year_ago": 6929.59
+  }
+ },
+ "candidates": [
+  4,
+  5,
+  10
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 9898.9,
+   "previous": 8209.73,
+   "year_ago": 6477.21,
+   "qoq_pct": 20.6,
+   "yoy_pct": 52.8
+  },
+  "pbt": {
+   "current": 1306.22,
+   "previous": 1058.22,
+   "year_ago": 921.0,
+   "qoq_pct": 23.4,
+   "yoy_pct": 41.8
+  },
+  "pat": {
+   "current": 990.0,
+   "previous": 796.65,
+   "year_ago": 692.96,
+   "qoq_pct": 24.3,
+   "yoy_pct": 42.9
+  },
+  "ebitda": {
+   "current": 1422.5,
+   "previous": 1136.2,
+   "year_ago": 1020.75,
+   "qoq_pct": 25.2,
+   "yoy_pct": 39.4
+  }
+ },
+ "margins": {
+  "ebitda": 14.4,
+  "pat": 10.0
+ },
+ "confidence": "high",
+ "confidence_note": "Every figure shown was found on the cited page.",
+ "dropped": [],
+ "unit_note": "₹ crore (converted from million)"
+}

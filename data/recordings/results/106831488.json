@@ -1,0 +1,87 @@
+{
+ "id": "106831488",
+ "symbol": "HINDUNILVR",
+ "url": "https://nsearchives.nseindia.com/corporate/HINDUNILVR_28102026093630_SEIntimationOutcomeofBM28102026signed.pdf",
+ "status": "extracted",
+ "extracted": {
+  "found": true,
+  "page": 7,
+  "basis": "consolidated",
+  "unit": "crore",
+  "quarter_label": "30.09.2026",
+  "revenue_label": "Revenue from operations",
+  "revenue": {
+   "current": 18037.0,
+   "previous": 17149.0,
+   "year_ago": 15715.0
+  },
+  "other_income": {
+   "current": 160.0,
+   "previous": 188.0,
+   "year_ago": 147.0
+  },
+  "finance_costs": {
+   "current": 74.0,
+   "previous": 75.0,
+   "year_ago": 124.0
+  },
+  "depreciation": {
+   "current": 363.0,
+   "previous": 353.0,
+   "year_ago": 322.0
+  },
+  "pbt": {
+   "current": 3814.0,
+   "previous": 3632.0,
+   "year_ago": 3702.0
+  },
+  "pat": {
+   "current": 2796.0,
+   "previous": 2680.0,
+   "year_ago": 2694.0
+  }
+ },
+ "candidates": [
+  7,
+  14
+ ],
+ "lender": false,
+ "rows": {
+  "revenue": {
+   "current": 18037.0,
+   "previous": 17149.0,
+   "year_ago": 15715.0,
+   "qoq_pct": 5.2,
+   "yoy_pct": 14.8
+  },
+  "pbt": {
+   "current": 3814.0,
+   "previous": 3632.0,
+   "year_ago": 3702.0,
+   "qoq_pct": 5.0,
+   "yoy_pct": 3.0
+  },
+  "pat": {
+   "current": 2796.0,
+   "previous": 2680.0,
+   "year_ago": 2694.0,
+   "qoq_pct": 4.3,
+   "yoy_pct": 3.8
+  },
+  "ebitda": {
+   "current": 4091.0,
+   "previous": 3872.0,
+   "year_ago": 4001.0,
+   "qoq_pct": 5.7,
+   "yoy_pct": 2.2
+  }
+ },
+ "margins": {
+  "ebitda": 22.7,
+  "pat": 15.5
+ },
+ "confidence": "high",
+ "confidence_note": "Every figure shown was found on the cited page.",
+ "dropped": [],
+ "unit_note": "₹ crore"
+}

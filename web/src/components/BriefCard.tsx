@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
 import { CATEGORY_LABEL, when } from '../format'
 import { describe } from '../market'
+import { ResultsTable } from './ResultsTable'
 
 const TIER_DOT: Record<string, string> = { high: 'bg-hot', medium: 'bg-accent', routine: 'bg-ink-3' }
 
@@ -96,7 +97,8 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
           </p>
         )}
         <h3 className="mt-1 text-[15px] font-semibold leading-snug text-ink">{lead.headline}</h3>
-        {lead.why && <p className="mt-1.5 text-[13px] leading-snug text-ink-2">{lead.why}</p>}
+        {lead.why && lead.category !== 'results' && <p className="mt-1.5 text-[13px] leading-snug text-ink-2">{lead.why}</p>}
+        {card.results && lead.category === 'results' && <ResultsTable r={card.results} />}
         {card.why_rank && (
           <p className="mt-2 text-xs leading-snug text-ink-3">
             <span className="tabular font-semibold text-ink-2">#{rank}</span> {card.why_rank}
@@ -122,6 +124,9 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
 
         {open && (
           <ul className="mt-3 space-y-3 border-t border-line pt-3">
+            {card.results && lead.category !== 'results' && (
+              <li><ResultsTable r={card.results} /></li>
+            )}
             {card.items.map((it) => (
               <li key={it.id}>
                 <div className="flex items-center justify-between gap-3">
