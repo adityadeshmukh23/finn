@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { applyAlerts, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
 import { fetchDigest, fetchLedger, fetchManifest, STATIC, type Card, type Digest, type Manifest } from './api'
 import { AlertsSheet } from './components/AlertsSheet'
@@ -78,17 +78,23 @@ export default function App() {
   useEffect(() => { if (STATIC) fetchManifest().then(setManifest).catch(() => setManifest(null)) }, [])
   const latestDay = STATIC ? manifest?.to ?? null : todayIST()
 
+  // Only the latest request may update the screen; a slower earlier one (another window or date) is dropped.
+  const latest = useRef(0)
   const load = useCallback(async (refresh = false) => {
+    const seq = ++latest.current
     if (refresh) setRefreshing(true)
     else setLoading(true)
     setError(null)
     try {
-      setData(await fetchDigest(hours, asOf, refresh))
+      const d = await fetchDigest(hours, asOf, refresh)
+      if (seq === latest.current) setData(d)
     } catch (e) {
-      setError((e as Error).message)
+      if (seq === latest.current) setError((e as Error).message)
     } finally {
-      setLoading(false)
-      setRefreshing(false)
+      if (seq === latest.current) {
+        setLoading(false)
+        setRefreshing(false)
+      }
     }
   }, [hours, asOf])
 

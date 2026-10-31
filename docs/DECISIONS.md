@@ -50,3 +50,9 @@
 
 - **CI #1 failed resolving `pydantic==2.11.4`:** `google-genai==2.34.0` requires `pydantic>=2.12.5`. Local dev never saw it because the venv had already drifted to 2.14.2. Pydantic now floats in `>=2.12.5,<3` (fastapi and anthropic accept anything below 3); a clean install resolves to 2.14.2, same as dev.
 - **CI runs the toolchain we develop on:** Python from `.python-version` (3.12) and Node 24 (Node 20 is past end-of-life). Every CI step was checked from a fresh clone with a clean venv and no `.env`: 44 tests, demo-data freshness, the tracked-secrets guard, and the web build.
+
+## Live at https://finn-olive.vercel.app (2026-11-01)
+
+- **Checked on the deployed site at 375px:** replay note, a "Demo data as of 30 Oct, 8:29 pm" badge, the $0.00 replay ledger, no `/api` requests, no console errors, and no horizontal scroll. Window, date and alert controls change the digest; deep links fall through to the app.
+- **NSE from the cloud: not exercised.** The public site is static and makes no NSE or API calls by design. Every briefing comes from the 30 Oct snapshot. Whether NSE answers cloud IPs is still unverified; it only matters if the optional Render API is ever deployed.
+- **Fixed a race found on the live site:** a fast window-then-date change could show the earlier request's briefing under the later date's header. Now only the latest request updates the screen.
