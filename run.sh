@@ -6,8 +6,8 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 [ -d "$HOME/.local/node/bin" ] && PATH="$HOME/.local/node/bin:$PATH"
-command -v python3 >/dev/null || { echo "Need Python 3.11+"; exit 1; }
-command -v npm >/dev/null || { echo "Need Node 20+ (npm)"; exit 1; }
+command -v python3 >/dev/null || { echo "Need Python 3.12"; exit 1; }
+command -v npm >/dev/null || { echo "Need Node 24 (npm)"; exit 1; }
 
 if [ ! -x .venv/bin/uvicorn ]; then
   echo "Setting up Python env…"

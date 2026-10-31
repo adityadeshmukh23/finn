@@ -45,3 +45,8 @@
 - **Honest labels:** a "Replay mode" note, a "Demo data as of <snapshot time>" badge, a $0.00 ledger that explains there are no model calls, and no Refresh button.
 - **Any ticker still works, locally.** `./run.sh TICKER …` adds tickers to the portfolio (`FINN_SYMBOLS`) with live NSE data. That's how to answer "point FINN at a company you didn't pick". `deploy/render/render.yaml` is kept as an optional, undeployed path.
 - **CI replaces the HF workflow:** tests, a check that the demo data matches the snapshot and ranking code, a guard against tracked PDF/.env/sqlite files, and the web build.
+
+## CI install fix (2026-11-01)
+
+- **CI #1 failed resolving `pydantic==2.11.4`:** `google-genai==2.34.0` requires `pydantic>=2.12.5`. Local dev never saw it because the venv had already drifted to 2.14.2. Pydantic now floats in `>=2.12.5,<3` (fastapi and anthropic accept anything below 3); a clean install resolves to 2.14.2, same as dev.
+- **CI runs the toolchain we develop on:** Python from `.python-version` (3.12) and Node 24 (Node 20 is past end-of-life). Every CI step was checked from a fresh clone with a clean venv and no `.env`: 44 tests, demo-data freshness, the tracked-secrets guard, and the web build.

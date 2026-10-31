@@ -11,7 +11,7 @@ A mobile-first investor briefing. You open a ranked list of what changed across 
 ./run.sh TATAMOTORS ZOMATO     # plus any other NSE tickers
 ```
 
-Open http://localhost:5173. The script sets up `.venv` and `web/node_modules` on first run and creates `.env` from `.env.example`. Add a free `GEMINI_API_KEY` there for live model calls; without one, FINN replays recordings or uses mock output. Needs Python 3.11+ and Node 20+.
+Open http://localhost:5173. The script sets up `.venv` and `web/node_modules` on first run and creates `.env` from `.env.example`. Add a free `GEMINI_API_KEY` there for live model calls; without one, FINN replays recordings or uses mock output. Needs Python 3.12 and Node 24 (what CI uses).
 
 Tests: `cd backend && ../.venv/bin/pytest -q`
 
