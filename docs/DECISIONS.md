@@ -35,3 +35,13 @@
 - **Guards checked before the key goes public:** with live enabled, the public demo is capped at 20 live calls/day overall, 3 per visitor, $0.25/day and $5 total, plus per-model RPM/RPD. Tests now cover the global daily cap and the mode default. No public endpoint calls the LLM yet anyway.
 - **Known weak spot:** the per-visitor key is the first `X-Forwarded-For` address, which callers can spoof; the global cap is what actually holds. The ledger lives on the Space's ephemeral disk, so counters reset on restart; AI Studio's own quota is the backstop.
 - **Deploy steps live in docs/DEPLOY.md** and use `GEMINI_API_KEY` and the `LLM_*` variables; no Anthropic key is needed.
+
+## Public demo is static on Vercel; the live API runs locally (2026-10-31)
+
+- **Hugging Face Docker Spaces now need a paid plan, so that path is gone.** Free API hosts checked on 2026-10-31: Render's free web service is the only real one (no card; 512 MB / 0.1 CPU; sleeps after 15 min idle, about 1 min to wake; ephemeral disk; 750 h/month). Koyeb lists no free compute; Fly.io and Railway are card or trial only.
+- **Chose a static demo over Render + Vercel.** The public demo serves recorded data anyway (no key on any public host), so a hosted API would only add a one-minute cold start, which a grader opening the link would likely hit, plus an NSE fetch from a cloud IP that may well be blocked. Static means no key to leak, no cost, nothing to sleep.
+- **Interactive, not a slideshow.** `scripts/build_static.py` runs the same digest code offline over the snapshot: 22 days × 3 windows. The window picker and as-of date read those files. Alert settings (high-only, muted categories) re-rank in the browser (`web/src/alerts.ts`), so they work on live data too. Muted filings move to a visible "muted by your settings" group rather than vanishing.
+- **Volume-multiple and price-move thresholds aren't there yet.** FINN has no price data until push mode; the settings sheet says so instead of showing controls that do nothing.
+- **Honest labels:** a "Replay mode" note, a "Demo data as of <snapshot time>" badge, a $0.00 ledger that explains there are no model calls, and no Refresh button.
+- **Any ticker still works, locally.** `./run.sh TICKER …` adds tickers to the portfolio (`FINN_SYMBOLS`) with live NSE data. That's how to answer "point FINN at a company you didn't pick". `deploy/render/render.yaml` is kept as an optional, undeployed path.
+- **CI replaces the HF workflow:** tests, a check that the demo data matches the snapshot and ranking code, a guard against tracked PDF/.env/sqlite files, and the web build.

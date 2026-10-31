@@ -44,6 +44,10 @@ class Settings:
     prices_ttl: int = int(os.getenv("PRICES_TTL", "21600"))
     # Polite fetching
     min_seconds_between_requests: float = float(os.getenv("FETCH_MIN_INTERVAL", "1.0"))
+    # Extra NSE tickers to brief on top of data/portfolio.json, e.g. "TATAMOTORS,ZOMATO" (./run.sh takes them as args).
+    extra_symbols: tuple[str, ...] = tuple(
+        s.strip().upper() for s in os.getenv("FINN_SYMBOLS", "").split(",") if s.strip()
+    )
     cors_origins: tuple[str, ...] = tuple(
         o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",") if o.strip()
     )

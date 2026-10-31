@@ -16,7 +16,10 @@ app.add_middleware(
 
 
 def _portfolio() -> dict:
-    return json.loads((settings.data_dir / "portfolio.json").read_text())
+    pf = json.loads((settings.data_dir / "portfolio.json").read_text())
+    have = {p["symbol"] for p in pf["portfolio"]}
+    pf["portfolio"] += [{"symbol": s, "name": s, "sector": "", "size": ""} for s in settings.extra_symbols if s not in have]
+    return pf
 
 
 def client_id(request: Request) -> str:

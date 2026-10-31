@@ -13,7 +13,7 @@ export function HiddenRow({ groups, total, refTime }: { groups: HiddenGroup[]; t
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full p-4 text-left">
         <div className="flex items-baseline justify-between gap-3">
           <p className="text-[15px] font-semibold text-ink">
-            <span className="tabular">{total}</span> routine {total === 1 ? 'filing' : 'filings'} hidden
+            <span className="tabular">{total}</span> {total === 1 ? 'filing' : 'filings'} hidden
           </p>
           <span className="text-xs font-medium text-ink-3">{open ? 'Close' : 'See why'}</span>
         </div>

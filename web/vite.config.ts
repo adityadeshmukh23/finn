@@ -26,6 +26,9 @@ export default defineConfig({
         // API responses are never served stale from the service worker; the app has its own snapshot fallback.
         navigateFallbackDenylist: [/^\/api/],
         globPatterns: ['**/*.{js,css,html,svg,png,json}'],
+        // 66 recorded briefings: cache each one when first opened instead of precaching ~1 MB.
+        globIgnores: ['demo/digest-*'],
+        runtimeCaching: [{ urlPattern: /\/demo\/digest-.*\.json$/, handler: 'CacheFirst', options: { cacheName: 'finn-demo' } }],
       },
     }),
   ],

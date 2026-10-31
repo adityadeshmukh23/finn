@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { fetchDigest, fetchLedger, type Card, type Digest } from './api'
+import { applyAlerts, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
+import { fetchDigest, fetchLedger, fetchManifest, STATIC, type Card, type Digest, type Manifest } from './api'
+import { AlertsSheet } from './components/AlertsSheet'
 import { BriefCard } from './components/BriefCard'
 import { HiddenRow } from './components/HiddenRow'
 import { LedgerSheet } from './components/LedgerSheet'
@@ -29,13 +31,13 @@ function saveDismissed(s: Set<string>) {
 function SourceBadge({ d }: { d: Digest }) {
   const s = d.source
   const fresh = s.source === 'live' || s.source === 'cache'
-  const label = fresh ? 'NSE' : s.source === 'unavailable' ? 'No data' : 'Snapshot'
+  const label = fresh ? 'NSE' : s.source === 'unavailable' ? 'No data' : STATIC ? 'Demo data' : 'Snapshot'
   return (
     <div className="text-xs">
       <span className={`inline-flex items-center gap-1.5 font-medium ${fresh ? 'text-good' : 'text-warn'}`}>
         <span className={`h-1.5 w-1.5 rounded-full ${fresh ? 'bg-good' : 'bg-warn'}`} />
         {label}
-        {s.as_of && <span className="font-normal text-ink-3">· data as of {clock(s.as_of)}</span>}
+        {s.as_of && <span className="font-normal text-ink-3">{STATIC ? ' as of ' : '· data as of '}{clock(s.as_of)}</span>}
       </span>
       {s.message && <p className="mt-1 leading-snug text-ink-3">{s.message}</p>}
     </div>
@@ -69,9 +71,16 @@ export default function App() {
   const [ask, setAsk] = useState<Card | null>(null)
   const [ledgerOpen, setLedgerOpen] = useState(false)
   const [spent, setSpent] = useState<number | null>(null)
+  const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
+  const [alertsOpen, setAlertsOpen] = useState(false)
+  const [manifest, setManifest] = useState<Manifest | null>(null)
+
+  useEffect(() => { if (STATIC) fetchManifest().then(setManifest).catch(() => setManifest(null)) }, [])
+  const latestDay = STATIC ? manifest?.to ?? null : todayIST()
 
   const load = useCallback(async (refresh = false) => {
-    refresh ? setRefreshing(true) : setLoading(true)
+    if (refresh) setRefreshing(true)
+    else setLoading(true)
     setError(null)
     try {
       setData(await fetchDigest(hours, asOf, refresh))
@@ -84,11 +93,17 @@ export default function App() {
   }, [hours, asOf])
 
   useEffect(() => { load() }, [load])
-  useEffect(() => { fetchLedger().then((l) => setSpent(l.spent_usd)).catch(() => setSpent(null)) }, [ledgerOpen])
+  useEffect(() => {
+    if (STATIC) { setSpent(0); return }
+    fetchLedger().then((l) => setSpent(l.spent_usd)).catch(() => setSpent(null))
+  }, [ledgerOpen])
 
+  const view = useMemo(() => (data ? applyAlerts(data, prefs) : null), [data, prefs])
+  const changePrefs = (p: AlertPrefs) => { setPrefs(p); savePrefs(p) }
+  const customised = prefs.minTier !== 'medium' || prefs.muted.length > 0
   const refTime = useMemo(() => (data ? new Date(data.window.end) : new Date()), [data])
-  const cards = (data?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
-  const dismissedHere = (data?.cards.length ?? 0) - cards.length
+  const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
+  const dismissedHere = (view?.cards.length ?? 0) - cards.length
 
   const dismiss = (id: string) => {
     const next = new Set(dismissed).add(id)
@@ -122,13 +137,27 @@ export default function App() {
                   aria-label="Open cost ledger">
             {spent === null ? 'Cost' : `${usd(spent)} spent`}
           </button>
-          <button onClick={() => load(true)} disabled={refreshing || loading || !!asOf}
-                  className="rounded-full border border-line px-3 py-1.5 text-xs font-medium text-ink-2 disabled:opacity-40"
-                  aria-label="Refresh from NSE" title={asOf ? 'Past briefings are fixed' : 'Fetch the latest filings'}>
-            {refreshing ? 'Refreshing…' : 'Refresh'}
+          <button onClick={() => setAlertsOpen(true)} aria-label="Alert settings"
+                  className={`rounded-full border px-3 py-1.5 text-xs font-medium ${customised ? 'border-ink text-ink' : 'border-line text-ink-2'}`}>
+            Alerts{customised ? ' ·' : ''}
           </button>
+          {!STATIC && (
+            <button onClick={() => load(true)} disabled={refreshing || loading || !!asOf}
+                    className="rounded-full border border-line px-3 py-1.5 text-xs font-medium text-ink-2 disabled:opacity-40"
+                    aria-label="Refresh from NSE" title={asOf ? 'Past briefings are fixed' : 'Fetch the latest filings'}>
+              {refreshing ? 'Refreshing…' : 'Refresh'}
+            </button>
+          )}
         </div>
       </header>
+
+      {STATIC && (
+        <p className="mt-2 rounded-xl bg-raised px-3 py-2 text-xs leading-snug text-ink-2">
+          <span className="font-semibold text-ink">Replay mode.</span> Recorded NSE filings
+          {manifest && <> for {manifest.holdings} holdings, {manifest.from} to {manifest.to}</>}. Live fetching,
+          any-ticker briefings and research run locally (see README).
+        </p>
+      )}
 
       <div className="mt-3 flex items-center gap-2">
         <div role="tablist" aria-label="Time window" className="flex rounded-full bg-raised p-0.5">
@@ -141,8 +170,8 @@ export default function App() {
         </div>
         <label className="ml-auto flex items-center gap-1.5 text-xs text-ink-3">
           As of
-          <input type="date" value={asOf ?? todayIST()} max={todayIST()}
-                 onChange={(e) => setAsOf(!e.target.value || e.target.value === todayIST() ? null : e.target.value)}
+          <input type="date" value={asOf ?? latestDay ?? ''} max={latestDay ?? undefined} min={STATIC ? manifest?.from : undefined}
+                 onChange={(e) => setAsOf(!e.target.value || e.target.value === latestDay ? null : e.target.value)}
                  className="rounded-full border border-line bg-surface px-2.5 py-1 text-xs text-ink" />
         </label>
       </div>
@@ -158,7 +187,7 @@ export default function App() {
           </div>
         )}
 
-        {!loading && data && (
+        {!loading && data && view && (
           <>
             <section>
               <p className="text-[15px] text-ink">
@@ -166,7 +195,7 @@ export default function App() {
                 {cards.length === 1 ? 'company needs' : 'companies need'} a look
               </p>
               <p className="tabular mt-0.5 text-[13px] text-ink-2">
-                {data.counts.total} filings in the last {windowLabel} · {data.counts.hidden} routine hidden
+                {data.counts.total} filings in the last {windowLabel} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} duplicates dropped`}
               </p>
               <div className="mt-2"><SourceBadge d={data} /></div>
@@ -175,12 +204,14 @@ export default function App() {
             {cards.length === 0 && (
               <div className="rounded-2xl border border-line bg-surface p-5">
                 <p className="text-[15px] font-semibold text-ink">
-                  {data.counts.total === 0 ? `No filings in the last ${windowLabel}` : 'Nothing material'}
+                  {data.counts.total === 0 ? `No filings in the last ${windowLabel}` : customised ? 'Nothing passes your alert settings' : 'Nothing material'}
                 </p>
                 <p className="mt-1 text-[13px] leading-snug text-ink-2">
                   {data.counts.total === 0
                     ? 'A quiet window. Widen it, or pick an earlier date to see a busy day.'
-                    : 'Everything filed in this window was routine. It is listed below if you want to check.'}
+                    : customised
+                      ? 'Everything in this window is muted or below your threshold. It is listed below.'
+                      : 'Everything filed in this window was routine. It is listed below if you want to check.'}
                 </p>
                 {hours < 168 && (
                   <button onClick={() => setHours(168)} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-bg">Show 7 days</button>
@@ -196,12 +227,12 @@ export default function App() {
             </ul>
 
             {dismissedHere > 0 && (
-              <button onClick={() => restore(data.cards.map((c) => c.lead.id))} className="text-xs text-ink-3 underline underline-offset-4">
+              <button onClick={() => restore(view.cards.map((c) => c.lead.id))} className="text-xs text-ink-3 underline underline-offset-4">
                 {dismissedHere} dismissed · show again
               </button>
             )}
 
-            <HiddenRow groups={data.hidden} total={data.counts.hidden} refTime={refTime} />
+            <HiddenRow groups={view.hidden} total={view.counts.hidden} refTime={refTime} />
 
             {data.quiet.length > 0 && (
               <p className="px-1 text-xs leading-relaxed text-ink-3">
@@ -228,10 +259,13 @@ export default function App() {
             with a page citation on every claim. The first lens is <span className="font-semibold text-ink">promised vs delivered</span>:
             what management guided over the last four quarters against what they reported.
           </p>
-          <p className="mt-3 rounded-xl bg-raised p-3 text-[13px] text-ink-2">Not built yet. Research arrives in the next build phase.</p>
+          <p className="mt-3 rounded-xl bg-raised p-3 text-[13px] text-ink-2">
+            Not built yet. Research arrives in the next build phase{STATIC ? '; this demo will replay recorded answers' : ''}.
+          </p>
         </Sheet>
       )}
       {ledgerOpen && <LedgerSheet onClose={() => setLedgerOpen(false)} />}
+      {alertsOpen && <AlertsSheet prefs={prefs} onChange={changePrefs} onClose={() => setAlertsOpen(false)} />}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { fetchLedger, type Ledger } from '../api'
+import { fetchLedger, STATIC, type Ledger } from '../api'
 import { usd } from '../format'
 import { Sheet } from './Sheet'
 
@@ -7,8 +7,22 @@ export function LedgerSheet({ onClose }: { onClose: () => void }) {
   const [data, setData] = useState<Ledger | null>(null)
   const [err, setErr] = useState<string | null>(null)
   useEffect(() => {
-    fetchLedger().then(setData).catch((e) => setErr(e.message))
+    if (!STATIC) fetchLedger().then(setData).catch((e) => setErr(e.message))
   }, [])
+
+  if (STATIC) {
+    return (
+      <Sheet title="Cost ledger" onClose={onClose}>
+        <p className="tabular text-3xl font-semibold text-ink">$0.00</p>
+        <p className="mt-1 text-[13px] leading-snug text-ink-2">
+          Replay mode makes no model calls and holds no API key. The briefing is ranked by rules, so it costs nothing to build.
+        </p>
+        <p className="mt-3 text-xs leading-snug text-ink-3">
+          Run FINN locally to see the live ledger: every model call with its tokens, cost, the free-tier limits and the $5 hard cap.
+        </p>
+      </Sheet>
+    )
+  }
 
   return (
     <Sheet title="Cost ledger" onClose={onClose}>

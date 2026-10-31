@@ -4,14 +4,29 @@
     {
       "name": "api",
       "runtimeExecutable": "/bin/sh",
-      "runtimeArgs": ["-c", "cd backend && ../.venv/bin/uvicorn finn.main:app --port 8000"],
+      "runtimeArgs": [
+        "-c",
+        "cd backend && ../.venv/bin/uvicorn finn.main:app --port 8000"
+      ],
       "port": 8000
     },
     {
       "name": "web",
       "runtimeExecutable": "/bin/sh",
-      "runtimeArgs": ["-c", "cd web && PATH=$HOME/.local/node/bin:$PATH npm run dev -- --port 5173 --strictPort"],
+      "runtimeArgs": [
+        "-c",
+        "cd web && PATH=$HOME/.local/node/bin:$PATH npm run dev -- --port 5173 --strictPort"
+      ],
       "port": 5173
+    },
+    {
+      "name": "web-static",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "cd web && PATH=$HOME/.local/node/bin:$PATH npm run build && PATH=$HOME/.local/node/bin:$PATH npx vite preview --port 4173 --strictPort"
+      ],
+      "port": 4173
     }
   ]
 }

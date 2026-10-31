@@ -1,0 +1,20 @@
+# OPTIONAL, NOT DEPLOYED. The public demo is static on Vercel (docs/DEPLOY.md).
+# Use this only if you want a hosted API: Render dashboard -> New -> Blueprint, point it at this
+# file's path. Free plan: no card, sleeps after 15 min idle, ~1 min cold start, ephemeral disk.
+# It stays in mock/recorded mode: no key is set here, and PUBLIC_DEMO forces LLM_MODE=mock by default.
+services:
+  - type: web
+    name: finn-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn finn.main:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /api/health
+    envVars:
+      - key: PUBLIC_DEMO
+        value: "true"
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: CORS_ORIGINS
+        sync: false        # set to your Vercel URL in the dashboard

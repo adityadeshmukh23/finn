@@ -60,6 +60,26 @@ export interface Ledger {
 }
 
 const API = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '')
+// No API configured in a production build (the public Vercel demo): replay pre-generated data.
+export const STATIC = import.meta.env.VITE_STATIC === '1' || (import.meta.env.PROD && !API)
+
+export interface Manifest {
+  fetched_at: string
+  from: string
+  to: string
+  days: string[]
+  windows: number[]
+  holdings: number
+}
+
+let manifest: Promise<Manifest> | null = null
+export function fetchManifest(): Promise<Manifest> {
+  manifest ??= fetch('/demo/manifest.json').then((r) => {
+    if (!r.ok) throw new Error('Demo data missing from this build')
+    return r.json() as Promise<Manifest>
+  }).catch((e) => { manifest = null; throw e })
+  return manifest
+}
 
 async function getJSON<T>(path: string, timeoutMs = 25000): Promise<T> {
   const ctl = new AbortController()
@@ -76,22 +96,32 @@ async function getJSON<T>(path: string, timeoutMs = 25000): Promise<T> {
   }
 }
 
+/** A pre-generated briefing. `asOf` null means the latest recorded day. */
+export async function fetchBundled(hours: number, asOf: string | null): Promise<Digest> {
+  const m = await fetchManifest()
+  const day = asOf ?? m.to
+  if (!m.days.includes(day)) {
+    throw new Error(`No recorded filings for that date. The demo covers ${m.from} to ${m.to}.`)
+  }
+  const r = await fetch(`/demo/digest-${day}-${hours}.json`)
+  if (!r.ok) throw new Error(`Demo data missing for ${day}`)
+  return (await r.json()) as Digest
+}
+
 export async function fetchDigest(hours: number, asOf: string | null, refresh = false): Promise<Digest> {
+  if (STATIC) return fetchBundled(hours, asOf)
   const q = new URLSearchParams({ hours: String(hours) })
   if (asOf) q.set('as_of', asOf)
   if (refresh) q.set('refresh', 'true')
   try {
     return await getJSON<Digest>(`/api/digest?${q}`)
   } catch (err) {
-    // Backend asleep or unreachable: fall back to the briefing bundled at build time.
+    // API down or unreachable: fall back to the recorded briefing for the latest day.
     if (asOf) throw err
-    const r = await fetch(`/snapshot/digest-${hours}.json`)
-    if (!r.ok) throw err
-    const d = (await r.json()) as Digest
+    const d = await fetchBundled(hours, null).catch(() => { throw err })
     d.source = {
       ...d.source,
-      source: 'bundled',
-      message: `Server unreachable (${(err as Error).message}). Showing the briefing bundled with the app.`,
+      message: `Server unreachable (${(err as Error).message}). Showing recorded filings.`,
     }
     return d
   }
