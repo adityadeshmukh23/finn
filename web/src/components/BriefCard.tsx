@@ -37,7 +37,7 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
   const [leaving, setLeaving] = useState(false)
   const start = useRef<{ x: number; y: number; horizontal: boolean | null } | null>(null)
   const { lead } = card
-  const more = card.items.length
+  const more = card.items.length + card.folded.length
 
   // One gesture only: swipe left to dismiss. Vertical scrolling is left to the browser.
   const onPointerDown = (e: React.PointerEvent) => {
@@ -90,9 +90,17 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
         </p>
         <h3 className="mt-1 text-[15px] font-semibold leading-snug text-ink">{lead.headline}</h3>
         {lead.why && <p className="mt-1.5 text-[13px] leading-snug text-ink-2">{lead.why}</p>}
+        {card.why_rank && (
+          <p className="mt-2 text-xs leading-snug text-ink-3">
+            <span className="tabular font-semibold text-ink-2">#{rank}</span> {card.why_rank}
+          </p>
+        )}
 
         <div className="mt-3 flex items-center gap-4">
           <FilingLink url={lead.url} />
+          {lead.read && (
+            <span className="text-xs text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page}</span>
+          )}
           {more > 0 && (
             <button onClick={() => setOpen(!open)} aria-expanded={open}
                     className="text-xs font-medium text-ink-2 hover:text-ink">
@@ -117,9 +125,19 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
                 <div className="mt-1"><FilingLink url={it.url} /></div>
               </li>
             ))}
-            {card.routine_count > 0 && (
+            {card.folded.length > 0 && (
               <li className="text-xs text-ink-3">
-                {card.routine_count} routine {card.routine_count === 1 ? 'filing' : 'filings'} from {card.symbol} hidden below
+                {card.folded.length} results newspaper {card.folded.length === 1 ? 'ad' : 'ads'} (same numbers, already filed){' '}
+                {card.folded.map((it, i) => (
+                  <a key={it.id} href={it.url} target="_blank" rel="noopener noreferrer"
+                     className="underline underline-offset-4">{i ? ', ' : ''}ad {i + 1} ↗</a>
+                ))}
+              </li>
+            )}
+            {card.routine_count - card.folded.length > 0 && (
+              <li className="text-xs text-ink-3">
+                {card.routine_count - card.folded.length} routine{' '}
+                {card.routine_count - card.folded.length === 1 ? 'filing' : 'filings'} from {card.symbol} hidden below
               </li>
             )}
           </ul>

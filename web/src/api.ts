@@ -11,7 +11,9 @@ export interface Item {
   url: string
   ts: string
   nse_category: string
+  base: number             // event weight before recency
   score: number
+  read: { page: number; quote: string } | null   // headline came from the filing, verified quote
 }
 
 export interface Card {
@@ -23,6 +25,8 @@ export interface Card {
   lead: Item
   items: Item[]
   routine_count: number
+  folded: Item[]           // routine results satellites (newspaper ads) riding on this card
+  why_rank?: string        // set in the browser: why this card sits at this rank
 }
 
 export interface HiddenGroup {

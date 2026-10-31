@@ -1,4 +1,5 @@
 import type { Card, Digest, Item } from './api'
+import { rankCards } from './rank'
 
 /** What the investor wants surfaced. Applied in the browser, so it works on live and recorded data alike. */
 export interface AlertPrefs {
@@ -31,7 +32,7 @@ const muted = (it: Item, p: AlertPrefs) => p.muted.includes(it.category) || (p.m
 
 /** Re-rank a digest under the investor's settings. Muted items move to the hidden list, never vanish. */
 export function applyAlerts(d: Digest, p: AlertPrefs): Digest {
-  if (p.minTier === 'medium' && p.muted.length === 0) return d
+  if (p.minTier === 'medium' && p.muted.length === 0) return { ...d, cards: rankCards(d.cards) }
   const out: Item[] = []
   const cards: Card[] = []
   for (const c of d.cards) {
@@ -39,14 +40,12 @@ export function applyAlerts(d: Digest, p: AlertPrefs): Digest {
     const keep = all.filter((it) => !muted(it, p)).sort((a, b) => b.score - a.score)
     out.push(...all.filter((it) => muted(it, p)))
     if (keep.length === 0) continue
-    const extraHigh = keep.slice(1).filter((it) => it.tier === 'high').length
-    cards.push({ ...c, lead: keep[0], items: keep.slice(1), score: Math.round((keep[0].score + 3 * extraHigh) * 10) / 10 })
+    cards.push({ ...c, lead: keep[0], items: keep.slice(1) })
   }
-  cards.sort((a, b) => b.score - a.score)
   const hidden = out.length ? [{ reason: MUTED_REASON, count: out.length, items: out }, ...d.hidden] : d.hidden
   return {
     ...d,
-    cards,
+    cards: rankCards(cards),
     hidden,
     counts: { ...d.counts, shown: d.counts.shown - out.length, hidden: d.counts.hidden + out.length },
   }

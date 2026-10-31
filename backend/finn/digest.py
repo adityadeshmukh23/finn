@@ -109,6 +109,7 @@ def _item(a: Announcement, c: Classified, window_start: datetime, window_end: da
         "url": a.url,
         "ts": a.ts,
         "nse_category": a.desc,
+        "base": base if c.tier != ROUTINE else 0,   # event weight alone; the "why it ranks here" line uses it
         "score": round(base + recency, 1) if c.tier != ROUTINE else 0,
     }
 

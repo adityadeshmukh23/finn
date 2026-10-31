@@ -66,3 +66,10 @@
 - **HUL now has a results card.** NSE's summary of its board outcome was empty; the filing itself says turnover ₹18,071 crore, which is now the headline.
 - **Recorded by NSE announcement ID** in `data/recordings/filings/` (committed) alongside the gate's hash-keyed recordings. `scripts.read_filings` runs once locally with a key and skips anything recorded; `--reverify` re-checks recorded reads after a verifier change with no model calls. The static build and the API only replay recordings, so CI, the public demo and keyless runs never call a model. Cost: 39 free-tier calls, once.
 - **Live filings that arrive after the snapshot get rules only** until `read_filings` is run for them; a request never waits on a model.
+
+## Push mode 2: every card says why it ranks where it does (2026-11-01)
+
+- **Score stays simple and inspectable:** event weight (table in `digest.py`; top-management change 95, results 90, M&A 85, litigation 80 …) + up to 5 for recency inside the window + 3 per other high-priority filing from the same company. No model in the ranking.
+- **The "why #N" line is computed in the browser** (`web/src/rank.ts`), because alert settings (and, next, price/volume alerts) change the order client-side; a server-written line would go stale the moment a setting changes. It names the lead event, what else the company filed, and the deciding comparison with the card above (higher weight, fewer corroborating filings, filed earlier, or older but outscored on recency).
+- **Results newspaper ads ride on the results card** ("2 results newspaper ads, same numbers, already filed") rather than inflating the hidden row; the hidden row still counts and groups everything else.
+- **Summaries read from the filing say so** ("Summary checked against p.N", with the verified quote on hover), so a model-written headline is never mistaken for NSE's own text.
