@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
 import { CATEGORY_LABEL, when } from '../format'
 import { describe } from '../market'
+import { People } from './People'
 import { ResultsTable } from './ResultsTable'
 
 const TIER_DOT: Record<string, string> = { high: 'bg-hot', medium: 'bg-accent', routine: 'bg-ink-3' }
@@ -97,8 +98,9 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
           </p>
         )}
         <h3 className="mt-1 text-[15px] font-semibold leading-snug text-ink">{lead.headline}</h3>
-        {lead.why && lead.category !== 'results' && <p className="mt-1.5 text-[13px] leading-snug text-ink-2">{lead.why}</p>}
+        {lead.why && lead.category !== 'results' && !(lead.category === 'management_change' && card.people?.length) && <p className="mt-1.5 text-[13px] leading-snug text-ink-2">{lead.why}</p>}
         {card.results && lead.category === 'results' && <ResultsTable r={card.results} />}
+        {card.people && card.people.length > 0 && lead.category === 'management_change' && <People people={card.people} />}
         {card.why_rank && (
           <p className="mt-2 text-xs leading-snug text-ink-3">
             <span className="tabular font-semibold text-ink-2">#{rank}</span> {card.why_rank}

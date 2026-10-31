@@ -6,7 +6,7 @@ import re
 from collections import defaultdict
 from datetime import datetime, timedelta
 
-from . import filings, results as results_mod
+from . import filings, mgmt, results as results_mod
 from .classify import HIGH, MEDIUM, ROUTINE, Classified, classify
 from .sources.nse import Announcement
 
@@ -115,8 +115,9 @@ def _item(a: Announcement, c: Classified, window_start: datetime, window_end: da
 
 
 def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str, dict],
-          reads: dict[str, dict] | None = None, results: dict[str, dict] | None = None) -> dict:
-    reads, results = reads or {}, results or {}
+          reads: dict[str, dict] | None = None, results: dict[str, dict] | None = None,
+          changes: dict[str, dict] | None = None) -> dict:
+    reads, results, changes = reads or {}, results or {}, changes or {}
     start = as_of - timedelta(hours=hours)
     in_window = [a for a in items if start < a.dt <= as_of]
 
@@ -162,6 +163,7 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
             "routine_count": sum(1 for r in rows if r["symbol"] == sym and r["tier"] == ROUTINE),
             "folded": folded.get(sym, []),
             "results": res,
+            "people": mgmt.people([changes.get(r["id"]) for r in its if r["category"] == "management_change"]),
         })
     cards.sort(key=lambda c: c["score"], reverse=True)
 

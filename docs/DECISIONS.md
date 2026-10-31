@@ -90,5 +90,13 @@
 - **Growth off a loss or zero is "n.m."**, not a percentage that reads backwards.
 - **The verifier had to learn PDF number splitting** ("9 ,976 .51", "1,391.5 2", "2 ,8 25.61") without ever gluing adjacent columns; both directions are tested on Asian Paints' real extracted text.
 - **Confidence:** high = consolidated and every figure found on the page; medium = standalone only, or a non-headline figure dropped; low = a headline figure (revenue, PBT or PAT) missing or the unit unclear. **Low shows no numbers**, only the reason and the page link: a wrong number on a briefing card is worse than none.
-- **Outcome on the snapshot (18 holdings, 18 cheap-model calls, $0):** 7 high (Aarti, Asian Paints, HUL, KPIT, L&T, Polycab, Reliance), 3 medium (Bajaj Finance; Equitas and Infosys standalone), 6 low (Maruti's PDF is OCR'd with misread digits; Sun Pharma's text merges columns; HDFC Bank, Home First, Sterling Tools partly), 2 none (Deepak Nitrite is a scanned image; no table found for Info Edge). Stopped tuning there: the remaining failures are source quality, and they fail honestly.
+- **Outcome on the snapshot (17 holdings with a results filing, 17 cheap-model calls, $0):** 7 high (Aarti, Asian Paints, HUL, KPIT, L&T, Polycab, Reliance), 3 medium (Bajaj Finance; Equitas and Infosys standalone), 5 low (Maruti's PDF is OCR'd with misread digits; Sun Pharma's text merges columns; HDFC Bank, Home First, Sterling Tools partly), 2 none (Deepak Nitrite is a scanned image; no table found for Info Edge). Stopped tuning there: the remaining failures are source quality, and they fail honestly.
 - **Confident cards lead with the number:** "PAT ₹29,250 cr, +32.1% YoY; revenue +28.6%".
+
+## Push mode 5: management-change card from the filing itself (2026-11-01)
+
+- **Who, role, effective date, reason, background: all from the Reg. 30 disclosure.** The cheap model copies them with a verbatim quote for the reason and the profile; code keeps a person only if they're named in the filing, and blanks any reason, date or profile it can't find there (numbers included). 13 top-management filings, 13 calls, 34 verified changes, $0.
+- **The profile is often at the end of a 20-page board outcome**, so the reader sends the first 4 pages plus up to 3 later pages that look like a profile annexure, each with its real page number for the citation.
+- **Reasons are shown for exits only.** For an appointment the "reason" field is process boilerplate ("on the recommendation of the NRC"), which tells an investor nothing.
+- **One row per person and change across a company's filings.** Info Edge filed the same transition five times; the card shows it once, keeping the most complete version.
+- **Web enrichment of bios is not built.** It's optional in the plan, and the filing's own profile already covers the CFO appointments in the demo (Aarti, Home First). If added, it would be a separate, labelled "outside the filing" link, never mixed into the verified fields.

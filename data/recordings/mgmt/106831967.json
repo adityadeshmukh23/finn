@@ -1,0 +1,62 @@
+{
+ "id": "106831967",
+ "symbol": "NAUKRI",
+ "url": "https://nsearchives.nseindia.com/corporate/NAUKRI2_28102026140721_IEIL_SE_Intimation_MD_and_CEO.pdf",
+ "status": "read",
+ "changes": [
+  {
+   "person": "Hitesh Oberoi",
+   "role": "Managing Director and Chief Executive Officer",
+   "change": "resigned",
+   "effective": "December 2, 2026",
+   "reason": "to devote more time to his personal interests in education, entrepreneurship, institution building, investing and philanthropy, as well as to spend more time with his family",
+   "reason_quote": "in order to devote more time to his personal interests in education, entrepreneurship, institution building, investing and philanthropy, as well as to spend more time with his family.",
+   "profile": "",
+   "profile_quote": "",
+   "page": 1,
+   "verified": true,
+   "checks": {
+    "name": true,
+    "reason": true,
+    "profile": false,
+    "effective": true
+   }
+  },
+  {
+   "person": "Hitesh Oberoi",
+   "role": "Additional Director",
+   "change": "appointed",
+   "effective": "December 3, 2026",
+   "reason": "Based on the recommendation of the Nomination and Remuneration Committee, the Board of Directors approved the appointment",
+   "reason_quote": "Based on the recommendation of the Nomination and Remuneration Committee, the Board of Directors approved the appointment of Mr. Hitesh Oberoi",
+   "profile": "",
+   "profile_quote": "",
+   "page": 1,
+   "verified": true,
+   "checks": {
+    "name": true,
+    "reason": true,
+    "profile": false,
+    "effective": true
+   }
+  },
+  {
+   "person": "Sanjeev Bikhchandani",
+   "role": "Executive Vice Chairman, Managing Director and Group Chief Executive Officer",
+   "change": "appointed",
+   "effective": "December 3, 2026",
+   "reason": "Based on the recommendation of the Nomination and Remuneration Committee, the Board of Directors approved the appointment and re-designation",
+   "reason_quote": "Based on the recommendation of the Nomination and Remuneration Committee, the Board of Directors approved the appointment and re-designation of Mr. Sanjeev Bikhchandani",
+   "profile": "",
+   "profile_quote": "",
+   "page": 2,
+   "verified": true,
+   "checks": {
+    "name": true,
+    "reason": true,
+    "profile": false,
+    "effective": true
+   }
+  }
+ ]
+}

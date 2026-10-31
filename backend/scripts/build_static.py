@@ -9,7 +9,7 @@ import json
 import shutil
 from datetime import date, datetime, time, timedelta
 
-from finn import digest, filings, market, results
+from finn import digest, filings, market, mgmt, results
 from finn.config import REPO_ROOT, settings
 from finn.sources import nse, prices
 
@@ -23,7 +23,7 @@ def build(out=OUT) -> dict:
         raise SystemExit("No snapshot in data/snapshots/nse. Run scripts.record_snapshots first.")
     meta = {p["symbol"]: p for p in json.loads((settings.data_dir / "portfolio.json").read_text())["portfolio"]}
     items = [a for a in (nse.Announcement(**r) for r in snap["items"]) if a.symbol in meta]
-    reads, extracted = filings.load_reads(), results.load_all()
+    reads, extracted, changes = filings.load_reads(), results.load_all(), mgmt.load_all()
     first, last = date.fromisoformat(snap["from"]), date.fromisoformat(snap["to"])
     fetched = datetime.fromisoformat(snap["fetched_at"])
 
@@ -36,7 +36,7 @@ def build(out=OUT) -> dict:
         # The last day ends when the snapshot was taken; earlier days end at midnight IST.
         end = fetched if d == last else datetime.combine(d, time(23, 59, 59), nse.IST)
         for hours in WINDOWS:
-            dg = digest.build(items, end, hours, meta, reads, extracted)
+            dg = digest.build(items, end, hours, meta, reads, extracted, changes)
             start = end - timedelta(hours=hours)
             msg = f"Recording starts {first:%-d %b}, so this window is partly empty." if start.date() < first else ""
             dg["source"] = {"source": "bundled", "as_of": snap["fetched_at"], "message": msg,

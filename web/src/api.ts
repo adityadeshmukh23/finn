@@ -37,6 +37,17 @@ export type Results =
       url: string
     }
 
+export interface Person {
+  person: string
+  role: string
+  change: 'appointed' | 'resigned' | 'ceased' | 'retiring' | 're-designated' | 're-appointed'
+  effective: string        // as printed in the filing; '' if not stated or not verified
+  reason: string           // exits only, backed by a quote found in the filing
+  profile: string          // the filing's own brief profile, quote-checked
+  page: number
+  url: string
+}
+
 export interface Card {
   symbol: string
   company: string
@@ -48,6 +59,7 @@ export interface Card {
   routine_count: number
   folded: Item[]           // routine results satellites (newspaper ads) riding on this card
   results?: Results | null // quarterly table read from the results filing, figures verified on the page
+  people?: Person[]        // management changes read from the filings, verified against their text
   why_rank?: string        // set in the browser: why this card sits at this rank
   market?: Signal          // set in the browser: a price/volume threshold crossed in this window
 }

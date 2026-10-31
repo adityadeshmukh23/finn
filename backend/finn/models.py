@@ -10,6 +10,7 @@ ROUTES = {
     "summarise_filing": "cheap",
     "extract_guidance": "cheap",
     "extract_results": "cheap",
+    "extract_mgmt": "cheap",
     "ask": "cheap",
     "verdict": "strong",
     "bull_bear": "strong",

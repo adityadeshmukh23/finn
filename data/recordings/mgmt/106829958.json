@@ -1,0 +1,44 @@
+{
+ "id": "106829958",
+ "symbol": "STERTOOLS",
+ "url": "https://nsearchives.nseindia.com/corporate/STERTOOLS_27102026130842_Outcomesign.pdf",
+ "status": "read",
+ "changes": [
+  {
+   "person": "Anish Agarwal",
+   "role": "Chief Financial Officer",
+   "change": "resigned",
+   "effective": "26th October, 2026",
+   "reason": "to devote more time and attention to the business development activities of the Company and focus on his strategic responsibilities as a Director",
+   "reason_quote": "tendered his resignation from the services of the Company to devote more time and attention to the business development activities of the Company and focus on his strategic responsibilities as a Director",
+   "profile": "",
+   "profile_quote": "",
+   "page": 15,
+   "verified": true,
+   "checks": {
+    "name": true,
+    "reason": true,
+    "profile": false,
+    "effective": true
+   }
+  },
+  {
+   "person": "Amit Dhadda",
+   "role": "Chief Financial Officer and Key Managerial Personnel",
+   "change": "appointed",
+   "effective": "27th October, 2026",
+   "reason": "As per the recommendation of the Nomination and Remuneration Committee and Audit Committee",
+   "reason_quote": "As per the recommendation of the Nomination and Remuneration Committee and Audit Committee",
+   "profile": "",
+   "profile_quote": "",
+   "page": 1,
+   "verified": true,
+   "checks": {
+    "name": true,
+    "reason": true,
+    "profile": false,
+    "effective": true
+   }
+  }
+ ]
+}
