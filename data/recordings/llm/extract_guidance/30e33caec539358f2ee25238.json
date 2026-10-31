@@ -1,0 +1,189 @@
+{
+ "promises": [
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "Revenue growth more than 15%, EBITDA margin more than 27%, order inflow of INR27,000-plus crores excluding QRFM.",
+   "page": 21
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "kind": "numeric",
+   "target_low": 27.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "Revenue growth more than 15%, EBITDA margin more than 27%, order inflow of INR27,000-plus crores excluding QRFM.",
+   "page": 21
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow",
+   "kind": "numeric",
+   "target_low": 27000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "Revenue growth more than 15%, EBITDA margin more than 27%, order inflow of INR27,000-plus crores excluding QRFM.",
+   "page": 21
+  },
+  {
+   "metric": "other",
+   "label": "R&D investment",
+   "kind": "numeric",
+   "target_low": 1600.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "R&D investment as it was committed, it will be INR1,600-plus crores only. Capex, INR1,000-plus crores and export $120-plus million.",
+   "page": 21
+  },
+  {
+   "metric": "capex",
+   "label": "Capex",
+   "kind": "numeric",
+   "target_low": 1000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "R&D investment as it was committed, it will be INR1,600-plus crores only. Capex, INR1,000-plus crores and export $120-plus million.",
+   "page": 21
+  },
+  {
+   "metric": "exports",
+   "label": "Exports",
+   "kind": "numeric",
+   "target_low": 120.0,
+   "target_high": null,
+   "unit": "usd_million",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "R&D investment as it was committed, it will be INR1,600-plus crores only. Capex, INR1,000-plus crores and export $120-plus million.",
+   "page": 21
+  },
+  {
+   "metric": "order_inflow",
+   "label": "QRSAM order",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q4 FY26",
+   "speaker": "Manoj Jain",
+   "quote": "We are confident to get this order by February, March as of now also. It may not slip to Q1 of next year. We are confident we may get in the Q4 of this year itself QRSAM",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Export turnover share",
+   "kind": "numeric",
+   "target_low": 10.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "about",
+   "horizon": "unspecified",
+   "speaker": "Manoj Jain",
+   "quote": "And we are confident over the period of next five years, we try to reach around 10% of our turnover through exports.",
+   "page": 10
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sustainable revenue growth",
+   "kind": "qualitative",
+   "target_low": 15.0,
+   "target_high": 17.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Manoj Jain",
+   "quote": "It will be between 15% to 17%, 17.5%, 18%, somewhere, we will try to stabilize around that type of a growth pattern",
+   "page": 8
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Revenue from operations",
+   "period": "Q1 FY26",
+   "value": 4417.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "Revenue from operations, it has increased to INR4,417 crores up to Q1 as compared to INR4,199 crores last year figure with a growth of 5.19%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "period": "Q1 FY26",
+   "value": 5.19,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "Revenue from operations, it has increased to INR4,417 crores up to Q1 as compared to INR4,199 crores last year figure with a growth of 5.19%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit before tax",
+   "period": "Q1 FY26",
+   "value": 1289.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "Then profit before tax, it has increased to INR1,289 crores up to Q1 as compared to INR1,037 crores previous year Q1, with a growth of 24.28%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax",
+   "period": "Q1 FY26",
+   "value": 969.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit after tax that also has increased to INR969 crores in Q1 as compared to INR776 previous year Q1, with a growth of 24.87%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "period": "Q1 FY26",
+   "value": 29.86,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "The EBITDA also has increased to 29.86% up to Q1 as compared to 22.82% last year.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book position",
+   "period": "Q1 FY26",
+   "value": 74859.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "and order book position as on 1/7/2025 is INR74,859 crores.",
+   "page": 3
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T03:40:32",
+  "fell_back_from": []
+ }
+}

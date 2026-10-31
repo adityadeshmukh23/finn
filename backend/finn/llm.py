@@ -10,7 +10,7 @@ import json
 import threading
 import time
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
 from typing import Callable, TypeVar
 from zoneinfo import ZoneInfo
@@ -31,6 +31,8 @@ class LLMResult:
     source: str          # recorded | mock | live | blocked
     cost_usd: float = 0.0
     note: str = ""
+    model: str = ""      # provider:model that produced the output ("" for mock/blocked)
+    fallbacks: list[dict] = field(default_factory=list)   # earlier models in the chain that couldn't answer, and why
 
 
 def _key(purpose: str, slot: Slot, system: str, user: str, schema: type[BaseModel]) -> str:
@@ -143,22 +145,49 @@ def call(
     max_tokens: int = 2000,
     max_wait: float | None = None,
 ) -> LLMResult:
-    slot = M.slot_for(purpose)
-    key = _key(purpose, slot, system, user, schema)
-    path = _recording_path(purpose, key)
-    if path.exists():
-        _log(purpose, slot, "recorded", client)
-        return LLMResult(schema.model_validate_json(path.read_text()), "recorded")
+    """Try each model in the purpose's chain in order (one model unless a fallback chain is set).
+    A recording from any model in the chain is replayed first; live, a model that is overloaded,
+    rate-limited or out of quota hands over to the next, and the result says which one answered."""
+    chain = M.chain_for(purpose)
+    for slot in chain:
+        path = _recording_path(purpose, _key(purpose, slot, system, user, schema))
+        if path.exists():
+            _log(purpose, slot, "recorded", client)
+            raw = json.loads(path.read_text())
+            meta = raw.pop("_meta", {})
+            return LLMResult(schema.model_validate(raw), "recorded", model=meta.get("model", _model_label(slot)),
+                             fallbacks=meta.get("fell_back_from", []))
 
-    if not settings.live(slot):
-        _log(purpose, slot, "mock", client)
-        return LLMResult(mock(), "mock", note=f"Mock mode: no {slot.provider} key or LLM_MODE=mock")
+    if not settings.live(chain[0]):
+        _log(purpose, chain[0], "mock", client)
+        return LLMResult(mock(), "mock", note=f"Mock mode: no {chain[0].provider} key or LLM_MODE=mock")
 
+    tried: list[dict] = []
+    for slot in chain:
+        if not settings.live(slot):
+            tried.append({"model": _model_label(slot), "why": f"no {slot.provider} key"})
+            continue
+        res = _live(purpose, slot, system, user, schema, client, max_tokens, max_wait)
+        if res.source == "live":
+            res.fallbacks = tried
+            if res.output is not None:
+                path = _recording_path(purpose, _key(purpose, slot, system, user, schema))
+                path.parent.mkdir(parents=True, exist_ok=True)
+                meta = {"model": res.model, "purpose": purpose, "recorded_at": datetime.now().isoformat(timespec="seconds"),
+                        "fell_back_from": tried}
+                path.write_text(json.dumps({**res.output.model_dump(mode="json"), "_meta": meta}, indent=1, ensure_ascii=False))
+            return res
+        tried.append({"model": _model_label(slot), "why": res.note})
+    why = "; ".join(f"{t['model']}: {t['why']}" for t in tried)
+    return LLMResult(mock(), "blocked", note=why, fallbacks=tried)
+
+
+def _live(purpose, slot: Slot, system, user, schema, client, max_tokens, max_wait) -> LLMResult:
     estimate = M.cost_usd(slot, (len(system) + len(user)) // 3, max_tokens)
     reason = guard(estimate, client) or acquire(slot, settings.rate_wait_max if max_wait is None else max_wait)
     if reason:
         _log(purpose, slot, "blocked", client)
-        return LLMResult(mock(), "blocked", note=reason)
+        return LLMResult(None, "blocked", note=reason)
 
     provider = providers.get(slot.provider)
     for attempt in (1, 2):
@@ -171,19 +200,15 @@ def call(
             if e.daily or attempt == 2 or (e.retry_after or 0) > settings.rate_wait_max:
                 _log(purpose, slot, "blocked", client)
                 why = "daily free-tier quota used up" if e.daily else "rate limited by the provider"
-                return LLMResult(mock(), "blocked", note=f"{slot.model}: {why}")
+                return LLMResult(None, "blocked", note=f"{slot.model}: {why}")
             time.sleep(e.retry_after or 5)
         except providers.ProviderError as e:
             _log(purpose, slot, "blocked", client)
-            return LLMResult(mock(), "blocked", note=str(e))
+            return LLMResult(None, "blocked", note=str(e))
 
     cost = M.cost_usd(slot, comp.input_tokens, comp.output_tokens, comp.cache_read_tokens)
     _log(purpose, slot, "live", client, comp.input_tokens, comp.output_tokens, comp.cache_read_tokens, cost)
-    if comp.parsed is None:
-        return LLMResult(None, "live", cost, note=comp.note)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(comp.parsed.model_dump_json(indent=1))
-    return LLMResult(comp.parsed, "live", cost)
+    return LLMResult(comp.parsed, "live", cost, note=comp.note, model=_model_label(slot))
 
 
 def ledger_summary() -> dict:

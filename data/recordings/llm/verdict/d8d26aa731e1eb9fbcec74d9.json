@@ -1,0 +1,149 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ1FY26-2"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "No reported items state whether the QRSAM order was received in Q4 FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-3"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "No reported items mention receipt of subsystems orders."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-4",
+    "PQ1FY26-9",
+    "PQ2FY26-4"
+   ],
+   "actual_ids": [
+    "AR:revenue_growth:FY26",
+    "RQ4FY26-2"
+   ],
+   "verdict": "met",
+   "reason": "Annual report revenue growth for FY26 was 16.2%, achieving the guided 15% to 17% range."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-5",
+    "PQ2FY26-1",
+    "PQ3FY26-2"
+   ],
+   "actual_ids": [
+    "AR:ebitda_margin:FY26",
+    "RQ4FY26-5"
+   ],
+   "verdict": "met",
+   "reason": "FY26 EBITDA margin reached 29.2% in the annual report, exceeding the guided 27%."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-6"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "No reported items provide employee figures for FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-7"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "The FY30 export target period has not yet elapsed."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-8",
+    "PQ2FY26-6"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "No reported items state FY26 capex figures."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-2"
+   ],
+   "actual_ids": [
+    "RQ4FY26-7"
+   ],
+   "verdict": "met",
+   "reason": "FY26 order acquired was 30,045 cr, exceeding the guidance of 27,000 cr."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-5"
+   ],
+   "actual_ids": [
+    "RQ4FY26-7"
+   ],
+   "verdict": "missed",
+   "reason": "FY26 order acquired was 30,045 cr, falling short of 57,000 cr."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-3"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "The target period of December 2029 has not arrived."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-1"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "FY27 is not complete and no full-year revenue growth is available."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-2",
+    "PQ1FY27-2"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "Full-year FY27 EBITDA margin is not reported."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-3"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "Full-year FY27 order inflow is not reported."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-4",
+    "PQ1FY27-4"
+   ],
+   "actual_ids": [],
+   "verdict": "not_found",
+   "reason": "Full-year FY27 capex is not reported."
+  }
+ ],
+ "credibility": "The company met FY26 revenue growth of 16.2%, EBITDA margin of 29.2%, and order inflow of 30,045 cr, but missed 57,000 cr.",
+ "_meta": {
+  "model": "gemini:gemini-3.6-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T03:37:52",
+  "fell_back_from": [
+   {
+    "model": "gemini:gemini-3.8-flash",
+    "why": "Gemini 504: Deadline expired before operation could complete."
+   },
+   {
+    "model": "gemini:gemini-3.7-flash",
+    "why": "Gemini 504: Deadline expired before operation could complete."
+   }
+  ]
+ }
+}

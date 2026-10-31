@@ -1,0 +1,160 @@
+{
+ "promises": [
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin guidance",
+   "kind": "numeric",
+   "target_low": 27.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "And what the guidance we have given more than 27% EBITDA, we are confident to achieve by the year-end.",
+   "page": 4
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow excluding QRSAM",
+   "kind": "numeric",
+   "target_low": 27000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "So we are confident that we will definitely achieve more than INR 27,000 crores order book -- order received in this financial year other than QRSAM.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Project Kusha production order",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Manoj Jain",
+   "quote": "So we are expecting order by December 2029, the first production order for us because right now, it is that way is the prototype developmental order which we have received.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth guidance",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "So I will again reiterate our commitment that revenue growth, we are going to have 15% plus EBITDA margin, definitely 27%.",
+   "page": 18
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow including QRSAM",
+   "kind": "numeric",
+   "target_low": 57000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "Order inflow as we committed other than QRSAM, INR 27,000 crores. And including QRSAM, it will be around INR 57,000 crores.",
+   "page": 18
+  },
+  {
+   "metric": "capex",
+   "label": "Capex guidance",
+   "kind": "numeric",
+   "target_low": 1000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "R&D investments more than INR 1,600 crores, capex more than INR 1,000 crores with a defense and nondefense business ratio of 90% to 10%, which is our typical ratio.",
+   "page": 18
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Revenue from operations",
+   "period": "H1 FY26",
+   "value": 10180.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "So this H1, we have achieved revenue from operations, we have increased it to INR 10,180 crores as compared to INR 8,782 crores up to Q2 of last year with a growth of 15.92%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "period": "H1 FY26",
+   "value": 15.92,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "So this H1, we have achieved revenue from operations, we have increased it to INR 10,180 crores as compared to INR 8,782 crores up to Q2 of last year with a growth of 15.92%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit before tax",
+   "period": "H1 FY26",
+   "value": 3023.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "Profit before tax, that has increased to INR 3,023 crores up to Q2 of this year as compared to comparable period of last year, INR 2,488 crores with a growth of 21.5% Profit after tax",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax",
+   "period": "H1 FY26",
+   "value": 2255.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "Profit after tax, that has increased to INR 2,255 crores up to Q2 as compared to INR 1,867 crores up to Q2 last year with a growth of 20.77%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "period": "H1 FY26",
+   "value": 30.15,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "EBITDA has increased to 30.15% as compared to 27.26% up to Q2 last year.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book position",
+   "period": "unspecified",
+   "value": 74453.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The order book position as on 1st October '25 is INR 74,453 crores and as on today, it has become INR 75,600 crores.",
+   "page": 3
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Orders acquired in financial year",
+   "period": "unspecified",
+   "value": 12539.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "Orders acquired till 1st October '25 in this financial year is INR 12,539 crores and till today, it is INR 14,750 crores.",
+   "page": 3
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T03:34:14",
+  "fell_back_from": []
+ }
+}

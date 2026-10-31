@@ -1,0 +1,169 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ1FY26-1",
+    "PQ3FY26-1"
+   ],
+   "actual_ids": [
+    "AR:revenue_growth:FY26",
+    "RQ4FY26-2"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Revenue growth reached 16.2% in FY26, exceeding the guidance of more than 15%."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-2",
+    "PQ3FY26-2"
+   ],
+   "actual_ids": [
+    "AR:ebitda_margin:FY26",
+    "RQ4FY26-7"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "EBITDA margin reached 29.2% (reported 30% in transcript), exceeding the 27% target."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-3",
+    "PQ3FY26-3"
+   ],
+   "actual_ids": [
+    "RQ4FY26-9"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Order inflow reached INR 30,045 crores in FY26, exceeding the INR 27,000 crores target."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-4",
+    "PQ3FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported FY26 figures or passages were provided for actual R&D investment."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-5",
+    "PQ3FY26-4"
+   ],
+   "actual_ids": [
+    "RQ4FY26-10"
+   ],
+   "evidence": null,
+   "verdict": "partially",
+   "reason": "Capital expenditure booked was INR 900 crores against the guidance of INR 1,000 crores."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported FY26 figures or passages confirm actual export turnover."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 4,
+    "quote": "And QRSAM, we told we were highly optimistic to get it by March, but procedural delays we knew, that is why we told it may go to Q1/Q2, maximum by September we will get and I am still sticking to that.",
+    "value": null,
+    "unit": "none",
+    "period": "Q4 FY26"
+   },
+   "verdict": "missed",
+   "reason": "The QRSAM order was delayed past March due to procedural delays and was not received in Q4 FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-8"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The five-year target of around 10% has no specified completion period."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-9"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The guidance describes a general growth pattern without a defined reporting period."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-6",
+    "PQ4FY26-1",
+    "PQ1FY27-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full-year FY27 revenue growth results are not available as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No items report whether NGC orders were received by Q2 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-2",
+    "PQ1FY27-2",
+    "PQ1FY27-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full-year FY27 EBITDA margin is not reported as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full-year FY27 order inflow is not reported as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-4",
+    "PQ1FY27-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full-year FY27 capex results are not reported as of Q1 FY27."
+  }
+ ],
+ "credibility": "The company met its FY26 targets for revenue growth, EBITDA margin, and order inflow, partially delivered capex, and missed one order milestone.",
+ "_meta": {
+  "model": "gemini:gemini-3.7-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T03:45:15",
+  "fell_back_from": [
+   {
+    "model": "gemini:gemini-3.8-flash",
+    "why": "Gemini 504: Deadline expired before operation could complete."
+   }
+  ]
+ }
+}

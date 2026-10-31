@@ -1,0 +1,700 @@
+{
+ "symbol": "BEL",
+ "name": "",
+ "generated_at": "2026-11-01T03:47:29",
+ "status": "ok",
+ "latest_period": "Q1 FY27",
+ "docs": {
+  "symbol": "BEL",
+  "calls": [
+   {
+    "id": "T-Q1FY26",
+    "kind": "transcript",
+    "title": "Q1 FY26 earnings call",
+    "period": "Q1 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf",
+    "pages": 21,
+    "listed_as": "Aug 2025"
+   },
+   {
+    "id": "T-Q2FY26",
+    "kind": "transcript",
+    "title": "Q2 FY26 earnings call",
+    "period": "Q2 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9086c7ac-ab01-42ac-887f-3d0e37ac0833.pdf",
+    "pages": 19,
+    "listed_as": "Nov 2025"
+   },
+   {
+    "id": "T-Q3FY26",
+    "kind": "transcript",
+    "title": "Q3 FY26 earnings call",
+    "period": "Q3 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=bb8b13a8-bf5d-410c-ac76-7a0f41a3cbdc.pdf",
+    "pages": 24,
+    "listed_as": "Jan 2026"
+   },
+   {
+    "id": "T-Q4FY26",
+    "kind": "transcript",
+    "title": "Q4 FY26 earnings call",
+    "period": "Q4 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf",
+    "pages": 21,
+    "listed_as": "May 2026"
+   },
+   {
+    "id": "T-Q1FY27",
+    "kind": "transcript",
+    "title": "Q1 FY27 earnings call",
+    "period": "Q1 FY27",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d2a747a3-664c-4c5d-9373-fcddc0d2a3ae.pdf",
+    "pages": 21,
+    "listed_as": "Jul 2026"
+   }
+  ],
+  "annual_report": {
+   "id": "AR-FY26",
+   "kind": "annual_report",
+   "title": "Annual report FY26",
+   "period": "FY26",
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe7510ea-01e4-4f93-99bd-b41007aebe1d.pdf",
+   "pages": 218,
+   "listed_as": "Annual Report 2026"
+  },
+  "skipped": [],
+  "index_source": "screener.in",
+  "index_as_of": "2026-11-01T03:28:17"
+ },
+ "financials": {
+  "doc": "AR-FY26",
+  "page": 124,
+  "basis": "standalone",
+  "unit": "lakh",
+  "fy": "FY26",
+  "prev_fy": "FY25",
+  "figures": {
+   "revenue": {
+    "current": 27479.63,
+    "previous": 23658.01
+   },
+   "other_income": {
+    "current": 590.39,
+    "previous": 767.59
+   },
+   "finance_costs": {
+    "current": 6.72,
+    "previous": 9.61
+   },
+   "depreciation": {
+    "current": 523.93,
+    "previous": 435.58
+   },
+   "pbt": {
+    "current": 8075.04,
+    "previous": 7089.99
+   },
+   "pat": {
+    "current": 6048.48,
+    "previous": 5288.25
+   },
+   "ebitda": {
+    "current": 8015.3,
+    "previous": 6767.59
+   }
+  },
+  "printed": {
+   "revenue": {
+    "current": 2747963.0,
+    "previous": 2365801.0
+   },
+   "other_income": {
+    "current": 59039.0,
+    "previous": 76759.0
+   },
+   "finance_costs": {
+    "current": 672.0,
+    "previous": 961.0
+   },
+   "depreciation": {
+    "current": 52393.0,
+    "previous": 43558.0
+   },
+   "pbt": {
+    "current": 807504.0,
+    "previous": 708999.0
+   },
+   "pat": {
+    "current": 604848.0,
+    "previous": 528825.0
+   }
+  },
+  "lender": false
+ },
+ "models": {
+  "extract_guidance": [
+   {
+    "doc": "T-Q1FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q2FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q3FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q4FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q1FY27",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "extract_annual": [
+   {
+    "doc": "AR-FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "verdict": [
+   {
+    "model": "gemini:gemini-3.8-flash",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ]
+ },
+ "scorecard": {
+  "counts": {
+   "met": 3,
+   "partially": 1,
+   "missed": 2,
+   "too_vague": 3,
+   "not_found": 2,
+   "not_yet_due": 6
+  },
+  "checkable": 6,
+  "credibility": {
+   "headline": "Met 3 of 6 checkable promises",
+   "line": "For FY26, the company delivered 16.2% revenue growth and 29.2% EBITDA margin, but booked INR 900 crores capex against INR 1,000-plus crores guided.",
+   "by": "gemini:gemini-3.8-flash"
+  },
+  "rows": [
+   {
+    "id": "PQ1FY26-7",
+    "metric": "order_inflow",
+    "label": "QRSAM order",
+    "kind": "milestone",
+    "verdict": "missed",
+    "verdict_by": "model",
+    "reason": "The QRSAM order was delayed past March due to procedural delays.",
+    "due": "Q4 FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "We are confident to get this order by February, March as of now also. It may not slip to Q1 of next year. We are confident we may get in the Q4 of this year itself QRSAM",
+     "doc": "T-Q1FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": {
+     "value": null,
+     "unit": "none",
+     "text": "",
+     "period": "Q4 FY26",
+     "label": "QRSAM order",
+     "source": "transcript",
+     "how": "found by searching later calls",
+     "speaker": "",
+     "quote": "And QRSAM, we told we were highly optimistic to get it by March, but procedural delays we knew, that is why we told it may go to Q1/Q2, maximum by September we will get and I am still sticking to that.",
+     "doc": "T-Q1FY27",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d2a747a3-664c-4c5d-9373-fcddc0d2a3ae.pdf#page=4",
+     "title": "Q1 FY27 earnings call"
+    }
+   },
+   {
+    "id": "PQ2FY26-3",
+    "metric": "order_inflow",
+    "label": "Order inflow including QRSAM",
+    "kind": "numeric",
+    "verdict": "missed",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "Order inflow as we committed other than QRSAM, INR 27,000 crores. And including QRSAM, it will be around INR 57,000 crores.",
+     "doc": "T-Q2FY26",
+     "page": 18,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9086c7ac-ab01-42ac-887f-3d0e37ac0833.pdf#page=18",
+     "target": "about ₹57,000 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": {
+     "value": 30045.0,
+     "unit": "crore",
+     "text": "₹30,045 cr",
+     "period": "FY26",
+     "label": "Order inflow",
+     "source": "transcript",
+     "how": "as stated by management",
+     "speaker": "Manoj Jain",
+     "quote": "The order book position as on 01/04/2026 is INR73,882 crores and order acquired till 31st March 2026 in the previous year was INR30,045 crores.",
+     "doc": "T-Q4FY26",
+     "page": 3,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf#page=3",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ1FY26-5",
+    "metric": "capex",
+    "label": "Capex",
+    "kind": "numeric",
+    "verdict": "partially",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "R&D investment as it was committed, it will be INR1,600-plus crores only. Capex, INR1,000-plus crores and export $120-plus million.",
+     "doc": "T-Q1FY26",
+     "page": 21,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=21",
+     "target": "₹1,000 cr+"
+    },
+    "revisions": [],
+    "restated": 2,
+    "delivered": {
+     "value": 900.0,
+     "unit": "crore",
+     "text": "₹900 cr",
+     "period": "FY26",
+     "label": "Capital expenditure",
+     "source": "transcript",
+     "how": "as stated by management",
+     "speaker": "Manoj Jain",
+     "quote": "And last year, I think we had INR900 crores capital expenditure was booked.",
+     "doc": "T-Q4FY26",
+     "page": 11,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf#page=11",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ1FY26-1",
+    "metric": "revenue_growth",
+    "label": "Revenue growth",
+    "kind": "numeric",
+    "verdict": "met",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "Revenue growth more than 15%, EBITDA margin more than 27%, order inflow of INR27,000-plus crores excluding QRFM.",
+     "doc": "T-Q1FY26",
+     "page": 21,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=21",
+     "target": "15%+"
+    },
+    "revisions": [],
+    "restated": 2,
+    "delivered": {
+     "value": 16.2,
+     "unit": "%",
+     "text": "16.2%",
+     "period": "FY26",
+     "label": "Revenue growth",
+     "source": "annual_report",
+     "how": "computed: ₹27,479.63 cr vs ₹23,658.01 cr",
+     "speaker": "",
+     "quote": "",
+     "doc": "AR-FY26",
+     "page": 124,
+     "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe7510ea-01e4-4f93-99bd-b41007aebe1d.pdf#page=124",
+     "title": "Annual report FY26"
+    }
+   },
+   {
+    "id": "PQ1FY26-2",
+    "metric": "ebitda_margin",
+    "label": "EBITDA margin",
+    "kind": "numeric",
+    "verdict": "met",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "Revenue growth more than 15%, EBITDA margin more than 27%, order inflow of INR27,000-plus crores excluding QRFM.",
+     "doc": "T-Q1FY26",
+     "page": 21,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=21",
+     "target": "27%+"
+    },
+    "revisions": [],
+    "restated": 2,
+    "delivered": {
+     "value": 29.2,
+     "unit": "%",
+     "text": "29.2%",
+     "period": "FY26",
+     "label": "EBITDA margin",
+     "source": "annual_report",
+     "how": "computed: EBITDA ₹8,015.3 cr / revenue ₹27,479.63 cr",
+     "speaker": "",
+     "quote": "",
+     "doc": "AR-FY26",
+     "page": 124,
+     "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/fe7510ea-01e4-4f93-99bd-b41007aebe1d.pdf#page=124",
+     "title": "Annual report FY26"
+    }
+   },
+   {
+    "id": "PQ1FY26-3",
+    "metric": "order_inflow",
+    "label": "Order inflow",
+    "kind": "numeric",
+    "verdict": "met",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "Revenue growth more than 15%, EBITDA margin more than 27%, order inflow of INR27,000-plus crores excluding QRFM.",
+     "doc": "T-Q1FY26",
+     "page": 21,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=21",
+     "target": "₹27,000 cr+"
+    },
+    "revisions": [],
+    "restated": 2,
+    "delivered": {
+     "value": 30045.0,
+     "unit": "crore",
+     "text": "₹30,045 cr",
+     "period": "FY26",
+     "label": "Order inflow",
+     "source": "transcript",
+     "how": "as stated by management",
+     "speaker": "Manoj Jain",
+     "quote": "The order book position as on 01/04/2026 is INR73,882 crores and order acquired till 31st March 2026 in the previous year was INR30,045 crores.",
+     "doc": "T-Q4FY26",
+     "page": 3,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf#page=3",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ1FY26-4",
+    "metric": "other",
+    "label": "R&D investment",
+    "kind": "numeric",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "No FY26 figure in the later calls.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "R&D investment as it was committed, it will be INR1,600-plus crores only. Capex, INR1,000-plus crores and export $120-plus million.",
+     "doc": "T-Q1FY26",
+     "page": 21,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=21",
+     "target": "₹1,600 cr+"
+    },
+    "revisions": [],
+    "restated": 1,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-6",
+    "metric": "exports",
+    "label": "Exports",
+    "kind": "numeric",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "No FY26 figure in the later calls.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "R&D investment as it was committed, it will be INR1,600-plus crores only. Capex, INR1,000-plus crores and export $120-plus million.",
+     "doc": "T-Q1FY26",
+     "page": 21,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=21",
+     "target": "$120 mn+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-8",
+    "metric": "other",
+    "label": "Export turnover share",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "And we are confident over the period of next five years, we try to reach around 10% of our turnover through exports.",
+     "doc": "T-Q1FY26",
+     "page": 10,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=10",
+     "target": "about 10%"
+    },
+    "revisions": [],
+    "restated": 1,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-9",
+    "metric": "revenue_growth",
+    "label": "Sustainable revenue growth",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "It will be between 15% to 17%, 17.5%, 18%, somewhere, we will try to stabilize around that type of a growth pattern",
+     "doc": "T-Q1FY26",
+     "page": 8,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad2b25e2-70db-49c7-8037-9c4517024829.pdf#page=8",
+     "target": "15%–17%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-6",
+    "metric": "revenue_growth",
+    "label": "Overall growth qualitative guidance",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No number or milestone to check against.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "So overall, across all financial parameters, we have registered good growth, and the company is having plans to sustain whatsoever guidance we had given at the year beginning.",
+     "doc": "T-Q2FY26",
+     "page": 3,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9086c7ac-ab01-42ac-887f-3d0e37ac0833.pdf#page=3",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-7",
+    "metric": "other",
+    "label": "Project Kusha production order",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY30",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "So we are expecting order by December 2029, the first production order for us because right now, it is that way is the prototype developmental order which we have received.",
+     "doc": "T-Q2FY26",
+     "page": 5,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=9086c7ac-ab01-42ac-887f-3d0e37ac0833.pdf#page=5",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-6",
+    "metric": "revenue_growth",
+    "label": "Revenue growth",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "Once we have committed to you that we are going to have a growth of more than 15% year-on-year. So, that we have taken care of for next 3-4 years at least",
+     "doc": "T-Q3FY26",
+     "page": 7,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=bb8b13a8-bf5d-410c-ac76-7a0f41a3cbdc.pdf#page=7",
+     "target": "15%+"
+    },
+    "revisions": [],
+    "restated": 2,
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-7",
+    "metric": "other",
+    "label": "NGC order timeline",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "But definitely by next year Q2, we will get all the orders of NGC order, because it is split across multiple line items and a separate order we are expecting for those line items.",
+     "doc": "T-Q3FY26",
+     "page": 4,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=bb8b13a8-bf5d-410c-ac76-7a0f41a3cbdc.pdf#page=4",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-2",
+    "metric": "ebitda_margin",
+    "label": "EBITDA margin",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "EBITDA margins will be more than 28%.",
+     "doc": "T-Q4FY26",
+     "page": 20,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf#page=20",
+     "target": "28%+"
+    },
+    "revisions": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Manoj Jain",
+      "quote": "The revenue growth of 15%, EBITDA margin 21% to 23%, order inflow of more than INR20,000 crores including QRSAM, the R&D investment more than INR2,200 crores, capex more than INR1,200 crores with a typical defence non-defence business of 90:10.",
+      "doc": "T-Q1FY27",
+      "page": 21,
+      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d2a747a3-664c-4c5d-9373-fcddc0d2a3ae.pdf#page=21",
+      "target": "21%–23%"
+     }
+    ],
+    "restated": 2,
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-3",
+    "metric": "order_inflow",
+    "label": "Order inflow",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "The order inflow we are expecting this year more than INR55,000 crores. That includes, of course, QRSAM, which we are expecting very soon.",
+     "doc": "T-Q4FY26",
+     "page": 20,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf#page=20",
+     "target": "₹55,000 cr+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-4",
+    "metric": "capex",
+    "label": "Capital expenditure",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Manoj Jain",
+     "quote": "So, we are targeting more than INR1,200 crores as a capital investment for this year.",
+     "doc": "T-Q4FY26",
+     "page": 21,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf#page=21",
+     "target": "₹1,200 cr+"
+    },
+    "revisions": [],
+    "restated": 1,
+    "delivered": null
+   }
+  ]
+ },
+ "dropped": [
+  {
+   "stage": "promise",
+   "what": "Order inflow",
+   "doc": "T-Q1FY27",
+   "page": 4,
+   "why": "55,000 is not in the quote"
+  },
+  {
+   "stage": "promise",
+   "what": "R&D budget",
+   "doc": "T-Q1FY27",
+   "page": 13,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "Export orders",
+   "doc": "T-Q1FY27",
+   "page": 20,
+   "why": "300 is not in the quote"
+  }
+ ],
+ "judged": true
+}

@@ -1,0 +1,164 @@
+{
+ "promises": [
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "So, we are retaining our revenue growth of more than 15%. So definitely, we are going to have more than 15% as a revenue growth for '26- '27.",
+   "page": 20
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "kind": "numeric",
+   "target_low": 28.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "EBITDA margins will be more than 28%.",
+   "page": 20
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow",
+   "kind": "numeric",
+   "target_low": 55000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "The order inflow we are expecting this year more than INR55,000 crores. That includes, of course, QRSAM, which we are expecting very soon.",
+   "page": 20
+  },
+  {
+   "metric": "capex",
+   "label": "Capital expenditure",
+   "kind": "numeric",
+   "target_low": 1200.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "So, we are targeting more than INR1,200 crores as a capital investment for this year.",
+   "page": 21
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Revenue from operations",
+   "period": "FY26",
+   "value": 27480.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "the revenue from operations has increased to INR27,480 crores in '25-'26 as compared to INR23,658 crores previous year with a growth of 16%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "period": "FY26",
+   "value": 16.0,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "the revenue from operations has increased to INR27,480 crores in '25-'26 as compared to INR23,658 crores previous year with a growth of 16%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit before tax",
+   "period": "FY26",
+   "value": 8075.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit before tax increased to INR8,075 crores in '25-'26 as compared to INR7,090 crores previous year with a growth of 14%.",
+   "page": 3
+  },
+  {
+   "metric": "other",
+   "label": "Profit before tax growth",
+   "period": "FY26",
+   "value": 14.0,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "The profit before tax increased to INR8,075 crores in '25-'26 as compared to INR7,090 crores previous year with a growth of 14%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax",
+   "period": "FY26",
+   "value": 6048.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit after tax increased to INR6,048 crores in '25-'26 as compared to INR5,288 crores in the previous year, with a growth of 14%.",
+   "page": 3
+  },
+  {
+   "metric": "other",
+   "label": "Profit after tax growth",
+   "period": "FY26",
+   "value": 14.0,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "The profit after tax increased to INR6,048 crores in '25-'26 as compared to INR5,288 crores in the previous year, with a growth of 14%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "period": "FY26",
+   "value": 30.0,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "The EBITDA has increased to 30% in '25-'26 as compared to 29% in '24-'25.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book",
+   "period": "FY26",
+   "value": 73882.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The order book position as on 01/04/2026 is INR73,882 crores and order acquired till 31st March 2026 in the previous year was INR30,045 crores.",
+   "page": 3
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow",
+   "period": "FY26",
+   "value": 30045.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The order book position as on 01/04/2026 is INR73,882 crores and order acquired till 31st March 2026 in the previous year was INR30,045 crores.",
+   "page": 3
+  },
+  {
+   "metric": "capex",
+   "label": "Capital expenditure",
+   "period": "FY26",
+   "value": 900.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "And last year, I think we had INR900 crores capital expenditure was booked.",
+   "page": 11
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T03:40:51",
+  "fell_back_from": []
+ }
+}

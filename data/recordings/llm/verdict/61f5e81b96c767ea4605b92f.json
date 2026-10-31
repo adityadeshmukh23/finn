@@ -1,0 +1,198 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ1FY26-1",
+    "PQ2FY26-5",
+    "PQ3FY26-1"
+   ],
+   "actual_ids": [
+    "AR:revenue_growth:FY26",
+    "RQ4FY26-2"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "FY26 revenue growth of 16.2% exceeded the guidance of more than 15%."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-2",
+    "PQ2FY26-1",
+    "PQ3FY26-2"
+   ],
+   "actual_ids": [
+    "AR:ebitda_margin:FY26",
+    "RQ4FY26-7"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "FY26 EBITDA margin reached 29.2% in the annual report, exceeding the 27% target."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-3",
+    "PQ2FY26-2",
+    "PQ3FY26-3"
+   ],
+   "actual_ids": [
+    "RQ4FY26-9"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Orders acquired in FY26 reached INR 30,045 crores, surpassing the target of INR 27,000-plus crores."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-4",
+    "PQ3FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No delivered FY26 R&D expenditure figure is reported in the provided items."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-5",
+    "PQ2FY26-4",
+    "PQ3FY26-4"
+   ],
+   "actual_ids": [
+    "RQ4FY26-10"
+   ],
+   "evidence": null,
+   "verdict": "partially",
+   "reason": "Capex booked for FY26 was INR 900 crores, falling short of the INR 1,000-plus crores target."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Delivered full-year exports for FY26 are not reported in the provided items."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 4,
+    "quote": "And QRSAM, we told we were highly optimistic to get it by March, but procedural delays we knew, that is why we told it may go to Q1/Q2, maximum by September we will get and I am still sticking to that.",
+    "value": null,
+    "unit": "none",
+    "period": "Q4 FY26"
+   },
+   "verdict": "missed",
+   "reason": "The QRSAM order was delayed past March due to procedural delays."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-8",
+    "PQ2FY26-8"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Target has no specific checkable period, framed as a long-term five-year goal."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-9"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "No specific time period was provided for stabilizing revenue growth."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-3"
+   ],
+   "actual_ids": [
+    "RQ4FY26-9"
+   ],
+   "evidence": null,
+   "verdict": "missed",
+   "reason": "Total FY26 order inflow was INR 30,045 crores, missing the INR 57,000 crores target as QRSAM slipped."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Statement lacks numeric targets and measurable milestones."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Project Kusha production order is due by December 2029, beyond Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-6",
+    "PQ4FY26-1",
+    "PQ1FY27-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 has not completed; full-year revenue growth is not yet reported."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "NGC order is due by Q2 FY27, beyond the reported period."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-2",
+    "PQ1FY27-2",
+    "PQ1FY27-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 is ongoing, so full-year EBITDA margin is not yet available."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full-year FY27 order inflow is not reported as the year is underway."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-4",
+    "PQ1FY27-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full-year FY27 capex is not yet reported."
+  }
+ ],
+ "credibility": "For FY26, the company delivered 16.2% revenue growth and 29.2% EBITDA margin, but booked INR 900 crores capex against INR 1,000-plus crores guided.",
+ "_meta": {
+  "model": "gemini:gemini-3.8-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T03:46:49",
+  "fell_back_from": []
+ }
+}

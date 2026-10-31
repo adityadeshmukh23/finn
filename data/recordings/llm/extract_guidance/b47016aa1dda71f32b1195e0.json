@@ -1,0 +1,173 @@
+{
+ "promises": [
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "figures which we had committed to you means revenue growth more than 15%, EBITDA margin definitely more than 27%, order inflow INR 27,000 crores plus, R&D investment although we told INR 1,600 crore, but I am confident we may cross INR 1,700 but at least INR 1,600 plus definitely we are going to be there, CAPEX INR 1,000 crore and defense non-defense business of 90 to 10.",
+   "page": 23
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "kind": "numeric",
+   "target_low": 27.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Damodar Bhattad",
+   "quote": "So, we maintain the EBITDA margin of 27% only for the current financial year.",
+   "page": 5
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow",
+   "kind": "numeric",
+   "target_low": 27000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "figures which we had committed to you means revenue growth more than 15%, EBITDA margin definitely more than 27%, order inflow INR 27,000 crores plus, R&D investment although we told INR 1,600 crore, but I am confident we may cross INR 1,700 but at least INR 1,600 plus definitely we are going to be there, CAPEX INR 1,000 crore and defense non-defense business of 90 to 10.",
+   "page": 23
+  },
+  {
+   "metric": "capex",
+   "label": "Capex",
+   "kind": "numeric",
+   "target_low": 1000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "figures which we had committed to you means revenue growth more than 15%, EBITDA margin definitely more than 27%, order inflow INR 27,000 crores plus, R&D investment although we told INR 1,600 crore, but I am confident we may cross INR 1,700 but at least INR 1,600 plus definitely we are going to be there, CAPEX INR 1,000 crore and defense non-defense business of 90 to 10.",
+   "page": 23
+  },
+  {
+   "metric": "other",
+   "label": "R&D investment",
+   "kind": "numeric",
+   "target_low": 1600.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "figures which we had committed to you means revenue growth more than 15%, EBITDA margin definitely more than 27%, order inflow INR 27,000 crores plus, R&D investment although we told INR 1,600 crore, but I am confident we may cross INR 1,700 but at least INR 1,600 plus definitely we are going to be there, CAPEX INR 1,000 crore and defense non-defense business of 90 to 10.",
+   "page": 23
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "Once we have committed to you that we are going to have a growth of more than 15% year-on-year. So, that we have taken care of for next 3-4 years at least",
+   "page": 7
+  },
+  {
+   "metric": "other",
+   "label": "NGC order timeline",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q2 FY27",
+   "speaker": "Manoj Jain",
+   "quote": "But definitely by next year Q2, we will get all the orders of NGC order, because it is split across multiple line items and a separate order we are expecting for those line items.",
+   "page": 4
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Revenue from operations",
+   "period": "9M FY26",
+   "value": 17302.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "So, till Q3, we have achieved revenue from operations of INR 17,302 crores as compared to INR 14,538 crores",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit before tax",
+   "period": "9M FY26",
+   "value": 5171.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit before tax increased to INR 5,171 crores up to Q3 as compared to INR 4,242 crores up to Q3 last year with a growth of 22%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax",
+   "period": "9M FY26",
+   "value": 3845.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit after tax also increased to INR 3,845 crores as compared to INR 3,183 crores up to Q3 last year with a growth of 21%.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book position",
+   "period": "Q3 FY26",
+   "value": 73015.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "And order book position as on 1st January 2026 is INR 73,015 crores, and as on 28th January 2026, as on today, is INR 73,450 crores.",
+   "page": 4
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book position",
+   "period": "Q3 FY26",
+   "value": 73450.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "And order book position as on 1st January 2026 is INR 73,015 crores, and as on 28th January 2026, as on today, is INR 73,450 crores.",
+   "page": 4
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order acquired",
+   "period": "9M FY26",
+   "value": 18100.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "And order acquired till 1st January 2026 is INR 18,100 crores, and till today is INR 19,300 crores.",
+   "page": 4
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order acquired",
+   "period": "Q3 FY26",
+   "value": 19300.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "And order acquired till 1st January 2026 is INR 18,100 crores, and till today is INR 19,300 crores.",
+   "page": 4
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T03:40:46",
+  "fell_back_from": []
+ }
+}

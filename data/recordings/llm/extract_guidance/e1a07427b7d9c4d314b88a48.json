@@ -1,0 +1,173 @@
+{
+ "promises": [
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow",
+   "kind": "numeric",
+   "target_low": 55000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "So, that is why there was no backlog per se. Actually, one or two orders were taken from this year first quarter also. So, this year whatsoever we have received, INR307 plus crores it is what was we planned, that only. So, as such, there is nothing to worry. We are definitely going to meet the guidance given about the order inflow for this year.",
+   "page": 4
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "kind": "numeric",
+   "target_low": 28.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Damodar Bhattad",
+   "quote": "So, due to that, there are some variations, but otherwise, the current year EBITDA guidance whatever we have given, we maintain that. So, there is no particular cause of concern for the margin on the quarterly basis. We don't have to go by that. Overall on a yearly basis, we maintain the EBITDA margin of 28%, which we have given already.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "Definitely, as I told last year also, target is 15%. Last month we may surprise you by maybe 0.5%, 1%, 1.5%. I don't know how much more we can have, but our balanced plan is 15% and I am confident we will reach 15%.",
+   "page": 18
+  },
+  {
+   "metric": "capex",
+   "label": "Capex",
+   "kind": "numeric",
+   "target_low": 1200.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "That as we have given you guidance, INR1,200 plus crores we are investing under capex which will take care of our production and other type of investments.",
+   "page": 13
+  },
+  {
+   "metric": "other",
+   "label": "R&D budget",
+   "kind": "numeric",
+   "target_low": 2200.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "And we are anyway we had given guidance also, more than INR2,200 crore R&D budget we have allocated for this year for all type of niche technology development, indigenization, and other collaborative R&Ds.",
+   "page": 13
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "kind": "numeric",
+   "target_low": 21.0,
+   "target_high": 23.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "The revenue growth of 15%, EBITDA margin 21% to 23%, order inflow of more than INR20,000 crores including QRSAM, the R&D investment more than INR2,200 crores, capex more than INR1,200 crores with a typical defence non-defence business of 90:10.",
+   "page": 21
+  },
+  {
+   "metric": "exports",
+   "label": "Export orders",
+   "kind": "numeric",
+   "target_low": 300.0,
+   "target_high": null,
+   "unit": "usd_million",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Manoj Jain",
+   "quote": "That is spreaded across again some 15 to 20 important products. So, we are confident to slowly and slowly increase our presence in export market because -- as you also remember and I told earlier, we want to finally aim at 10% of our revenues through export.",
+   "page": 20
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Revenue from operations",
+   "period": "Q1 FY27",
+   "value": 5533.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The revenue from operations has increased to INR5,533 crores up to Q1 as compared to INR4,417 crores in the previous year Q1, with a growth of 25.27 percentage.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "period": "Q1 FY27",
+   "value": 25.27,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "The revenue from operations has increased to INR5,533 crores up to Q1 as compared to INR4,417 crores in the previous year Q1, with a growth of 25.27 percentage.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit before tax",
+   "period": "Q1 FY27",
+   "value": 1403.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit before tax increased to INR1,403 crores as compared to INR1,289 crores in the previous year at the same quarter, with a growth of 8.81%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax",
+   "period": "Q1 FY27",
+   "value": 1048.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit after tax has increased to INR1,048 crores up to Q1 as compared to INR969 crores up to Q1 previous year, with a growth of 8.17%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "period": "Q1 FY27",
+   "value": 25.83,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "The EBITDA margin up to Q1 is 25.83%. The earning per share increased to INR1.43 up to Q1 as compared to INR1.33 previous year at the same time.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book",
+   "period": "Q1 FY27",
+   "value": 72258.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The order book position as on 1st July 2026 is INR72,258 crores and orders acquired in this quarter is INR3,754 crores. So, this is the brief financial highlight of Q1 '26-'27 from my side.",
+   "page": 3
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow",
+   "period": "Q1 FY27",
+   "value": 3754.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The order book position as on 1st July 2026 is INR72,258 crores and orders acquired in this quarter is INR3,754 crores. So, this is the brief financial highlight of Q1 '26-'27 from my side.",
+   "page": 3
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T03:40:56",
+  "fell_back_from": []
+ }
+}

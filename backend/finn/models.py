@@ -11,6 +11,7 @@ ROUTES = {
     "extract_guidance": "cheap",
     "extract_results": "cheap",
     "extract_mgmt": "cheap",
+    "extract_annual": "cheap",
     "ask": "cheap",
     "verdict": "strong",
     "bull_bear": "strong",
@@ -19,6 +20,13 @@ ROUTES = {
 
 def slot_for(purpose: str) -> Slot:
     return settings.slots[ROUTES[purpose]]
+
+
+def chain_for(purpose: str) -> list[Slot]:
+    """The slot's model, then its fallbacks in order (LLM_<SLOT>_FALLBACKS). Free-tier capacity on
+    the strong Flash models swings by the hour, so verdicts walk down the chain instead of failing."""
+    slot = slot_for(purpose)
+    return [slot, *settings.fallbacks.get(slot.name, ())]
 
 
 def cost_usd(slot: Slot, input_tokens: int, output_tokens: int, cache_read_tokens: int = 0) -> float:

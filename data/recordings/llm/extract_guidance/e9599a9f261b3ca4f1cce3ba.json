@@ -1,0 +1,160 @@
+{
+ "promises": [
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth guidance",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "So what ever guidance we gave at the start of the year, we are maintaining that and we are confident that we will achieve or exceed this guidance.",
+   "page": 4
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin guidance",
+   "kind": "numeric",
+   "target_low": 27.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Damodar Bhattad",
+   "quote": "No. As of now, we maintain the EBITDA margin of 27% what we have guided for the current year, because it is a composition of products which we sell.",
+   "page": 5
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order inflow guidance",
+   "kind": "numeric",
+   "target_low": 27000.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Manoj Jain",
+   "quote": "So, around INR 3,000 crores to INR 4,000 crore is included in that for FY '25-26, because we expected this conclusion, because mostly at GRSE level and GSL level, it is already concluded with Government.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Revenue growth sustainability",
+   "kind": "qualitative",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Manoj Jain",
+   "quote": "Certainly. Once we have committed to you that we are going to have a growth of more than 15% year-on-year. So, that we have taken care of for next 3-4 years at least, what all are the expected orders in pipeline.",
+   "page": 6
+  },
+  {
+   "metric": "exports",
+   "label": "Export turnover share",
+   "kind": "numeric",
+   "target_low": 10.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Manoj Jain",
+   "quote": "Definitely, export opportunities are there in all the areas of BEL’s operation and we are doing a focused attempt to increase our export turnover from presently 3% to 4% to 5% in near future and overall 10% in a long-term.",
+   "page": 13
+  },
+  {
+   "metric": "other",
+   "label": "Non-defense share target",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Manoj Jain",
+   "quote": "Certainly, as you also told, right now our non-defense is around 6%, 7% type of thing only, which we want to definitely cross (+10%) in near future and long-term our aim is to make it 15% and beyond.",
+   "page": 14
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Revenue from operations",
+   "period": "9M FY26",
+   "value": 17302.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "So, till Q3, we have achieved revenue from operations of INR 17,302 crores as compared to INR 14,538 crores, which was up to Q3 of last year with the overall growth of 19%.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Revenue growth",
+   "period": "9M FY26",
+   "value": 19.0,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "So, till Q3, we have achieved revenue from operations of INR 17,302 crores as compared to INR 14,538 crores, which was up to Q3 of last year with the overall growth of 19%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit before tax",
+   "period": "9M FY26",
+   "value": 5171.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit before tax increased to INR 5,171 crores up to Q3 as compared to INR 4,242 crores up to Q3 last year with a growth of 22%.",
+   "page": 3
+  },
+  {
+   "metric": "pat",
+   "label": "Profit after tax",
+   "period": "9M FY26",
+   "value": 3845.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "The profit after tax also increased to INR 3,845 crores as compared to INR 3,183 crores up to Q3 last year with a growth of 21%.",
+   "page": 3
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBITDA margin",
+   "period": "9M FY26",
+   "value": 30.0,
+   "unit": "%",
+   "speaker": "Manoj Jain",
+   "quote": "The EBITDA has increased to 30% up to Q3 as compared to 28% up to Q3 last year.",
+   "page": 3
+  },
+  {
+   "metric": "order_book",
+   "label": "Order book position",
+   "period": "Q3 FY26",
+   "value": 73015.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "And order book position as on 1st January 2026 is INR 73,015 crores, and as on 28th January 2026, as on today, is INR 73,450 crores.",
+   "page": 4
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order acquired",
+   "period": "9M FY26",
+   "value": 18100.0,
+   "unit": "crore",
+   "speaker": "Manoj Jain",
+   "quote": "And order acquired till 1st January 2026 is INR 18,100 crores, and till today is INR 19,300 crores.",
+   "page": 4
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T03:34:19",
+  "fell_back_from": []
+ }
+}

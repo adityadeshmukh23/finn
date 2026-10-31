@@ -34,7 +34,7 @@ def setup(tmp_path, monkeypatch):
     llm._exhausted_until.clear()
 
     def configure(cheap=FREE, strong=PAID, script=None, **kw):
-        base = dict(public_demo=False, budget_usd_total=5.0, rate_wait_max=0) | kw
+        base = dict(public_demo=False, budget_usd_total=5.0, rate_wait_max=0, fallbacks={}) | kw
         s = dataclasses.replace(
             llm.settings, data_dir=tmp_path, llm_mode="auto", provider_keys={"fake": True},
             slots={"cheap": cheap, "strong": strong}, **base,
@@ -144,3 +144,33 @@ def test_default_llm_mode(monkeypatch, env, expected):
     for k, v in env.items():
         monkeypatch.setenv(k, v)
     assert config.default_llm_mode() == expected
+
+
+# ---- fallback chain -------------------------------------------------------------------------
+
+BACKUP = dataclasses.replace(PAID, model="fake-backup")
+
+
+def test_overloaded_strong_model_falls_back_and_recording_names_the_model(setup, tmp_path):
+    fake = setup(script=[providers.ProviderError("Gemini 503: high demand")], fallbacks={"strong": (BACKUP,)})
+    r = ask("verdict")
+    assert (r.source, r.model) == ("live", "fake:fake-backup")
+    assert r.fallbacks == [{"model": "fake:fake-pro", "why": "Gemini 503: high demand"}]
+    assert fake.calls == ["fake-pro", "fake-backup"]
+    import json
+    rec = json.loads(next((tmp_path / "recordings" / "llm" / "verdict").glob("*.json")).read_text())
+    assert rec["_meta"]["model"] == "fake:fake-backup"
+    assert rec["_meta"]["fell_back_from"][0]["model"] == "fake:fake-pro"
+
+    again = ask("verdict")          # replay: no provider call, same model and fallback story
+    assert (again.source, again.model, again.output.label) == ("recorded", "fake:fake-backup", "live")
+    assert again.fallbacks == r.fallbacks
+    assert fake.calls == ["fake-pro", "fake-backup"]
+
+
+def test_whole_chain_down_is_blocked_and_records_nothing(setup, tmp_path):
+    setup(script=[providers.ProviderError("503"), providers.ProviderError("504")], fallbacks={"strong": (BACKUP,)})
+    r = ask("verdict")
+    assert r.source == "blocked" and r.output.label == "mock"
+    assert [f["model"] for f in r.fallbacks] == ["fake:fake-pro", "fake:fake-backup"]
+    assert not (tmp_path / "recordings" / "llm" / "verdict").exists()

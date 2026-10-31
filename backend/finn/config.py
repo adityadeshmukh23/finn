@@ -29,6 +29,9 @@ class Settings:
         "anthropic": bool(os.getenv("ANTHROPIC_API_KEY")),
     })
     slots: dict[str, "Slot"] = field(default_factory=lambda: {"cheap": _slot("CHEAP"), "strong": _slot("STRONG")})
+    # Ordered fallbacks per slot, same prices and limits as the slot: LLM_STRONG_FALLBACKS=gemini-3.6-flash,gemini:gemini-3.5-flash
+    fallbacks: dict[str, tuple["Slot", ...]] = field(default_factory=lambda: {
+        "cheap": _fallbacks("CHEAP"), "strong": _fallbacks("STRONG")})
     # Longest we'll wait for a free per-minute slot before falling back (seconds).
     rate_wait_max: float = float(os.getenv("LLM_RATE_WAIT_MAX", "20"))
     # Per-request timeout; the SDK's own silent retries otherwise stretch an overload to minutes.
@@ -91,7 +94,7 @@ class Slot:
 # (aistudio.google.com/rate-limit); set LLM_*_RPM / LLM_*_RPD to what yours shows.
 _DEFAULTS = {
     "CHEAP": ("gemini", "gemini-3.5-flash-lite", 10, 500),
-    "STRONG": ("gemini", "gemini-3.6-flash", 5, 20),
+    "STRONG": ("gemini", "gemini-3.8-flash", 5, 20),
 }
 
 
@@ -108,6 +111,24 @@ def _slot(name: str) -> Slot:
         rpm=int(env("RPM", str(rpm))),
         rpd=int(env("RPD", str(rpd))),
     )
+
+
+_FALLBACK_DEFAULTS = {"CHEAP": "", "STRONG": "gemini-3.7-flash,gemini-3.6-flash"}
+
+
+def _fallbacks(name: str) -> tuple[Slot, ...]:
+    from dataclasses import replace
+    base = _slot(name)
+    out = []
+    for item in os.getenv(f"LLM_{name}_FALLBACKS", _FALLBACK_DEFAULTS[name]).split(","):
+        item = item.strip()
+        if not item:
+            continue
+        provider, _, model = item.rpartition(":")
+        slot = replace(base, provider=provider or base.provider, model=model)
+        if (slot.provider, slot.model) != (base.provider, base.model):
+            out.append(slot)
+    return tuple(out)
 
 
 settings = Settings()
