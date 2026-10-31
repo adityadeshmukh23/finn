@@ -2,13 +2,14 @@
 
 A mobile-first investor briefing. You open a ranked list of what changed across your portfolio, not a chatbox: one card per company, the routine paperwork collapsed into a count you can inspect.
 
-**Status: Phase 1.** Briefing from live NSE filings, rule-based ranking, snapshot fallback, cost ledger. Research ("Ask FINN") comes next.
+**Status:** push mode (ranked briefing, results and management-change cards, price/volume alerts) and pull mode's first lens, promised vs delivered, recorded for BEL, Asian Paints, Kaynes, Coforge and Dixon.
 
 ## Run locally (live data, any ticker)
 
 ```bash
 ./run.sh                       # your portfolio, from data/portfolio.json
 ./run.sh TATAMOTORS ZOMATO     # plus any other NSE tickers
+./run.sh research TATAMOTORS   # record promised-vs-delivered research for any NSE ticker, then start
 ```
 
 Open http://localhost:5173. The script sets up `.venv` and `web/node_modules` on first run and creates `.env` from `.env.example`. Add a free `GEMINI_API_KEY` there for live model calls; without one, FINN replays recordings or uses mock output. Needs Python 3.12 and Node 24 (what CI uses).
@@ -24,6 +25,7 @@ The hosted demo is a static site: briefings for every day in the recorded NSE sn
 - **Data**: NSE corporate announcements (one request per window, cached; past windows never refetched). If NSE is unreachable, FINN serves `data/snapshots/nse/announcements.json` and says so with a "data as of" badge. If the API itself is down, the PWA shows the recorded briefing for the latest day.
 - **Ranking**: deterministic rules on NSE's category and the filing summary (`backend/finn/classify.py`), scored and grouped by company (`backend/finn/digest.py`). No LLM is involved, so the briefing costs nothing.
 - **LLM gate** (`backend/finn/llm.py`): every model call goes through one function that replays recorded outputs first, runs mock mode with no key, enforces free-tier rate limits, a hard spend cap and per-visitor limits on the public demo, and logs tokens and cost to a ledger shown in the app.
+- **Research** (`backend/finn/research/`): screener.in is used only as an index of earnings-call transcripts and annual reports (PDFs from BSE or the company). The cheap model copies management's promises and reported figures with verbatim quotes; code drops any quote not on its cited page, computes growth and margins, and sets every numeric verdict; the strong model (fallback chain in `.env`) only groups restatements and judges milestones. Recordings hold verified claims only, and CI re-checks each against its page.
 - **Providers** (`backend/finn/providers.py`): Gemini (default, free tier) and Anthropic behind one interface. Two slots, `cheap` and `strong`, each with provider, model, price and limits set only in `.env` (see `.env.example`); `backend/finn/models.py` maps tasks to slots.
 
 ## Refresh the snapshot and demo data

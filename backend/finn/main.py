@@ -88,7 +88,7 @@ def research(symbol: str):
     rec = pvd.load(symbol.upper())
     if not rec:
         raise HTTPException(404, f"No research recorded for {symbol.upper()} yet. "
-                                 f"Generate it locally: cd backend && python -m scripts.research {symbol.upper()}")
+                                 f"Generate it locally: ./run.sh research {symbol.upper()}")
     return rec
 
 

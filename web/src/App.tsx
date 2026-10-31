@@ -198,8 +198,8 @@ export default function App() {
         <p className="mt-2 rounded-xl bg-raised px-3 py-2 text-xs leading-snug text-ink-2">
           <span className="font-semibold text-ink">Replay mode.</span> Recorded NSE filings
           {manifest && <> for {manifest.holdings} holdings, {manifest.from} to {manifest.to}</>}
-          {researched.length > 0 && <>, and recorded research for {researched.length} {researched.length === 1 ? 'company' : 'companies'}</>}.
-          Live fetching and any-ticker briefings and research run locally (see README).
+          {researched.length > 0 && <>, and recorded research on {researched.length} {researched.length === 1 ? 'company' : 'companies'}</>}.
+          Live filings run locally, and any NSE ticker can be researched with <code className="text-ink">./run.sh research TICKER</code> (see README).
         </p>
       )}
 
@@ -330,8 +330,8 @@ export default function App() {
           </p>
           <p className="mt-3 rounded-xl bg-raised p-3 text-[13px] leading-snug text-ink-2">
             {STATIC
-              ? <>Not recorded for {ask.symbol} in this demo. Recorded: {researched.map((r) => r.symbol).join(', ') || 'none'}. Any NSE ticker works locally.</>
-              : <>Not generated for {ask.symbol} yet. Run <code className="text-ink">python -m scripts.research {ask.symbol}</code> in backend/ (takes a few minutes, free-tier models).</>}
+              ? <>Not recorded for {ask.symbol} in this demo. Recorded: {researched.map((r) => r.symbol).join(', ') || 'none'}. Any NSE ticker can be researched locally with <code className="text-ink">./run.sh research {ask.symbol}</code>.</>
+              : <>Not generated for {ask.symbol} yet. Run <code className="text-ink">./run.sh research {ask.symbol}</code> (a few minutes, free-tier models).</>}
           </p>
           {researched.length > 0 && (
             <div className="mt-3 flex flex-wrap gap-1.5">

@@ -2,6 +2,8 @@
 # One command to run FINN locally with live NSE data: API on :8000, PWA on :5173.
 #   ./run.sh                      your portfolio (data/portfolio.json)
 #   ./run.sh TATAMOTORS ZOMATO    ...plus any other NSE tickers
+#   ./run.sh research TATAMOTORS  record promised-vs-delivered research for any NSE ticker first
+#                                 (needs GEMINI_API_KEY in .env; a few minutes per company), then start
 # Without GEMINI_API_KEY in .env, model calls replay recordings or use mock output.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -15,6 +17,13 @@ if [ ! -x .venv/bin/uvicorn ]; then
 fi
 [ -d web/node_modules ] || (echo "Installing web deps…" && cd web && npm install --silent)
 [ -f .env ] || { cp .env.example .env; echo "Created .env from .env.example (no keys: mock/recorded mode)."; }
+
+if [ "${1:-}" = "research" ]; then
+  shift
+  [ $# -gt 0 ] || { echo "Usage: ./run.sh research TICKER [TICKER...]"; exit 1; }
+  (cd backend && ../.venv/bin/python -m scripts.research "$@") || echo "Some research wasn't recorded (see above); starting the app anyway."
+  set --
+fi
 
 export FINN_SYMBOLS="$(IFS=,; echo "${*:-}" | tr '[:lower:]' '[:upper:]')"
 [ -n "$FINN_SYMBOLS" ] && echo "Adding tickers: $FINN_SYMBOLS"
