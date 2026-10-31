@@ -1,0 +1,478 @@
+{
+ "symbol": "ASIANPAINT",
+ "name": "Asian Paints Ltd",
+ "generated_at": "2026-11-01T04:18:29",
+ "status": "ok",
+ "latest_period": "Q1 FY27",
+ "docs": {
+  "symbol": "ASIANPAINT",
+  "calls": [
+   {
+    "id": "T-Q1FY26",
+    "kind": "transcript",
+    "title": "Q1 FY26 earnings call",
+    "period": "Q1 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=cfd25bff-1623-40b0-a6d6-c8ddab10b398.pdf",
+    "pages": 26,
+    "listed_as": "Aug 2025"
+   },
+   {
+    "id": "T-Q2FY26",
+    "kind": "transcript",
+    "title": "Q2 FY26 earnings call",
+    "period": "Q2 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=99e65c90-6bb0-4984-ac71-2a0f0eb4cc7f.pdf",
+    "pages": 30,
+    "listed_as": "Nov 2025"
+   },
+   {
+    "id": "T-Q3FY26",
+    "kind": "transcript",
+    "title": "Q3 FY26 earnings call",
+    "period": "Q3 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=8bc8c7dd-23d0-4cf2-bcdf-620769ed0d1a.pdf",
+    "pages": 38,
+    "listed_as": "Feb 2026"
+   },
+   {
+    "id": "T-Q4FY26",
+    "kind": "transcript",
+    "title": "Q4 FY26 earnings call",
+    "period": "Q4 FY26",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=2a71cf39-800d-4765-8131-5d78e54925ce.pdf",
+    "pages": 26,
+    "listed_as": "Jun 2026"
+   },
+   {
+    "id": "T-Q1FY27",
+    "kind": "transcript",
+    "title": "Q1 FY27 earnings call",
+    "period": "Q1 FY27",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=6e0d5627-2b8b-4bf1-a7ce-9d0160833a0f.pdf",
+    "pages": 26,
+    "listed_as": "Aug 2026"
+   }
+  ],
+  "annual_report": {
+   "id": "AR-FY26",
+   "kind": "annual_report",
+   "title": "Annual report FY26",
+   "period": "FY26",
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/aeefecce-2626-4370-9455-c7c6dd94d670.pdf",
+   "pages": 294,
+   "listed_as": "Annual Report 2026"
+  },
+  "skipped": [
+   {
+    "listed_as": "Oct 2026",
+    "why": "no transcript link on screener"
+   }
+  ],
+  "index_source": "screener.in",
+  "index_as_of": "2026-11-01T04:08:38"
+ },
+ "financials": {
+  "doc": "AR-FY26",
+  "page": 234,
+  "basis": "consolidated",
+  "unit": "crore",
+  "fy": "FY26",
+  "prev_fy": "FY25",
+  "figures": {
+   "revenue": {
+    "current": 35583.54,
+    "previous": 33905.62,
+    "how": "sum of 3 printed lines"
+   },
+   "other_income": {
+    "current": 723.8,
+    "previous": 572.61
+   },
+   "finance_costs": {
+    "current": 195.41,
+    "previous": 227.02
+   },
+   "depreciation": {
+    "current": 1228.85,
+    "previous": 1026.34
+   },
+   "pbt": {
+    "current": 6003.44,
+    "previous": 5103.07
+   },
+   "pat": {
+    "current": 4394.69,
+    "previous": 3709.71
+   },
+   "ebitda": {
+    "current": 6703.9,
+    "previous": 5783.82
+   }
+  },
+  "printed": {
+   "revenue": {
+    "current": null,
+    "previous": null
+   },
+   "other_income": {
+    "current": 723.8,
+    "previous": 572.61
+   },
+   "finance_costs": {
+    "current": 195.41,
+    "previous": 227.02
+   },
+   "depreciation": {
+    "current": 1228.85,
+    "previous": 1026.34
+   },
+   "pbt": {
+    "current": 6003.44,
+    "previous": 5103.07
+   },
+   "pat": {
+    "current": 4394.69,
+    "previous": 3709.71
+   },
+   "revenue_parts": {
+    "current": [
+     35416.25,
+     100.12,
+     67.17
+    ],
+    "previous": [
+     33626.82,
+     170.54,
+     108.26
+    ]
+   }
+  },
+  "lender": false
+ },
+ "models": {
+  "extract_guidance": [
+   {
+    "doc": "T-Q1FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q2FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q3FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q4FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q1FY27",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "extract_annual": [
+   {
+    "doc": "AR-FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "verdict": [
+   {
+    "model": "gemini:gemini-3.6-flash",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": [
+     {
+      "model": "gemini:gemini-3.8-flash",
+      "why": "Gemini 504: Deadline expired before operation could complete."
+     },
+     {
+      "model": "gemini:gemini-3.7-flash",
+      "why": "Gemini 504: Deadline expired before operation could complete."
+     }
+    ]
+   }
+  ]
+ },
+ "scorecard": {
+  "counts": {
+   "met": 0,
+   "partially": 0,
+   "missed": 0,
+   "too_vague": 6,
+   "not_found": 1,
+   "not_yet_due": 2
+  },
+  "checkable": 0,
+  "credibility": {
+   "headline": "No promise could be checked yet",
+   "line": "",
+   "by": "FINN"
+  },
+  "rows": [
+   {
+    "id": "PQ1FY26-2",
+    "metric": "capex",
+    "label": "CapEx commitment",
+    "kind": "numeric",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "No FY26 figure in the later calls.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Amit Syngle",
+     "quote": "Secondly, from a CapEx point of view, we have committed closer to 700 crores of CapEx this year. We've spent about 100 crores this year already on that.",
+     "doc": "T-Q1FY26",
+     "page": 23,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=cfd25bff-1623-40b0-a6d6-c8ddab10b398.pdf#page=23",
+     "target": "about ₹700 cr"
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-1",
+    "metric": "ebitda_margin",
+    "label": "PBDIT margin guidance",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Amit Syngle",
+     "quote": "So, as of now, we will keep the guidance on in terms of our 18 to 20% guidance. We continuously work on lot of areas from a overall cost excellence perspective looking at that we have enough ammunition of how we need to really look at the market conditions and how we want to go in the market.",
+     "doc": "T-Q1FY26",
+     "page": 25,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=cfd25bff-1623-40b0-a6d6-c8ddab10b398.pdf#page=25",
+     "target": "18%–20%"
+    },
+    "revisions": [],
+    "restated": 3,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-3",
+    "metric": "revenue_growth",
+    "label": "Near term growth",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Amit Syngle",
+     "quote": "When you talk from a near term growth, We are still looking at basically a single digit growth in how it would pan out in overall numbers in terms of both value and volume as we go ahead.",
+     "doc": "T-Q1FY26",
+     "page": 23,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=cfd25bff-1623-40b0-a6d6-c8ddab10b398.pdf#page=23",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY26-4",
+    "metric": "revenue_growth",
+    "label": "Good growth commitment",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q1 FY26",
+     "speaker": "Amit Syngle",
+     "quote": "So, whether it is new players, whether it is existing players, we expect that the intensity of competition will remain to that extent. And therefore, what we are channelizing in terms of our ways is very clear that as we go ahead, we will look at possibly very strong ways to keep on growing, looking at innovation, brand saliency, looking at very different ways of what we can look at various regions. Regionalization is a strategy which I spoke of. So, therefore we are very committed to saying that we wanted to pursue the whole business of looking at growth going forward.",
+     "doc": "T-Q1FY26",
+     "page": 20,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=cfd25bff-1623-40b0-a6d6-c8ddab10b398.pdf#page=20",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-1",
+    "metric": "other",
+    "label": "second half initiatives for kitchen and bath",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No number or milestone to check against.",
+    "due": "H2 FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Amit Syngle",
+     "quote": "A lot of initiatives are being put for the second half of the year in terms of how we need to galvanize this, get it possibly in a zone so that it starts contributing to the core business.",
+     "doc": "T-Q2FY26",
+     "page": 16,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=99e65c90-6bb0-4984-ac71-2a0f0eb4cc7f.pdf#page=16",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-2",
+    "metric": "revenue_growth",
+    "label": "Full year value growth",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No number or milestone to check against.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Amit Syngle",
+     "quote": "We are looking at mid-single-digit value growth for the full year. And as we kind of go-ahead volumes would be higher",
+     "doc": "T-Q2FY26",
+     "page": 25,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=99e65c90-6bb0-4984-ac71-2a0f0eb4cc7f.pdf#page=25",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-4",
+    "metric": "other",
+    "label": "Maintain growth momentum",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Amit Syngle",
+     "quote": "Overall, our priority is very clear that can we maintain the growth momentum which we have seen in the last few quarters.",
+     "doc": "T-Q1FY27",
+     "page": 18,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=6e0d5627-2b8b-4bf1-a7ce-9d0160833a0f.pdf#page=18",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-1",
+    "metric": "capex",
+    "label": "VAM-VAE first phase commissioning",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Amit Syngle",
+     "quote": "Today, worldwide, there are very limited players who are making VAM-VAE, and for us, it is a signature project and we expect to commission first phase in the first half of this year.",
+     "doc": "T-Q4FY26",
+     "page": 12,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=2a71cf39-800d-4765-8131-5d78e54925ce.pdf#page=12",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-1",
+    "metric": "volume_growth",
+    "label": "Full year volume growth band",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Amit Syngle",
+     "quote": "At the current stage, we are looking at the band of 8-10% for the full FY27.",
+     "doc": "T-Q1FY27",
+     "page": 20,
+     "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=6e0d5627-2b8b-4bf1-a7ce-9d0160833a0f.pdf#page=20",
+     "target": "8%–10%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "delivered": null
+   }
+  ]
+ },
+ "dropped": [
+  {
+   "stage": "reported",
+   "what": "International business constant currency growth",
+   "doc": "T-Q2FY26",
+   "page": 17,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "Q4 Volume growth band",
+   "doc": "T-Q3FY26",
+   "page": 33,
+   "why": "8 is not in the quote"
+  },
+  {
+   "stage": "reported",
+   "what": "Consolidated 9M Gross Margin",
+   "doc": "T-Q3FY26",
+   "page": 24,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "promise",
+   "what": "Volume growth ambition",
+   "doc": "T-Q4FY26",
+   "page": 20,
+   "why": "8 is not in the quote"
+  },
+  {
+   "stage": "promise",
+   "what": "Margin guidance",
+   "doc": "T-Q4FY26",
+   "page": 22,
+   "why": "18 is not in the quote"
+  },
+  {
+   "stage": "promise",
+   "what": "People skilling target",
+   "doc": "T-Q3FY26",
+   "page": 28,
+   "why": "a count with no unit FINN can show; left out rather than shown as a bare number"
+  }
+ ],
+ "judged": true
+}

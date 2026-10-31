@@ -176,3 +176,31 @@ def test_credibility_line_is_built_from_the_verdicts():
     c = pvd._credibility(None, rows, counts, [], None)
     assert c["headline"] == "Met 2 of 4 checkable promises"
     assert c["line"] == "Missed QRSAM order; short on capex; delivered revenue growth and EBITDA margin."
+
+
+def test_revenue_printed_only_as_parts_is_summed_by_code(monkeypatch):
+    page = ("Consolidated Statement of Profit and Loss for the year ended 31st March 2026 (` in Crores) "
+            "REVENUE FROM OPERATIONS Revenue from Sale of Products 23A 35,416.25 33,626.82 Revenue from Sale of Services "
+            "23A 100.12 170.54 Other Operating Revenue 23A 67.17 108.26 Profit before tax 5,900.10 5,000.20 "
+            "Profit for the year 4,394.69 3,709.71")
+    P = pvd.Pair
+    out = pvd.AnnualPL(found=True, page=1, basis="consolidated", unit="crore", revenue=P(current=35583.54, previous=33905.62),
+                       revenue_parts=[P(current=35416.25, previous=33626.82), P(current=100.12, previous=170.54),
+                                      P(current=67.17, previous=108.26)],
+                       other_income=P(current=None, previous=None), finance_costs=P(current=None, previous=None),
+                       depreciation=P(current=None, previous=None), pbt=P(current=5900.10, previous=5000.20),
+                       pat=P(current=4394.69, previous=3709.71))
+    monkeypatch.setattr(pvd, "pl_candidates", lambda pages: [1])
+    monkeypatch.setattr(pvd.llm, "call", lambda *a, **k: pvd.llm.LLMResult(out, "recorded", model="m"))
+    pl, _, dropped = pvd.read_annual(Doc("AR-FY26", "annual_report", "AR", "FY26", "u"), [page])
+    assert pl["figures"]["revenue"]["current"] == 35583.54 and not dropped     # model's own sum was not on the page
+    growth = {i["id"]: i for i in pvd.annual_items(pl)}["AR:revenue_growth:FY26"]
+    assert growth["value"] == 4.9 and "sum of 3 printed lines" in growth["how"]
+    assert pvd.reverify({"scorecard": {"rows": []}, "financials": pl}, {"AR-FY26": {"1": page}}) == []
+
+
+def test_a_count_without_a_unit_is_left_out():
+    p = _promise(id="P1", metric="other", unit="none", target_low=10.0, label="People skilling",
+                 quote="we are gunning for training almost 10 lakh people")
+    rows, dropped = _assemble([p], [], [dict(promise_ids=["P1"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
+    assert rows == [] and dropped[0]["what"] == "People skilling"

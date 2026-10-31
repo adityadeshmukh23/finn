@@ -1,0 +1,194 @@
+{
+ "promises": [
+  {
+   "metric": "ebitda_margin",
+   "label": "PBDIT margin guidance",
+   "kind": "numeric",
+   "target_low": 18.0,
+   "target_high": 20.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Amit Syngle",
+   "quote": "So, as of now, we will keep the guidance on in terms of our 18 to 20% guidance. We continuously work on lot of areas from a overall cost excellence perspective looking at that we have enough ammunition of how we need to really look at the market conditions and how we want to go in the market.",
+   "page": 24
+  },
+  {
+   "metric": "capex",
+   "label": "CapEx commitment",
+   "kind": "numeric",
+   "target_low": 700.0,
+   "target_high": null,
+   "unit": "crore",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Amit Syngle",
+   "quote": "Secondly, from a CapEx point of view, we have committed closer to 700 crores of CapEx this year. We've spent about 100 crores this year already on that.",
+   "page": 22
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Near term growth",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Amit Syngle",
+   "quote": "When you talk from a near term growth, We are still looking at basically a single digit growth in how it would pan out in overall numbers in terms of both value and volume as we go ahead.",
+   "page": 23
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Good growth commitment",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Amit Syngle",
+   "quote": "So, whether it is new players, whether it is existing players, we expect that the intensity of competition will remain to that extent. And therefore, what we are channelizing in terms of our ways is very clear that as we go ahead, we will look at possibly very strong ways to keep on growing, looking at innovation, brand saliency, looking at very different ways of what we can look at various regions. Regionalization is a strategy which I spoke of. So, therefore we are very committed to saying that we wanted to pursue the whole business of looking at growth going forward.",
+   "page": 20
+  }
+ ],
+ "reported": [
+  {
+   "metric": "volume_growth",
+   "label": "Decorative volume growth",
+   "period": "Q1 FY26",
+   "value": 3.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at from a decor business point of view in India. Overall, the volume growth has been decent. We've got about 3.9% volume growth over the Q1 of last year, which was also at about 7 .1% volume growth.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Decorative value growth",
+   "period": "Q1 FY26",
+   "value": -1.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at the value number, the value is just about -1.2%. So, just falling short of possibly hitting the base.",
+   "page": 4
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Overall coatings volume growth",
+   "period": "Q1 FY26",
+   "value": 4.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at putting the industrial numbers along with this. So, look at the overall coatings piece, the volume goes to about 4.2% and the value is just at about the base of what we see.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Industrial business growth",
+   "period": "Q1 FY26",
+   "value": 8.8,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "So, obviously the industrial business has grown almost close to 8.8%. That is kind of pepped up the overall coatings business as we see the final outcome.",
+   "page": 4
+  },
+  {
+   "metric": "revenue",
+   "label": "New products revenue contribution",
+   "period": "Q1 FY26",
+   "value": 14.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "The good news is that the new products continue to contribute a strong percentage to the overall revenue. This quarter we saw about 14% contribution coming to the overall revenues from the new products.",
+   "page": 6
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "AP Global INR growth",
+   "period": "Q1 FY26",
+   "value": 8.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Overall, we got a strong global presence. We grew almost 8.4% in INR terms. In constant currency growth would be closer to 17.5%.",
+   "page": 16
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "AP Global constant currency growth",
+   "period": "Q1 FY26",
+   "value": 17.5,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Overall, we got a strong global presence. We grew almost 8.4% in INR terms. In constant currency growth would be closer to 17.5%.",
+   "page": 16
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "PPGAP business growth",
+   "period": "Q1 FY26",
+   "value": 11.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Industrial business, When I look at the two businesses which we have, the PPGAP business which talks of auto refinishes, industrial marine business. This business has done quite well with double-digit growth, 11% is the growth what we have registered.",
+   "page": 17
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "APPPG business top line growth",
+   "period": "Q1 FY26",
+   "value": 5.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "The second business, which is the APPPG is about protective paints, powder coatings, road marking paints and so on and so forth. And this business also grew by almost about 5% on top line.",
+   "page": 17
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone gross margin",
+   "period": "Q1 FY26",
+   "value": 43.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Gross margins as I just said is 43.2, a little bit higher than Q1 of last year, but by and large strong PBDIT margins again is still healthy at 19.4%, a little bit lower than Q1 of last year, but higher than the sequential quarter which is Q4.",
+   "page": 18
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone PBDIT margin",
+   "period": "Q1 FY26",
+   "value": 19.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Gross margins as I just said is 43.2, a little bit higher than Q1 of last year, but by and large strong PBDIT margins again is still healthy at 19.4%, a little bit lower than Q1 of last year, but higher than the sequential quarter which is Q4.",
+   "page": 18
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated gross margin",
+   "period": "Q1 FY26",
+   "value": 42.6,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In terms of consolidated financials, literally the same to what you see of stand-alone to some extent. However, in terms of sales, it is at base overall. In terms of gross margins at 42.6% bit higher than Q1 of last year.",
+   "page": 18
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated PBDIT margin",
+   "period": "Q1 FY26",
+   "value": 18.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "And in terms of PBDIT margins still healthy at 18.2% a bit lower than the Q1 of last year, but sequentially again higher from Q4. So, that's how the overall financials span out in both stand alone and consolidated.",
+   "page": 18
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:09:38",
+  "fell_back_from": []
+ }
+}

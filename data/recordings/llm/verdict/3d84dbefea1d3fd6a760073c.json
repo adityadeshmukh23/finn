@@ -1,0 +1,123 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ1FY26-1",
+    "PQ2FY26-3",
+    "PQ3FY26-2",
+    "PQ1FY27-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The margin target of 18%-20% does not specify a target period."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported figure for full-year CapEx in FY26 is provided."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The guidance lacks a target metric and specified period."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The statement is qualitative without a target figure or specific period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-1"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 12,
+    "quote": "Overall, a mixed bag this quarter. Again, we have seen that Kitchen and Weatherseal revenues have been strong, double digits. However, White Teak and Bath have been on a lower side.",
+    "value": null,
+    "unit": "none",
+    "period": "Q1 FY27"
+   },
+   "verdict": "partially",
+   "reason": "Kitchen revenue grew in double digits while Bath revenue remained on the lower side."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-2"
+   ],
+   "actual_ids": [
+    "RQ4FY26-4"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Full year decorative value growth was 4.3%, which is in the mid-single-digit range."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported item contains the final number of people trained in FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-1",
+    "PQ1FY27-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported items confirm whether phase 1 was commissioned."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full year FY27 volume growth is not reported as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The guidance is a qualitative statement without a target number or period."
+  }
+ ],
+ "credibility": "The company met its mid-single-digit value growth guidance with 4.3% decorative value growth in FY26.",
+ "_meta": {
+  "model": "gemini:gemini-3.6-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T04:13:17",
+  "fell_back_from": [
+   {
+    "model": "gemini:gemini-3.8-flash",
+    "why": "Gemini 504: Deadline expired before operation could complete."
+   },
+   {
+    "model": "gemini:gemini-3.7-flash",
+    "why": "Gemini 504: Deadline expired before operation could complete."
+   }
+  ]
+ }
+}

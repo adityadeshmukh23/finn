@@ -1,0 +1,124 @@
+{
+ "promises": [
+  {
+   "metric": "volume_growth",
+   "label": "Full year volume growth band",
+   "kind": "numeric",
+   "target_low": 8.0,
+   "target_high": 10.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Amit Syngle",
+   "quote": "At the current stage, we are looking at the band of 8-10% for the full FY27.",
+   "page": 19
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "PBDIT margin guidance",
+   "kind": "numeric",
+   "target_low": 18.0,
+   "target_high": 20.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Amit Syngle",
+   "quote": "We are still garnering around the guidance of 18-20% of our PBDIT margins holds.",
+   "page": 19
+  },
+  {
+   "metric": "other",
+   "label": "VAM-VAE Phase 1 start",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "Q2 FY27",
+   "speaker": "Amit Syngle",
+   "quote": "The first phase of this initiative will commence by August. We believe this is a very significant area that we will be entering.",
+   "page": 8
+  },
+  {
+   "metric": "other",
+   "label": "Maintain growth momentum",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Amit Syngle",
+   "quote": "Overall, our priority is very clear that can we maintain the growth momentum which we have seen in the last few quarters.",
+   "page": 17
+  }
+ ],
+ "reported": [
+  {
+   "metric": "volume_growth",
+   "label": "Standalone volume growth",
+   "period": "Q1 FY27",
+   "value": 9.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Overall, we are at about a strong 9% volume growth. The growth has been across the months in this entire quarter.",
+   "page": 9
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Decorative value growth",
+   "period": "Q1 FY27",
+   "value": 16.6,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "If you look at the value, the decorative value has grown at a very good pitch of about 16.6%, albeit on a lower base.",
+   "page": 9
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "General industrial growth",
+   "period": "Q1 FY27",
+   "value": 21.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When it comes to the General Industrial business, there the growths have been fairly strong. 21% is the overall growth of what we have been able to do.",
+   "page": 12
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "International business growth",
+   "period": "Q1 FY27",
+   "value": 27.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "This has yielded results. We have grown at about 27% in Q1. This has been a very strong performance.",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Standalone top line growth",
+   "period": "Q1 FY27",
+   "value": 17.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In summary, if you look at the standalone financials, overall top line growth of about 17%.",
+   "page": 15
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated top line growth",
+   "period": "Q1 FY27",
+   "value": 18.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Consolidated financials almost follow the same route. In fact, it improved to about an 18% top line growth.",
+   "page": 16
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:10:00",
+  "fell_back_from": []
+ }
+}

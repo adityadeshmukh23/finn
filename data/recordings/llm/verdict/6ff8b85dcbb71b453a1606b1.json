@@ -1,0 +1,125 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ1FY26-1",
+    "PQ2FY26-3",
+    "PQ3FY26-2",
+    "PQ1FY27-2"
+   ],
+   "actual_ids": [
+    "AR:ebitda_margin:FY26"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "FY26 EBITDA margin was 18.8%, falling within the guided 18%–20% range."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported figures or details are provided for FY26 CapEx."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The commitment specifies near term growth without a specific timeframe or target period."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The statement lacks measurable metrics or specific target dates."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-1"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 12,
+    "quote": "Overall, a mixed bag this quarter. Again, we have seen that Kitchen and Weatherseal revenues have been strong, double digits. However, White Teak and Bath have been on a lower side.",
+    "value": null,
+    "unit": "none",
+    "period": "Q1 FY27"
+   },
+   "verdict": "partially",
+   "reason": "Kitchen revenue was strong in double digits, but Bath revenue remained on the lower side in Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-2"
+   ],
+   "actual_ids": [
+    "AR:revenue_growth:FY26"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "FY26 revenue growth was 4.9%, meeting the target of mid-single-digit value growth."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported items or passages show the number of people trained in FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-1",
+    "PQ1FY27-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported data confirms the commissioning status of the VAM-VAE first phase."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Full year FY27 volume growth results are not available as of Q1 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The commitment to maintain growth momentum lacks quantifiable targets."
+  }
+ ],
+ "credibility": "Management achieved 18.8% EBITDA margin against its 18%–20% guidance and 4.9% FY26 revenue growth against mid-single-digit guidance, while other targets lacked disclosures.",
+ "_meta": {
+  "model": "gemini:gemini-3.6-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T04:17:39",
+  "fell_back_from": [
+   {
+    "model": "gemini:gemini-3.8-flash",
+    "why": "Gemini 504: Deadline expired before operation could complete."
+   },
+   {
+    "model": "gemini:gemini-3.7-flash",
+    "why": "Gemini 504: Deadline expired before operation could complete."
+   }
+  ]
+ }
+}

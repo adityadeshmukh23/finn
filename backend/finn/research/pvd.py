@@ -143,7 +143,9 @@ class AnnualPL(BaseModel):
     page: int
     basis: Literal["consolidated", "standalone", "unknown"]
     unit: Literal["crore", "lakh", "million", "thousand", "rupees", "unknown"]
-    revenue: Pair = Field(description="Revenue from operations")
+    revenue: Pair = Field(description="Revenue from operations, only if a total line is printed")
+    revenue_parts: list[Pair] = Field(description="if no total is printed: each line under Revenue from operations "
+                                                  "(sale of products, sale of services, other operating revenue)")
     other_income: Pair
     finance_costs: Pair
     depreciation: Pair
@@ -153,7 +155,8 @@ class AnnualPL(BaseModel):
 
 AR_SYSTEM = """You copy figures from the statement of profit and loss in an Indian company's annual report.
 Use only the page text given. Copy each figure exactly as printed, as a plain number (no commas; negative
-for figures in brackets); null if not printed. Never compute or round. Prefer the consolidated statement
+for figures in brackets); null if not printed. Never compute, add or round: if revenue from operations has
+no total line, leave revenue null and copy each of its lines into revenue_parts. Prefer the consolidated statement
 if one is given. "current" is the year the report covers, "previous" the year before. unit: as stated in
 the heading (e.g. "₹ in crore", "Rs. lakh", "₹ million"). If no page is a statement of profit and loss
 with both years, set found=false."""
@@ -204,6 +207,16 @@ def read_annual(doc: Doc, pages: list[str]) -> tuple[dict | None, llm.LLMResult 
                 v = None
             printed[name][col] = v
             fig[name][col] = None if v is None or k is None else round(v * k, 2)
+    if fig["revenue"]["current"] is None and t.revenue_parts and k is not None:
+        # Revenue printed only as its parts: code adds them, and only if every part is on the page.
+        parts = [[getattr(p, col) for col in ("current", "previous")] for p in t.revenue_parts]
+        printed["revenue_parts"] = {col: [p[i] for p in parts] for i, col in enumerate(("current", "previous"))}
+        for i, col in enumerate(("current", "previous")):
+            vals = [p[i] for p in parts]
+            if all(v is not None and number_in(abs(v), page) for v in vals):
+                fig["revenue"][col] = round(sum(vals) * k, 2)
+                dropped = [d for d in dropped if d["what"] != f"revenue ({col} year)"]
+        fig["revenue"]["how"] = f"sum of {len(parts)} printed lines"
     fy = Period.parse(doc.period)
     lender = "interestearned" in re.sub(r"\s+", "", page.lower())
     ebitda = {}
@@ -233,8 +246,9 @@ def annual_items(pl: dict | None) -> list[dict]:
     add("revenue", "Revenue from operations", fy, rev["current"], "crore", "printed")
     add("revenue", "Revenue from operations", prev, rev["previous"], "crore", "printed")
     add("pat", "Profit after tax", fy, pat["current"], "crore", "printed")
+    summed = f" (each year the sum of {rev['how'].removeprefix('sum of ')})" if rev.get("how") else ""
     add("revenue_growth", "Revenue growth", fy, pct(rev["current"], rev["previous"]), "%",
-        f"computed: ₹{rev['current']:,} cr vs ₹{rev['previous']:,} cr" if rev["previous"] else "")
+        f"computed: ₹{rev['current']:,} cr vs ₹{rev['previous']:,} cr{summed}" if rev["previous"] else "")
     if ebitda["current"] is not None and rev["current"]:
         add("ebitda", "EBITDA (PBT + finance costs + D&A − other income)", fy, ebitda["current"], "crore", "computed")
         add("ebitda_margin", "EBITDA margin", fy, round(ebitda["current"] / rev["current"] * 100, 1), "%",
@@ -545,6 +559,11 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
     rows = []
     for ids, aids, g in groups:
         first, last = by_p[ids[0]], by_p[ids[-1]]
+        if first["kind"] == "numeric" and first["unit"] == "none" and first["target_low"] is not None:
+            # "almost 10 lakh people" arrives as 10 with no unit; shown as "10+" it would mislead.
+            dropped.append({"stage": "promise", "what": first["label"], "doc": first["doc"], "page": first["page"],
+                            "why": "a count with no unit FINN can show; left out rather than shown as a bare number"})
+            continue
         horizon = last["horizon"] if last["horizon"] != "unspecified" else first["horizon"]
         due = due_of(horizon)
         verdict, by, reason, delivered = None, "rule", "", None
@@ -699,9 +718,10 @@ def reverify(rec: dict, cited: dict[str, dict[str, str]]) -> list[str]:
     if f:
         page = cited[f["doc"]][str(f["page"])]
         for name, cols in f["printed"].items():
-            for col, v in cols.items():
-                if v is not None and not number_in(abs(v), page):
-                    bad.append(f"annual report {name} {col} not on p.{f['page']}")
+            for col, vals in cols.items():
+                for v in (vals if isinstance(vals, list) else [vals]):
+                    if v is not None and not number_in(abs(v), page):
+                        bad.append(f"annual report {name} {col} not on p.{f['page']}")
     return bad
 
 

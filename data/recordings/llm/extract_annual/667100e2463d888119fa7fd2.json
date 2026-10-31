@@ -1,0 +1,36 @@
+{
+ "found": true,
+ "page": 234,
+ "basis": "consolidated",
+ "unit": "crore",
+ "revenue": {
+  "current": 35583.54,
+  "previous": 33905.62
+ },
+ "other_income": {
+  "current": 723.8,
+  "previous": 572.61
+ },
+ "finance_costs": {
+  "current": 195.41,
+  "previous": 227.02
+ },
+ "depreciation": {
+  "current": 1228.85,
+  "previous": 1026.34
+ },
+ "pbt": {
+  "current": 6003.44,
+  "previous": 5103.07
+ },
+ "pat": {
+  "current": 4394.69,
+  "previous": 3709.71
+ },
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_annual",
+  "recorded_at": "2026-11-01T04:10:02",
+  "fell_back_from": []
+ }
+}

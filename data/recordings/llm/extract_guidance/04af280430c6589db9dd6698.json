@@ -1,0 +1,341 @@
+{
+ "promises": [
+  {
+   "metric": "volume_growth",
+   "label": "Q4 Volume growth band",
+   "kind": "numeric",
+   "target_low": 8.0,
+   "target_high": 10.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "Q4 FY26",
+   "speaker": "Amit Syngle",
+   "quote": "I think as we go ahead, this band would remain, in terms of what we would be able to target for the Q4 as well.",
+   "page": 33
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "PBDIT margin band",
+   "kind": "numeric",
+   "target_low": 18.0,
+   "target_high": 20.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Amit Syngle",
+   "quote": "So, I would say that we would keep the guidance between that 18 and 20% band as we go ahead and that is something which we will endeavour to maintain.",
+   "page": 35
+  },
+  {
+   "metric": "other",
+   "label": "People skilling target",
+   "kind": "numeric",
+   "target_low": 10.0,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Amit Syngle",
+   "quote": "We already trained about 6.7 lakh people here, and this year , as we kind of go ahead, we are gunning for training almost 10 lakh people.",
+   "page": 27
+  }
+ ],
+ "reported": [
+  {
+   "metric": "volume_growth",
+   "label": "Q3 volume growth",
+   "period": "Q3 FY26",
+   "value": 7.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Coming on to the Q3 results, as you see, we have been able to drive a strong high single -digit volume growth of 7.9% which is strong.",
+   "page": 13
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Q3 value growth",
+   "period": "Q3 FY26",
+   "value": 2.8,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "The value growth was about 2.8%, so you can see the difference between the value and the volume was approximately about 5%",
+   "page": 14
+  },
+  {
+   "metric": "volume_growth",
+   "label": "9M volume growth",
+   "period": "9M FY26",
+   "value": 7.5,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look from a 9M level the respective volume growth is about 7.5%, and the value is about 2.4%",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "9M value growth",
+   "period": "9M FY26",
+   "value": 2.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look from a 9M level the respective volume growth is about 7.5%, and the value is about 2.4%",
+   "page": 14
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Q3 all coatings volume growth",
+   "period": "Q3 FY26",
+   "value": 8.3,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we see this the volume growth jumps to about 8.3% from the 7.9% in decorative and the value growth for all coatings jumps to 4.4%.",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Q3 all coatings value growth",
+   "period": "Q3 FY26",
+   "value": 4.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we see this the volume growth jumps to about 8.3% from the 7.9% in decorative and the value growth for all coatings jumps to 4.4%.",
+   "page": 14
+  },
+  {
+   "metric": "volume_growth",
+   "label": "9M all coatings volume growth",
+   "period": "9M FY26",
+   "value": 7.7,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Overall, from a point of view of 9M growths again in the same regime, about 7.7% on the volume and about 3.5% on a value on a 9M frame.",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "9M all coatings value growth",
+   "period": "9M FY26",
+   "value": 3.5,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Overall, from a point of view of 9M growths again in the same regime, about 7.7% on the volume and about 3.5% on a value on a 9M frame.",
+   "page": 14
+  },
+  {
+   "metric": "other",
+   "label": "New product contribution to revenue",
+   "period": "Q3 FY26",
+   "value": 16.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "And today , new product contributes to about 16% of our overall revenues.",
+   "page": 16
+  },
+  {
+   "metric": "other",
+   "label": "Home decor contribution to decorative revenue",
+   "period": "Q3 FY26",
+   "value": 4.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Right now, obviously it contributes to about 4% of our decorative revenue.",
+   "page": 17
+  },
+  {
+   "metric": "other",
+   "label": "Beautiful Home stores network count",
+   "period": "Q3 FY26",
+   "value": 74.0,
+   "unit": "none",
+   "speaker": "Amit Syngle",
+   "quote": "Our Beautiful Home stores network, which is doing quite well overall, expands to about 74 stores across the country.",
+   "page": 18
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "International business value growth in constant currency",
+   "period": "Q3 FY26",
+   "value": 4.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "I think a good steady business in terms of what we have done. We see there is a 6.3% value growth, in constant currency terms i t boils down to about 4.2%, given the fact that INR has depreciated.",
+   "page": 20
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "PPGAP value growth",
+   "period": "Q3 FY26",
+   "value": 17.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "the PPGAP which is our JV, which is about auto and general industrial segment, this is something which has really delivered a stellar performance in terms of almost growing by 17% this quarter",
+   "page": 21
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "PPGAP 9M value growth",
+   "period": "9M FY26",
+   "value": 14.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "and on a 9M level also growing at a strong 14%.",
+   "page": 21
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "APPPG value growth",
+   "period": "Q3 FY26",
+   "value": 16.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In this business again, a very strong quarter with about a 16% value growth.",
+   "page": 21
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Standalone Net Sales growth",
+   "period": "Q3 FY26",
+   "value": 2.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "If you see that the N et Sales growth is about 2.9%, I think a little bit lower here because of the festive season being cut short.",
+   "page": 23
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone Gross Margin",
+   "period": "Q3 FY26",
+   "value": 44.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "At the same time, when we look at the gross margin, one of the highest Gross Margins I would say over the quarters in terms of what we have registered, about 44.9%",
+   "page": 23
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone PBDIT margin",
+   "period": "Q3 FY26",
+   "value": 21.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "and the PBDIT margins are also quite good at 21.4%, 100 bps up yoy.",
+   "page": 23
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Standalone 9M Net Sales growth",
+   "period": "9M FY26",
+   "value": 2.3,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "On a 9M basis, again, if you look at it the N et Sales growth is about 2.3%.",
+   "page": 23
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone 9M Gross Margin",
+   "period": "9M FY26",
+   "value": 43.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Gross Margins are high at about 43.9%, almost about 170 bps points higher.",
+   "page": 23
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone 9M PBDIT margin",
+   "period": "9M FY26",
+   "value": 19.8,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "and the PB DIT margins are strong at about 19.8%, almost 80 bps points higher.",
+   "page": 23
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated top line growth",
+   "period": "Q3 FY26",
+   "value": 4.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "At a consolidated level, when we see again, from a top line perspective we are at about 4% yoy growth",
+   "page": 24
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated Gross Margin",
+   "period": "Q3 FY26",
+   "value": 44.3,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "The Gross Margin is 44.3% which is higher by about 200 bps points.",
+   "page": 24
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated PBDIT margin",
+   "period": "Q3 FY26",
+   "value": 20.1,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "with PBDIT margin of 20.1%, which is also higher about by 90 bps points.",
+   "page": 24
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated 9M top line growth",
+   "period": "9M FY26",
+   "value": 3.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "On a 9M basis, similar picture with 3.2% top line growth",
+   "page": 24
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated 9M Gross Margin",
+   "period": "9M FY26",
+   "value": 43.3,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Gross Margin of 43.3%",
+   "page": 24
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated 9M PBDIT margin",
+   "period": "9M FY26",
+   "value": 18.7,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "and a margin at about 18.7% overall.",
+   "page": 24
+  },
+  {
+   "metric": "pat",
+   "label": "Labour code exceptional item standalone",
+   "period": "Q3 FY26",
+   "value": 60.56,
+   "unit": "crore",
+   "speaker": "Amit Syngle",
+   "quote": "one is on the labour code, which is about Rs. 60.56 crores",
+   "page": 25
+  },
+  {
+   "metric": "pat",
+   "label": "Standalone impairment loss exceptional item",
+   "period": "Q3 FY26",
+   "value": 106.0,
+   "unit": "crore",
+   "speaker": "Amit Syngle",
+   "quote": "and similarly an impairment loss on the standalone numbers which comes close to about Rs. 106 crores.",
+   "page": 25
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:09:53",
+  "fell_back_from": []
+ }
+}

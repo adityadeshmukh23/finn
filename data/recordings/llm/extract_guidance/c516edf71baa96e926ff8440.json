@@ -1,0 +1,141 @@
+{
+ "promises": [
+  {
+   "metric": "capex",
+   "label": "VAM-VAE first phase commissioning",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "at_least",
+   "horizon": "H1 FY27",
+   "speaker": "Amit Syngle",
+   "quote": "Today, worldwide, there are very limited players who are making VAM-VAE, and for us, it is a signature project and we expect to commission first phase in the first half of this year.",
+   "page": 12
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Volume growth ambition",
+   "kind": "qualitative",
+   "target_low": 8.0,
+   "target_high": 10.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Amit Syngle",
+   "quote": "And we basically believe that going forward, we are still looking atleast a high single-digit volume growth in terms of what we would kind of achieve.",
+   "page": 20
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Margin guidance",
+   "kind": "qualitative",
+   "target_low": 18.0,
+   "target_high": 20.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Amit Syngle",
+   "quote": "Absolutely right. We are maintaining our margin guidance, which is there. We are looking at the price increases that are happening and trying to see that we get into that area of 8-10% volume growth.",
+   "page": 22
+  }
+ ],
+ "reported": [
+  {
+   "metric": "volume_growth",
+   "label": "Decorative volume growth",
+   "period": "Q4 FY26",
+   "value": 12.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at the decorative business, we have achieved 12.4% volume growth and a very strong value growth of 10.2%.",
+   "page": 11
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Decorative value growth",
+   "period": "Q4 FY26",
+   "value": 10.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at the decorative business, we have achieved 12.4% volume growth and a very strong value growth of 10.2%.",
+   "page": 11
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Yearly decorative volume growth",
+   "period": "FY26",
+   "value": 9.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "On a yearly level, volume growth is close to about 9%, which is quite commendable, and the value growth is about 4.3%.",
+   "page": 11
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Yearly decorative value growth",
+   "period": "FY26",
+   "value": 4.3,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "On a yearly level, volume growth is close to about 9%, which is quite commendable, and the value growth is about 4.3%.",
+   "page": 11
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Coatings volume growth",
+   "period": "Q4 FY26",
+   "value": 12.7,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at the coatings world, which is decorative plus industrial, which means the full coatings range, the volume growth from 12.4% goes up to 12.7% in the quarter, and the value growth goes up from 10.2% to about 11%.",
+   "page": 11
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Coatings value growth",
+   "period": "Q4 FY26",
+   "value": 11.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at the coatings world, which is decorative plus industrial, which means the full coatings range, the volume growth from 12.4% goes up to 12.7% in the quarter, and the value growth goes up from 10.2% to about 11%.",
+   "page": 11
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Standalone Net Sales growth",
+   "period": "Q4 FY26",
+   "value": 10.3,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "First, if we were to look at it from a perspective of the standalone financials, I spoke of the Net Sales, which is in double digits 10.3%.",
+   "page": 16
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone PBDIT margin",
+   "period": "Q4 FY26",
+   "value": 21.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "From the point of view of PBDIT, very strong growth of 26%, with a PBDIT margin of about 21.2%, which is higher by 260 bps year-on-year.",
+   "page": 16
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated net sales growth",
+   "period": "Q4 FY26",
+   "value": 11.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In fact, the top line moves further to about 11% as I spoke. The top line again is very strong, and if I look at it from the point of view of Gross Margins, again higher by 100 bps year-on-year",
+   "page": 17
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:09:57",
+  "fell_back_from": []
+ }
+}

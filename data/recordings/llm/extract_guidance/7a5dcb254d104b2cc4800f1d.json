@@ -1,0 +1,311 @@
+{
+ "promises": [
+  {
+   "metric": "other",
+   "label": "second half initiatives for kitchen and bath",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "H2 FY26",
+   "speaker": "Amit Syngle",
+   "quote": "A lot of initiatives are being put for the second half of the year in terms of how we need to galvanize this, get it possibly in a zone so that it starts contributing to the core business.",
+   "page": 16
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Full year value growth",
+   "kind": "numeric",
+   "target_low": null,
+   "target_high": null,
+   "unit": "%",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Amit Syngle",
+   "quote": "We are looking at mid-single-digit value growth for the full year. And as we kind of go-ahead volumes would be higher",
+   "page": 25
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "PBDIT margin band",
+   "kind": "numeric",
+   "target_low": 18.0,
+   "target_high": 20.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Amit Syngle",
+   "quote": "Given all this, it is okay to maintain the whole guidance of 18 to 20% PBDIT margin band. I would not qualify whether it should be at an 18% level or a higher level. But it's good to maintain 18-20% margin as we go ahead.",
+   "page": 27
+  }
+ ],
+ "reported": [
+  {
+   "metric": "volume_growth",
+   "label": "Volume growth in Q2FY26",
+   "period": "Q2 FY26",
+   "value": 10.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "If you look from the point of view of performance, we delivered a volume growth of 10.9% in Q2FY26, but we had a value of about 6% in an environment",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Value growth in Q2FY26",
+   "period": "Q2 FY26",
+   "value": 6.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "we delivered a volume growth of 10.9% in Q2FY26, but we had a value of about 6% in an environment which was not too great and overall consumer sentiment sentiments",
+   "page": 14
+  },
+  {
+   "metric": "volume_growth",
+   "label": "H1 volume growth",
+   "period": "H1 FY26",
+   "value": 7.2,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In H1, we are at 7.2% volume and 2.1% value growth, which I think in the current circumstances it is good.",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "H1 value growth",
+   "period": "H1 FY26",
+   "value": 2.1,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In H1, we are at 7.2% volume and 2.1% value growth, which I think in the current circumstances it is good.",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Coatings business value growth in Q2",
+   "period": "Q2 FY26",
+   "value": 6.7,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "When we look at the total coatings business, which is the decorative plus the industrial business, overall the number goes up further up to 6.7% because industrial business has also done well",
+   "page": 14
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Coatings business volume growth in Q2",
+   "period": "Q2 FY26",
+   "value": 11.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "overall the number goes up further up to 6.7% because industrial business has also done well and the volume goes to 11%.",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Coatings business value growth in H1",
+   "period": "H1 FY26",
+   "value": 3.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In H1, there is a value growth of 3% and a volume growth of about 7.4%. So, overall from the coatings piece it improves",
+   "page": 14
+  },
+  {
+   "metric": "volume_growth",
+   "label": "Coatings business volume growth in H1",
+   "period": "H1 FY26",
+   "value": 7.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In H1, there is a value growth of 3% and a volume growth of about 7.4%. So, overall from the coatings piece it improves",
+   "page": 14
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "International business growth in INR terms",
+   "period": "Q2 FY26",
+   "value": 9.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "It's been a strong quarter overall we have done 9.9% growth in INR terms. So, almost a double-digit value growth.",
+   "page": 17
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "International business constant currency growth",
+   "period": "Q2 FY26",
+   "value": 10.6,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "In terms of constant currency given the fact that there has been a devaluation in Ethiopia and other places. So, we are looking at a 10.6% growth.",
+   "page": 17
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "PPGAP business revenue growth in Q2FY26",
+   "period": "Q2 FY26",
+   "value": 13.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "the PPGAP business which is largely into auto OEMs and auto refinishes along with packaging and marine, the revenue grew by 13% in Q2FY26 and 12% in H1FY26.",
+   "page": 18
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "PPGAP business revenue growth in H1FY26",
+   "period": "H1 FY26",
+   "value": 12.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "the PPGAP business which is largely into auto OEMs and auto refinishes along with packaging and marine, the revenue grew by 13% in Q2FY26 and 12% in H1FY26.",
+   "page": 18
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "PPGAP PBT margins in Q2FY26",
+   "period": "Q2 FY26",
+   "value": 17.3,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "PBT margins in Q2FY26 have gone up to about 17.3% which is higher by 160 bps.",
+   "page": 18
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "APPPG revenue growth in Q2FY26",
+   "period": "Q2 FY26",
+   "value": 10.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Revenue, we delivered 10% growth in Q2FY26 and in H1FY26, we delivered 7% growth.",
+   "page": 18
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "APPPG revenue growth in H1FY26",
+   "period": "H1 FY26",
+   "value": 7.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Revenue, we delivered 10% growth in Q2FY26 and in H1FY26, we delivered 7% growth.",
+   "page": 18
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "APPPG PBT margins in Q2FY26",
+   "period": "Q2 FY26",
+   "value": 8.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "The PBT margins have gone up to 8.9%, higher by 190 bps. So, again a steady show in from the industrial business point of view.",
+   "page": 18
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone gross margins in Q2",
+   "period": "Q2 FY26",
+   "value": 43.7,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "We are up from 43.2% in last quarter to about 43.7% now. At the same time, we are up 270 bps from same quarter last year.",
+   "page": 19
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Standalone net sales growth in Q2",
+   "period": "Q2 FY26",
+   "value": 5.8,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "So, finally coming to the overall standalone financials, Net Sales as I said grew by 5.8%, Gross Margins have expanded by 270bps to 43.7%.",
+   "page": 20
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone PBDIT margin in Q2",
+   "period": "Q2 FY26",
+   "value": 18.5,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "PBDIT has grown by 21% and PBDIT margin is at 18.5% higher by 230bps points.",
+   "page": 20
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Standalone net sales growth in H1",
+   "period": "H1 FY26",
+   "value": 2.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "At an H1 level, given the fact that the quarter one was not so strong, we are seeing a net sales growth of about 2%, Gross Margins of 43.4%",
+   "page": 20
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone gross margins in H1",
+   "period": "H1 FY26",
+   "value": 43.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Gross Margins of 43.4% which is 150bps higher from the last year same period.",
+   "page": 20
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone PBDIT margin in H1",
+   "period": "H1 FY26",
+   "value": 19.0,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "The PBDIT margins were at 19%, 70bps higher.",
+   "page": 20
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated net sales growth in Q2",
+   "period": "Q2 FY26",
+   "value": 6.4,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Quite similar to what we see from a standalone perspective, net sales grew by 6.4%, supported by growth across decorative, industrial and international business.",
+   "page": 21
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated gross margins in Q2",
+   "period": "Q2 FY26",
+   "value": 43.1,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Gross margins at 43.1% was higher by 250 bps.",
+   "page": 21
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated PBDIT margin in Q2",
+   "period": "Q2 FY26",
+   "value": 17.7,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "PBDIT growth was 21.3%, and PBDIT margin of 17.7% was higher by 220 bps points.",
+   "page": 21
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Consolidated net sales growth in H1",
+   "period": "H1 FY26",
+   "value": 2.9,
+   "unit": "%",
+   "speaker": "Amit Syngle",
+   "quote": "Similarly, at H1 level Net Sales grew by 2.9%. Both gross margins and PBDIT margins have expanded",
+   "page": 21
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:09:46",
+  "fell_back_from": []
+ }
+}
