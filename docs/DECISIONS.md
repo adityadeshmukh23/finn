@@ -95,8 +95,9 @@
 
 ## Push mode 5: management-change card from the filing itself (2026-11-01)
 
-- **Who, role, effective date, reason, background: all from the Reg. 30 disclosure.** The cheap model copies them with a verbatim quote for the reason and the profile; code keeps a person only if they're named in the filing, and blanks any reason, date or profile it can't find there (numbers included). 13 top-management filings, 13 calls, 34 verified changes, $0.
+- **Who, role, effective date, reason, background: all from the Reg. 30 disclosure.** The cheap model copies them with a verbatim quote for the reason and the profile; code keeps a person only if they're named in the filing, and blanks any reason, date or profile it can't find there (numbers included). 14 top-management filings, 16 live calls (two re-reads after the page fix), 34 changes, all naming a person found in the filing, $0.
 - **The profile is often at the end of a 20-page board outcome**, so the reader sends the first 4 pages plus up to 3 later pages that look like a profile annexure, each with its real page number for the citation.
 - **Reasons are shown for exits only.** For an appointment the "reason" field is process boilerplate ("on the recommendation of the NRC"), which tells an investor nothing.
 - **One row per person and change across a company's filings.** Info Edge filed the same transition five times; the card shows it once, keeping the most complete version.
 - **Web enrichment of bios is not built.** It's optional in the plan, and the filing's own profile already covers the CFO appointments in the demo (Aarti, Home First). If added, it would be a separate, labelled "outside the filing" link, never mixed into the verified fields.
+- **Push-mode model spend, all phases:** 93 live cheap-model calls (classification reads, filing summaries, results tables, management changes, including re-runs after prompt fixes), about 285k input and 18k output tokens, $0 on the Gemini free tier. Every output is recorded; the public demo makes no model calls.
