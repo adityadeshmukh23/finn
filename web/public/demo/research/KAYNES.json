@@ -1,7 +1,7 @@
 {
  "symbol": "KAYNES",
  "name": "Kaynes Technology India Ltd",
- "generated_at": "2026-11-01T04:24:19",
+ "generated_at": "2026-11-01T04:31:29",
  "status": "ok",
  "latest_period": "Q1 FY27",
  "docs": {
@@ -287,7 +287,7 @@
     "kind": "milestone",
     "verdict": "not_found",
     "verdict_by": "rule",
-    "reason": "Later calls mention it but don't say whether it happened.",
+    "reason": "Later calls mention it; FINN found none that says whether it happened.",
     "due": "FY26",
     "promised": {
      "call": "Q1 FY26",

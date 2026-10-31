@@ -1,0 +1,177 @@
+{
+ "promises": [
+  {
+   "metric": "other",
+   "label": "Large deals in Q2",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q2 FY27",
+   "speaker": "Sudhir Singh",
+   "quote": "In Q2 itself, and we know that a month the quarter has already elapsed, we believe we are likely to sign large deals in numbers that were very close to what we signed in a full year just 2-3 years back.",
+   "page": 2
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated EBITDA margin",
+   "kind": "numeric",
+   "target_low": 20.5,
+   "target_high": 21.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Sudhir Singh",
+   "quote": "We are confident of achieving an EBITDA margin of 20.5 to 21% on a consolidated basis.",
+   "page": 10
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Standalone EBIT margin",
+   "kind": "numeric",
+   "target_low": 16.5,
+   "target_high": 17.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "FY27",
+   "speaker": "Sudhir Singh",
+   "quote": "EBIT margins are expected to be in the range of 16.5 to 17% on a standalone basis, and 15.5% or higher on a consolidated basis.",
+   "page": 10
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated EBIT margin",
+   "kind": "numeric",
+   "target_low": 15.5,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Sudhir Singh",
+   "quote": "EBIT margins are expected to be in the range of 16.5 to 17% on a standalone basis, and 15.5% or higher on a consolidated basis.",
+   "page": 10
+  },
+  {
+   "metric": "other",
+   "label": "FCF to PAT conversion",
+   "kind": "numeric",
+   "target_low": 100.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Sudhir Singh",
+   "quote": "FCF to PAT for the year will be 100%+.",
+   "page": 10
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue",
+   "label": "Consolidated revenue (USD)",
+   "period": "Q1 FY27",
+   "value": 592.2,
+   "unit": "usd_million",
+   "speaker": "Sudhir Singh",
+   "quote": "Consolidated revenue for the quarter stood at US$592.2 million in US dollar terms.",
+   "page": 5
+  },
+  {
+   "metric": "revenue",
+   "label": "Consolidated revenue (INR)",
+   "period": "Q1 FY27",
+   "value": 55277.0,
+   "unit": "crore",
+   "speaker": "Sudhir Singh",
+   "quote": "In Indian-rupee terms, revenue stood at ₹55,277 million.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "EPS",
+   "period": "Q1 FY27",
+   "value": 13.3,
+   "unit": "none",
+   "speaker": "Sudhir Singh",
+   "quote": "EPS, excluding one -time exceptional costs, remained broadly stable at ₹13.3, compared with ₹13.8 last quarter.",
+   "page": 6
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order intake",
+   "period": "Q1 FY27",
+   "value": 691.0,
+   "unit": "usd_million",
+   "speaker": "Sudhir Singh",
+   "quote": "Total order intake during the quarter stood at US$691 million.",
+   "page": 6
+  },
+  {
+   "metric": "order_book",
+   "label": "Next 12-month executable order book",
+   "period": "Q1 FY27",
+   "value": 2.23,
+   "unit": "usd_billion",
+   "speaker": "Sudhir Singh",
+   "quote": "Our next 12-month executable order book expanded to an all-time high of US$2.23 billion, compared with US$1.55 billion a year ago",
+   "page": 6
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Encora EBITDA margin",
+   "period": "Q1 FY27",
+   "value": 20.3,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "Within its first quarter as part of Coforge, Encora delivered: • EBITDA margin of 20.3%",
+   "page": 8
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Encora EBIT margin",
+   "period": "Q1 FY27",
+   "value": 19.1,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "Within its first quarter as part of Coforge, Encora delivered: • EBITDA margin of 20.3% • EBIT margin of 19.1%",
+   "page": 8
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Consolidated EBIT margin",
+   "period": "Q1 FY27",
+   "value": 16.0,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "Consolidated EBIT margin came in at 16%, while organic EBIT margin was 16.7%.",
+   "page": 8
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Organic EBIT margin",
+   "period": "Q1 FY27",
+   "value": 16.7,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "Consolidated EBIT margin came in at 16%, while organic EBIT margin was 16.7%.",
+   "page": 8
+  },
+  {
+   "metric": "capex",
+   "label": "Free cash flow",
+   "period": "Q1 FY27",
+   "value": 52.9,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "the combined organization generated free cash flow of $52.9 million in Q1, representing an FCF -to-PAT conversion of 95.3%",
+   "page": 9
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:25:52",
+  "fell_back_from": []
+ }
+}

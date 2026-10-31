@@ -1,0 +1,270 @@
+{
+ "groups": [
+  {
+   "promise_ids": [
+    "PQ2FY26-1",
+    "PQ2FY26-8",
+    "PQ3FY26-1"
+   ],
+   "actual_ids": [
+    "RQ4FY26-8"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Reported FY26 EBIT margin came in at 14.4%, meeting the 14% target."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "The commitment lacks a specific target period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Robust growth is qualitative without a measurable numerical target or checkable milestone."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "No reported items or passages state whether the healthcare book of business reached $100 million in FY26."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Targeting a run rate in coming quarters specifies no defined period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-7"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q4FY26",
+    "page": 7,
+    "quote": "Following the effective implementation of the Cigniti amalgamation scheme in FY26, deferred tax balances on the merged entity were remeasured.",
+    "value": null,
+    "unit": "none",
+    "period": "FY26"
+   },
+   "verdict": "partially",
+   "reason": "Amalgamation scheme was implemented in FY26, but later than the targeted December or January timeframe."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-9",
+    "PQ3FY26-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Maintaining FCF to PAT on a sustained basis specifies no target period."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-10"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q3FY26",
+    "page": 12,
+    "quote": "as I mentioned earlier the effective date of the merger is April 1, 2025 so which means we will if we have not reported our numbers for Q4 and the financial year FY26 we will restate the three quarters",
+    "value": null,
+    "unit": "none",
+    "period": "FY26"
+   },
+   "verdict": "met",
+   "reason": "Management confirmed the effective merger date remained April 1, 2025."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY26-11"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Sustained and robust growth is qualitative with no measurable numeric threshold."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-3"
+   ],
+   "actual_ids": [
+    "RQ4FY26-2"
+   ],
+   "evidence": null,
+   "verdict": "met",
+   "reason": "Reported Q4 FY26 EBIT margin was 16.6%, exceeding the 15% plan."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-4",
+    "PQ4FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Robust growth commentary provides no verifiable quantitative milestone."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-5"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q1FY27",
+    "page": 8,
+    "quote": "Exceptional expenses and acquisition-related expenses recognized during the current quarter amounted to $6. 5 million, compared with $5.4 million in Q4.",
+    "value": null,
+    "unit": "usd_million",
+    "period": "Q1 FY27"
+   },
+   "verdict": "met",
+   "reason": "Expenses were $5.4 million in Q4 and $6.5 million in Q1, within the $10 to $15 million range."
+  },
+  {
+   "promise_ids": [
+    "PQ3FY26-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 full year is incomplete as reporting is through Q2 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-1",
+    "PQ1FY27-2",
+    "PQ2FY27-8"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 full year has not yet been reported."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-2",
+    "PQ1FY27-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 full year has not yet been reported."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-3",
+    "PQ1FY27-4",
+    "PQ2FY27-1"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 full year has not yet been reported."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-4"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 full year has not yet been reported."
+  },
+  {
+   "promise_ids": [
+    "PQ4FY26-5",
+    "PQ1FY27-5",
+    "PQ2FY27-5"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "FY27 full year has not yet been reported."
+  },
+  {
+   "promise_ids": [
+    "PQ1FY27-1"
+   ],
+   "actual_ids": [],
+   "evidence": {
+    "doc": "T-Q2FY27",
+    "page": 3,
+    "quote": "In Q2, we signed eight large deals, this is the highest number of large deals we have signed in any quarter in our history.",
+    "value": 8.0,
+    "unit": "none",
+    "period": "Q2 FY27"
+   },
+   "verdict": "met",
+   "reason": "The company signed eight large deals in Q2 FY27."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY27-2"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Q4 FY27 results are not yet reported."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY27-3"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "too_vague",
+   "reason": "Industry growth leader statement lacks an objective numeric threshold."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY27-6"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Q3 FY27 results are not yet reported."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY27-7"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period Q3 or Q4 FY27 is not yet reported."
+  },
+  {
+   "promise_ids": [
+    "PQ2FY27-9"
+   ],
+   "actual_ids": [],
+   "evidence": null,
+   "verdict": "not_found",
+   "reason": "Target period FY28 is not yet reported."
+  }
+ ],
+ "credibility": "Management met all verifiable FY26 margin guidance and delivered eight large deals in Q2 FY27, with FY27 annual targets still open.",
+ "_meta": {
+  "model": "gemini:gemini-3.8-flash",
+  "purpose": "verdict",
+  "recorded_at": "2026-11-01T04:29:19",
+  "fell_back_from": []
+ }
+}

@@ -1,0 +1,211 @@
+{
+ "symbol": "COFORGE",
+ "source": "screener.in",
+ "as_of": "2026-11-01T04:24:48",
+ "page": "https://www.screener.in/company/COFORGE/consolidated/",
+ "name": "Coforge Ltd",
+ "annual_reports": [
+  {
+   "year": 2026,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/b6778798-69aa-4fea-b818-8182497957b3.pdf"
+  },
+  {
+   "year": 2025,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/092cb657-c836-432f-8802-1fa337f1806e.pdf"
+  },
+  {
+   "year": 2024,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/4a9f4e43-9ca2-4956-8d5f-053e45e7a0ef.pdf"
+  },
+  {
+   "year": 2023,
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/7255f3ee-e102-4dca-ac7d-4b279447b296.pdf"
+  },
+  {
+   "year": 2022,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/74004532541.pdf"
+  },
+  {
+   "year": 2021,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/68802532541.pdf"
+  },
+  {
+   "year": 2020,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410320.pdf"
+  },
+  {
+   "year": 2019,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410319.pdf"
+  },
+  {
+   "year": 2018,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410318.pdf"
+  },
+  {
+   "year": 2017,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410317.pdf"
+  },
+  {
+   "year": 2016,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410316.pdf"
+  },
+  {
+   "year": 2015,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410315.pdf"
+  },
+  {
+   "year": 2014,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410314.pdf"
+  },
+  {
+   "year": 2013,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410313.pdf"
+  },
+  {
+   "year": 2012,
+   "url": "https://www.bseindia.com/bseplus/AnnualReport/532541/5325410312.pdf"
+  }
+ ],
+ "concalls": [
+  {
+   "month": "Oct 2026",
+   "transcript": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en"
+  },
+  {
+   "month": "Sep 2026",
+   "transcript": null
+  },
+  {
+   "month": "Jul 2026",
+   "transcript": "https://investors.coforge.com/hubfs/Coforge_Q1FY27%20Earnings%20Conference%20Call%20Transcript.pdf"
+  },
+  {
+   "month": "May 2026",
+   "transcript": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en"
+  },
+  {
+   "month": "Feb 2026",
+   "transcript": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf"
+  },
+  {
+   "month": "Jan 2026",
+   "transcript": "https://www.coforge.com/hubfs/Transcript-Coforge-Encora-Acquisition-Conference-Call.pdf"
+  },
+  {
+   "month": "Dec 2025",
+   "transcript": null
+  },
+  {
+   "month": "Oct 2025",
+   "transcript": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf"
+  },
+  {
+   "month": "Jul 2025",
+   "transcript": "https://www.coforge.com/hubfs/Coforge%20Earnings%20Conference%20Call%20Transcript%20Q1FY26.pdf"
+  },
+  {
+   "month": "May 2025",
+   "transcript": "https://www.coforge.com/hubfs/Earnings-Conference-Call-Transcript-Q4FY25.pdf"
+  },
+  {
+   "month": "Jan 2025",
+   "transcript": "https://www.coforge.com/hubfs/Earnings-Conference-Call-Transcript-Q3FY25.pdf"
+  },
+  {
+   "month": "Oct 2024",
+   "transcript": "https://www.coforge.com/hubfs/Transcript-of-Earnings-Conference-Call-Q2-FY25pdf.pdf"
+  },
+  {
+   "month": "Jul 2024",
+   "transcript": "https://www.coforge.com/hubfs/Q1FY25-earnings-call-transcript.pdf"
+  },
+  {
+   "month": "May 2024",
+   "transcript": "https://www.coforge.com/hubfs/Coforge-Q4FY24-Earnings-call-Transcript.pdf"
+  },
+  {
+   "month": "Jan 2024",
+   "transcript": "https://www.coforge.com/hubfs/Coforge-Q3FY24-earnings-call-transcript.pdf"
+  },
+  {
+   "month": "Oct 2023",
+   "transcript": "https://www.coforge.com/hubfs/Coforge-Q2FY24%20Earnings%20call%20Transcript.pdf"
+  },
+  {
+   "month": "Jul 2023",
+   "transcript": "https://www.coforge.com/hubfs/Earnings-call-Transcript-Q1FY24.pdf"
+  },
+  {
+   "month": "Jun 2023",
+   "transcript": null
+  },
+  {
+   "month": "Jun 2023",
+   "transcript": null
+  },
+  {
+   "month": "Jun 2023",
+   "transcript": null
+  },
+  {
+   "month": "Jun 2023",
+   "transcript": null
+  },
+  {
+   "month": "Jun 2023",
+   "transcript": null
+  },
+  {
+   "month": "Feb 2022",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=8059230a-0f0f-462e-a0ef-39974c178207.pdf"
+  },
+  {
+   "month": "Oct 2021",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=c622a151-d760-4f9f-95b0-e2daf66970bf.pdf"
+  },
+  {
+   "month": "Aug 2021",
+   "transcript": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=23c8c6c1-96d0-4020-b18a-43ddadbf8dcb.pdf"
+  },
+  {
+   "month": "Feb 2021",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2021-01/TRANSCRIPT_Coforge%20Q3FY21%20earnings%20call_28jan2021_0.pdf"
+  },
+  {
+   "month": "Nov 2019",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-07/TRANSCRIPT_NIIT_Tech_Q2FY20_earnings_call_23oct2019.pdf"
+  },
+  {
+   "month": "Aug 2019",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-07/Transcript_NIIT%20Tech%20Q1FY20%20earnings%20call_23july2019_6pm_0.pdf"
+  },
+  {
+   "month": "Nov 2018",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-07/Transcript_NIIT%20Tech_Q3FY19%20earnings%20call_18jan2019%204pm.pdf"
+  },
+  {
+   "month": "Oct 2018",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-07/Transcript_NIIT%20Tech_earnings%20call_Q2FY2019.pdf"
+  },
+  {
+   "month": "May 2018",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-08/Transcript_NIIT%20Tech%20Q4FY2018%20earnings%20call_04may2018.pdf"
+  },
+  {
+   "month": "Feb 2018",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-08/Transcript_NIIT%20Tech_Q3FY2018%20earnings%20call_19jan2018.pdf"
+  },
+  {
+   "month": "Nov 2017",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-08/Transcript_NIIT%20Tech%20Q2FY2018%20earnings%20call_4pm_18oct2017.pdf"
+  },
+  {
+   "month": "Aug 2017",
+   "transcript": "https://www.coforgetech.com/sites/default/files/2020-08/Transcript_NIIT%20Tech%20earnings%20call_20july2017_5pmIST.pdf"
+  },
+  {
+   "month": "Jun 2016",
+   "transcript": null
+  }
+ ]
+}

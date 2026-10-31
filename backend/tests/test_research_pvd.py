@@ -144,15 +144,15 @@ def test_evidence_must_come_from_a_searched_page_and_be_verbatim():
 def test_restating_a_target_in_other_words_is_not_a_revision():
     a = _promise(id="P1", metric="revenue_growth", unit="%", target_low=15, target_high=17, direction="range", horizon="FY26",
                  quote="It will be between 15% to 17% growth this year")
-    b = _promise(id="P2", metric="revenue_growth", unit="%", target_low=15, direction="at_least", call="Q4 FY26", doc="T-Q4FY26",
+    b = _promise(id="P2", metric="revenue_growth", unit="%", target_low=15, direction="at_least", call="Q3 FY26", doc="T-Q4FY26",
                  quote="Revenue growth more than 15%, EBITDA margin more than 27%")
-    c = _promise(id="P3", metric="revenue_growth", unit="%", target_low=12, direction="at_least", call="Q4 FY26", doc="T-Q4FY26",
+    c = _promise(id="P3", metric="revenue_growth", unit="%", target_low=12, direction="at_least", call="Q3 FY26", doc="T-Q4FY26",
                  quote="Revenue growth now more than 12% for the year")
     rows, _ = _assemble([a, b], [], [dict(promise_ids=["P1", "P2"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
     assert rows[0]["restated"] == 1 and rows[0]["revisions"] == []
     rows, _ = _assemble([a, c], [], [dict(promise_ids=["P1", "P3"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
     assert [r["target"] for r in rows[0]["revisions"]] == ["12%+"]
-    d = _promise(id="P4", metric="revenue_growth", unit="%", target_low=None, call="Q4 FY26", doc="T-Q4FY26",
+    d = _promise(id="P4", metric="revenue_growth", unit="%", target_low=None, call="Q3 FY26", doc="T-Q4FY26",
                  quote="we'll cross about the earlier number, mainly driven by EMS revenue")
     rows, _ = _assemble([a, b, d], [], [dict(promise_ids=["P1", "P2", "P4"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
     assert [x["change"] for x in rows[0]["later"]] == ["restated", "no figure read"]
@@ -253,3 +253,42 @@ def test_an_analyst_question_first_in_a_group_gives_way_to_managements_statement
                  quote="So $1 billion by FY '28, certainly visibility is there, and we are sure we'll do it.")
     rows, dropped = _assemble([q, m], [], [dict(promise_ids=["P1", "P2"], actual_ids=[], verdict="not_found", reason="", evidence=None)])
     assert rows[0]["promised"]["quote"].startswith("So $1 billion") and not dropped
+
+
+def test_period_written_in_the_quote_wins():
+    a = _reported(metric="ebitda_margin", label="Q4 FY26 EBIT margin", period="Q1 FY26", value=16.6, unit="%",
+                  quote="I would like to draw your attention to the fact that Q4 FY26 EBIT of the firm is 16.6%, while it was")
+    assert pvd.period_from_quote(a)["period"] == "Q4 FY26"
+    two = a | {"quote": "Q4 FY26 EBIT of the firm is 16.6%, while it was 12.3% in Q4 FY25"}
+    assert pvd.period_from_quote(two)["period"] == "Q1 FY26"          # two periods named: leave it
+
+
+def test_ebit_guidance_is_not_settled_by_an_ebitda_figure():
+    p = _promise(id="P1", metric="ebitda_margin", label="FY26 EBIT margin", unit="%", target_low=14.0, horizon="FY26",
+                 quote="if we manage to hit it this year, we will plan to at a minimum clip along at 14% EBIT")
+    ebitda = _reported(id="R1", metric="ebitda_margin", label="FY26 EBITDA margin", value=18.6, unit="%", period="FY26",
+                       quote="EBITDA margins came in at 18.6% for the year")
+    ebit = _reported(id="R2", metric="ebitda_margin", label="FY26 EBIT margin", value=14.4, unit="%", period="FY26",
+                     quote="EBIT margin came in at 14.4% as compared to 10.7% a year ago")
+    rows, _ = _assemble([p], [ebitda, ebit], [dict(promise_ids=["P1"], actual_ids=["R1", "R2"], verdict="met", reason="", evidence=None)])
+    assert rows[0]["delivered"]["value"] == 14.4
+
+
+def test_code_matches_a_unique_figure_the_judge_missed_but_not_an_ambiguous_one():
+    p = _promise(id="P1", metric="ebitda_margin", label="Q4 EBIT", unit="%", target_low=15.0, horizon="Q4 FY26", call="Q3 FY26",
+                 quote="our plan to register a 15% EBIT in Q4 will lead us to the 14% EBIT guidance")
+    q4 = _reported(id="R1", metric="ebitda_margin", label="Q4 FY26 EBIT margin", period="Q1 FY26", value=16.6, unit="%",
+                   quote="the fact that Q4 FY26 EBIT of the firm is 16.6%, while it was")
+    group = [dict(promise_ids=["P1"], actual_ids=[], verdict="not_found", reason="", evidence=None)]
+    rows, _ = _assemble([p], [q4], group)
+    assert (rows[0]["verdict"], rows[0]["delivered"]["period"]) == ("met", "Q4 FY26")
+    other = _reported(id="R2", metric="ebitda_margin", label="Standalone EBIT", period="Q4 FY26", value=17.0, unit="%",
+                      quote="standalone EBIT of 17% in the quarter")
+    rows, _ = _assemble([p], [q4, other], group)
+    assert rows[0]["verdict"] == "not_found"
+
+
+def test_a_promise_about_the_quarter_being_reported_is_not_a_promise():
+    p = _promise(horizon="Q2 FY26", call="Q2 FY26", kind="milestone", target_low=None,
+                 quote="effective date of the merger is 1st April 2025 as approved")
+    assert pvd.row_problem(p).startswith("due by the quarter the call itself reports")

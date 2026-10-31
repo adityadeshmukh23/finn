@@ -1,0 +1,972 @@
+{
+ "symbol": "COFORGE",
+ "name": "Coforge Ltd",
+ "generated_at": "2026-11-01T04:31:29",
+ "status": "ok",
+ "latest_period": "Q2 FY27",
+ "docs": {
+  "symbol": "COFORGE",
+  "calls": [
+   {
+    "id": "T-Q2FY26",
+    "kind": "transcript",
+    "title": "Q2 FY26 earnings call",
+    "period": "Q2 FY26",
+    "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf",
+    "pages": 22,
+    "listed_as": "Oct 2025"
+   },
+   {
+    "id": "T-Q3FY26",
+    "kind": "transcript",
+    "title": "Q3 FY26 earnings call",
+    "period": "Q3 FY26",
+    "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf",
+    "pages": 21,
+    "listed_as": "Feb 2026"
+   },
+   {
+    "id": "T-Q4FY26",
+    "kind": "transcript",
+    "title": "Q4 FY26 earnings call",
+    "period": "Q4 FY26",
+    "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en",
+    "pages": 27,
+    "listed_as": "May 2026"
+   },
+   {
+    "id": "T-Q1FY27",
+    "kind": "transcript",
+    "title": "Q1 FY27 earnings call",
+    "period": "Q1 FY27",
+    "url": "https://investors.coforge.com/hubfs/Coforge_Q1FY27%20Earnings%20Conference%20Call%20Transcript.pdf",
+    "pages": 25,
+    "listed_as": "Jul 2026"
+   },
+   {
+    "id": "T-Q2FY27",
+    "kind": "transcript",
+    "title": "Q2 FY27 earnings call",
+    "period": "Q2 FY27",
+    "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en",
+    "pages": 23,
+    "listed_as": "Oct 2026"
+   }
+  ],
+  "annual_report": {
+   "id": "AR-FY26",
+   "kind": "annual_report",
+   "title": "Annual report FY26",
+   "period": "FY26",
+   "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/b6778798-69aa-4fea-b818-8182497957b3.pdf",
+   "pages": 182,
+   "listed_as": "Annual Report 2026"
+  },
+  "skipped": [
+   {
+    "listed_as": "Sep 2026",
+    "why": "no transcript link on screener"
+   },
+   {
+    "listed_as": "Jan 2026",
+    "why": "not an earnings call (business update, acquisition or other)",
+    "url": "https://www.coforge.com/hubfs/Transcript-Coforge-Encora-Acquisition-Conference-Call.pdf"
+   },
+   {
+    "listed_as": "Dec 2025",
+    "why": "no transcript link on screener"
+   }
+  ],
+  "index_source": "screener.in",
+  "index_as_of": "2026-11-01T04:24:48"
+ },
+ "financials": {
+  "doc": "AR-FY26",
+  "page": 136,
+  "basis": "consolidated",
+  "unit": "million",
+  "fy": "FY26",
+  "prev_fy": "FY25",
+  "figures": {
+   "revenue": {
+    "current": 16402.7,
+    "previous": 12073.3
+   },
+   "other_income": {
+    "current": 73.2,
+    "previous": 164.7
+   },
+   "finance_costs": {
+    "current": 168.6,
+    "previous": 134.7
+   },
+   "depreciation": {
+    "current": 681.9,
+    "previous": 427.6
+   },
+   "pbt": {
+    "current": 1932.8,
+    "previous": 1296.1
+   },
+   "pat": {
+    "current": 1744.7,
+    "previous": 936.1
+   },
+   "ebitda": {
+    "current": 2710.1,
+    "previous": 1693.7
+   }
+  },
+  "printed": {
+   "revenue": {
+    "current": 164027.0,
+    "previous": 120733.0
+   },
+   "other_income": {
+    "current": 732.0,
+    "previous": 1647.0
+   },
+   "finance_costs": {
+    "current": 1686.0,
+    "previous": 1347.0
+   },
+   "depreciation": {
+    "current": 6819.0,
+    "previous": 4276.0
+   },
+   "pbt": {
+    "current": 19328.0,
+    "previous": 12961.0
+   },
+   "pat": {
+    "current": 17447.0,
+    "previous": 9361.0
+   }
+  },
+  "lender": false
+ },
+ "models": {
+  "extract_guidance": [
+   {
+    "doc": "T-Q2FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q3FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q4FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q1FY27",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   },
+   {
+    "doc": "T-Q2FY27",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "extract_annual": [
+   {
+    "doc": "AR-FY26",
+    "model": "gemini:gemini-3.5-flash-lite",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ],
+  "verdict": [
+   {
+    "model": "gemini:gemini-3.8-flash",
+    "source": "recorded",
+    "note": "",
+    "fallbacks": []
+   }
+  ]
+ },
+ "scorecard": {
+  "counts": {
+   "met": 2,
+   "partially": 0,
+   "missed": 0,
+   "too_vague": 6,
+   "not_found": 3,
+   "not_yet_due": 12
+  },
+  "checkable": 2,
+  "credibility": {
+   "headline": "Met 2 of 2 checkable promises",
+   "line": "Delivered FY26 EBIT margin minimum and Q4 EBIT.",
+   "by": "FINN"
+  },
+  "rows": [
+   {
+    "id": "PQ2FY26-8",
+    "metric": "ebitda_margin",
+    "label": "FY26 EBIT margin minimum",
+    "kind": "numeric",
+    "verdict": "met",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "Ankur, once we hit 14% EBIT, if we manage to hit it this year, we will plan to at a minimum clip along at 14% EBIT, but our primary aim will be to make sure that we prioritize growth over any further EBIT improvement.",
+     "doc": "T-Q2FY26",
+     "page": 11,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=11",
+     "target": "14%+"
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q3 FY26",
+      "speaker": "Sudhir Singh",
+      "quote": "Our reported 13.4 % EBIT for the quarter and our plan to register a 15% EBIT in Q4 will lead us to the 14% EBIT guidance for FY2026 .",
+      "doc": "T-Q3FY26",
+      "page": 2,
+      "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=2",
+      "target": "14%+",
+      "change": "restated"
+     }
+    ],
+    "delivered": {
+     "value": 14.4,
+     "unit": "%",
+     "text": "14.4%",
+     "period": "FY26",
+     "label": "FY26 EBIT margin",
+     "source": "transcript",
+     "how": "as stated by management",
+     "speaker": "Saurabh Goel",
+     "quote": "EBIT expanded to 23,645 million rupees , up 83% versus the previous year . EBIT margin came in at 14.4% as compared to 10.7% a year ago",
+     "doc": "T-Q4FY26",
+     "page": 7,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=7",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ3FY26-3",
+    "metric": "ebitda_margin",
+    "label": "Q4 EBIT",
+    "kind": "numeric",
+    "verdict": "met",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q4 FY26",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "our plan to register a 15% EBIT in Q4 will lead us to the 14% EBIT guidance for FY2026",
+     "doc": "T-Q3FY26",
+     "page": 2,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=2",
+     "target": "15%+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": {
+     "value": 16.6,
+     "unit": "%",
+     "text": "16.6%",
+     "period": "Q4 FY26",
+     "label": "Q4 FY26 EBIT margin",
+     "source": "transcript",
+     "how": "as stated by management",
+     "speaker": "Sudhir Singh",
+     "quote": "I would like to draw your attention to the fact that Q4 FY26 EBIT of the firm is 16.6%, while it was 12.3% in the same quarter a year back.",
+     "doc": "T-Q4FY26",
+     "page": 4,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=4",
+     "title": "Q4 FY26 earnings call"
+    }
+   },
+   {
+    "id": "PQ2FY26-5",
+    "metric": "other",
+    "label": "Healthcare book of business",
+    "kind": "numeric",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "FINN found no FY26 figure for this in the later calls.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "One is healthcare, where we think that by the end of this year, we will have a book of business of almost $100 million.",
+     "doc": "T-Q2FY26",
+     "page": 9,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=9",
+     "target": "about $100 mn"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-7",
+    "metric": "other",
+    "label": "Cigniti acquisition completion",
+    "kind": "milestone",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "Later calls mention it; FINN found none that says whether it happened.",
+    "due": "Q4 FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "We expect that to be getting completed by either December, Jan timeframe.",
+     "doc": "T-Q2FY26",
+     "page": 10,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=10",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-5",
+    "metric": "other",
+    "label": "Encora transaction expenses",
+    "kind": "numeric",
+    "verdict": "not_found",
+    "verdict_by": "rule",
+    "reason": "FINN found no H1 FY27 figure for this in the later calls.",
+    "due": "H1 FY27",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "we are expecting expenses associated with the transaction included integration and funding expenses over the course of next two quarters to the extent of $ 10 – $15 million.",
+     "doc": "T-Q3FY26",
+     "page": 7,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=7",
+     "target": "$10 mn–$15 mn"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-2",
+    "metric": "ebitda_margin",
+    "label": "EBIT margin threshold",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "If we do hit the 14% reported EBIT margin plan for the year, we will, at a minimum, irrespective of the changes in the macros, commit ourselves to delivering on that as the minimum threshold going forward in the years to come.",
+     "doc": "T-Q2FY26",
+     "page": 7,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=7",
+     "target": "14%+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-4",
+    "metric": "revenue_growth",
+    "label": "Ninth consecutive year of robust growth",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No number or milestone to check against.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "We remain committed, strongly committed, to turning in the ninth consecutive year of robust growth, despite the uncertain macros swirling around our industry.",
+     "doc": "T-Q2FY26",
+     "page": 6,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=6",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-6",
+    "metric": "other",
+    "label": "Public sector outside India run rate",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "And the second is public sector outside India, which is a book of business that has already crossed 150 odd million dollars and we think that in the coming quarters, we should start nudging the 200 million dollar run rate on the vertical as well.",
+     "doc": "T-Q2FY26",
+     "page": 9,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=9",
+     "target": "about $200 mn"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-9",
+    "metric": "other",
+    "label": "Free cash flow to PAT ratio",
+    "kind": "numeric",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No fixed date to check against.",
+    "due": "unspecified",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "So, the focus will be to maintain FCF to PAT of 80 odd percent, 75 to 80 odd percent.",
+     "doc": "T-Q2FY26",
+     "page": 13,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=13",
+     "target": "75%–80%"
+    },
+    "revisions": [
+     {
+      "call": "Q3 FY26",
+      "speaker": "Sudhir Singh",
+      "quote": "Finally, free cash flow for the quarter came in at 110%, significantly ahead of our guidance of around 70% to 80% FCF on a sustained basis.",
+      "doc": "T-Q3FY26",
+      "page": 2,
+      "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=2",
+      "target": "70%–80%"
+     }
+    ],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q3 FY26",
+      "speaker": "Sudhir Singh",
+      "quote": "Finally, free cash flow for the quarter came in at 110%, significantly ahead of our guidance of around 70% to 80% FCF on a sustained basis.",
+      "doc": "T-Q3FY26",
+      "page": 2,
+      "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=2",
+      "target": "70%–80%",
+      "change": "revised"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY26-11",
+    "metric": "revenue_growth",
+    "label": "Sustained and robust growth",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No number or milestone to check against.",
+    "due": "FY26",
+    "promised": {
+     "call": "Q2 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "intent, as always, and exemplified by our results over the last nine years, continues to be that over the next two to three years and beyond, we will continue to turn in sustained and robust growth.",
+     "doc": "T-Q2FY26",
+     "page": 7,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=7",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ1FY27-1",
+    "metric": "other",
+    "label": "Large deals in Q2",
+    "kind": "qualitative",
+    "verdict": "too_vague",
+    "verdict_by": "rule",
+    "reason": "No number or milestone to check against.",
+    "due": "Q2 FY27",
+    "promised": {
+     "call": "Q1 FY27",
+     "speaker": "Sudhir Singh",
+     "quote": "In Q2 itself, and we know that a month the quarter has already elapsed, we believe we are likely to sign large deals in numbers that were very close to what we signed in a full year just 2-3 years back.",
+     "doc": "T-Q1FY27",
+     "page": 2,
+     "url": "https://investors.coforge.com/hubfs/Coforge_Q1FY27%20Earnings%20Conference%20Call%20Transcript.pdf#page=2",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-4",
+    "metric": "revenue_growth",
+    "label": "Robust growth",
+    "kind": "qualitative",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Sudhir Singh",
+     "quote": "set us up for continued robust growth performance not just in FY2026, but in FY2027 and hopefully beyond.",
+     "doc": "T-Q3FY26",
+     "page": 2,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=2",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q4 FY26",
+      "speaker": "Sudhir Singh",
+      "quote": "We believe revenue growth will be robust. We are confident of achieving an EBITDA margin of 20.5% to 21% in FY27 on a consolidated basis.",
+      "doc": "T-Q4FY26",
+      "page": 15,
+      "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=15",
+      "target": "",
+      "change": "no figure read"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ3FY26-6",
+    "metric": "pat",
+    "label": "No dilution of EPS in FY27",
+    "kind": "qualitative",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q3 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "The guidance related to no dilution of EPS in FY27 of the combined business stays intact even after this debt.",
+     "doc": "T-Q3FY26",
+     "page": 8,
+     "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=8",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-1",
+    "metric": "ebitda_margin",
+    "label": "FY27 consolidated EBITDA margin",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "EBITDA margins of 20.5% to 21% in FY27 on a consolidated basis, which is including Encora and,",
+     "doc": "T-Q4FY26",
+     "page": 8,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=8",
+     "target": "20.5%–21%"
+    },
+    "revisions": [],
+    "restated": 2,
+    "later": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Sudhir Singh",
+      "quote": "We are confident of achieving an EBITDA margin of 20.5 to 21% on a consolidated basis.",
+      "doc": "T-Q1FY27",
+      "page": 10,
+      "url": "https://investors.coforge.com/hubfs/Coforge_Q1FY27%20Earnings%20Conference%20Call%20Transcript.pdf#page=10",
+      "target": "20.5%–21%",
+      "change": "restated"
+     },
+     {
+      "call": "Q2 FY27",
+      "speaker": "Saurabh Goel",
+      "quote": "We remain confident of the guidance of 20.5% to 21% range.",
+      "doc": "T-Q2FY27",
+      "page": 10,
+      "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=10",
+      "target": "20.5%–21%",
+      "change": "restated"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-2",
+    "metric": "ebitda_margin",
+    "label": "FY27 standalone EBIT margin",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "EBIT margins of 16.5% to 17% on a standalone basis, that is, excluding Encora, and",
+     "doc": "T-Q4FY26",
+     "page": 8,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=8",
+     "target": "16.5%–17%"
+    },
+    "revisions": [],
+    "restated": 1,
+    "later": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Sudhir Singh",
+      "quote": "EBIT margins are expected to be in the range of 16.5 to 17% on a standalone basis, and 15.5% or higher on a consolidated basis.",
+      "doc": "T-Q1FY27",
+      "page": 10,
+      "url": "https://investors.coforge.com/hubfs/Coforge_Q1FY27%20Earnings%20Conference%20Call%20Transcript.pdf#page=10",
+      "target": "16.5%–17%",
+      "change": "restated"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-3",
+    "metric": "ebitda_margin",
+    "label": "FY27 consolidated EBIT margin",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "15.5% on a consolidated basis, which includes Encora.",
+     "doc": "T-Q4FY26",
+     "page": 8,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=8",
+     "target": "15.5%+"
+    },
+    "revisions": [
+     {
+      "call": "Q2 FY27",
+      "speaker": "Sudhir Singh",
+      "quote": "1. We are pleased to raise our consolidated EBIT margin guidance for fiscal year 2027 to 16%, from the 15.5% we had shared at the beginning of the year.",
+      "doc": "T-Q2FY27",
+      "page": 2,
+      "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=2",
+      "target": "16%+"
+     }
+    ],
+    "restated": 2,
+    "later": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Sudhir Singh",
+      "quote": "EBIT margins are expected to be in the range of 16.5 to 17% on a standalone basis, and 15.5% or higher on a consolidated basis.",
+      "doc": "T-Q1FY27",
+      "page": 10,
+      "url": "https://investors.coforge.com/hubfs/Coforge_Q1FY27%20Earnings%20Conference%20Call%20Transcript.pdf#page=10",
+      "target": "15.5%+",
+      "change": "restated"
+     },
+     {
+      "call": "Q2 FY27",
+      "speaker": "Sudhir Singh",
+      "quote": "1. We are pleased to raise our consolidated EBIT margin guidance for fiscal year 2027 to 16%, from the 15.5% we had shared at the beginning of the year.",
+      "doc": "T-Q2FY27",
+      "page": 2,
+      "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=2",
+      "target": "16%+",
+      "change": "revised"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-4",
+    "metric": "pat",
+    "label": "FY27 effective tax rate guidance",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "Steady state effective tax rate guidance for FY27 is between 23% and 24%.",
+     "doc": "T-Q4FY26",
+     "page": 7,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=7",
+     "target": "23%–24%"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ4FY26-5",
+    "metric": "other",
+    "label": "FY27 Free Cash Flow to PAT",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q4 FY26",
+     "speaker": "Saurabh Goel",
+     "quote": "Looking ahead, we anticipate free cash flow to PAT to be maintained at 100% from FY27 onwards in contrast to our earlier guidance of 70 to 80%.",
+     "doc": "T-Q4FY26",
+     "page": 8,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q4FY26%20_AJ.pdf?hsLang=en#page=8",
+     "target": "100%+"
+    },
+    "revisions": [],
+    "restated": 2,
+    "later": [
+     {
+      "call": "Q1 FY27",
+      "speaker": "Sudhir Singh",
+      "quote": "FCF to PAT for the year will be 100%+.",
+      "doc": "T-Q1FY27",
+      "page": 10,
+      "url": "https://investors.coforge.com/hubfs/Coforge_Q1FY27%20Earnings%20Conference%20Call%20Transcript.pdf#page=10",
+      "target": "100%+",
+      "change": "restated"
+     },
+     {
+      "call": "Q2 FY27",
+      "speaker": "Sudhir Singh",
+      "quote": "Short note, we expect it to be 100% for the year.",
+      "doc": "T-Q2FY27",
+      "page": 4,
+      "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=4",
+      "target": "100%+",
+      "change": "restated"
+     }
+    ],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY27-2",
+    "metric": "ebitda_margin",
+    "label": "Reported Q4 EBIT",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q4 FY27",
+    "promised": {
+     "call": "Q2 FY27",
+     "speaker": "Sudhir Singh",
+     "quote": "We also plan to achieve a reported Q4 EBIT of 17%, thereby establishing the glide path to further and significant margin expansion in fiscal year 2028 as well.",
+     "doc": "T-Q2FY27",
+     "page": 2,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=2",
+     "target": "17%+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY27-3",
+    "metric": "revenue_growth",
+    "label": "Industry growth leader",
+    "kind": "qualitative",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY27",
+    "promised": {
+     "call": "Q2 FY27",
+     "speaker": "Sudhir Singh",
+     "quote": "This year, we will be the industry growth leader for the third consecutive year.",
+     "doc": "T-Q2FY27",
+     "page": 3,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=3",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY27-6",
+    "metric": "revenue_growth",
+    "label": "Encora revenue growth",
+    "kind": "qualitative",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q3 FY27",
+    "promised": {
+     "call": "Q2 FY27",
+     "speaker": "Sudhir Singh",
+     "quote": "we continue to expect Encora’s revenue growth to mirror Coforge’s growth from Q3 onwards.",
+     "doc": "T-Q2FY27",
+     "page": 7,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=7",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY27-7",
+    "metric": "other",
+    "label": "Potential win announcement around large Encora client",
+    "kind": "milestone",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "Q4 FY27",
+    "promised": {
+     "call": "Q2 FY27",
+     "speaker": "Sudhir Singh",
+     "quote": "If all goes well, we hope to announce a win either in Q3 or in Q4 around this.",
+     "doc": "T-Q2FY27",
+     "page": 7,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=7",
+     "target": ""
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   },
+   {
+    "id": "PQ2FY27-9",
+    "metric": "ebitda_margin",
+    "label": "EBIT margin going forward",
+    "kind": "numeric",
+    "verdict": "not_yet_due",
+    "verdict_by": "rule",
+    "reason": "",
+    "due": "FY28",
+    "promised": {
+     "call": "Q2 FY27",
+     "speaker": "Saurabh Goel",
+     "quote": "expect EBIT margins to be more than 17% going forward.",
+     "doc": "T-Q2FY27",
+     "page": 10,
+     "url": "https://investors.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2FY27-October-23-2026.pdf?hsLang=en#page=10",
+     "target": "17%+"
+    },
+    "revisions": [],
+    "restated": 0,
+    "later": [],
+    "delivered": null
+   }
+  ]
+ },
+ "dropped": [
+  {
+   "stage": "promise",
+   "what": "Free cash flow to PAT",
+   "doc": "T-Q2FY26",
+   "page": 7,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "reported",
+   "what": "Government outside India vertical QoQ growth in dollar terms",
+   "doc": "T-Q2FY26",
+   "page": 4,
+   "why": "0.4 is not in the quote"
+  },
+  {
+   "stage": "reported",
+   "what": "Acquisition-related expenses",
+   "doc": "T-Q2FY26",
+   "page": 6,
+   "why": "0.5 is not in the quote"
+  },
+  {
+   "stage": "promise",
+   "what": "Q3 large deal signings",
+   "doc": "T-Q2FY27",
+   "page": 3,
+   "why": "8 is not in the quote"
+  },
+  {
+   "stage": "reported",
+   "what": "Next 12-month executable order book",
+   "doc": "T-Q2FY27",
+   "page": 6,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "reported",
+   "what": "Free cash flow to PAT conversion for H1",
+   "doc": "T-Q2FY27",
+   "page": 9,
+   "why": "quote not found on the cited page"
+  },
+  {
+   "stage": "evidence",
+   "what": "Cigniti acquisition completion",
+   "doc": "T-Q4FY26",
+   "page": 7,
+   "why": "evidence cited a page that wasn't among the passages searched"
+  },
+  {
+   "stage": "evidence",
+   "what": "Large deals in Q2",
+   "doc": "T-Q2FY27",
+   "page": 3,
+   "why": "8 is not in the evidence quote"
+  },
+  {
+   "stage": "promise",
+   "what": "Effective date of Cigniti merger",
+   "doc": "T-Q2FY26",
+   "page": 10,
+   "why": "due by the quarter the call itself reports, so it isn't a forward-looking promise"
+  }
+ ],
+ "judged": true
+}

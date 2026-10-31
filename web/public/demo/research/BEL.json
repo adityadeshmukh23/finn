@@ -1,7 +1,7 @@
 {
  "symbol": "BEL",
  "name": "Bharat Electronics Ltd",
- "generated_at": "2026-11-01T04:24:19",
+ "generated_at": "2026-11-01T04:31:29",
  "status": "ok",
  "latest_period": "Q1 FY27",
  "docs": {
@@ -521,7 +521,7 @@
     "kind": "numeric",
     "verdict": "not_found",
     "verdict_by": "rule",
-    "reason": "No FY26 figure in the later calls.",
+    "reason": "FINN found no FY26 figure for this in the later calls.",
     "due": "FY26",
     "promised": {
      "call": "Q1 FY26",
@@ -555,7 +555,7 @@
     "kind": "numeric",
     "verdict": "not_found",
     "verdict_by": "rule",
-    "reason": "No FY26 figure in the later calls.",
+    "reason": "FINN found no FY26 figure for this in the later calls.",
     "due": "FY26",
     "promised": {
      "call": "Q1 FY26",

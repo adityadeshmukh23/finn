@@ -1,0 +1,170 @@
+{
+ "promises": [
+  {
+   "metric": "ebitda_margin",
+   "label": "FY2026 EBIT guidance",
+   "kind": "numeric",
+   "target_low": 14.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Sudhir Singh",
+   "quote": "Our reported 13.4 % EBIT for the quarter and our plan to register a 15% EBIT in Q4 will lead us to the 14% EBIT guidance for FY2026 .",
+   "page": 2
+  },
+  {
+   "metric": "other",
+   "label": "FCF on a sustained basis",
+   "kind": "numeric",
+   "target_low": 70.0,
+   "target_high": 80.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Sudhir Singh",
+   "quote": "Finally, free cash flow for the quarter came in at 110%, significantly ahead of our guidance of around 70% to 80% FCF on a sustained basis.",
+   "page": 2
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Q4 EBIT",
+   "kind": "numeric",
+   "target_low": 15.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "Q4 FY26",
+   "speaker": "Sudhir Singh",
+   "quote": "our plan to register a 15% EBIT in Q4 will lead us to the 14% EBIT guidance for FY2026",
+   "page": 2
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Robust growth",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Sudhir Singh",
+   "quote": "set us up for continued robust growth performance not just in FY2026, but in FY2027 and hopefully beyond.",
+   "page": 2
+  },
+  {
+   "metric": "other",
+   "label": "Encora transaction expenses",
+   "kind": "numeric",
+   "target_low": 10.0,
+   "target_high": 15.0,
+   "unit": "usd_million",
+   "direction": "range",
+   "horizon": "H1 FY27",
+   "speaker": "Saurabh Goel",
+   "quote": "we are expecting expenses associated with the transaction included integration and funding expenses over the course of next two quarters to the extent of $ 10 – $15 million.",
+   "page": 7
+  },
+  {
+   "metric": "pat",
+   "label": "No dilution of EPS in FY27",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY27",
+   "speaker": "Saurabh Goel",
+   "quote": "The guidance related to no dilution of EPS in FY27 of the combined business stays intact even after this debt.",
+   "page": 8
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue_growth",
+   "label": "Q3 sequential CC growth",
+   "period": "Q3 FY26",
+   "value": 4.4,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "In Q3, we registered a growth of 4.4 % in CC terms, and our year -to-date dollar revenue growth is now 32.8%.",
+   "page": 2
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "YTD dollar revenue growth",
+   "period": "9M FY26",
+   "value": 32.8,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "In Q3, we registered a growth of 4.4 % in CC terms, and our year -to-date dollar revenue growth is now 32.8%.",
+   "page": 2
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "Reported EBIT margin",
+   "period": "Q3 FY26",
+   "value": 13.4,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "it is pertinent to note that our reported 13.4 % EBIT for the quarter and our plan to register a 15% EBIT in Q4 will lead us to the 14% EBIT guidance for FY2026 .",
+   "page": 2
+  },
+  {
+   "metric": "other",
+   "label": "Free cash flow to normalized PAT",
+   "period": "Q3 FY26",
+   "value": 110.0,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "Finally, free cash flow for the quarter came in at 110%, significantly ahead of our guidance of around 70% to 80% FCF on a sustained basis.",
+   "page": 2
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Order intake",
+   "period": "Q3 FY26",
+   "value": 593.0,
+   "unit": "usd_million",
+   "speaker": "Sudhir Singh",
+   "quote": "The total order intake during Q3 was $593 million. It was almost within kissing distance of $600 million.",
+   "page": 4
+  },
+  {
+   "metric": "order_book",
+   "label": "Executable order book",
+   "period": "Q3 FY26",
+   "value": 1.72,
+   "unit": "usd_billion",
+   "speaker": "Sudhir Singh",
+   "quote": "The executable order book, which reflects the total value of locked orders over the next 12 months stands at a record $1.72 billion .",
+   "page": 4
+  },
+  {
+   "metric": "revenue",
+   "label": "Revenue",
+   "period": "Q3 FY26",
+   "value": 41881.0,
+   "unit": "none",
+   "speaker": "Saurabh Goel",
+   "quote": "We are pleased to report revenue of INR 41,881 Mn in Q3 of FY26 reflecting a sequential growth of 4.4 % in CC terms and 5.1% in INR terms.",
+   "page": 7
+  },
+  {
+   "metric": "capex",
+   "label": "Capital expenditure",
+   "period": "Q3 FY26",
+   "value": 3.0,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "Capital expenditure for the quarter stood at $3 million.",
+   "page": 7
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:25:43",
+  "fell_back_from": []
+ }
+}

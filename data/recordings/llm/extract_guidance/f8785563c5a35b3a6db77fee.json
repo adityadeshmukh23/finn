@@ -1,0 +1,595 @@
+{
+ "promises": [
+  {
+   "metric": "ebitda_margin",
+   "label": "FY26 EBIT margin",
+   "kind": "numeric",
+   "target_low": 14.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Saurabh Goel",
+   "quote": "This reported EBIT margin is what we are targeting, that we will touch 14% in FY’26?",
+   "page": 9
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBIT margin threshold",
+   "kind": "numeric",
+   "target_low": 14.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "unspecified",
+   "speaker": "Sudhir Singh",
+   "quote": "If we do hit the 14% reported EBIT margin plan for the year, we will, at a minimum, irrespective of the changes in the macros, commit ourselves to delivering on that as the minimum threshold going forward in the years to come.",
+   "page": 7
+  },
+  {
+   "metric": "other",
+   "label": "Free cash flow to PAT",
+   "kind": "numeric",
+   "target_low": 70.0,
+   "target_high": 80.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Sudhir Singh",
+   "quote": "we believe on a sustained basis, you should expect free cash flow to PAT at around 70% to 80% going forward.",
+   "page": 7
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Ninth consecutive year of robust growth",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Sudhir Singh",
+   "quote": "We remain committed, strongly committed, to turning in the ninth consecutive year of robust growth, despite the uncertain macros swirling around our industry.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Healthcare book of business",
+   "kind": "numeric",
+   "target_low": 100.0,
+   "target_high": null,
+   "unit": "usd_million",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Sudhir Singh",
+   "quote": "One is healthcare, where we think that by the end of this year, we will have a book of business of almost $100 million.",
+   "page": 9
+  },
+  {
+   "metric": "other",
+   "label": "Public sector outside India run rate",
+   "kind": "numeric",
+   "target_low": 200.0,
+   "target_high": null,
+   "unit": "usd_million",
+   "direction": "about",
+   "horizon": "unspecified",
+   "speaker": "Sudhir Singh",
+   "quote": "And the second is public sector outside India, which is a book of business that has already crossed 150 odd million dollars and we think that in the coming quarters, we should start nudging the 200 million dollar run rate on the vertical as well.",
+   "page": 9
+  },
+  {
+   "metric": "other",
+   "label": "Cigniti acquisition completion",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q4 FY26",
+   "speaker": "Saurabh Goel",
+   "quote": "We expect that to be getting completed by either December, Jan timeframe.",
+   "page": 10
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "FY26 EBIT margin minimum",
+   "kind": "numeric",
+   "target_low": 14.0,
+   "target_high": null,
+   "unit": "%",
+   "direction": "at_least",
+   "horizon": "FY26",
+   "speaker": "Sudhir Singh",
+   "quote": "Ankur, once we hit 14% EBIT, if we manage to hit it this year, we will plan to at a minimum clip along at 14% EBIT, but our primary aim will be to make sure that we prioritize growth over any further EBIT improvement.",
+   "page": 11
+  },
+  {
+   "metric": "other",
+   "label": "Free cash flow to PAT ratio",
+   "kind": "numeric",
+   "target_low": 75.0,
+   "target_high": 80.0,
+   "unit": "%",
+   "direction": "range",
+   "horizon": "unspecified",
+   "speaker": "Saurabh Goel",
+   "quote": "So, the focus will be to maintain FCF to PAT of 80 odd percent, 75 to 80 odd percent.",
+   "page": 13
+  },
+  {
+   "metric": "other",
+   "label": "Effective date of Cigniti merger",
+   "kind": "milestone",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "Q1 FY26",
+   "speaker": "Saurabh Goel",
+   "quote": "effective date of the merger is 1st April 2025.",
+   "page": 10
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sustained and robust growth",
+   "kind": "qualitative",
+   "target_low": null,
+   "target_high": null,
+   "unit": "none",
+   "direction": "about",
+   "horizon": "FY26",
+   "speaker": "Sudhir Singh",
+   "quote": "intent, as always, and exemplified by our results over the last nine years, continues to be that over the next two to three years and beyond, we will continue to turn in sustained and robust growth.",
+   "page": 7
+  }
+ ],
+ "reported": [
+  {
+   "metric": "revenue_growth",
+   "label": "Sequential CC revenue growth",
+   "period": "Q2 FY26",
+   "value": 5.9,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "The firm recorded 5.9% sequential CC growth and registered an EBIT of 14% for the quarter.",
+   "page": 2
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBIT margin",
+   "period": "Q2 FY26",
+   "value": 14.0,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "The firm recorded 5.9% sequential CC growth and registered an EBIT of 14% for the quarter.",
+   "page": 2
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sequential revenue growth in CC",
+   "period": "Q2 FY26",
+   "value": 5.9,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "I am pleased to report the firm registered a sequential revenue growth of 5.9% in CC terms.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sequential revenue growth in INR",
+   "period": "Q2 FY26",
+   "value": 8.1,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "In Indian rupee and US dollar terms, the sequential growth was 8.1% and 4.5% respectively.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sequential revenue growth in USD",
+   "period": "Q2 FY26",
+   "value": 4.5,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "In Indian rupee and US dollar terms, the sequential growth was 8.1% and 4.5% respectively.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Travel vertical sequential growth in dollar terms",
+   "period": "Q2 FY26",
+   "value": 6.4,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "The growth during the quarter was led by the travel vertical which grew 6.4% sequentially in dollar terms.",
+   "page": 3
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Other verticals sequential growth",
+   "period": "Q2 FY26",
+   "value": 5.9,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "Other verticals which include healthcare, retail, high-tech and manufacturing grew 5.9%.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Insurance vertical sequential growth",
+   "period": "Q2 FY26",
+   "value": 1.8,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "The insurance vertical grew 1.8% and the BFS vertical grew by 4% sequentially.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "BFS vertical sequential growth",
+   "period": "Q2 FY26",
+   "value": 4.0,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "The insurance vertical grew 1.8% and the BFS vertical grew by 4% sequentially.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Government outside India vertical QoQ growth in dollar terms",
+   "period": "Q2 FY26",
+   "value": 0.4,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "Government outside India vertical grew 0.4% QoQ in dollar terms.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Top 5 clients sequential growth",
+   "period": "Q2 FY26",
+   "value": 6.2,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "Our top 5 clients and our top 10 clients grew 6.2% and 9.8% quarter on quarter respectively.",
+   "page": 4
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Top 10 clients sequential growth",
+   "period": "Q2 FY26",
+   "value": 9.8,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "Our top 5 clients and our top 10 clients grew 6.2% and 9.8% quarter on quarter respectively.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Top 5 clients contribution to revenue",
+   "period": "Q2 FY26",
+   "value": 21.0,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "They contributed 21% and 30.8% respectively to our overall quarter 2 revenue.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Top 10 clients contribution to revenue",
+   "period": "Q2 FY26",
+   "value": 30.8,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "They contributed 21% and 30.8% respectively to our overall quarter 2 revenue.",
+   "page": 4
+  },
+  {
+   "metric": "order_inflow",
+   "label": "Total order intake",
+   "period": "Q2 FY26",
+   "value": 514.0,
+   "unit": "usd_million",
+   "speaker": "Sudhir Singh",
+   "quote": "The total order intake during quarter 2 was 514 million US dollars.",
+   "page": 4
+  },
+  {
+   "metric": "order_book",
+   "label": "Executable order book next 12 months",
+   "period": "Q2 FY26",
+   "value": 1.63,
+   "unit": "usd_billion",
+   "speaker": "Sudhir Singh",
+   "quote": "The executable order book which reflects the total value of locked orders over the next 12 months, stands at a record $1.63 billion.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Executable order book YoY growth",
+   "period": "Q2 FY26",
+   "value": 26.7,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "This number, some of you might recall, was $1.3 billion a year back and is currently 26.7% higher than at the same time last year.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Total headcount",
+   "period": "Q2 FY26",
+   "value": 34896.0,
+   "unit": "none",
+   "speaker": "Sudhir Singh",
+   "quote": "On the people front, our total headcount at the end of Q2 stood at 34,896.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Net people addition",
+   "period": "Q2 FY26",
+   "value": 709.0,
+   "unit": "none",
+   "speaker": "Sudhir Singh",
+   "quote": "We saw a net people addition of 709 during the quarter.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Utilization",
+   "period": "Q2 FY26",
+   "value": 82.3,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "Utilization during the quarter stood at 82.3%.",
+   "page": 4
+  },
+  {
+   "metric": "other",
+   "label": "Last 12-month attrition",
+   "period": "Q2 FY26",
+   "value": 11.4,
+   "unit": "%",
+   "speaker": "Sudhir Singh",
+   "quote": "Last 12 -month attrition for the quarter fell further and is now at 11.4%.",
+   "page": 4
+  },
+  {
+   "metric": "revenue",
+   "label": "Revenue",
+   "period": "Q2 FY26",
+   "value": 462.1,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "As previously stated by Sudhir, for the second quarter, revenue reached $462.1 million.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sequential growth in dollar terms",
+   "period": "Q2 FY26",
+   "value": 4.5,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "This figure represents a sequential growth of 4.5% in dollar terms, 8.1% in INR terms, and 5.9 % in CC terms.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sequential growth in INR terms",
+   "period": "Q2 FY26",
+   "value": 8.1,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "This figure represents a sequential growth of 4.5% in dollar terms, 8.1% in INR terms, and 5.9 % in CC terms.",
+   "page": 5
+  },
+  {
+   "metric": "revenue_growth",
+   "label": "Sequential growth in CC terms",
+   "period": "Q2 FY26",
+   "value": 5.9,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "This figure represents a sequential growth of 4.5% in dollar terms, 8.1% in INR terms, and 5.9 % in CC terms.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "Hedge loss",
+   "period": "Q2 FY26",
+   "value": 307.0,
+   "unit": "crore",
+   "speaker": "Saurabh Goel",
+   "quote": "The hedge loss reported for the quarter amounted to INR 307 million as compared to INR 158 million in the previous quarter",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "Hedge loss in previous quarter",
+   "period": "Q1 FY26",
+   "value": 158.0,
+   "unit": "crore",
+   "speaker": "Saurabh Goel",
+   "quote": "The hedge loss reported for the quarter amounted to INR 307 million as compared to INR 158 million in the previous quarter",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "Adverse impact of hedge loss on reported EBIT",
+   "period": "Q2 FY26",
+   "value": 78.0,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "reflecting adverse impact of 78 bps in the reported EBIT.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "ESOP cost to revenue",
+   "period": "Q2 FY26",
+   "value": 1.4,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "ESOP cost for the quarter further reduced to 1.4% to revenue for the quarter reflecting 20 bps upside on EBIT.",
+   "page": 5
+  },
+  {
+   "metric": "ebitda_margin",
+   "label": "EBIT margin",
+   "period": "Q2 FY26",
+   "value": 14.0,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "The EBIT margin for quarter 2 was 14%, an increase of 251 bps quarter-on-quarter and 240 bps year-on-year.",
+   "page": 5
+  },
+  {
+   "metric": "other",
+   "label": "One-time bonus provision for employees",
+   "period": "Q1 FY26",
+   "value": 5.5,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "In the first quarter, a one-time bonus provision for employees amounting to $5.5 million and $0.5 million for acquisition-related expenses was recorded.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Acquisition-related expenses",
+   "period": "Q1 FY26",
+   "value": 0.5,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "In the first quarter, a one-time bonus provision for employees amounting to $5.5 million and $0.5 million for acquisition-related expenses was recorded.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Exceptional legal expense",
+   "period": "Q1 FY26",
+   "value": 3.0,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "and an exceptional legal expense of $3 million in the first quarter related to cybersecurity breach with the client.",
+   "page": 6
+  },
+  {
+   "metric": "pat_margin",
+   "label": "PAT as percentage of revenue",
+   "period": "Q2 FY26",
+   "value": 9.4,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "The PAT for quarter 2 stood at 9.4% of revenue, an improvement of 82 bps compared to previous quarter, and 275 bps year-on-year.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Earnings per share",
+   "period": "Q2 FY26",
+   "value": 11.2,
+   "unit": "none",
+   "speaker": "Saurabh Goel",
+   "quote": "Earnings per share for the quarter was Rs.11.2 per share.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "EPS for first half",
+   "period": "H1 FY26",
+   "value": 20.7,
+   "unit": "none",
+   "speaker": "Saurabh Goel",
+   "quote": "For the first half of FY2026, EPS was at Rs. 20.7 per share, reflecting an increase of 101% over previous year's first half.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "EPS increase over previous year first half",
+   "period": "H1 FY26",
+   "value": 101.0,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "For the first half of FY2026, EPS was at Rs. 20.7 per share, reflecting an increase of 101% over previous year's first half.",
+   "page": 6
+  },
+  {
+   "metric": "capex",
+   "label": "Capital expenditure",
+   "period": "Q2 FY26",
+   "value": 4.0,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "Capital expenditure for the quarter stood at $4 million.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Free cash flow",
+   "period": "Q2 FY26",
+   "value": 37.1,
+   "unit": "usd_million",
+   "speaker": "Saurabh Goel",
+   "quote": "Free cash flow increased to $37.1 million reflecting FCF to PAT ratio of 86%.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "FCF to PAT ratio",
+   "period": "Q2 FY26",
+   "value": 86.0,
+   "unit": "%",
+   "speaker": "Saurabh Goel",
+   "quote": "Free cash flow increased to $37.1 million reflecting FCF to PAT ratio of 86%.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Billed DSO",
+   "period": "Q2 FY26",
+   "value": 63.0,
+   "unit": "none",
+   "speaker": "Saurabh Goel",
+   "quote": "Billed DSO stood at 63 days, unbilled at 26 and contract assets at 15 reflecting a total working capital cycle of 104 days.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Unbilled days",
+   "period": "Q2 FY26",
+   "value": 26.0,
+   "unit": "none",
+   "speaker": "Saurabh Goel",
+   "quote": "Billed DSO stood at 63 days, unbilled at 26 and contract assets at 15 reflecting a total working capital cycle of 104 days.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Contract assets days",
+   "period": "Q2 FY26",
+   "value": 15.0,
+   "unit": "none",
+   "speaker": "Saurabh Goel",
+   "quote": "Billed DSO stood at 63 days, unbilled at 26 and contract assets at 15 reflecting a total working capital cycle of 104 days.",
+   "page": 6
+  },
+  {
+   "metric": "other",
+   "label": "Total working capital cycle",
+   "period": "Q2 FY26",
+   "value": 104.0,
+   "unit": "none",
+   "speaker": "Saurabh Goel",
+   "quote": "Billed DSO stood at 63 days, unbilled at 26 and contract assets at 15 reflecting a total working capital cycle of 104 days.",
+   "page": 6
+  }
+ ],
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_guidance",
+  "recorded_at": "2026-11-01T04:25:39",
+  "fell_back_from": []
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "found": true,
+ "page": 136,
+ "basis": "consolidated",
+ "unit": "million",
+ "revenue": {
+  "current": 164027.0,
+  "previous": 120733.0
+ },
+ "revenue_parts": [],
+ "other_income": {
+  "current": 732.0,
+  "previous": 1647.0
+ },
+ "finance_costs": {
+  "current": 1686.0,
+  "previous": 1347.0
+ },
+ "depreciation": {
+  "current": 6819.0,
+  "previous": 4276.0
+ },
+ "pbt": {
+  "current": 19328.0,
+  "previous": 12961.0
+ },
+ "pat": {
+  "current": 17447.0,
+  "previous": 9361.0
+ },
+ "_meta": {
+  "model": "gemini:gemini-3.5-flash-lite",
+  "purpose": "extract_annual",
+  "recorded_at": "2026-11-01T04:26:01",
+  "fell_back_from": []
+ }
+}

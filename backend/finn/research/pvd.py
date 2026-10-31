@@ -575,16 +575,24 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
             verdict = "too_vague"
             reason = "No number or milestone to check against." if due else "No fixed date to check against."
         else:
-            comparable = [by_a[a] for a in aids if by_a[a]["metric"] == first["metric"] and by_a[a]["unit"] == first["unit"]
-                          and by_a[a]["value"] is not None and due_of(by_a[a]["period"]) == due
-                          and (by_a[a]["source"] == "annual_report" or unit_stated(by_a[a], "value"))]
+            def fits(a):
+                return (a["metric"] == first["metric"] and a["unit"] == first["unit"] and a["value"] is not None
+                        and due_of(a["period"]) == due and same_measure(first, a)
+                        and (a["source"] == "annual_report" or unit_stated(a, "value")))
+            comparable = [x for x in (period_from_quote(by_a[a]) for a in aids) if fits(x)]
             comparable.sort(key=lambda a: a["source"] != "annual_report")
+            if not comparable:
+                # The judge listed nothing usable: code matches verified figures itself, but only when
+                # exactly one value fits (consolidated 16% and standalone 17% in one quarter don't).
+                pool = [x for x in (period_from_quote(a) for a in actuals) if fits(x)]
+                if len({x["value"] for x in pool}) == 1:
+                    comparable = sorted(pool, key=lambda a: a["source"] != "annual_report")[:1]
             if first["kind"] == "numeric" and comparable:
                 a = comparable[0]
                 verdict, delivered = numeric_verdict(first, a["value"]), a
             elif first["kind"] == "numeric":
                 verdict = "not_found"
-                reason = (f"No {horizon} figure in the later calls"
+                reason = (f"FINN found no {horizon} figure for this in the later calls"
                           + (" or the annual report's profit and loss statement." if first["metric"] in AR_METRICS else "."))
             elif g and g.verdict in ("met", "partially", "missed") and aids:
                 verdict, by, delivered = g.verdict, "model", by_a[aids[0]]
@@ -593,8 +601,8 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
             else:
                 searched = any(evidence.get(i) for i in ids)
                 verdict = "not_found"
-                reason = ("Later calls mention it but don't say whether it happened." if searched
-                          else "No later call mentions it.")
+                reason = ("Later calls mention it; FINN found none that says whether it happened." if searched
+                          else "FINN found no later call that mentions it.")
         if g and g.reason and by == "model":
             cited = [by_p[i] for i in ids] + [by_a[a] for a in aids]
             if numbers(g.reason) <= allowed_numbers(cited):
@@ -643,7 +651,7 @@ def _evidence_item(e: Evidence, first: dict, ids: list[str], evidence: dict[str,
 _UNIT_WORDS = {"%": r"%|per ?cent", "crore": r"crore|\bcr\b|\bcrs?\.", "usd_million": r"\$|dollar|usd",
                "usd_billion": r"\$|dollar|usd"}
 _FIGURE = re.compile(r"\d[\d,.]*\s*(%|per ?cent|crore|\bcr\b|million|billion|lakh)|(₹|rs\.?|inr|\$)\s*\d", re.I)
-_ABOUT = re.compile(r"\b(about|around|approximately|nearly|close to|roughly)\b", re.I)
+_ABOUT = re.compile(r"\b(about|around|approximately|nearly|almost|close to|roughly)\b", re.I)
 _AT_LEAST = re.compile(r"\+|plus|more than|at least|minimum|north of|over|above|exceed|cross", re.I)
 
 
@@ -662,6 +670,9 @@ def row_problem(p: dict, lead: bool = True) -> str:
     """Why a promise can't be shown honestly as extracted, or ''. Applied after the judge, so a rule
     change replays recorded model output instead of calling the model again."""
     has_target = p["target_low"] is not None or p["target_high"] is not None
+    due, made = due_of(p["horizon"]), due_of(p["call"])
+    if due and made and due <= made:
+        return "due by the quarter the call itself reports, so it isn't a forward-looking promise"
     if "?" in p["quote"]:
         return "the quote is a question, not a promise"
     if has_target and p["unit"] == "none":
@@ -671,6 +682,33 @@ def row_problem(p: dict, lead: bool = True) -> str:
     if lead and not has_target and p["kind"] != "milestone" and _FIGURE.search(p["quote"]):
         return "the quote states a figure that wasn't read as the target; not judged"
     return ""
+
+
+_QLABEL = re.compile(r"\b(Q[1-4]|H[12]|9M)\s*FY\s*'?\s*(\d{4}|\d{2})\b", re.I)
+
+
+def period_from_quote(a: dict) -> dict:
+    """A period written in the quote beats the model's label: 'Q4 FY26 EBIT of the firm is 16.6%'
+    was recorded as Q1 FY26. Only when the quote names exactly one period."""
+    found = {canonical(f"{m.group(1)} FY{m.group(2)[-2:]}") for m in _QLABEL.finditer(a.get("quote") or "")}
+    if len(found) == 1 and a["period"] not in found:
+        return a | {"period": found.pop(), "period_read": a["period"]}
+    return a
+
+
+def margin_kind(text: str) -> str | None:
+    if re.search(r"EBITDA|PBDIT|operating profit before dep", text, re.I):
+        return "ebitda"
+    if re.search(r"\bEBIT\b", text):
+        return "ebit"
+    return None
+
+
+def same_measure(p: dict, a: dict) -> bool:
+    """EBIT guidance isn't met by an EBITDA figure: both share a metric key, so the words decide."""
+    kp = margin_kind(f"{p['label']} {p['quote']}")
+    ka = margin_kind(f"{a['label']} {a['quote']} {a.get('how', '')}")
+    return kp is None or ka is None or kp == ka
 
 
 def settle_direction(p: dict) -> dict:
@@ -711,7 +749,7 @@ def _credibility(j: Judgement | None, rows, counts, items, res) -> dict:
     headline = f"Met {counts['met']} of {n} checkable promises" if n else "No promise could be checked yet"
 
     def names(v):
-        labels = [r["label"] if r["label"][1:2].isupper() else r["label"][:1].lower() + r["label"][1:]
+        labels = [r["label"][:1].lower() + r["label"][1:] if r["label"][1:2].islower() else r["label"]
                   for r in rows if r["verdict"] == v]
         return labels[0] if len(labels) == 1 else ", ".join(labels[:-1]) + " and " + labels[-1] if labels else ""
 
