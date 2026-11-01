@@ -50,6 +50,14 @@ describe('on the recording, at default alert settings', () => {
     expect(top.symbol).toBe('RELIANCE')
     expect(rowFigure(top)?.value).toBe('+32.1%')
   })
+  it('every recorded #1 has an explanation, including after the first row is dismissed', () => {
+    for (const f of digests) {
+      const { cards } = applyAlerts(read<Digest>(f), DEFAULT_PREFS, market)
+      if (cards.length === 0) continue
+      expect(cards[0].why_rank, f).toMatch(/^\S.{8,}\.$/)
+      if (cards.length > 1) expect(rankCards(cards.slice(1))[0].why_rank, f).toMatch(/^\S.{8,}\.$/)
+    }
+  })
   it('no recorded briefing leads with results it cannot show, unless nothing else is there', () => {
     for (const f of digests) {
       const { cards } = applyAlerts(read<Digest>(f), DEFAULT_PREFS, market)

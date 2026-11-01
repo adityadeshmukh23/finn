@@ -126,11 +126,12 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
           <Icon name="close" size={24} />
         </button>
 
+        {/* #1 always says why, even collapsed or after a dismiss moved it up. */}
+        {card.why_rank && (open || rank === 1) && (
+          <p className={`text-meta text-ink-3 ${open ? '' : 'pb-3'}`}><span className="font-semibold text-ink-2">#{rank}</span> {card.why_rank}</p>
+        )}
         {open && (
           <div className="pb-3">
-            {card.why_rank && (
-              <p className="text-meta text-ink-3"><span className="font-semibold text-ink-2">#{rank}</span> {card.why_rank}</p>
-            )}
             <div className="mt-1 flex items-center gap-4">
               <FilingLink url={lead.url} label={lead.category === 'market' ? 'NSE quote' : 'Filing'} />
               {extra > 0 && (

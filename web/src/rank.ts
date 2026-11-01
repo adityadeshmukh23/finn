@@ -26,7 +26,7 @@ const EVENT: Record<string, string> = {
   'Unusual move, no filing': 'Price/volume alert with no filing behind it',
 }
 
-const label = (reason: string) => EVENT[reason] ?? reason
+const label = (reason: string) => EVENT[reason] ?? (reason || 'A material filing')
 
 export function scoreCard(c: Card): number {
   const extraHigh = c.items.filter((it) => it.tier === 'high').length
