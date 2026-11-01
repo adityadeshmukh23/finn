@@ -28,6 +28,8 @@ const EVENT: Record<string, string> = {
 
 const label = (reason: string) => EVENT[reason] ?? (reason || 'A material filing')
 
+export const eventLabel = label
+
 export function scoreCard(c: Card): number {
   const extraHigh = c.items.filter((it) => it.tier === 'high').length
   return Math.round((c.lead.score + 3 * extraHigh) * 10) / 10

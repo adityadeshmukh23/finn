@@ -4,6 +4,7 @@ import { lastMaterialBefore, type Timeline } from '../company'
 import { usd } from '../format'
 import { noSessionNote, type Market } from '../market'
 import { rankCards } from '../rank'
+import { synthesis } from '../synthesis'
 import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
@@ -53,6 +54,7 @@ export function Today({ chip, data, view, market, timeline, day, hours, onHours,
   // Rank what's left, so the numbers, the lead rule and the "why #N" lines stay true after a dismiss.
   const cards = rankCards((view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id)))
   const dismissedHere = (view?.cards.length ?? 0) - cards.length
+  const says = view ? synthesis(cards, view.window.start, timeline) : []
 
   return (
     <>
@@ -86,7 +88,19 @@ export function Today({ chip, data, view, market, timeline, day, hours, onHours,
                   Details<Icon name="down" size={14} className={details ? 'rotate-180' : ''} />
                 </button>
               </div>
-              {details && <p className="text-meta text-ink-3">
+              {says.length > 0 && (
+                <p className="text-ink-2">
+                  {says.map((s, i) => (
+                    <span key={s.symbol}>
+                      {i > 0 && ' '}
+                      {/* An inline link: its padding gives a 44 px target without pushing the lines apart. */}
+                      <a href={`#row-${s.symbol}`} onClick={(e) => { e.preventDefault(); document.getElementById(`row-${s.symbol}`)?.scrollIntoView({ block: 'start' }) }}
+                         className="py-[11px] underline decoration-line underline-offset-4">{s.text}.</a>
+                    </span>
+                  ))}
+                </p>
+              )}
+              {details && <p className="mt-1 text-meta text-ink-3">
                 {data.counts.total} filings in the last {span}
                 {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price or volume alerts`} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} ${data.counts.duplicates_dropped === 1 ? 'duplicate' : 'duplicates'} dropped`}

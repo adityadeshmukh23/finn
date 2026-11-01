@@ -81,7 +81,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
   }
 
   return (
-    <li ref={row} className="relative overflow-hidden">
+    <li ref={row} id={`row-${card.symbol}`} className="relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-end bg-raised pr-5 text-meta text-ink-3">Dismiss</div>
       <article
         onPointerDown={onPointerDown}
