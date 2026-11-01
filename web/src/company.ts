@@ -55,6 +55,21 @@ export function lastMaterialBefore(rows: TimelineItem[] | undefined, start: stri
   return recent.filter((r) => r.ts.startsWith(day)).reduce((a, b) => (b.base > a.base ? b : a))
 }
 
+/** Same category on the same day reads as one line with a count. The heaviest filing speaks for the group. */
+export interface FilingGroup { day: string; category: string; lead: TimelineItem; items: TimelineItem[] }
+
+export function groupSameDay(rows: TimelineItem[]): FilingGroup[] {
+  const groups = new Map<string, TimelineItem[]>()
+  for (const r of rows) {
+    const key = `${r.ts.slice(0, 10)}|${r.category}`
+    groups.set(key, [...(groups.get(key) ?? []), r])
+  }
+  return [...groups.values()].map((items) => ({
+    day: items[0].ts.slice(0, 10), category: items[0].category, items,
+    lead: items.reduce((a, b) => (b.base > a.base ? b : a)),
+  }))
+}
+
 export const material = (rows: TimelineItem[]) => rows.filter((r) => r.tier !== 'routine')
 export const routine = (rows: TimelineItem[]) => rows.filter((r) => r.tier === 'routine')
 export const latestResults = (rows: TimelineItem[]) => rows.find((r) => r.results)

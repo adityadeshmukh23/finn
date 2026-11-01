@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { STATIC, type Card, type ResearchEntry } from '../api'
-import { filingsAsOf, latestPeople, latestResults, material, routine, sessionIndexFor, sessionsAsOf, type TimelineItem } from '../company'
+import { filingsAsOf, groupSameDay, latestPeople, latestResults, material, routine, sessionIndexFor, sessionsAsOf, type FilingGroup, type TimelineItem } from '../company'
 import { CATEGORY_LABEL, clock, dayMonth, verdictLine } from '../format'
 import type { Session } from '../market'
 import { CompanyChart } from './CompanyChart'
@@ -10,6 +10,23 @@ import { ResultsTable } from './ResultsTable'
 import { Sheet } from './Sheet'
 
 const category = (c: string) => CATEGORY_LABEL[c] ?? c
+
+function GroupRow({ g }: { g: FilingGroup }) {
+  const [open, setOpen] = useState(false)
+  if (g.items.length === 1) return <FilingRow it={g.items[0]} />
+  return (
+    <li>
+      <button onClick={() => setOpen(!open)} aria-expanded={open} className="flex min-h-11 w-full items-start gap-3 py-2.5 text-left">
+        <span className="min-w-0 flex-1">
+          <span className="block text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(g.category)}</span> · {dayMonth(g.day)} · {g.items.length} filings</span>
+          <span className="block text-ink">{g.lead.headline}</span>
+        </span>
+        <Icon name="down" size={14} className={`mt-1 text-ink-3 ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && <ul className="mb-2 divide-y divide-line border-l-2 border-line pl-3">{g.items.map((it) => <FilingRow key={it.id} it={it} />)}</ul>}
+    </li>
+  )
+}
 
 function FilingRow({ it }: { it: TimelineItem }) {
   const body = (
@@ -129,7 +146,7 @@ export function CompanySheet({ symbol, name, card, filings, sessions, end, since
         {filings === null && (fromCard.length > 0
           ? <ul className="divide-y divide-line">{fromCard.map((it) => <FilingRow key={it.id} it={it} />)}</ul>
           : <p className="mt-1 text-ink-2">The filings list didn't load in this session.</p>)}
-        {keep.length > 0 && <ul className="divide-y divide-line">{keep.map((it) => <FilingRow key={it.id} it={it} />)}</ul>}
+        {keep.length > 0 && <ul className="divide-y divide-line">{groupSameDay(keep).map((g) => <GroupRow key={`${g.day}${g.category}`} g={g} />)}</ul>}
         {quiet.length > 0 && (
           <>
             <button onClick={() => setShowRoutine(!showRoutine)} aria-expanded={showRoutine}

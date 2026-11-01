@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { filingsAsOf, lastMaterialBefore, sessionIndexFor, sessionsAsOf, type TimelineItem } from '../company'
+import { filingsAsOf, groupSameDay, lastMaterialBefore, sessionIndexFor, sessionsAsOf, type TimelineItem } from '../company'
 import type { Session } from '../market'
 
 const item = (id: string, ts: string, tier: TimelineItem['tier'] = 'high', base = 50): TimelineItem =>
@@ -37,4 +37,17 @@ describe('lastMaterialBefore', () => {
     expect(lastMaterialBefore(rows, '2026-10-29T11:00:00+05:30')?.id).not.toBe('exit')
   })
   it('stops after a week', () => expect(lastMaterialBefore(rows, '2026-10-20T12:00:00+05:30')).toBeNull())
+})
+
+describe('groupSameDay', () => {
+  const day = [item('deck', '2026-10-29T16:18:00+05:30', 'medium', 35), item('res', '2026-10-29T14:51:00+05:30', 'high', 90), item('ceo', '2026-10-29T15:00:00+05:30', 'high', 95), item('old', '2026-10-12T15:00:00+05:30', 'high', 90)]
+  day[2].category = 'management_change'
+  it('collapses one category on one day, led by its heaviest', () => {
+    const g = groupSameDay(day)
+    expect(g.map((x) => x.items.length)).toEqual([2, 1, 1])
+    expect(g[0].lead.id).toBe('res')
+  })
+  it('keeps different categories and different days apart', () => {
+    expect(groupSameDay(day).map((x) => x.lead.id)).toEqual(['res', 'ceo', 'old'])
+  })
 })
