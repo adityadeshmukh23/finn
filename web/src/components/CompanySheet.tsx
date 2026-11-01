@@ -143,9 +143,11 @@ export function CompanySheet({ symbol, name, card, filings, sessions, end, since
       </section>
 
       {!research && (
-        <p className="mt-5 text-meta text-ink-3">
-          Promised vs delivered isn't recorded for {symbol} in this {STATIC ? 'demo' : 'build yet'}. Locally: <code>./run.sh research {symbol}</code>
-        </p>
+        <section className="mt-5">
+          <h3 className="font-semibold text-ink">Management's promises aren't checked yet</h3>
+          <p className="mt-1 text-ink-2">FINN hasn't read {name}'s earnings calls in this {STATIC ? 'recording' : 'build'}, so there is no promised vs delivered view.</p>
+          <p className="mt-2 text-meta text-ink-3">To add it, run FINN on your own machine with the research command for {symbol}. See the README.</p>
+        </section>
       )}
     </Sheet>
   )
