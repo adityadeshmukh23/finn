@@ -57,15 +57,17 @@ export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
     if (s.horizontal === null && Math.hypot(ddx, ddy) > 8) s.horizontal = Math.abs(ddx) > Math.abs(ddy)
     if (s.horizontal) setDx(Math.min(0, ddx))
   }
+  const leave = () => {
+    setLeaving(true)
+    setTimeout(onDismiss, 180)
+  }
   const swiped = useRef(false)
   const onPointerUp = () => {
     const s = start.current
     start.current = null
     swiped.current = !!s?.horizontal
-    if (s?.horizontal && dx < -90) {
-      setLeaving(true)
-      setTimeout(onDismiss, 180)
-    } else setDx(0)
+    if (s?.horizontal && dx < -90) leave()
+    else setDx(0)
   }
 
   return (
@@ -85,11 +87,16 @@ export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
       >
         <span aria-hidden="true" className="absolute inset-y-3 left-0 rounded-full bg-ink" style={{ width: spine(rank) }} />
         <button onClick={() => { if (!swiped.current) setOpen(!open); swiped.current = false }} aria-expanded={open}
-                className="flex min-h-[72px] w-full items-start gap-3 py-3 text-left">
+                className="block w-full pb-3 text-left">
+          <span className="flex min-h-11 items-center pr-11">
+            <span className="truncate">
+              <span className="font-semibold text-ink">{card.symbol}</span>
+              <span className="text-meta text-ink-3"> · {category(lead)}</span>
+            </span>
+          </span>
+          <span className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
-            <span className="font-semibold text-ink">{card.symbol}</span>
-            <span className="text-meta text-ink-3"> · {category(lead)}</span>
-            <span className={`mt-0.5 block text-ink ${open ? '' : 'line-clamp-2'}`}>{rowLine(card)}</span>
+            <span className={`block text-ink ${open ? '' : 'line-clamp-2'}`}>{rowLine(card)}</span>
             <span className="mt-0.5 block text-meta text-ink-3">
               {lead.category === 'market' ? `${dayMonth(m?.date ?? lead.ts)} close` : clock(lead.ts)}
               {figuresWithheld(card) && <span className="text-flag"> · Low confidence, figures withheld</span>}
@@ -102,6 +109,11 @@ export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
               <span className="block text-meta text-ink-3">{figure.label}</span>
             </span>
           )}
+          </span>
+        </button>
+        <button onClick={leave} aria-label={`Dismiss ${card.symbol}`}
+                className="absolute right-0 top-0 flex h-11 w-11 items-center justify-end text-ink-3 hover:text-ink">
+          <Icon name="close" size={18} />
         </button>
 
         {open && (
