@@ -28,6 +28,12 @@ describe('rankCards', () => {
   it('leaves the order alone when the top card has figures', () => {
     expect(rankCards([card('REL', 100, high), card('SUN', 95, low)]).map((c) => c.symbol)).toEqual(['REL', 'SUN'])
   })
+  it('re-ranking what is left after a dismiss is stable and keeps the rule', () => {
+    const once = rankCards([card('SUN', 100, low), card('REL', 95, high), card('POL', 80, null, 'litigation')])
+    const after = rankCards(once.filter((c) => c.symbol !== 'REL'))
+    expect(after.map((c) => c.symbol)).toEqual(['POL', 'SUN'])
+    expect(after.map((c) => c.score)).toEqual([80, 100])
+  })
   it('keeps a figure-less card first if nothing else exists', () => {
     expect(rankCards([card('SUN', 100, low)])[0].symbol).toBe('SUN')
   })

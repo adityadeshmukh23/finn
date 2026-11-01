@@ -3,6 +3,7 @@ import type { Card, Digest } from '../api'
 import { lastMaterialBefore, type Timeline } from '../company'
 import { usd } from '../format'
 import { noSessionNote, type Market } from '../market'
+import { rankCards } from '../rank'
 import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
@@ -48,7 +49,8 @@ interface Props {
 export function Today({ data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
   const [details, setDetails] = useState(false)
   const span = windowLabel(hours)
-  const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
+  // Rank what's left, so the numbers, the lead rule and the "why #N" lines stay true after a dismiss.
+  const cards = rankCards((view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id)))
   const dismissedHere = (view?.cards.length ?? 0) - cards.length
 
   return (
