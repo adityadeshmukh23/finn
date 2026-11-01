@@ -20,6 +20,15 @@
       "port": 5173
     },
     {
+      "name": "web-demo",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "cd web && PATH=$HOME/.local/node/bin:$PATH VITE_STATIC=1 npm run dev -- --port 5174 --strictPort"
+      ],
+      "port": 5174
+    },
+    {
       "name": "web-static",
       "runtimeExecutable": "/bin/sh",
       "runtimeArgs": [
