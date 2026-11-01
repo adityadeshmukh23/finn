@@ -73,6 +73,7 @@ interface Props {
 export function Today({ data, view, market, manifest, researched, latestDay, hours, onHours, asOf, onAsOf, loading, error,
   refreshing, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
   const [dataOpen, setDataOpen] = useState(false)
+  const [details, setDetails] = useState(false)
   const windowLabel = WINDOWS.find((w) => w.hours === hours)?.label ?? `${hours}h`
   const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
   const dismissedHere = (view?.cards.length ?? 0) - cards.length
@@ -103,15 +104,21 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
         {!loading && data && view && (
           <>
             <section>
-              <p className="text-ink">
-                <span className="text-figure font-semibold">{cards.length}</span>{' '}
-                {cards.length === 1 ? 'company needs' : 'companies need'} a look
-              </p>
-              <p className="mt-0.5 text-meta text-ink-3">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-ink">
+                  <span className="text-figure font-semibold">{cards.length}</span>{' '}
+                  {cards.length === 1 ? 'company needs' : 'companies need'} a look
+                </p>
+                <button onClick={() => setDetails(!details)} aria-expanded={details}
+                        className="-mr-2 flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1 px-2 text-meta text-ink-3">
+                  Details<Icon name="down" size={14} className={details ? 'rotate-180' : ''} />
+                </button>
+              </div>
+              {details && <p className="text-meta text-ink-3">
                 {data.counts.total} filings in the last {windowLabel}
                 {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price or volume alerts`} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} ${data.counts.duplicates_dropped === 1 ? 'duplicate' : 'duplicates'} dropped`}
-              </p>
+              </p>}
             </section>
 
             {cards.length === 0 && (
