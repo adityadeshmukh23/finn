@@ -185,3 +185,29 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
         "quiet": sorted(s for s in meta if s not in active),
         "names": {s: m.get("name", s) for s, m in meta.items()},
     }
+
+
+def timeline(items: list[Announcement], reads: dict[str, dict] | None = None, results: dict[str, dict] | None = None,
+             changes: dict[str, dict] | None = None) -> dict[str, list[dict]]:
+    """Every filing per company, newest first, for the company file. Same classification and verified reads as the
+    briefing; the browser filters by the as-of date, so a past date never sees a later filing."""
+    reads, results, changes = reads or {}, results or {}, changes or {}
+    out, seen = defaultdict(list), set()
+    for a in sorted(items, key=lambda a: a.ts, reverse=True):
+        key = (a.symbol, headline(a).lower()[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+        c, summary = filings.apply(classify(a.desc, a.text), reads.get(a.id))
+        read = reads.get(a.id)
+        row = {"id": a.id, "ts": a.ts, "category": c.category, "tier": c.tier, "reason": c.reason,
+               "headline": summary or headline(a, c), "url": a.url,
+               "read": {"page": read["page"], "quote": read["quote"]} if summary and read else None}
+        if a.id in results and (view := results_mod.card_view(results[a.id])):
+            row["results"] = view
+            if h := results_mod.headline(view):
+                row["headline"] = h
+        if c.category == "management_change" and (people := mgmt.people([changes.get(a.id)])):
+            row["people"] = people
+        out[a.symbol].append(row)
+    return dict(out)

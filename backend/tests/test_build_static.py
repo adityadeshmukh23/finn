@@ -6,11 +6,22 @@ from scripts import build_static
 def test_static_demo_covers_every_recorded_day(tmp_path):
     m = build_static.build(tmp_path)
     files = {p.name for p in tmp_path.iterdir()}
-    assert {f"digest-{d}-{h}.json" for d in m["days"] for h in m["windows"]} | {"manifest.json", "market.json", "research"} == files
+    assert {f"digest-{d}-{h}.json" for d in m["days"] for h in m["windows"]} | {"manifest.json", "market.json", "timeline.json", "research"} == files
     last = json.loads((tmp_path / f"digest-{m['to']}-168.json").read_text())
     assert last["source"]["source"] == "bundled" and last["source"]["as_of"] == m["fetched_at"]
     assert last["window"]["end"] == m["fetched_at"]            # latest day ends when the snapshot was taken
     assert last["counts"]["shown"] + last["counts"]["hidden"] == last["counts"]["total"]
+
+
+def test_timeline_lists_every_company_filing_newest_first(tmp_path):
+    m = build_static.build(tmp_path)
+    tl = json.loads((tmp_path / "timeline.json").read_text())
+    eq = tl["EQUITASBNK"]
+    assert [r["ts"] for r in eq] == sorted((r["ts"] for r in eq), reverse=True)
+    assert all(r["ts"][:10] <= m["to"] for r in eq)
+    assert any(r["category"] == "management_change" and r.get("people") for r in eq)    # the 29 Oct MD & CEO exit
+    # Figures only reach the timeline through the same results view as the card, low confidence included as low.
+    assert any(r.get("results", {}).get("status") == "extracted" for rows in tl.values() for r in rows)
 
 
 def test_bundled_prices_cover_the_demo_and_fire_the_default_alerts(tmp_path):

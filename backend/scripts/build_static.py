@@ -56,6 +56,9 @@ def build(out=OUT) -> dict:
             "sessions": market.compact({s: b for s, b in psnap["bars"].items() if s in meta}, since),
         }, separators=(",", ":")))
 
+    # Every filing per company, for the company file. One small file so a missing one degrades as one thing.
+    (out / "timeline.json").write_text(json.dumps(digest.timeline(items, reads, extracted, changes), ensure_ascii=False, separators=(",", ":")))
+
     # Recorded research: one file per company plus the index. Pages text stays out of the web build.
     (out / "research").mkdir()
     research = pvd.catalog()
