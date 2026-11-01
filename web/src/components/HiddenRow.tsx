@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { HiddenGroup } from '../api'
-import { when } from '../format'
+import { clock } from '../format'
 import { Icon } from './Icon'
 
-export function HiddenRow({ groups, total, refTime }: { groups: HiddenGroup[]; total: number; refTime: Date }) {
+export function HiddenRow({ groups, total }: { groups: HiddenGroup[]; total: number }) {
   const [open, setOpen] = useState(false)
   const [group, setGroup] = useState<string | null>(null)
   if (total === 0) return null
@@ -37,7 +37,7 @@ export function HiddenRow({ groups, total, refTime }: { groups: HiddenGroup[]; t
                     <li key={it.id} className="text-body ">
                       <span className="font-semibold text-ink">{it.symbol}</span>{' '}
                       <span className="text-ink-2">{it.headline}</span>{' '}
-                      <span className="whitespace-nowrap text-meta text-ink-3">{when(it.ts, refTime)}</span>{' '}
+                      <span className="whitespace-nowrap text-meta text-ink-3">{clock(it.ts)}</span>{' '}
                       {it.url && (
                         <a href={it.url} target="_blank" rel="noopener noreferrer"
                            className="whitespace-nowrap text-meta text-ink-3 underline underline-offset-4">filing<Icon name="external" size={12} className="ml-0.5" /></a>

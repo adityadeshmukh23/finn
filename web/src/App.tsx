@@ -8,8 +8,8 @@ import { Icon } from './components/Icon'
 import { LedgerSheet } from './components/LedgerSheet'
 import { Research } from './components/Research'
 import { Sheet } from './components/Sheet'
-import { clock, todayIST, usd } from './format'
-import type { Market } from './market'
+import { clock, dayMonth, todayIST, usd } from './format'
+import { lastSessionBy, type Market } from './market'
 
 const WINDOWS = [
   { hours: 24, label: '24h' },
@@ -35,27 +35,24 @@ function saveDismissed(s: Set<string>) {
 function SourceBadge({ d }: { d: Digest }) {
   const s = d.source
   const fresh = s.source === 'live' || s.source === 'cache'
-  const label = fresh ? 'NSE' : s.source === 'unavailable' ? 'No data' : STATIC ? 'Demo data' : 'Snapshot'
+  const label = fresh ? 'Live NSE' : s.source === 'unavailable' ? 'No data' : 'Recorded filings'
+  // A past date in the replay is "as of" the end of that window; otherwise the snapshot's own fetch time.
+  const asOf = STATIC ? d.window.end : s.as_of
   return (
-    <div className="text-meta">
-      <span className={`inline-flex items-center gap-1.5 font-medium ${fresh ? 'text-up' : 'text-flag'}`}>
-        <span className={`h-1.5 w-1.5 rounded-full ${fresh ? 'bg-up' : 'bg-flag'}`} />
-        {label}
-        {s.as_of && <span className="font-normal text-ink-3">{STATIC ? ' as of ' : '· data as of '}{clock(s.as_of)}</span>}
-      </span>
-      {s.message && <p className="mt-1 text-ink-3">{s.message}</p>}
+    <div className="text-meta text-ink-3">
+      <span className="font-semibold text-ink-2">{label}</span>
+      {asOf && <>, as of {clock(asOf)} IST</>}
+      {s.message && <p className="mt-1">{s.message}</p>}
     </div>
   )
 }
 
-function PriceBadge({ m }: { m: Market | null }) {
-  if (!m) return <p className="mt-1 text-meta text-ink-3">Prices unavailable: price and volume alerts are off.</p>
-  const fresh = m.source === 'live' || m.source === 'cache'
-  const day = m.through ? new Date(m.through).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : '?'
+function PriceBadge({ m, end }: { m: Market | null; end: string }) {
+  if (!m) return <p className="text-meta text-ink-3">Prices unavailable: price and volume alerts are off.</p>
+  const last = lastSessionBy(m, end) ?? m.through
   return (
-    <p className="mt-1 text-meta text-ink-3">
-      <span className={`mr-1.5 inline-block h-1.5 w-1.5 rounded-full ${fresh ? 'bg-up' : 'bg-flag'}`} />
-      Prices to {day} close · Yahoo Finance{m.message ? ` · ${m.message}` : ''}
+    <p className="text-meta text-ink-3">
+      Prices to the {last ? dayMonth(last) : '?'} close, Yahoo Finance{m.message ? `. ${m.message}` : ''}
     </p>
   )
 }
@@ -143,7 +140,6 @@ export default function App() {
   const changePrefs = (p: AlertPrefs) => { setPrefs(p); savePrefs(p) }
   const customised = prefs.minTier !== 'medium' || prefs.muted.length > 0
     || prefs.volX !== DEFAULT_PREFS.volX || prefs.movePct !== DEFAULT_PREFS.movePct
-  const refTime = useMemo(() => (data ? new Date(data.window.end) : new Date()), [data])
   const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
   const dismissedHere = (view?.cards.length ?? 0) - cards.length
 
@@ -172,7 +168,7 @@ export default function App() {
         <div>
           <h1 className="text-title font-bold text-ink">FINN</h1>
           <p className="text-meta text-ink-3">
-            {asOf ? `Briefing as of ${new Date(asOf).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}` : 'Your portfolio briefing'}
+Your portfolio briefing
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -244,7 +240,7 @@ export default function App() {
                 {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price/volume alerts`} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} duplicates dropped`}
               </p>
-              <div className="mt-2"><SourceBadge d={data} /><PriceBadge m={market} /></div>
+              <div className="mt-2"><SourceBadge d={data} /><PriceBadge m={market} end={data.window.end} /></div>
             </section>
 
             {cards.length === 0 && (
@@ -267,7 +263,7 @@ export default function App() {
 
             <ul className="space-y-3">
               {cards.map((c, i) => (
-                <BriefCard key={c.lead.id} card={c} rank={i + 1} refTime={refTime}
+                <BriefCard key={c.lead.id} card={c} rank={i + 1}
                            onDismiss={() => dismiss(c.lead.id)} onAsk={() => askFinn(c)} />
               ))}
             </ul>
@@ -278,7 +274,7 @@ export default function App() {
               </button>
             )}
 
-            <HiddenRow groups={view.hidden} total={view.counts.hidden} refTime={refTime} />
+            <HiddenRow groups={view.hidden} total={view.counts.hidden} />
 
             {researched.length > 0 && (
               <section className="rounded-2xl border border-line bg-surface">

@@ -20,18 +20,17 @@ export const CATEGORY_LABEL: Record<string, string> = {
 
 const IST = 'Asia/Kolkata'
 
-export function when(ts: string, ref: Date): string {
-  const t = new Date(ts)
-  const mins = Math.round((ref.getTime() - t.getTime()) / 60000)
-  if (mins >= 0 && mins < 60) return `${Math.max(mins, 1)}m ago`
-  if (mins >= 0 && mins < 24 * 60) return `${Math.round(mins / 60)}h ago`
-  return t.toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: IST })
-}
-
+/** Always an explicit time, never "6h ago": this is a recording, and relative time would read as live. */
 export function clock(ts: string): string {
   return new Date(ts).toLocaleString('en-IN', {
     day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: IST,
   })
+}
+
+/** "30 Oct" from an ISO date or timestamp. */
+export function dayMonth(ts: string): string {
+  const d = /^\d{4}-\d{2}-\d{2}$/.test(ts) ? `${ts}T12:00:00+05:30` : ts
+  return new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: IST })
 }
 
 export function todayIST(): string {

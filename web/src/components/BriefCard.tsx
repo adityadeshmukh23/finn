@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
-import { CATEGORY_LABEL, when } from '../format'
+import { CATEGORY_LABEL, clock, dayMonth } from '../format'
 import { describe } from '../market'
 import { Icon } from './Icon'
 import { People } from './People'
@@ -25,12 +25,11 @@ function FilingLink({ url, label = 'Filing' }: { url: string; label?: string }) 
 interface Props {
   card: Card
   rank: number
-  refTime: Date
   onDismiss: () => void
   onAsk: () => void
 }
 
-export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
+export function BriefCard({ card, rank, onDismiss, onAsk }: Props) {
   const [open, setOpen] = useState(false)
   const [dx, setDx] = useState(0)
   const [leaving, setLeaving] = useState(false)
@@ -79,7 +78,7 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
       >
         <div className="flex items-center justify-between gap-3">
           <Chip item={lead} />
-          <span className="text-meta text-ink-3">{when(lead.ts, refTime)}</span>
+          <span className="text-meta text-ink-3">{clock(lead.ts)}</span>
         </div>
 
         <p className="mt-2 text-body text-ink-2">
@@ -90,7 +89,7 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
         {card.market && lead.category !== 'market' && (
           <p className="mt-1 text-meta font-semibold text-ink">
             Stock {describe(card.market)}
-            <span className="font-normal text-ink-3"> · {new Date(card.market.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })} close</span>
+            <span className="font-normal text-ink-3"> · {dayMonth(card.market.date)} close</span>
           </p>
         )}
         <h3 className="mt-1 text-body font-semibold text-ink">{lead.headline}</h3>
@@ -129,7 +128,7 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
               <li key={it.id}>
                 <div className="flex items-center justify-between gap-3">
                   <Chip item={it} />
-                  <span className="text-meta text-ink-3">{when(it.ts, refTime)}</span>
+                  <span className="text-meta text-ink-3">{clock(it.ts)}</span>
                 </div>
                 <p className="mt-1 text-body text-ink">{it.headline}</p>
                 <div className="mt-1"><FilingLink url={it.url} /></div>
