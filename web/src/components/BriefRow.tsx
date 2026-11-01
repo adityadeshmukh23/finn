@@ -122,8 +122,8 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
           </span>
         </button>
         <button onClick={leave} aria-label={`Dismiss ${card.symbol}`}
-                className="absolute right-0 top-0 flex h-11 w-11 items-center justify-end text-ink-3 hover:text-ink">
-          <Icon name="close" size={18} />
+                className="absolute right-0 top-0 flex h-11 w-11 items-center justify-end text-ink-2 hover:text-ink">
+          <Icon name="close" size={24} />
         </button>
 
         {open && (

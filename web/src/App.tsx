@@ -19,6 +19,7 @@ import { parseHash, tabHash, type Route, type Tab } from './route'
 
 const DISMISSED_KEY = 'finn.dismissed'
 const MIN_ROW_VISIBLE = 96
+const UNDO_MS = 8000
 
 function loadDismissed(): Set<string> {
   try {
@@ -128,7 +129,7 @@ export default function App() {
     setDismissed(next)
     saveDismissed(next)
     setUndo({ id, symbol })
-    setTimeout(() => setUndo((u) => (u?.id === id ? null : u)), 4000)
+    setTimeout(() => setUndo((u) => (u?.id === id ? null : u)), UNDO_MS)
     requestAnimationFrame(() => {
       const dockTop = document.querySelector('nav')?.getBoundingClientRect().top ?? window.innerHeight
       const under = top + MIN_ROW_VISIBLE - dockTop
