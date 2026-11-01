@@ -178,3 +178,5 @@
 ## Polish: block 1 review fixes (2026-11-01)
 
 - **Results we can't show a number for don't take #1.** Sun Pharma's low-confidence results outscored Reliance and led the default screen with no figure. The highest-scoring other card now leads, and both "why #N" lines say so; scores don't change. On the 62 non-empty recorded briefings at default settings, 38 now lead with a figure; the other 24 lead with management (9), legal (8), M&A (6) or news (1), which have no number by nature and stay first by design.
+- **Smallest text is 13/18, muted grey one notch stronger** (#5f636c light, #9ca1ab dark), from review on a real browser at 320 px. Rows still fit; the first screen loses about one line.
+- **Filing stats behind Details, window picker and undo share one docked slot above the tabs.** The slot is reserved in the page's bottom padding, so neither floats over a row, and a dismiss near the dock scrolls the next row clear.

@@ -20,8 +20,8 @@
   --text-title--line-height: 22px;
   --text-body: 15px;
   --text-body--line-height: 22px;
-  --text-meta: 12px;
-  --text-meta--line-height: 16px;
+  --text-meta: 13px;
+  --text-meta--line-height: 18px;
 }
 
 /* Colour means something: up and down are the sign of a number, flag is "low confidence or unverified". */
@@ -31,7 +31,7 @@
   --raised: #efede8;
   --ink: #16181d;
   --ink-2: #4b4f58;
-  --ink-3: #6b6f78;
+  --ink-3: #5f636c;
   --line: #e4e1da;
   --up: #15803d;
   --down: #b42318;
@@ -46,7 +46,7 @@
     --raised: #1f232b;
     --ink: #eceae6;
     --ink-2: #a9adb6;
-    --ink-3: #8a8f99;
+    --ink-3: #9ca1ab;
     --line: #2b2f38;
     --up: #4ade80;
     --down: #f87171;
