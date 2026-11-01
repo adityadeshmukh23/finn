@@ -24,12 +24,13 @@ const spine = (rank: number) => (rank === 1 ? 4 : rank <= 3 ? 3 : rank <= 5 ? 2 
 interface Props {
   card: Card
   rank: number
-  onDismiss: () => void
+  onDismiss: (top: number) => void
   onAsk: () => void
 }
 
 export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
   const [open, setOpen] = useState(rank <= 3)
+  const row = useRef<HTMLLIElement>(null)
   const [more, setMore] = useState(false)
   const [dx, setDx] = useState(0)
   const [leaving, setLeaving] = useState(false)
@@ -59,7 +60,8 @@ export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
   }
   const leave = () => {
     setLeaving(true)
-    setTimeout(onDismiss, 180)
+    const top = row.current?.getBoundingClientRect().top ?? 0
+    setTimeout(() => onDismiss(top), 180)
   }
   const swiped = useRef(false)
   const onPointerUp = () => {
@@ -71,7 +73,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
   }
 
   return (
-    <li className="relative overflow-hidden">
+    <li ref={row} className="relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-end bg-raised pr-5 text-meta text-ink-3">Dismiss</div>
       <article
         onPointerDown={onPointerDown}

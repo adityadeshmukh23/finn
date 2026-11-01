@@ -37,7 +37,7 @@ interface Props {
   customised: boolean
   spent: number | null
   dismissed: Set<string>
-  onDismiss: (id: string) => void
+  onDismiss: (id: string, symbol: string, top: number) => void
   onRestore: (ids: string[]) => void
   onAsk: (c: Card) => void
   onLedger: () => void
@@ -109,7 +109,7 @@ export function Today({ data, view, market, day, hours, onHours, loading, error,
               <ul className="divide-y divide-line border-y border-line">
                 {cards.map((c, i) => (
                   <BriefRow key={c.lead.id} card={c} rank={i + 1}
-                            onDismiss={() => onDismiss(c.lead.id)} onAsk={() => onAsk(c)} />
+                            onDismiss={(top) => onDismiss(c.lead.id, c.symbol, top)} onAsk={() => onAsk(c)} />
                 ))}
               </ul>
             )}

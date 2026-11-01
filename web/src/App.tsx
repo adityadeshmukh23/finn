@@ -16,6 +16,7 @@ import type { Market } from './market'
 import { parseHash, tabHash, type Route, type Tab } from './route'
 
 const DISMISSED_KEY = 'finn.dismissed'
+const MIN_ROW_VISIBLE = 96
 
 function loadDismissed(): Set<string> {
   try {
@@ -40,7 +41,7 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
   const [dismissed, setDismissed] = useState(loadDismissed)
-  const [undo, setUndo] = useState<string | null>(null)
+  const [undo, setUndo] = useState<{ id: string; symbol: string } | null>(null)
   const [ask, setAsk] = useState<Card | null>(null)
   const [ledgerOpen, setLedgerOpen] = useState(false)
   const [windowOpen, setWindowOpen] = useState(false)
@@ -117,12 +118,18 @@ export default function App() {
   const customised = prefs.minTier !== 'medium' || prefs.muted.length > 0
     || prefs.volX !== DEFAULT_PREFS.volX || prefs.movePct !== DEFAULT_PREFS.movePct
 
-  const dismiss = (id: string) => {
+  // `top` is where the dismissed row was: the next row slides into that spot, so keep it above the dock.
+  const dismiss = (id: string, symbol: string, top: number) => {
     const next = new Set(dismissed).add(id)
     setDismissed(next)
     saveDismissed(next)
-    setUndo(id)
-    setTimeout(() => setUndo((u) => (u === id ? null : u)), 4000)
+    setUndo({ id, symbol })
+    setTimeout(() => setUndo((u) => (u?.id === id ? null : u)), 4000)
+    requestAnimationFrame(() => {
+      const dockTop = document.querySelector('nav')?.getBoundingClientRect().top ?? window.innerHeight
+      const under = top + MIN_ROW_VISIBLE - dockTop
+      if (under > 0) window.scrollBy({ top: under })
+    })
   }
   const restore = (ids: string[]) => {
     const next = new Set(dismissed)
@@ -150,22 +157,18 @@ export default function App() {
         {route.tab === 'alerts' && <Alerts prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} />}
       </div>
 
-      <TabBar tab={route.tab} onSelect={selectTab} dock={route.tab !== 'research' && (
+      <TabBar tab={route.tab} onSelect={selectTab} dock={undo ? (
+        <div className="flex min-h-11 items-center justify-between gap-3 bg-ink pl-4 text-bg" role="status">
+          <span className="truncate">Dismissed {undo.symbol}</span>
+          <button onClick={() => restore([undo.id])} className="min-h-11 min-w-11 px-4 font-semibold">Undo</button>
+        </div>
+      ) : route.tab !== 'research' && (
         <button onClick={() => setWindowOpen(true)} aria-label={`Change window and date. Showing ${windowLabel(hours)}${day ? ` to ${dayMonth(day)}` : ''}`}
                 className="flex min-h-11 w-full items-center justify-between gap-3 px-4 text-left">
           <span className="truncate text-ink-2">Showing <span className="font-semibold text-ink">{windowLabel(hours)}</span>{day && <> to <span className="font-semibold text-ink">{dayMonth(day)}</span></>}</span>
           <span className="flex shrink-0 items-center gap-1 text-meta text-ink-3">Change<Icon name="down" size={14} className="rotate-180" /></span>
         </button>
       )} />
-
-      {undo && (
-        <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
-          <div className="flex items-center gap-3 rounded-full bg-ink pl-4 pr-1 text-bg shadow-lg">
-            Dismissed
-            <button onClick={() => restore([undo])} className="min-h-11 min-w-11 px-3 font-semibold">Undo</button>
-          </div>
-        </div>
-      )}
 
       {ask && (
         <Sheet title={`Ask FINN · ${ask.symbol}`} onClose={() => setAsk(null)}>
