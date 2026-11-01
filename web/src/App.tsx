@@ -14,6 +14,7 @@ import { windowLabel, WindowSheet } from './components/WindowSheet'
 import { dayMonth, todayIST } from './format'
 import type { Timeline } from './company'
 import type { Market } from './market'
+import { sheetHistory } from './sheetHistory'
 import { parseHash, tabHash, type Route, type Tab } from './route'
 
 const DISMISSED_KEY = 'finn.dismissed'
@@ -177,7 +178,10 @@ export default function App() {
         <CompanySheet symbol={file} name={view.names[file] ?? file} card={view.cards.find((c) => c.symbol === file) ?? null}
                       filings={timeline ? timeline[file] ?? [] : null} sessions={market?.sessions[file]} end={view.window.end}
                       since={manifest?.from ?? null} volX={prefs.volX} research={researched.find((r) => r.symbol === file)}
-                      onResearch={() => { setFile(null); openResearch(file) }} onClose={() => setFile(null)} />
+                      onResearch={() => {
+                        sheetHistory.leaveTo(`#research/${file}`)
+                        window.dispatchEvent(new HashChangeEvent('hashchange'))
+                      }} onClose={() => setFile(null)} />
       )}
       {windowOpen && (
         <WindowSheet data={data} market={market} manifest={manifest} researched={researched} latestDay={latestDay}

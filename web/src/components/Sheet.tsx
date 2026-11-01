@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { sheetHistory } from '../sheetHistory'
 import { Icon } from './Icon'
 
 const FOCUSABLE = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'
@@ -17,6 +18,7 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
     const overflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     panel.current?.focus()
+    const release = sheetHistory.open(() => close.current())
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close.current()
       if (e.key !== 'Tab' || !panel.current) return
@@ -28,6 +30,7 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
     }
     window.addEventListener('keydown', onKey)
     return () => {
+      release()
       window.removeEventListener('keydown', onKey)
       document.body.style.overflow = overflow
       before?.focus?.()
