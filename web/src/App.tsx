@@ -7,9 +7,11 @@ import { LedgerSheet } from './components/LedgerSheet'
 import { Research } from './components/Research'
 import { ResearchHome } from './components/ResearchHome'
 import { Sheet } from './components/Sheet'
+import { Icon } from './components/Icon'
 import { TabBar } from './components/TabBar'
 import { Today } from './components/Today'
-import { todayIST } from './format'
+import { windowLabel, WindowSheet } from './components/WindowSheet'
+import { dayMonth, todayIST } from './format'
 import type { Market } from './market'
 import { parseHash, tabHash, type Route, type Tab } from './route'
 
@@ -41,6 +43,7 @@ export default function App() {
   const [undo, setUndo] = useState<string | null>(null)
   const [ask, setAsk] = useState<Card | null>(null)
   const [ledgerOpen, setLedgerOpen] = useState(false)
+  const [windowOpen, setWindowOpen] = useState(false)
   const [spent, setSpent] = useState<number | null>(null)
   const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
   const [manifest, setManifest] = useState<Manifest | null>(null)
@@ -78,6 +81,7 @@ export default function App() {
 
   useEffect(() => { if (STATIC) fetchManifest().then(setManifest).catch(() => setManifest(null)) }, [])
   const latestDay = STATIC ? manifest?.to ?? null : todayIST()
+  const day = asOf ?? latestDay
 
   // Only the latest request may update the screen; a slower earlier one (another window or date) is dropped.
   const latest = useRef(0)
@@ -133,11 +137,10 @@ export default function App() {
 
   return (
     <>
-      <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(56px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
+      <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(100px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
         <div hidden={route.tab !== 'today'}>
-          <Today data={data} view={view} market={market} manifest={manifest} researched={researched} latestDay={latestDay}
-                 hours={hours} onHours={setHours} asOf={asOf} onAsOf={setAsOf} loading={loading} error={error}
-                 refreshing={refreshing} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
+          <Today data={data} view={view} market={market} day={day} hours={hours} onHours={setHours}
+                 loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
                  onDismiss={dismiss} onRestore={restore} onAsk={askFinn} onLedger={() => setLedgerOpen(true)} />
         </div>
         {route.tab === 'book' && (view ? <Book view={view} market={market} researched={new Set(researched.map((r) => r.symbol))} onResearch={openResearch} /> : skeleton)}
@@ -147,7 +150,13 @@ export default function App() {
         {route.tab === 'alerts' && <Alerts prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} />}
       </div>
 
-      <TabBar tab={route.tab} onSelect={selectTab} />
+      <TabBar tab={route.tab} onSelect={selectTab} dock={route.tab !== 'research' && (
+        <button onClick={() => setWindowOpen(true)} aria-label={`Change window and date. Showing ${windowLabel(hours)}${day ? ` to ${dayMonth(day)}` : ''}`}
+                className="flex min-h-11 w-full items-center justify-between gap-3 px-4 text-left">
+          <span className="truncate text-ink-2">Showing <span className="font-semibold text-ink">{windowLabel(hours)}</span>{day && <> to <span className="font-semibold text-ink">{dayMonth(day)}</span></>}</span>
+          <span className="flex shrink-0 items-center gap-1 text-meta text-ink-3">Change<Icon name="down" size={14} className="rotate-180" /></span>
+        </button>
+      )} />
 
       {undo && (
         <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
@@ -178,6 +187,11 @@ export default function App() {
             </div>
           )}
         </Sheet>
+      )}
+      {windowOpen && (
+        <WindowSheet data={data} market={market} manifest={manifest} researched={researched} latestDay={latestDay}
+                     hours={hours} onHours={setHours} asOf={asOf} onAsOf={setAsOf} loading={loading} refreshing={refreshing}
+                     onRefresh={() => load(true)} onClose={() => setWindowOpen(false)} />
       )}
       {ledgerOpen && <LedgerSheet onClose={() => setLedgerOpen(false)} />}
     </>

@@ -1,33 +1,11 @@
 import { useState } from 'react'
-import { STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from '../api'
-import { clock, dayMonth, usd } from '../format'
-import { lastSessionBy, noSessionNote, type Market } from '../market'
+import type { Card, Digest } from '../api'
+import { usd } from '../format'
+import { noSessionNote, type Market } from '../market'
 import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
-import { Sheet } from './Sheet'
-
-const WINDOWS = [
-  { hours: 24, label: '24h' },
-  { hours: 72, label: '3 days' },
-  { hours: 168, label: '7 days' },
-]
-
-/** "Recorded filings, as of 30 Oct, 8:29 pm IST": the one line that says how old this is. */
-function asOfLine(d: Digest): string {
-  const s = d.source
-  const fresh = s.source === 'live' || s.source === 'cache'
-  const label = fresh ? 'Live NSE' : s.source === 'unavailable' ? 'No data' : 'Recorded filings'
-  // A past date in the replay is "as of" the end of that window; otherwise the snapshot's own fetch time.
-  const at = STATIC ? d.window.end : s.as_of
-  return at ? `${label}, as of ${clock(at)} IST` : label
-}
-
-function priceLine(m: Market | null, end: string): string {
-  if (!m) return 'Prices unavailable: price and volume alerts are off.'
-  const last = lastSessionBy(m, end) ?? m.through
-  return `Prices to the ${last ? dayMonth(last) : '?'} close, Yahoo Finance${m.message ? `. ${m.message}` : ''}`
-}
+import { asOfLine, windowLabel } from './WindowSheet'
 
 function Skeleton() {
   return (
@@ -50,17 +28,12 @@ interface Props {
   data: Digest | null
   view: Digest | null
   market: Market | null
-  manifest: Manifest | null
-  researched: ResearchEntry[]
-  latestDay: string | null
   hours: number
   onHours: (h: number) => void
-  asOf: string | null
-  onAsOf: (d: string | null) => void
+  day: string | null
   loading: boolean
   error: string | null
-  refreshing: boolean
-  onReload: (refresh?: boolean) => void
+  onReload: () => void
   customised: boolean
   spent: number | null
   dismissed: Set<string>
@@ -70,25 +43,18 @@ interface Props {
   onLedger: () => void
 }
 
-export function Today({ data, view, market, manifest, researched, latestDay, hours, onHours, asOf, onAsOf, loading, error,
-  refreshing, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
-  const [dataOpen, setDataOpen] = useState(false)
+export function Today({ data, view, market, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
   const [details, setDetails] = useState(false)
-  const windowLabel = WINDOWS.find((w) => w.hours === hours)?.label ?? `${hours}h`
+  const span = windowLabel(hours)
   const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
   const dismissedHere = (view?.cards.length ?? 0) - cards.length
-  const day = asOf ?? latestDay
 
   return (
     <>
-      <header className="flex items-center justify-between gap-3">
+      <header>
         <h1 className="text-title font-bold text-ink">FINN</h1>
-        <button onClick={() => setDataOpen(true)} aria-label={`Change briefing window and date. ${windowLabel}${day ? `, ${dayMonth(day)}` : ''}`}
-                className="flex min-h-11 shrink-0 items-center gap-1 rounded-full border border-line px-3 font-medium text-ink-2">
-          {day ? `${dayMonth(day)} · ` : ''}{windowLabel}<Icon name="down" size={14} />
-        </button>
       </header>
-      <p className="mt-1 text-meta text-ink-3">{data ? asOfLine(data) : 'Loading the briefing'}</p>
+      <p className="text-meta text-ink-3">{data ? asOfLine(data) : 'Loading the briefing'}</p>
 
       <main className="mt-3 space-y-4">
         {loading && <Skeleton />}
@@ -115,7 +81,7 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
                 </button>
               </div>
               {details && <p className="text-meta text-ink-3">
-                {data.counts.total} filings in the last {windowLabel}
+                {data.counts.total} filings in the last {span}
                 {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price or volume alerts`} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} ${data.counts.duplicates_dropped === 1 ? 'duplicate' : 'duplicates'} dropped`}
               </p>}
@@ -124,7 +90,7 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
             {cards.length === 0 && (
               <div className="border-y border-line py-4">
                 <p className="font-semibold text-ink">
-                  {data.counts.total === 0 ? `No filings in the last ${windowLabel}` : customised ? 'Nothing passes your alert settings' : 'Nothing material'}
+                  {data.counts.total === 0 ? `No filings in the last ${span}` : customised ? 'Nothing passes your alert settings' : 'Nothing material'}
                 </p>
                 <p className="mt-1 text-ink-2">
                   {data.counts.total === 0
@@ -170,40 +136,6 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
         )}
       </main>
 
-      {dataOpen && (
-        <Sheet title="Briefing window" onClose={() => setDataOpen(false)}>
-          <div role="radiogroup" aria-label="Time window" className="flex rounded-full bg-raised p-0.5">
-            {WINDOWS.map((w) => (
-              <button key={w.hours} role="radio" aria-checked={hours === w.hours} onClick={() => onHours(w.hours)}
-                      className={`min-h-11 flex-1 rounded-full font-semibold ${hours === w.hours ? 'bg-surface text-ink shadow-sm' : 'text-ink-3'}`}>
-                {w.label}
-              </button>
-            ))}
-          </div>
-          <label className="mt-3 flex min-h-11 items-center justify-between gap-3 text-ink-2">
-            As of
-            <input type="date" value={asOf ?? latestDay ?? ''} max={latestDay ?? undefined} min={STATIC ? manifest?.from : undefined}
-                   onChange={(e) => onAsOf(!e.target.value || e.target.value === latestDay ? null : e.target.value)}
-                   className="min-h-11 rounded-full border border-line bg-surface px-3 text-ink" />
-          </label>
-          {!STATIC && (
-            <button onClick={() => onReload(true)} disabled={refreshing || loading || !!asOf}
-                    className="mt-3 min-h-11 w-full rounded-full border border-line font-medium text-ink-2 disabled:opacity-40">
-              {refreshing ? 'Fetching' : asOf ? 'Past briefings are fixed' : 'Fetch the latest filings'}
-            </button>
-          )}
-          <p className="mt-5 font-semibold text-ink">{STATIC ? 'This is a recording' : 'Sources'}</p>
-          {data && <p className="mt-1 text-ink-2">{asOfLine(data)}. {priceLine(market, data.window.end)}.</p>}
-          {data?.source.message && <p className="mt-1 text-ink-2">{data.source.message}</p>}
-          {STATIC && (
-            <p className="mt-2 text-ink-2">
-              {manifest ? `NSE filings for ${manifest.holdings} holdings, ${dayMonth(manifest.from)} to ${dayMonth(manifest.to)}` : 'Recorded NSE filings'}
-              {researched.length > 0 && `, and research on ${researched.length} companies`}. Nothing here updates.
-              Run locally for live filings and any NSE ticker: <code className="text-ink">./run.sh research TICKER</code>.
-            </p>
-          )}
-        </Sheet>
-      )}
     </>
   )
 }

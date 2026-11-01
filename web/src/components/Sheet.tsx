@@ -8,6 +8,9 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
   const panel = useRef<HTMLDivElement>(null)
   const drag = useRef<number | null>(null)
   const [dy, setDy] = useState(0)
+  // A parent's re-render passes a new onClose; that must not steal focus or re-lock the page.
+  const close = useRef(onClose)
+  close.current = onClose
 
   useEffect(() => {
     const before = document.activeElement as HTMLElement | null
@@ -15,7 +18,7 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
     document.body.style.overflow = 'hidden'
     panel.current?.focus()
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') close.current()
       if (e.key !== 'Tab' || !panel.current) return
       const els = [...panel.current.querySelectorAll<HTMLElement>(FOCUSABLE)]
       if (els.length === 0) return
@@ -29,7 +32,7 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
       document.body.style.overflow = overflow
       before?.focus?.()
     }
-  }, [onClose])
+  }, [])
 
   // Drag from the handle area only, so the sheet's own content still scrolls.
   const onDown = (e: React.PointerEvent) => {
