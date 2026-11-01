@@ -72,6 +72,12 @@ button, a { touch-action: manipulation; }
 @keyframes shimmer { 0% { opacity: .55 } 50% { opacity: 1 } 100% { opacity: .55 } }
 .skeleton { background: var(--raised); border-radius: 6px; animation: shimmer 1.4s ease-in-out infinite; }
 
+/* Sheets rise; nothing else bounces. */
+@keyframes sheet-rise { from { transform: translateY(24px); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes sheet-fade { from { opacity: 0 } to { opacity: 1 } }
+.sheet-backdrop { animation: sheet-fade 180ms ease-out; }
+.sheet-panel { animation: sheet-rise 220ms cubic-bezier(.2, .8, .2, 1); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
