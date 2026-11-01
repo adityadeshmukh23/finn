@@ -23,13 +23,13 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, { failed: 
     if (!this.state.failed) return this.props.children
     return (
       <div className="mx-auto max-w-xl px-4 pt-[max(2rem,env(safe-area-inset-top))]">
-        <h1 className="text-lg font-bold text-ink">Something went wrong on this screen</h1>
-        <p className="mt-1 text-[15px] leading-snug text-ink-2">Your data is untouched. Reloading usually fixes it.</p>
+        <h1 className="text-title font-bold text-ink">Something went wrong on this screen</h1>
+        <p className="mt-1 text-body text-ink-2">Your data is untouched. Reloading usually fixes it.</p>
         <div className="mt-4 flex gap-2">
           <button onClick={() => window.location.reload()}
-                  className="min-h-11 rounded-full bg-ink px-4 text-[15px] font-semibold text-bg">Reload</button>
+                  className="min-h-11 rounded-full bg-ink px-4 text-body font-semibold text-bg">Reload</button>
           <button onClick={this.reset}
-                  className="min-h-11 rounded-full border border-line px-4 text-[15px] text-ink-2">Clear saved settings</button>
+                  className="min-h-11 rounded-full border border-line px-4 text-body text-ink-2">Clear saved settings</button>
         </div>
       </div>
     )

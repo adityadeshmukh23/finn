@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-raised: var(--raised);
@@ -9,24 +9,33 @@
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-line: var(--line);
-  --color-accent: var(--accent);
-  --color-hot: var(--hot);
-  --color-warn: var(--warn);
-  --color-good: var(--good);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-flag: var(--flag);
+
+  /* Four sizes only. Figure: the one number a row is about. */
+  --text-figure: 28px;
+  --text-figure--line-height: 32px;
+  --text-title: 17px;
+  --text-title--line-height: 22px;
+  --text-body: 15px;
+  --text-body--line-height: 22px;
+  --text-meta: 12px;
+  --text-meta--line-height: 16px;
 }
 
+/* Colour means something: up and down are the sign of a number, flag is "low confidence or unverified". */
 :root {
   --bg: #f6f5f2;
   --surface: #ffffff;
   --raised: #efede8;
   --ink: #16181d;
   --ink-2: #4b4f58;
-  --ink-3: #8a8e97;
+  --ink-3: #6b6f78;
   --line: #e4e1da;
-  --accent: #9a6b00;
-  --hot: #c2410c;
-  --warn: #a16207;
-  --good: #15803d;
+  --up: #15803d;
+  --down: #b42318;
+  --flag: #92600a;
   color-scheme: light;
 }
 
@@ -37,24 +46,32 @@
     --raised: #1f232b;
     --ink: #eceae6;
     --ink-2: #a9adb6;
-    --ink-3: #6f747e;
-    --line: #262a33;
-    --accent: #e8c26a;
-    --hot: #fb923c;
-    --warn: #facc15;
-    --good: #4ade80;
+    --ink-3: #8a8f99;
+    --line: #2b2f38;
+    --up: #4ade80;
+    --down: #f87171;
+    --flag: #e8c26a;
     color-scheme: dark;
   }
 }
 
-html, body {
-  background: var(--bg);
+html, body { background: var(--bg); }
+
+/* On body, not html: a font-size on html would rescale every rem-based spacing token. */
+body {
   color: var(--ink);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
 
-.tabular { font-variant-numeric: tabular-nums; }
+button, a { touch-action: manipulation; }
 
 @keyframes shimmer { 0% { opacity: .55 } 50% { opacity: 1 } 100% { opacity: .55 } }
 .skeleton { background: var(--raised); border-radius: 6px; animation: shimmer 1.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

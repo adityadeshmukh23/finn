@@ -4,6 +4,7 @@ import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, fetchResearchInde
 import { AlertsSheet } from './components/AlertsSheet'
 import { BriefCard } from './components/BriefCard'
 import { HiddenRow } from './components/HiddenRow'
+import { Icon } from './components/Icon'
 import { LedgerSheet } from './components/LedgerSheet'
 import { Research } from './components/Research'
 import { Sheet } from './components/Sheet'
@@ -36,24 +37,24 @@ function SourceBadge({ d }: { d: Digest }) {
   const fresh = s.source === 'live' || s.source === 'cache'
   const label = fresh ? 'NSE' : s.source === 'unavailable' ? 'No data' : STATIC ? 'Demo data' : 'Snapshot'
   return (
-    <div className="text-xs">
-      <span className={`inline-flex items-center gap-1.5 font-medium ${fresh ? 'text-good' : 'text-warn'}`}>
-        <span className={`h-1.5 w-1.5 rounded-full ${fresh ? 'bg-good' : 'bg-warn'}`} />
+    <div className="text-meta">
+      <span className={`inline-flex items-center gap-1.5 font-medium ${fresh ? 'text-up' : 'text-flag'}`}>
+        <span className={`h-1.5 w-1.5 rounded-full ${fresh ? 'bg-up' : 'bg-flag'}`} />
         {label}
         {s.as_of && <span className="font-normal text-ink-3">{STATIC ? ' as of ' : '· data as of '}{clock(s.as_of)}</span>}
       </span>
-      {s.message && <p className="mt-1 leading-snug text-ink-3">{s.message}</p>}
+      {s.message && <p className="mt-1 text-ink-3">{s.message}</p>}
     </div>
   )
 }
 
 function PriceBadge({ m }: { m: Market | null }) {
-  if (!m) return <p className="mt-1 text-xs text-ink-3">Prices unavailable: price and volume alerts are off.</p>
+  if (!m) return <p className="mt-1 text-meta text-ink-3">Prices unavailable: price and volume alerts are off.</p>
   const fresh = m.source === 'live' || m.source === 'cache'
   const day = m.through ? new Date(m.through).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : '?'
   return (
-    <p className="mt-1 text-xs text-ink-3">
-      <span className={`mr-1.5 inline-block h-1.5 w-1.5 rounded-full ${fresh ? 'bg-good' : 'bg-warn'}`} />
+    <p className="mt-1 text-meta text-ink-3">
+      <span className={`mr-1.5 inline-block h-1.5 w-1.5 rounded-full ${fresh ? 'bg-up' : 'bg-flag'}`} />
       Prices to {day} close · Yahoo Finance{m.message ? ` · ${m.message}` : ''}
     </p>
   )
@@ -169,24 +170,24 @@ export default function App() {
     <div className="mx-auto min-h-dvh max-w-xl px-4 pb-16 pt-[max(1rem,env(safe-area-inset-top))]">
       <header className="flex items-center justify-between py-2">
         <div>
-          <h1 className="text-lg font-bold tracking-tight text-ink">FINN</h1>
-          <p className="text-xs text-ink-3">
+          <h1 className="text-title font-bold text-ink">FINN</h1>
+          <p className="text-meta text-ink-3">
             {asOf ? `Briefing as of ${new Date(asOf).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}` : 'Your portfolio briefing'}
           </p>
         </div>
         <div className="flex items-center gap-2">
           <button onClick={() => setLedgerOpen(true)}
-                  className="tabular rounded-full border border-line px-3 py-1.5 text-xs font-medium text-ink-2"
+                  className="rounded-full border border-line px-3 py-1.5 text-meta font-medium text-ink-2"
                   aria-label="Open cost ledger">
             {spent === null ? 'Cost' : `${usd(spent)} spent`}
           </button>
           <button onClick={() => setAlertsOpen(true)} aria-label="Alert settings"
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium ${customised ? 'border-ink text-ink' : 'border-line text-ink-2'}`}>
+                  className={`rounded-full border px-3 py-1.5 text-meta font-medium ${customised ? 'border-ink text-ink' : 'border-line text-ink-2'}`}>
             Alerts{customised ? ' ·' : ''}
           </button>
           {!STATIC && (
             <button onClick={() => load(true)} disabled={refreshing || loading || !!asOf}
-                    className="rounded-full border border-line px-3 py-1.5 text-xs font-medium text-ink-2 disabled:opacity-40"
+                    className="rounded-full border border-line px-3 py-1.5 text-meta font-medium text-ink-2 disabled:opacity-40"
                     aria-label="Refresh from NSE" title={asOf ? 'Past briefings are fixed' : 'Fetch the latest filings'}>
               {refreshing ? 'Refreshing…' : 'Refresh'}
             </button>
@@ -195,7 +196,7 @@ export default function App() {
       </header>
 
       {STATIC && (
-        <p className="mt-2 rounded-xl bg-raised px-3 py-2 text-xs leading-snug text-ink-2">
+        <p className="mt-2 rounded-xl bg-raised px-3 py-2 text-meta text-ink-2">
           <span className="font-semibold text-ink">Replay mode.</span> Recorded NSE filings
           {manifest && <> for {manifest.holdings} holdings, {manifest.from} to {manifest.to}</>}
           {researched.length > 0 && <>, and recorded research on {researched.length} {researched.length === 1 ? 'company' : 'companies'}</>}.
@@ -207,16 +208,16 @@ export default function App() {
         <div role="tablist" aria-label="Time window" className="flex rounded-full bg-raised p-0.5">
           {WINDOWS.map((w) => (
             <button key={w.hours} role="tab" aria-selected={hours === w.hours} onClick={() => setHours(w.hours)}
-                    className={`rounded-full px-3 py-1.5 text-xs font-semibold ${hours === w.hours ? 'bg-surface text-ink shadow-sm' : 'text-ink-3'}`}>
+                    className={`rounded-full px-3 py-1.5 text-meta font-semibold ${hours === w.hours ? 'bg-surface text-ink shadow-sm' : 'text-ink-3'}`}>
               {w.label}
             </button>
           ))}
         </div>
-        <label className="ml-auto flex items-center gap-1.5 text-xs text-ink-3">
+        <label className="ml-auto flex items-center gap-1.5 text-meta text-ink-3">
           As of
           <input type="date" value={asOf ?? latestDay ?? ''} max={latestDay ?? undefined} min={STATIC ? manifest?.from : undefined}
                  onChange={(e) => setAsOf(!e.target.value || e.target.value === latestDay ? null : e.target.value)}
-                 className="rounded-full border border-line bg-surface px-2.5 py-1 text-xs text-ink" />
+                 className="rounded-full border border-line bg-surface px-2.5 py-1 text-meta text-ink" />
         </label>
       </div>
 
@@ -225,20 +226,20 @@ export default function App() {
 
         {!loading && error && (
           <div className="rounded-2xl border border-line bg-surface p-5">
-            <p className="text-[15px] font-semibold text-ink">Couldn't load the briefing</p>
-            <p className="mt-1 text-[13px] text-ink-2">{error}</p>
-            <button onClick={() => load()} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-bg">Try again</button>
+            <p className="text-body font-semibold text-ink">Couldn't load the briefing</p>
+            <p className="mt-1 text-body text-ink-2">{error}</p>
+            <button onClick={() => load()} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-meta font-semibold text-bg">Try again</button>
           </div>
         )}
 
         {!loading && data && view && (
           <>
             <section>
-              <p className="text-[15px] text-ink">
-                <span className="tabular text-2xl font-bold">{cards.length}</span>{' '}
+              <p className="text-body text-ink">
+                <span className="text-figure font-bold">{cards.length}</span>{' '}
                 {cards.length === 1 ? 'company needs' : 'companies need'} a look
               </p>
-              <p className="tabular mt-0.5 text-[13px] text-ink-2">
+              <p className="mt-0.5 text-body text-ink-2">
                 {data.counts.total} filings in the last {windowLabel}
                 {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price/volume alerts`} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} duplicates dropped`}
@@ -248,10 +249,10 @@ export default function App() {
 
             {cards.length === 0 && (
               <div className="rounded-2xl border border-line bg-surface p-5">
-                <p className="text-[15px] font-semibold text-ink">
+                <p className="text-body font-semibold text-ink">
                   {data.counts.total === 0 ? `No filings in the last ${windowLabel}` : customised ? 'Nothing passes your alert settings' : 'Nothing material'}
                 </p>
-                <p className="mt-1 text-[13px] leading-snug text-ink-2">
+                <p className="mt-1 text-body text-ink-2">
                   {data.counts.total === 0
                     ? 'A quiet window. Widen it, or pick an earlier date to see a busy day.'
                     : customised
@@ -259,7 +260,7 @@ export default function App() {
                       : 'Everything filed in this window was routine. It is listed below if you want to check.'}
                 </p>
                 {hours < 168 && (
-                  <button onClick={() => setHours(168)} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-bg">Show 7 days</button>
+                  <button onClick={() => setHours(168)} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-meta font-semibold text-bg">Show 7 days</button>
                 )}
               </div>
             )}
@@ -272,7 +273,7 @@ export default function App() {
             </ul>
 
             {dismissedHere > 0 && (
-              <button onClick={() => restore(view.cards.map((c) => c.lead.id))} className="text-xs text-ink-3 underline underline-offset-4">
+              <button onClick={() => restore(view.cards.map((c) => c.lead.id))} className="text-meta text-ink-3 underline underline-offset-4">
                 {dismissedHere} dismissed · show again
               </button>
             )}
@@ -282,8 +283,8 @@ export default function App() {
             {researched.length > 0 && (
               <section className="rounded-2xl border border-line bg-surface">
                 <div className="px-4 pt-4">
-                  <h2 className="text-[15px] font-semibold text-ink">Promised vs delivered</h2>
-                  <p className="mt-0.5 text-[13px] leading-snug text-ink-2">
+                  <h2 className="text-body font-semibold text-ink">Promised vs delivered</h2>
+                  <p className="mt-0.5 text-body text-ink-2">
                     Management's guidance over the last four quarters, against what it reported. Transcripts and annual reports only.
                   </p>
                 </div>
@@ -292,11 +293,11 @@ export default function App() {
                     <li key={r.symbol} className="border-t border-line">
                       <button onClick={() => openResearch(r.symbol)} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left">
                         <span className="min-w-0">
-                          <span className="text-[13px] font-semibold text-ink">{r.symbol}</span>
-                          <span className="text-[13px] text-ink-3"> · {r.name || r.symbol}</span>
-                          <span className="block text-xs text-ink-2">{r.headline}{r.counts.missed > 0 ? ` · ${r.counts.missed} missed` : ''}</span>
+                          <span className="text-body font-semibold text-ink">{r.symbol}</span>
+                          <span className="text-body text-ink-3"> · {r.name || r.symbol}</span>
+                          <span className="block text-meta text-ink-2">{r.headline}{r.counts.missed > 0 ? ` · ${r.counts.missed} missed` : ''}</span>
                         </span>
-                        <span className="text-ink-3" aria-hidden="true">→</span>
+                        <Icon name="chevron" className="text-ink-3" />
                       </button>
                     </li>
                   ))}
@@ -305,7 +306,7 @@ export default function App() {
             )}
 
             {view.quiet.length > 0 && (
-              <p className="px-1 text-xs leading-relaxed text-ink-3">
+              <p className="px-1 text-meta text-ink-3">
                 Nothing from {view.quiet.length} holdings (no filings, no price or volume alert): {view.quiet.join(', ')}
               </p>
             )}
@@ -315,20 +316,20 @@ export default function App() {
 
       {undo && (
         <div className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
-          <div className="flex items-center gap-4 rounded-full bg-ink px-4 py-2 text-xs text-bg shadow-lg">
+          <div className="flex items-center gap-4 rounded-full bg-ink px-4 py-2 text-meta text-bg shadow-lg">
             Dismissed
-            <button onClick={() => restore([undo])} className="font-semibold text-accent">Undo</button>
+            <button onClick={() => restore([undo])} className="font-semibold">Undo</button>
           </div>
         </div>
       )}
 
       {ask && (
         <Sheet title={`Ask FINN · ${ask.symbol}`} onClose={() => setAsk(null)}>
-          <p className="text-[13px] leading-snug text-ink-2">
+          <p className="text-body text-ink-2">
             Research on {ask.company} is grounded only in its earnings-call transcripts and annual report, with a page
             citation on every claim: <span className="font-semibold text-ink">promised vs delivered</span> over the last four quarters.
           </p>
-          <p className="mt-3 rounded-xl bg-raised p-3 text-[13px] leading-snug text-ink-2">
+          <p className="mt-3 rounded-xl bg-raised p-3 text-body text-ink-2">
             {STATIC
               ? <>Not recorded for {ask.symbol} in this demo. Recorded: {researched.map((r) => r.symbol).join(', ') || 'none'}. Any NSE ticker can be researched locally with <code className="text-ink">./run.sh research {ask.symbol}</code>.</>
               : <>Not generated for {ask.symbol} yet. Run <code className="text-ink">./run.sh research {ask.symbol}</code> (a few minutes, free-tier models).</>}
@@ -337,7 +338,7 @@ export default function App() {
             <div className="mt-3 flex flex-wrap gap-1.5">
               {researched.map((r) => (
                 <button key={r.symbol} onClick={() => { setAsk(null); openResearch(r.symbol) }}
-                        className="rounded-full border border-line px-3 py-1.5 text-xs font-medium text-ink-2">{r.symbol}</button>
+                        className="rounded-full border border-line px-3 py-1.5 text-meta font-medium text-ink-2">{r.symbol}</button>
               ))}
             </div>
           )}

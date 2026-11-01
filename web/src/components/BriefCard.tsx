@@ -2,17 +2,13 @@ import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
 import { CATEGORY_LABEL, when } from '../format'
 import { describe } from '../market'
+import { Icon } from './Icon'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
 
-const TIER_DOT: Record<string, string> = { high: 'bg-hot', medium: 'bg-accent', routine: 'bg-ink-3' }
-
 function Chip({ item }: { item: Item }) {
   return (
-    <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-ink-2">
-      <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} />
-      {CATEGORY_LABEL[item.category] ?? item.category}
-    </span>
+    <span className="text-meta font-semibold text-ink-2">{CATEGORY_LABEL[item.category] ?? item.category}</span>
   )
 }
 
@@ -20,8 +16,8 @@ function FilingLink({ url, label = 'Filing' }: { url: string; label?: string }) 
   if (!url) return null
   return (
     <a href={url} target="_blank" rel="noopener noreferrer"
-       className="text-xs font-medium text-ink-2 underline decoration-line underline-offset-4 hover:text-ink">
-      {label} ↗
+       className="text-meta font-medium text-ink-2 underline decoration-line underline-offset-4 hover:text-ink">
+      {label}<Icon name="external" size={12} className="ml-0.5" />
     </a>
   )
 }
@@ -66,7 +62,7 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
 
   return (
     <li className="relative overflow-hidden rounded-2xl">
-      <div className="absolute inset-0 flex items-center justify-end rounded-2xl bg-raised pr-5 text-xs font-medium text-ink-3">
+      <div className="absolute inset-0 flex items-center justify-end rounded-2xl bg-raised pr-5 text-meta font-medium text-ink-3">
         Dismiss
       </div>
       <article
@@ -83,43 +79,43 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
       >
         <div className="flex items-center justify-between gap-3">
           <Chip item={lead} />
-          <span className="tabular text-xs text-ink-3">{when(lead.ts, refTime)}</span>
+          <span className="text-meta text-ink-3">{when(lead.ts, refTime)}</span>
         </div>
 
-        <p className="mt-2 text-[13px] text-ink-2">
+        <p className="mt-2 text-body text-ink-2">
           <span className="font-semibold text-ink">{card.symbol}</span>
           <span className="text-ink-3"> · </span>
           {card.company}
         </p>
         {card.market && lead.category !== 'market' && (
-          <p className="tabular mt-1 text-xs font-semibold text-hot">
+          <p className="mt-1 text-meta font-semibold text-ink">
             Stock {describe(card.market)}
             <span className="font-normal text-ink-3"> · {new Date(card.market.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })} close</span>
           </p>
         )}
-        <h3 className="mt-1 text-[15px] font-semibold leading-snug text-ink">{lead.headline}</h3>
-        {lead.why && lead.category !== 'results' && !(lead.category === 'management_change' && card.people?.length) && <p className="mt-1.5 text-[13px] leading-snug text-ink-2">{lead.why}</p>}
+        <h3 className="mt-1 text-body font-semibold text-ink">{lead.headline}</h3>
+        {lead.why && lead.category !== 'results' && !(lead.category === 'management_change' && card.people?.length) && <p className="mt-1.5 text-body text-ink-2">{lead.why}</p>}
         {card.results && lead.category === 'results' && <ResultsTable r={card.results} />}
         {card.people && card.people.length > 0 && lead.category === 'management_change' && <People people={card.people} />}
         {card.why_rank && (
-          <p className="mt-2 text-xs leading-snug text-ink-3">
-            <span className="tabular font-semibold text-ink-2">#{rank}</span> {card.why_rank}
+          <p className="mt-2 text-meta text-ink-3">
+            <span className="font-semibold text-ink-2">#{rank}</span> {card.why_rank}
           </p>
         )}
 
         <div className="mt-3 flex items-center gap-4">
           <FilingLink url={lead.url} label={lead.category === 'market' ? 'NSE quote' : 'Filing'} />
           {lead.read && (
-            <span className="text-xs text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page}</span>
+            <span className="text-meta text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page}</span>
           )}
           {more > 0 && (
             <button onClick={() => setOpen(!open)} aria-expanded={open}
-                    className="text-xs font-medium text-ink-2 hover:text-ink">
+                    className="text-meta font-medium text-ink-2 hover:text-ink">
               {open ? 'Less' : `+${more} more`}
             </button>
           )}
           <button onClick={onAsk}
-                  className="ml-auto rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-bg active:scale-95">
+                  className="ml-auto rounded-full bg-ink px-3 py-1.5 text-meta font-semibold text-bg active:scale-95">
             Ask FINN
           </button>
         </div>
@@ -133,23 +129,23 @@ export function BriefCard({ card, rank, refTime, onDismiss, onAsk }: Props) {
               <li key={it.id}>
                 <div className="flex items-center justify-between gap-3">
                   <Chip item={it} />
-                  <span className="tabular text-xs text-ink-3">{when(it.ts, refTime)}</span>
+                  <span className="text-meta text-ink-3">{when(it.ts, refTime)}</span>
                 </div>
-                <p className="mt-1 text-[13px] leading-snug text-ink">{it.headline}</p>
+                <p className="mt-1 text-body text-ink">{it.headline}</p>
                 <div className="mt-1"><FilingLink url={it.url} /></div>
               </li>
             ))}
             {card.folded.length > 0 && (
-              <li className="text-xs text-ink-3">
+              <li className="text-meta text-ink-3">
                 {card.folded.length} results newspaper {card.folded.length === 1 ? 'ad' : 'ads'} (same numbers, already filed){' '}
                 {card.folded.map((it, i) => (
                   <a key={it.id} href={it.url} target="_blank" rel="noopener noreferrer"
-                     className="underline underline-offset-4">{i ? ', ' : ''}ad {i + 1} ↗</a>
+                     className="underline underline-offset-4">{i ? ', ' : ''}ad {i + 1}<Icon name="external" size={12} className="ml-0.5" /></a>
                 ))}
               </li>
             )}
             {card.routine_count - card.folded.length > 0 && (
-              <li className="text-xs text-ink-3">
+              <li className="text-meta text-ink-3">
                 {card.routine_count - card.folded.length} routine{' '}
                 {card.routine_count - card.folded.length === 1 ? 'filing' : 'filings'} from {card.symbol} hidden below
               </li>
