@@ -5,6 +5,7 @@ import { usd } from '../format'
 import { noSessionNote, type Market } from '../market'
 import { rankCards } from '../rank'
 import { synthesis } from '../synthesis'
+import { BookStrip } from './BookStrip'
 import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
@@ -45,10 +46,11 @@ interface Props {
   onDismiss: (id: string, symbol: string, top: number) => void
   onRestore: (ids: string[]) => void
   onAsk: (c: Card) => void
+  onOpen: (sym: string) => void
   onLedger: () => void
 }
 
-export function Today({ chip, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
+export function Today({ chip, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger }: Props) {
   const [details, setDetails] = useState(false)
   const span = windowLabel(hours)
   // Rank what's left, so the numbers, the lead rule and the "why #N" lines stay true after a dismiss.
@@ -95,15 +97,18 @@ export function Today({ chip, data, view, market, timeline, day, hours, onHours,
                       {i > 0 && ' '}
                       {/* An inline link: its padding gives a 44 px target without pushing the lines apart. */}
                       <a href={`#row-${s.symbol}`} onClick={(e) => { e.preventDefault(); document.getElementById(`row-${s.symbol}`)?.scrollIntoView({ block: 'start' }) }}
-                         className="py-[11px] underline decoration-line underline-offset-4">{s.text}.</a>
+                         className="py-[13px] underline decoration-line underline-offset-4">{s.text}.</a>
                     </span>
                   ))}
                 </p>
               )}
-              {details && <p className="mt-1 text-meta text-ink-3">
+              <div className="mt-2"><BookStrip view={view} market={market} onOpen={onOpen} /></div>
+              {details && <p className="mt-2 text-meta text-ink-3">
                 {data.counts.total} filings in the last {span}
                 {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price or volume alerts`} · {view.counts.hidden} hidden
                 {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} ${data.counts.duplicates_dropped === 1 ? 'duplicate' : 'duplicates'} dropped`}
+                {view.quiet.length > 0 && <span className="mt-1 block">Nothing from {view.quiet.length} holdings: {view.quiet.join(', ')}.</span>}
+                <span className="mt-1 block">Tiles show each holding's last close, tinted by the move. A dot means a filing in this window.</span>
               </p>}
             </section>
 
@@ -142,12 +147,6 @@ export function Today({ chip, data, view, market, timeline, day, hours, onHours,
             )}
 
             <HiddenRow groups={view.hidden} total={view.counts.hidden} />
-
-            {view.quiet.length > 0 && (
-              <p className="px-1 text-meta text-ink-3">
-                Nothing from {view.quiet.length} holdings (no filings, no price or volume alert): {view.quiet.join(', ')}
-              </p>
-            )}
 
             <button onClick={onLedger} className="flex min-h-11 w-full items-center justify-between gap-3 px-1 text-left text-ink-2">
               <span>{spent === null ? 'How FINN routes model calls' : `${usd(spent)} in model spend. See how`}</span>

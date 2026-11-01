@@ -154,7 +154,7 @@ export default function App() {
         <div hidden={route.tab !== 'today'}>
           <Today chip={chip} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
                  loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
-                 onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onLedger={() => setLedgerOpen(true)} />
+                 onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} />
         </div>
         {route.tab === 'book' && (view ? <Book chip={chip} view={view} market={market} onOpen={setFile} /> : skeleton)}
         {route.tab === 'research' && (route.symbol

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { tileTint } from '../components/BookStrip'
 import { clock, dayMonth, verdictLine } from '../format'
 import { lastSessionBy, type Market } from '../market'
 
@@ -28,4 +29,14 @@ describe('verdictLine', () => {
   it('does not hide a partial behind "met 0 of 1"', () => expect(verdictLine(c(0, 1, 0))).toBe('1 partially, of 1 checkable'))
   it('lists what was checked', () => expect(verdictLine(c(3, 1, 2, 3))).toBe('3 met, 1 partially, 2 missed, of 6 checkable'))
   it('says when nothing was checkable', () => expect(verdictLine(c(0, 0, 0, 6))).toBe('No checkable promise yet, 6 too vague'))
+})
+
+describe('tileTint', () => {
+  it('is red for a fall, green for a rise, none when flat or unknown', () => {
+    expect(tileTint(-3)).toContain('--down')
+    expect(tileTint(3)).toContain('--up')
+    expect(tileTint(0)).toBeUndefined()
+    expect(tileTint(null)).toBeUndefined()
+  })
+  it('stops getting stronger at the cap', () => expect(tileTint(50)).toBe(tileTint(6)))
 })
