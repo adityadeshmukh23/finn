@@ -4,7 +4,7 @@ import { lastMaterialBefore, type Timeline } from '../company'
 import { usd } from '../format'
 import { noSessionNote, type Market } from '../market'
 import { rankCards } from '../rank'
-import { synthesis } from '../synthesis'
+import { briefingEnd, synthesis } from '../synthesis'
 import { BookStrip } from './BookStrip'
 import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
@@ -112,7 +112,7 @@ export function Today({ chip, data, view, market, timeline, day, hours, onHours,
               </p>}
             </section>
 
-            {cards.length === 0 && (
+            {view.cards.length === 0 && (
               <div className="border-y border-line py-4">
                 <p className="font-semibold text-ink">
                   {data.counts.total === 0 ? `No filings in the last ${span}` : customised ? 'Nothing passes your alert settings' : 'Nothing material'}
@@ -147,6 +147,13 @@ export function Today({ chip, data, view, market, timeline, day, hours, onHours,
             )}
 
             <HiddenRow groups={view.hidden} total={view.counts.hidden} />
+
+            {(view.cards.length > 0 || view.counts.hidden > 0) && (
+              <p className="flex items-start gap-2 font-semibold text-ink">
+                <Icon name="check" size={20} className="mt-px" />
+                {briefingEnd(cards.length, dismissedHere, view.counts.hidden)}
+              </p>
+            )}
 
             <button onClick={onLedger} className="flex min-h-11 w-full items-center justify-between gap-3 px-1 text-left text-ink-2">
               <span>{spent === null ? 'How FINN routes model calls' : `${usd(spent)} in model spend. See how`}</span>
