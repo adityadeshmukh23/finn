@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
+import type { TimelineItem } from '../company'
 import { CATEGORY_LABEL, clock, dayMonth } from '../format'
 import { figuresWithheld, rowFigure, rowLine } from '../figure'
 import { describe } from '../market'
@@ -26,9 +27,10 @@ interface Props {
   rank: number
   onDismiss: (top: number) => void
   onAsk: () => void
+  last: TimelineItem | null
 }
 
-export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
+export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
   const [open, setOpen] = useState(rank <= 3)
   const row = useRef<HTMLLIElement>(null)
   const [more, setMore] = useState(false)
@@ -98,7 +100,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk }: Props) {
           </span>
           <span className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
-            <span className={`block text-ink ${open ? '' : 'line-clamp-2'}`}>{rowLine(card)}</span>
+            <span className={`block text-ink ${open ? '' : 'line-clamp-2'}`}>{rowLine(card, last)}</span>
             <span className="mt-0.5 block text-meta text-ink-3">
               {lead.category === 'market' ? `${dayMonth(m?.date ?? lead.ts)} close` : clock(lead.ts)}
               {figuresWithheld(card) && <span className="text-flag"> · Low confidence, figures withheld</span>}

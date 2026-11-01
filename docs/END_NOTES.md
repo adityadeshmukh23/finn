@@ -5,6 +5,7 @@ A running list, kept during polish. Neither file has been edited yet.
 ## README.md
 - Screens are now Today, Book, Research, Alerts. Replace anything that describes a single scrolling page, and retake `docs/img`.
 - Window and as-of date live in the sheet behind the date chip on Today.
+- Ask FINN opens the company file (price, volume, results, management, filings, research if recorded). Any NSE ticker can still be researched locally.
 - `npm test` and `npm run check:size` exist in `web/`, and CI runs both.
 
 ## COVER_NOTE.md

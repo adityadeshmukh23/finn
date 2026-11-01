@@ -180,3 +180,10 @@
 - **Results we can't show a number for don't take #1.** Sun Pharma's low-confidence results outscored Reliance and led the default screen with no figure. The highest-scoring other card now leads, and both "why #N" lines say so; scores don't change. On the 62 non-empty recorded briefings at default settings, 38 now lead with a figure; the other 24 lead with management (9), legal (8), M&A (6) or news (1), which have no number by nature and stay first by design.
 - **Smallest text is 13/18, muted grey one notch stronger** (#5f636c light, #9ca1ab dark), from review on a real browser at 320 px. Rows still fit; the first screen loses about one line.
 - **Filing stats behind Details, window picker and undo share one docked slot above the tabs.** The slot is reserved in the page's bottom padding, so neither floats over a row, and a dismiss near the dock scrolls the next row clear.
+
+## Polish block 2: company file sheet (2026-11-01)
+
+- **Ask FINN opens a file, not research or an apology.** It was an apology on 49 of 50 cards. Now every entry point (Ask FINN, every Book row, every fired alert) opens one sheet with what FINN verifiably holds, and "run locally" is a small footnote for tickers with no research.
+- **One additive `timeline.json`, 95 KB, 18 KB gzipped,** built by the same classifier and verified reads as the briefing, and filtered in the browser by the as-of date, so a past date never sees a later filing. If it fails to load, the sheet shows the card's own filings. Tested by removing the file.
+- **A price card points at the heaviest event on the last filing day,** not the latest. Equitas on 30 Oct used to say "check for news"; it now says "Last, 29 Oct: Resignation of Mr. P N Vasudevan as Managing Director & CEO". It states what was filed and when, and claims no cause. Investor decks filed later that day would have won under "latest".
+- **Close and volume are two aligned panels, never one chart with two axes.** Inline SVG, no library. A filing marks the first close at or after it, so an after-hours filing marks the next day, which is the session that could react to it. Tap or drag a session and the figure above follows.

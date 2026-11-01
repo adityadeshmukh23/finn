@@ -1,4 +1,6 @@
 import type { Card, Results } from './api'
+import type { TimelineItem } from './company'
+import { dayMonth } from './format'
 import { fmtPct, fmtX } from './market'
 
 /** The one number a row is about, and the line beside it. Nothing here is computed: it picks fields the card already has. */
@@ -35,11 +37,12 @@ export function rowFigure(card: Card): RowFigure | null {
 }
 
 /** The row's sentence. Drops what the figure beside it already says. */
-export function rowLine(card: Card): string {
+export function rowLine(card: Card, last: TimelineItem | null = null): string {
   const { lead, market: m } = card
   if (lead.category === 'market') {
     const price = m && !m.move_hit && m.chg_pct !== null ? `Price ${fmtPct(m.chg_pct)}. ` : ''
-    return `${price}No filing in this window`
+    const before = last ? `. Last, ${dayMonth(last.ts)}: ${last.headline}` : ''
+    return `${price}No filing in this window${before}`
   }
   if (shownResults(card) && rowFigure(card)?.label === 'PAT YoY') return lead.headline.replace(/, [+−-][\d.]+% YoY/, '')
   return lead.headline

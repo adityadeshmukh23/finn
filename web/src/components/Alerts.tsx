@@ -22,8 +22,8 @@ function Stepper({ label, value, step, min, max, unit, prefix = '', onChange }: 
   )
 }
 
-export function Alerts({ prefs, onChange, cards }: {
-  prefs: AlertPrefs; onChange: (p: AlertPrefs) => void; cards: Card[]
+export function Alerts({ prefs, onChange, cards, onOpen }: {
+  prefs: AlertPrefs; onChange: (p: AlertPrefs) => void; cards: Card[]; onOpen: (sym: string) => void
 }) {
   const fired = cards.filter((c) => c.market)
   const toggle = (cat: string) =>
@@ -38,12 +38,14 @@ export function Alerts({ prefs, onChange, cards }: {
       {fired.length > 0 && (
         <ul className="mt-1 divide-y divide-line border-y border-line">
           {fired.map((c) => (
-            <li key={c.symbol} className="flex min-h-11 items-center justify-between gap-3 py-2">
+            <li key={c.symbol}>
+              <button onClick={() => onOpen(c.symbol)} className="flex min-h-11 w-full items-center justify-between gap-3 py-2 text-left">
               <span className="shrink-0">
                 <span className="block font-semibold text-ink">{c.symbol}</span>
                 <span className="block text-meta text-ink-3">{dayMonth(c.market!.date)} close</span>
               </span>
-              <span className="text-right text-ink-2">{describe(c.market!)}</span>
+              <span className="flex items-center gap-2 text-right text-ink-2">{describe(c.market!)}<Icon name="chevron" className="text-ink-3" /></span>
+              </button>
             </li>
           ))}
         </ul>

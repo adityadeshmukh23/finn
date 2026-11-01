@@ -14,9 +14,7 @@ export function filingCount(d: Digest, symbol: string): number {
 const inr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: n >= 1000 ? 0 : 2 })}`
 
 /** The 18 holdings as a ledger: last close, day move, what was filed. Biggest move first. */
-export function Book({ view, market, researched, onResearch }: {
-  view: Digest; market: Market | null; researched: Set<string>; onResearch: (sym: string) => void
-}) {
+export function Book({ view, market, onOpen }: { view: Digest; market: Market | null; onOpen: (sym: string) => void }) {
   const end = view.window.end
   const last = market ? lastSessionBy(market, end) : null
   const rows = Object.entries(view.names).map(([symbol, name]) => ({
@@ -50,13 +48,9 @@ export function Book({ view, market, researched, onResearch }: {
           )
           return (
             <li key={r.symbol}>
-              {researched.has(r.symbol) ? (
-                <button onClick={() => onResearch(r.symbol)} className="flex min-h-14 w-full items-center gap-3 py-2 text-left">
-                  {body}<Icon name="chevron" className="text-ink-3" />
-                </button>
-              ) : (
-                <div className="flex min-h-14 items-center gap-3 py-2">{body}</div>
-              )}
+              <button onClick={() => onOpen(r.symbol)} className="flex min-h-14 w-full items-center gap-3 py-2 text-left">
+                {body}<Icon name="chevron" className="text-ink-3" />
+              </button>
             </li>
           )
         })}

@@ -37,6 +37,7 @@ export function ResultsTable({ r }: { r: Results }) {
   if (r.confidence === 'low') {
     return (
       <div className="mt-1 rounded-xl bg-raised px-3 pt-3 text-ink-2">
+        <p className="font-semibold text-flag">Low confidence, figures withheld</p>
         <p>{r.confidence_note}</p>
         <p className="text-meta text-ink-3">The table is on {source}</p>
       </div>

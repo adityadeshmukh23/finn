@@ -29,7 +29,7 @@ export interface Signal {
 export interface Thresholds { volX: number; movePct: number }
 
 // NSE's cash session closes at 15:30 IST; an EOD bar belongs to a window if its close does.
-const closeTime = (d: string) => new Date(`${d}T15:30:00+05:30`).getTime()
+export const closeTime = (d: string) => new Date(`${d}T15:30:00+05:30`).getTime()
 
 /** The last session with a close at or before this moment: what "prices to" honestly means on a past date. */
 export function lastSessionBy(m: Market, end: string): string | null {

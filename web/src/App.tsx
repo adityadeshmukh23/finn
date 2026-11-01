@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { applyAlerts, DEFAULT_PREFS, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
-import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, fetchResearchIndex, STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from './api'
+import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, fetchResearchIndex, fetchTimeline, STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from './api'
 import { Alerts } from './components/Alerts'
 import { Book } from './components/Book'
+import { CompanySheet } from './components/CompanySheet'
 import { LedgerSheet } from './components/LedgerSheet'
 import { Research } from './components/Research'
 import { ResearchHome } from './components/ResearchHome'
-import { Sheet } from './components/Sheet'
 import { Icon } from './components/Icon'
 import { TabBar } from './components/TabBar'
 import { Today } from './components/Today'
 import { windowLabel, WindowSheet } from './components/WindowSheet'
 import { dayMonth, todayIST } from './format'
+import type { Timeline } from './company'
 import type { Market } from './market'
 import { parseHash, tabHash, type Route, type Tab } from './route'
 
@@ -42,7 +43,8 @@ export default function App() {
   const [refreshing, setRefreshing] = useState(false)
   const [dismissed, setDismissed] = useState(loadDismissed)
   const [undo, setUndo] = useState<{ id: string; symbol: string } | null>(null)
-  const [ask, setAsk] = useState<Card | null>(null)
+  const [file, setFile] = useState<string | null>(null)
+  const [timeline, setTimeline] = useState<Timeline | null>(null)
   const [ledgerOpen, setLedgerOpen] = useState(false)
   const [windowOpen, setWindowOpen] = useState(false)
   const [spent, setSpent] = useState<number | null>(null)
@@ -58,6 +60,7 @@ export default function App() {
   useEffect(() => {
     history.scrollRestoration = 'manual'
     const onHash = () => {
+      setFile(null)
       scrolls.current[routeKey(current.current)] = window.scrollY
       const next = parseHash(window.location.hash)
       current.current = next
@@ -78,7 +81,7 @@ export default function App() {
     if (t === route.tab && !route.symbol) window.scrollTo({ top: 0 })
     else window.location.hash = tabHash(t)
   }
-  const askFinn = (c: Card) => (researched.some((r) => r.symbol === c.symbol) ? openResearch(c.symbol) : setAsk(c))
+  useEffect(() => { fetchTimeline().then(setTimeline) }, [])
 
   useEffect(() => { if (STATIC) fetchManifest().then(setManifest).catch(() => setManifest(null)) }, [])
   const latestDay = STATIC ? manifest?.to ?? null : todayIST()
@@ -146,15 +149,15 @@ export default function App() {
     <>
       <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(100px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
         <div hidden={route.tab !== 'today'}>
-          <Today data={data} view={view} market={market} day={day} hours={hours} onHours={setHours}
+          <Today data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
                  loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
-                 onDismiss={dismiss} onRestore={restore} onAsk={askFinn} onLedger={() => setLedgerOpen(true)} />
+                 onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onLedger={() => setLedgerOpen(true)} />
         </div>
-        {route.tab === 'book' && (view ? <Book view={view} market={market} researched={new Set(researched.map((r) => r.symbol))} onResearch={openResearch} /> : skeleton)}
+        {route.tab === 'book' && (view ? <Book view={view} market={market} onOpen={setFile} /> : skeleton)}
         {route.tab === 'research' && (route.symbol
           ? <Research symbol={route.symbol} onBack={closeResearch} />
           : <ResearchHome entries={researched} book={book} onOpen={openResearch} />)}
-        {route.tab === 'alerts' && <Alerts prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} />}
+        {route.tab === 'alerts' && <Alerts prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} onOpen={setFile} />}
       </div>
 
       <TabBar tab={route.tab} onSelect={selectTab} dock={undo ? (
@@ -170,26 +173,11 @@ export default function App() {
         </button>
       )} />
 
-      {ask && (
-        <Sheet title={`Ask FINN · ${ask.symbol}`} onClose={() => setAsk(null)}>
-          <p className="text-ink-2">
-            Research on {ask.company} is grounded only in its earnings-call transcripts and annual report, with a page
-            citation on every claim: <span className="font-semibold text-ink">promised vs delivered</span> over the last four quarters.
-          </p>
-          <p className="mt-3 rounded-xl bg-raised p-3 text-ink-2">
-            {STATIC
-              ? <>Not recorded for {ask.symbol} in this demo. Recorded: {researched.map((r) => r.symbol).join(', ') || 'none'}. Any NSE ticker can be researched locally with <code className="text-ink">./run.sh research {ask.symbol}</code>.</>
-              : <>Not generated for {ask.symbol} yet. Run <code className="text-ink">./run.sh research {ask.symbol}</code> (a few minutes, free-tier models).</>}
-          </p>
-          {researched.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {researched.map((r) => (
-                <button key={r.symbol} onClick={() => { setAsk(null); openResearch(r.symbol) }}
-                        className="min-h-11 rounded-full border border-line px-3 font-medium text-ink-2">{r.symbol}</button>
-              ))}
-            </div>
-          )}
-        </Sheet>
+      {file && view && (
+        <CompanySheet symbol={file} name={view.names[file] ?? file} card={view.cards.find((c) => c.symbol === file) ?? null}
+                      filings={timeline ? timeline[file] ?? [] : null} sessions={market?.sessions[file]} end={view.window.end}
+                      since={manifest?.from ?? null} volX={prefs.volX} research={researched.find((r) => r.symbol === file)}
+                      onResearch={() => { setFile(null); openResearch(file) }} onClose={() => setFile(null)} />
       )}
       {windowOpen && (
         <WindowSheet data={data} market={market} manifest={manifest} researched={researched} latestDay={latestDay}

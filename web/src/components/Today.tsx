@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Card, Digest } from '../api'
+import { lastMaterialBefore, type Timeline } from '../company'
 import { usd } from '../format'
 import { noSessionNote, type Market } from '../market'
 import { BriefRow } from './BriefRow'
@@ -28,6 +29,7 @@ interface Props {
   data: Digest | null
   view: Digest | null
   market: Market | null
+  timeline: Timeline | null
   hours: number
   onHours: (h: number) => void
   day: string | null
@@ -43,7 +45,7 @@ interface Props {
   onLedger: () => void
 }
 
-export function Today({ data, view, market, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
+export function Today({ data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
   const [details, setDetails] = useState(false)
   const span = windowLabel(hours)
   const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
@@ -109,7 +111,8 @@ export function Today({ data, view, market, day, hours, onHours, loading, error,
               <ul className="divide-y divide-line border-y border-line">
                 {cards.map((c, i) => (
                   <BriefRow key={c.lead.id} card={c} rank={i + 1}
-                            onDismiss={(top) => onDismiss(c.lead.id, c.symbol, top)} onAsk={() => onAsk(c)} />
+                            onDismiss={(top) => onDismiss(c.lead.id, c.symbol, top)} onAsk={() => onAsk(c)}
+                            last={c.lead.category === 'market' ? lastMaterialBefore(timeline?.[c.symbol], view.window.start) : null} />
                 ))}
               </ul>
             )}

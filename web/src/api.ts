@@ -1,3 +1,4 @@
+import type { Timeline } from './company'
 import type { Market, Signal } from './market'
 
 export type Tier = 'high' | 'medium' | 'routine'
@@ -185,6 +186,13 @@ export async function fetchMarket(asOf: string | null): Promise<Market | null> {
     return fetchBundledMarket().then((m) => ({ ...m, message: 'Price server unreachable. Showing recorded prices.' }))
       .catch(() => null)
   }
+}
+
+let timeline: Promise<Timeline | null> | null = null
+/** Every filing per company. Never throws: without it the company file shows what the card has. */
+export function fetchTimeline(): Promise<Timeline | null> {
+  timeline ??= fetch('/demo/timeline.json').then((r) => (r.ok ? r.json() as Promise<Timeline> : null)).catch(() => null)
+  return timeline
 }
 
 export const fetchLedger = () => getJSON<Ledger>('/api/ledger', 10000)

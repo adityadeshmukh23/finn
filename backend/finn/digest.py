@@ -201,6 +201,7 @@ def timeline(items: list[Announcement], reads: dict[str, dict] | None = None, re
         c, summary = filings.apply(classify(a.desc, a.text), reads.get(a.id))
         read = reads.get(a.id)
         row = {"id": a.id, "ts": a.ts, "category": c.category, "tier": c.tier, "reason": c.reason,
+               "base": SCORES.get((c.category, c.tier), 0) if c.tier != ROUTINE else 0,
                "headline": summary or headline(a, c), "url": a.url,
                "read": {"page": read["page"], "quote": read["quote"]} if summary and read else None}
         if a.id in results and (view := results_mod.card_view(results[a.id])):
