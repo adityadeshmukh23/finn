@@ -55,7 +55,7 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
            className={`sheet-panel flex max-h-[85dvh] w-full max-w-md flex-col rounded-t-3xl bg-surface outline-none sm:rounded-3xl ${drag.current === null ? 'transition-transform duration-150' : ''}`}>
         <div onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} style={{ touchAction: 'none' }}
              className="shrink-0 cursor-grab px-5 pt-2">
-          <div className="mx-auto h-1 w-9 rounded-full bg-line sm:hidden" aria-hidden="true" />
+          <div className="mx-auto h-1.5 w-12 rounded-full bg-ink-3 sm:hidden" aria-hidden="true" />
           <div className="mt-1 flex min-h-11 items-center justify-between gap-3">
             <h2 className="text-title font-semibold text-ink">{title}</h2>
             <button onClick={onClose} className="-mr-3 flex h-11 w-11 items-center justify-center rounded-full text-ink-3 hover:text-ink" aria-label="Close">
