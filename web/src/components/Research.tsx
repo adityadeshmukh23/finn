@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Icon } from './Icon'
+import { verdictLine } from '../format'
 import { fetchResearch, type Research as R, type ResearchDoc, type ScoreRow, type Verdict } from '../api'
 
 const LABEL: Record<Verdict, string> = {
@@ -218,9 +219,9 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
   const calls = data?.docs.calls ?? []
 
   return (
-    <div className="mx-auto min-h-dvh max-w-xl px-4 pb-16 pt-[max(1rem,env(safe-area-inset-top))]">
-      <header className="flex items-center justify-between py-2">
-        <button onClick={onBack} className="text-body font-medium text-ink-2 hover:text-ink"><Icon name="back" className="-ml-1" /> Briefing</button>
+    <div>
+      <header className="-mt-2 flex items-center justify-between">
+        <button onClick={onBack} className="-ml-1 flex min-h-11 items-center gap-1 pr-3 font-medium text-ink-2 hover:text-ink"><Icon name="back" />Back</button>
         <span className="text-meta text-ink-3">Promised vs delivered</span>
       </header>
 
@@ -244,7 +245,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
           </section>
 
           <section className="rounded-2xl bg-raised p-4">
-            <p className="text-title font-bold text-ink">{data.scorecard.credibility.headline}</p>
+            <p className="text-title font-bold text-ink">{verdictLine(data.scorecard.counts)}</p>
             {data.scorecard.credibility.line && (
               <p className="mt-1 text-body text-ink-2">{data.scorecard.credibility.line}</p>
             )}

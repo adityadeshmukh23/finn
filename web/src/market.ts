@@ -41,6 +41,14 @@ export function lastSessionBy(m: Market, end: string): string | null {
   return last
 }
 
+/** A holding's session as of this moment, for the Book and the company file. */
+export function sessionAt(rows: Session[] | undefined, end: string): Session | null {
+  if (!rows) return null
+  const e = new Date(end).getTime()
+  for (let i = rows.length - 1; i >= 0; i--) if (closeTime(rows[i][0]) <= e) return rows[i]
+  return null
+}
+
 /** The most unusual session in the window that crosses a threshold, or null. */
 export function signalFor(rows: Session[] | undefined, start: string, end: string, t: Thresholds): Signal | null {
   if (!rows) return null
@@ -63,7 +71,7 @@ export function signalFor(rows: Session[] | undefined, start: string, end: strin
   return best
 }
 
-const fmtPct = (n: number) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(1)}%`
+export const fmtPct = (n: number) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(1)}%`
 const fmtX = (n: number) => `${n >= 10 ? Math.round(n) : n.toFixed(1)}×`
 
 /** "−12.2% on 49× volume", leading with whatever crossed the line. */

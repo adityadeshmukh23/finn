@@ -33,6 +33,14 @@ export function dayMonth(ts: string): string {
   return new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: IST })
 }
 
+/** Counts of verdicts, led by what was checked. "Met 0 of 1" hid that the one was partially met. */
+export function verdictLine(c: { met: number; partially: number; missed: number; too_vague: number }): string {
+  const checkable = c.met + c.partially + c.missed
+  if (checkable === 0) return c.too_vague > 0 ? `No checkable promise yet, ${c.too_vague} too vague` : 'No checkable promise yet'
+  const parts = [c.met && `${c.met} met`, c.partially && `${c.partially} partially`, c.missed && `${c.missed} missed`].filter(Boolean)
+  return `${parts.join(', ')}, of ${checkable} checkable`
+}
+
 export function todayIST(): string {
   return new Date().toLocaleDateString('en-CA', { timeZone: IST })
 }

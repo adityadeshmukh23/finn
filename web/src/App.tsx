@@ -1,23 +1,19 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { applyAlerts, DEFAULT_PREFS, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
 import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, fetchResearchIndex, STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from './api'
-import { AlertsSheet } from './components/AlertsSheet'
-import { BriefCard } from './components/BriefCard'
-import { HiddenRow } from './components/HiddenRow'
-import { Icon } from './components/Icon'
+import { Alerts } from './components/Alerts'
+import { Book } from './components/Book'
 import { LedgerSheet } from './components/LedgerSheet'
 import { Research } from './components/Research'
+import { ResearchHome } from './components/ResearchHome'
 import { Sheet } from './components/Sheet'
-import { clock, dayMonth, todayIST, usd } from './format'
-import { lastSessionBy, type Market } from './market'
+import { TabBar } from './components/TabBar'
+import { Today } from './components/Today'
+import { todayIST } from './format'
+import type { Market } from './market'
+import { parseHash, tabHash, type Route, type Tab } from './route'
 
-const WINDOWS = [
-  { hours: 24, label: '24h' },
-  { hours: 72, label: '3 days' },
-  { hours: 168, label: '7 days' },
-]
 const DISMISSED_KEY = 'finn.dismissed'
-const researchFromHash = () => decodeURIComponent(window.location.hash.match(/^#research\/([A-Za-z0-9&_-]+)$/)?.[1] ?? '').toUpperCase() || null
 
 function loadDismissed(): Set<string> {
   try {
@@ -32,45 +28,7 @@ function saveDismissed(s: Set<string>) {
   } catch { /* storage unavailable: dismissals last for this session only */ }
 }
 
-function SourceBadge({ d }: { d: Digest }) {
-  const s = d.source
-  const fresh = s.source === 'live' || s.source === 'cache'
-  const label = fresh ? 'Live NSE' : s.source === 'unavailable' ? 'No data' : 'Recorded filings'
-  // A past date in the replay is "as of" the end of that window; otherwise the snapshot's own fetch time.
-  const asOf = STATIC ? d.window.end : s.as_of
-  return (
-    <div className="text-meta text-ink-3">
-      <span className="font-semibold text-ink-2">{label}</span>
-      {asOf && <>, as of {clock(asOf)} IST</>}
-      {s.message && <p className="mt-1">{s.message}</p>}
-    </div>
-  )
-}
-
-function PriceBadge({ m, end }: { m: Market | null; end: string }) {
-  if (!m) return <p className="text-meta text-ink-3">Prices unavailable: price and volume alerts are off.</p>
-  const last = lastSessionBy(m, end) ?? m.through
-  return (
-    <p className="text-meta text-ink-3">
-      Prices to the {last ? dayMonth(last) : '?'} close, Yahoo Finance{m.message ? `. ${m.message}` : ''}
-    </p>
-  )
-}
-
-function Skeleton() {
-  return (
-    <ul className="space-y-3" aria-label="Loading briefing">
-      {[0, 1, 2].map((i) => (
-        <li key={i} className="space-y-2.5 rounded-2xl border border-line bg-surface p-4">
-          <div className="skeleton h-3 w-24" />
-          <div className="skeleton h-3 w-40" />
-          <div className="skeleton h-4 w-full" />
-          <div className="skeleton h-3 w-3/4" />
-        </li>
-      ))}
-    </ul>
-  )
-}
+const routeKey = (r: Route) => `${r.tab}/${r.symbol ?? ''}`
 
 export default function App() {
   const [hours, setHours] = useState(24)
@@ -85,22 +43,36 @@ export default function App() {
   const [ledgerOpen, setLedgerOpen] = useState(false)
   const [spent, setSpent] = useState<number | null>(null)
   const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
-  const [alertsOpen, setAlertsOpen] = useState(false)
   const [manifest, setManifest] = useState<Manifest | null>(null)
   const [market, setMarket] = useState<Market | null>(null)
-  const [researchSym, setResearchSym] = useState<string | null>(researchFromHash)
+  const [route, setRoute] = useState<Route>(() => parseHash(window.location.hash))
   const [researched, setResearched] = useState<ResearchEntry[]>([])
 
-  useEffect(() => { fetchResearchIndex().then(setResearched) }, [])
+  // Each tab keeps its scroll position; the briefing stays mounted so open rows survive a tab switch.
+  const scrolls = useRef<Record<string, number>>({})
+  const current = useRef(route)
   useEffect(() => {
-    const onHash = () => setResearchSym(researchFromHash())
+    history.scrollRestoration = 'manual'
+    const onHash = () => {
+      scrolls.current[routeKey(current.current)] = window.scrollY
+      const next = parseHash(window.location.hash)
+      current.current = next
+      setRoute(next)
+    }
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
+  useLayoutEffect(() => { window.scrollTo(0, scrolls.current[routeKey(route)] ?? 0) }, [route])
+
+  useEffect(() => { fetchResearchIndex().then(setResearched) }, [])
   const openResearch = (sym: string) => { window.location.hash = `research/${sym}` }
   const closeResearch = () => {
-    if (window.history.length > 1 && researchFromHash()) window.history.back()
-    else { window.location.hash = ''; setResearchSym(null) }
+    if (window.history.length > 1) window.history.back()
+    else window.location.hash = 'research'
+  }
+  const selectTab = (t: Tab) => {
+    if (t === route.tab && !route.symbol) window.scrollTo({ top: 0 })
+    else window.location.hash = tabHash(t)
   }
   const askFinn = (c: Card) => (researched.some((r) => r.symbol === c.symbol) ? openResearch(c.symbol) : setAsk(c))
 
@@ -140,8 +112,6 @@ export default function App() {
   const changePrefs = (p: AlertPrefs) => { setPrefs(p); savePrefs(p) }
   const customised = prefs.minTier !== 'medium' || prefs.muted.length > 0
     || prefs.volX !== DEFAULT_PREFS.volX || prefs.movePct !== DEFAULT_PREFS.movePct
-  const cards = (view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id))
-  const dismissedHere = (view?.cards.length ?? 0) - cards.length
 
   const dismiss = (id: string) => {
     const next = new Set(dismissed).add(id)
@@ -158,174 +128,43 @@ export default function App() {
     setUndo(null)
   }
 
-  const windowLabel = WINDOWS.find((w) => w.hours === hours)?.label ?? `${hours}h`
-
-  if (researchSym) return <Research symbol={researchSym} onBack={closeResearch} />
+  const book = useMemo(() => new Set(Object.keys(data?.names ?? {})), [data])
+  const skeleton = <div className="skeleton h-40 w-full" aria-label="Loading" />
 
   return (
-    <div className="mx-auto min-h-dvh max-w-xl px-4 pb-16 pt-[max(1rem,env(safe-area-inset-top))]">
-      <header className="flex items-center justify-between py-2">
-        <div>
-          <h1 className="text-title font-bold text-ink">FINN</h1>
-          <p className="text-meta text-ink-3">
-Your portfolio briefing
-          </p>
+    <>
+      <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(56px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
+        <div hidden={route.tab !== 'today'}>
+          <Today data={data} view={view} market={market} manifest={manifest} researched={researched} latestDay={latestDay}
+                 hours={hours} onHours={setHours} asOf={asOf} onAsOf={setAsOf} loading={loading} error={error}
+                 refreshing={refreshing} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
+                 onDismiss={dismiss} onRestore={restore} onAsk={askFinn} onLedger={() => setLedgerOpen(true)} />
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setLedgerOpen(true)}
-                  className="rounded-full border border-line px-3 py-1.5 text-meta font-medium text-ink-2"
-                  aria-label="Open cost ledger">
-            {spent === null ? 'Cost' : `${usd(spent)} spent`}
-          </button>
-          <button onClick={() => setAlertsOpen(true)} aria-label="Alert settings"
-                  className={`rounded-full border px-3 py-1.5 text-meta font-medium ${customised ? 'border-ink text-ink' : 'border-line text-ink-2'}`}>
-            Alerts{customised ? ' ·' : ''}
-          </button>
-          {!STATIC && (
-            <button onClick={() => load(true)} disabled={refreshing || loading || !!asOf}
-                    className="rounded-full border border-line px-3 py-1.5 text-meta font-medium text-ink-2 disabled:opacity-40"
-                    aria-label="Refresh from NSE" title={asOf ? 'Past briefings are fixed' : 'Fetch the latest filings'}>
-              {refreshing ? 'Refreshing…' : 'Refresh'}
-            </button>
-          )}
-        </div>
-      </header>
-
-      {STATIC && (
-        <p className="mt-2 rounded-xl bg-raised px-3 py-2 text-meta text-ink-2">
-          <span className="font-semibold text-ink">Replay mode.</span> Recorded NSE filings
-          {manifest && <> for {manifest.holdings} holdings, {manifest.from} to {manifest.to}</>}
-          {researched.length > 0 && <>, and recorded research on {researched.length} {researched.length === 1 ? 'company' : 'companies'}</>}.
-          Live filings run locally, and any NSE ticker can be researched with <code className="text-ink">./run.sh research TICKER</code> (see README).
-        </p>
-      )}
-
-      <div className="mt-3 flex items-center gap-2">
-        <div role="tablist" aria-label="Time window" className="flex rounded-full bg-raised p-0.5">
-          {WINDOWS.map((w) => (
-            <button key={w.hours} role="tab" aria-selected={hours === w.hours} onClick={() => setHours(w.hours)}
-                    className={`rounded-full px-3 py-1.5 text-meta font-semibold ${hours === w.hours ? 'bg-surface text-ink shadow-sm' : 'text-ink-3'}`}>
-              {w.label}
-            </button>
-          ))}
-        </div>
-        <label className="ml-auto flex items-center gap-1.5 text-meta text-ink-3">
-          As of
-          <input type="date" value={asOf ?? latestDay ?? ''} max={latestDay ?? undefined} min={STATIC ? manifest?.from : undefined}
-                 onChange={(e) => setAsOf(!e.target.value || e.target.value === latestDay ? null : e.target.value)}
-                 className="rounded-full border border-line bg-surface px-2.5 py-1 text-meta text-ink" />
-        </label>
+        {route.tab === 'book' && (view ? <Book view={view} market={market} researched={new Set(researched.map((r) => r.symbol))} onResearch={openResearch} /> : skeleton)}
+        {route.tab === 'research' && (route.symbol
+          ? <Research symbol={route.symbol} onBack={closeResearch} />
+          : <ResearchHome entries={researched} book={book} onOpen={openResearch} />)}
+        {route.tab === 'alerts' && <Alerts prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} />}
       </div>
 
-      <main className="mt-5 space-y-4">
-        {loading && <Skeleton />}
-
-        {!loading && error && (
-          <div className="rounded-2xl border border-line bg-surface p-5">
-            <p className="text-body font-semibold text-ink">Couldn't load the briefing</p>
-            <p className="mt-1 text-body text-ink-2">{error}</p>
-            <button onClick={() => load()} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-meta font-semibold text-bg">Try again</button>
-          </div>
-        )}
-
-        {!loading && data && view && (
-          <>
-            <section>
-              <p className="text-body text-ink">
-                <span className="text-figure font-bold">{cards.length}</span>{' '}
-                {cards.length === 1 ? 'company needs' : 'companies need'} a look
-              </p>
-              <p className="mt-0.5 text-body text-ink-2">
-                {data.counts.total} filings in the last {windowLabel}
-                {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price/volume alerts`} · {view.counts.hidden} hidden
-                {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} duplicates dropped`}
-              </p>
-              <div className="mt-2"><SourceBadge d={data} /><PriceBadge m={market} end={data.window.end} /></div>
-            </section>
-
-            {cards.length === 0 && (
-              <div className="rounded-2xl border border-line bg-surface p-5">
-                <p className="text-body font-semibold text-ink">
-                  {data.counts.total === 0 ? `No filings in the last ${windowLabel}` : customised ? 'Nothing passes your alert settings' : 'Nothing material'}
-                </p>
-                <p className="mt-1 text-body text-ink-2">
-                  {data.counts.total === 0
-                    ? 'A quiet window. Widen it, or pick an earlier date to see a busy day.'
-                    : customised
-                      ? 'Everything in this window is muted or below your threshold. It is listed below.'
-                      : 'Everything filed in this window was routine. It is listed below if you want to check.'}
-                </p>
-                {hours < 168 && (
-                  <button onClick={() => setHours(168)} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-meta font-semibold text-bg">Show 7 days</button>
-                )}
-              </div>
-            )}
-
-            <ul className="space-y-3">
-              {cards.map((c, i) => (
-                <BriefCard key={c.lead.id} card={c} rank={i + 1}
-                           onDismiss={() => dismiss(c.lead.id)} onAsk={() => askFinn(c)} />
-              ))}
-            </ul>
-
-            {dismissedHere > 0 && (
-              <button onClick={() => restore(view.cards.map((c) => c.lead.id))} className="text-meta text-ink-3 underline underline-offset-4">
-                {dismissedHere} dismissed · show again
-              </button>
-            )}
-
-            <HiddenRow groups={view.hidden} total={view.counts.hidden} />
-
-            {researched.length > 0 && (
-              <section className="rounded-2xl border border-line bg-surface">
-                <div className="px-4 pt-4">
-                  <h2 className="text-body font-semibold text-ink">Promised vs delivered</h2>
-                  <p className="mt-0.5 text-body text-ink-2">
-                    Management's guidance over the last four quarters, against what it reported. Transcripts and annual reports only.
-                  </p>
-                </div>
-                <ul className="mt-2">
-                  {researched.map((r) => (
-                    <li key={r.symbol} className="border-t border-line">
-                      <button onClick={() => openResearch(r.symbol)} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left">
-                        <span className="min-w-0">
-                          <span className="text-body font-semibold text-ink">{r.symbol}</span>
-                          <span className="text-body text-ink-3"> · {r.name || r.symbol}</span>
-                          <span className="block text-meta text-ink-2">{r.headline}{r.counts.missed > 0 ? ` · ${r.counts.missed} missed` : ''}</span>
-                        </span>
-                        <Icon name="chevron" className="text-ink-3" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {view.quiet.length > 0 && (
-              <p className="px-1 text-meta text-ink-3">
-                Nothing from {view.quiet.length} holdings (no filings, no price or volume alert): {view.quiet.join(', ')}
-              </p>
-            )}
-          </>
-        )}
-      </main>
+      <TabBar tab={route.tab} onSelect={selectTab} />
 
       {undo && (
-        <div className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
-          <div className="flex items-center gap-4 rounded-full bg-ink px-4 py-2 text-meta text-bg shadow-lg">
+        <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
+          <div className="flex items-center gap-3 rounded-full bg-ink pl-4 pr-1 text-bg shadow-lg">
             Dismissed
-            <button onClick={() => restore([undo])} className="font-semibold">Undo</button>
+            <button onClick={() => restore([undo])} className="min-h-11 min-w-11 px-3 font-semibold">Undo</button>
           </div>
         </div>
       )}
 
       {ask && (
         <Sheet title={`Ask FINN · ${ask.symbol}`} onClose={() => setAsk(null)}>
-          <p className="text-body text-ink-2">
+          <p className="text-ink-2">
             Research on {ask.company} is grounded only in its earnings-call transcripts and annual report, with a page
             citation on every claim: <span className="font-semibold text-ink">promised vs delivered</span> over the last four quarters.
           </p>
-          <p className="mt-3 rounded-xl bg-raised p-3 text-body text-ink-2">
+          <p className="mt-3 rounded-xl bg-raised p-3 text-ink-2">
             {STATIC
               ? <>Not recorded for {ask.symbol} in this demo. Recorded: {researched.map((r) => r.symbol).join(', ') || 'none'}. Any NSE ticker can be researched locally with <code className="text-ink">./run.sh research {ask.symbol}</code>.</>
               : <>Not generated for {ask.symbol} yet. Run <code className="text-ink">./run.sh research {ask.symbol}</code> (a few minutes, free-tier models).</>}
@@ -334,14 +173,13 @@ Your portfolio briefing
             <div className="mt-3 flex flex-wrap gap-1.5">
               {researched.map((r) => (
                 <button key={r.symbol} onClick={() => { setAsk(null); openResearch(r.symbol) }}
-                        className="rounded-full border border-line px-3 py-1.5 text-meta font-medium text-ink-2">{r.symbol}</button>
+                        className="min-h-11 rounded-full border border-line px-3 font-medium text-ink-2">{r.symbol}</button>
               ))}
             </div>
           )}
         </Sheet>
       )}
       {ledgerOpen && <LedgerSheet onClose={() => setLedgerOpen(false)} />}
-      {alertsOpen && <AlertsSheet prefs={prefs} onChange={changePrefs} onClose={() => setAlertsOpen(false)} />}
-    </div>
+    </>
   )
 }
