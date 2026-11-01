@@ -67,7 +67,7 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
         </g>
       </svg>
       <p className="mt-1 text-meta text-ink-3">
-        {n} {n === 1 ? 'session' : 'sessions'}: low {money(lo)}, high {money(hi)}. Bars are volume against its 20-session average, dark at {volX}× or more.
+        {n} {n === 1 ? 'session' : 'sessions'}: low {money(lo)}, high {money(hi)}. Bars are volume against the 20-session average, solid at {volX}× or more, faint below it.
         {markers.size > 0 && ' Dots are material filings.'}
       </p>
     </div>
