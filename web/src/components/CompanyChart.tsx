@@ -2,9 +2,14 @@ import { useState } from 'react'
 import { dayMonth } from '../format'
 import { fmtPct, fmtX, type Session } from '../market'
 
-const W = 340, CLOSE_H = 84, GAP = 10, VOL_H = 40, H = CLOSE_H + GAP + VOL_H, PAD = 8
+const W = 340, CLOSE_H = 108, LABEL_ROOM = 24, GAP = 10, VOL_H = 40, H = CLOSE_H + GAP + VOL_H, PAD = 8
 
 const money = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: n >= 1000 ? 0 : 2 })}`
+
+function PriceLabel({ text, xPct, topPct }: { text: string; xPct: number; topPct: number }) {
+  const side = xPct < 20 ? { left: 0 } : xPct > 80 ? { right: 0 } : { left: `${xPct}%`, transform: 'translateX(-50%)' }
+  return <span className="pointer-events-none absolute whitespace-nowrap text-meta text-ink-3" style={{ top: `${topPct}%`, ...side }}>{text}</span>
+}
 
 /**
  * Close and volume multiple as two aligned panels, one axis each. Dots are material filings on the close
@@ -19,7 +24,7 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
   const closes = sessions.map((s) => s[1])
   const lo = Math.min(...closes), hi = Math.max(...closes)
   const x = (i: number) => (n === 1 ? W / 2 : PAD + (i * (W - 2 * PAD)) / (n - 1))
-  const y = (c: number) => (hi === lo ? CLOSE_H / 2 : PAD + ((hi - c) * (CLOSE_H - 2 * PAD)) / (hi - lo))
+  const y = (c: number) => (hi === lo ? CLOSE_H / 2 : LABEL_ROOM + ((hi - c) * (CLOSE_H - 2 * LABEL_ROOM)) / (hi - lo))
   const vols = sessions.map((s) => s[3] ?? 0)
   const vMax = Math.max(...vols, volX, 1)
   const vh = (v: number) => (v / vMax) * (VOL_H - 2)
@@ -48,7 +53,8 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
         </span>
       </p>
       <p className="min-h-[18px] text-meta text-ink-3">{filed && `Filed since the previous close: ${filed}`}</p>
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-1 block w-full select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink" style={{ touchAction: 'pan-y' }} tabIndex={0} onKeyDown={onKey}
+      <div className="relative mt-1">
+      <svg viewBox={`0 0 ${W} ${H}`} className="block w-full select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink" style={{ touchAction: 'pan-y' }} tabIndex={0} onKeyDown={onKey}
            role="img" aria-label={`Close over ${n} sessions, low ${money(lo)}, high ${money(hi)}. Use arrow keys to read a session.`}
            onPointerDown={pick} onPointerMove={(e) => { if (e.buttons || e.pointerType !== 'mouse') pick(e) }}>
         <line x1={x(at)} x2={x(at)} y1={0} y2={H} stroke="var(--line)" strokeWidth={1} />
@@ -66,8 +72,13 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
           <line x1={0} x2={W} y1={VOL_H} y2={VOL_H} stroke="var(--line)" strokeWidth={1} />
         </g>
       </svg>
+      {/* The line never goes above its high or below its low, so these two can't collide with it. */}
+      <PriceLabel text={`High ${money(hi)}`} xPct={(x(closes.indexOf(hi)) / W) * 100} topPct={0} />
+      <PriceLabel text={`Low ${money(lo)}`} xPct={(x(closes.indexOf(lo)) / W) * 100} topPct={((CLOSE_H - LABEL_ROOM + 2) / H) * 100} />
+      </div>
+      <p className="mt-0.5 flex justify-between text-meta text-ink-3"><span>{dayMonth(sessions[0][0])}</span><span>{dayMonth(sessions[n - 1][0])}</span></p>
       <p className="mt-1 text-meta text-ink-3">
-        {n} {n === 1 ? 'session' : 'sessions'}: low {money(lo)}, high {money(hi)}. Bars are volume against the 20-session average, solid at {volX}× or more, faint below it.
+        {n} {n === 1 ? 'session' : 'sessions'}. Bars are volume against the 20-session average, solid at {volX}× or more, faint below it.
         {markers.size > 0 && ' Dots are material filings.'}
       </p>
     </div>
