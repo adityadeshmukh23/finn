@@ -4,6 +4,7 @@ import type { TimelineItem } from '../company'
 import { CATEGORY_LABEL, clock, dayMonth } from '../format'
 import { figuresWithheld, rowFigure, rowLine } from '../figure'
 import { describe } from '../market'
+import { swipeDismisses, swipeMayStart } from '../swipe'
 import { Icon } from './Icon'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
@@ -36,7 +37,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
   const [more, setMore] = useState(false)
   const [dx, setDx] = useState(0)
   const [leaving, setLeaving] = useState(false)
-  const start = useRef<{ x: number; y: number; horizontal: boolean | null } | null>(null)
+  const start = useRef<{ x: number; y: number; t: number; horizontal: boolean | null } | null>(null)
   const { lead } = card
   const extra = card.items.length + card.folded.length
   const figure = rowFigure(card)
@@ -47,17 +48,21 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
   const isResults = lead.category === 'results'
   const isPeople = lead.category === 'management_change' && !!card.people?.length
 
-  // One gesture only: swipe left to dismiss. Vertical scrolling is left to the browser.
+  // One gesture only: swipe left to dismiss, from anywhere on the row but the left edge.
+  // Vertical scrolling is left to the browser. Capture keeps the swipe alive if the pointer leaves the row.
   const onPointerDown = (e: React.PointerEvent) => {
-    if ((e.target as HTMLElement).closest('a')) return
-    start.current = { x: e.clientX, y: e.clientY, horizontal: null }
+    if ((e.target as HTMLElement).closest('a') || !swipeMayStart(e.clientX)) return
+    start.current = { x: e.clientX, y: e.clientY, t: e.timeStamp, horizontal: null }
   }
   const onPointerMove = (e: React.PointerEvent) => {
     const s = start.current
     if (!s) return
     const ddx = e.clientX - s.x
     const ddy = e.clientY - s.y
-    if (s.horizontal === null && Math.hypot(ddx, ddy) > 8) s.horizontal = Math.abs(ddx) > Math.abs(ddy)
+    if (s.horizontal === null && Math.hypot(ddx, ddy) > 8) {
+      s.horizontal = Math.abs(ddx) > Math.abs(ddy)
+      if (s.horizontal) e.currentTarget.setPointerCapture(e.pointerId)
+    }
     if (s.horizontal) setDx(Math.min(0, ddx))
   }
   const leave = () => {
@@ -66,11 +71,11 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
     setTimeout(() => onDismiss(top), 180)
   }
   const swiped = useRef(false)
-  const onPointerUp = () => {
+  const onPointerUp = (e: React.PointerEvent) => {
     const s = start.current
     start.current = null
     swiped.current = !!s?.horizontal
-    if (s?.horizontal && dx < -90) leave()
+    if (s?.horizontal && swipeDismisses(dx, e.timeStamp - s.t, window.innerWidth)) leave()
     else setDx(0)
   }
 
@@ -87,7 +92,8 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
           transition: start.current ? 'none' : 'transform 180ms ease-out',
           touchAction: 'pan-y',
         }}
-        className="relative bg-bg pl-3"
+        onDragStart={(e) => e.preventDefault()}
+        className="relative select-none bg-bg pl-3"
       >
         <span aria-hidden="true" className="absolute inset-y-3 left-0 rounded-full bg-ink" style={{ width: spine(rank) }} />
         <button onClick={() => { if (!swiped.current) setOpen(!open); swiped.current = false }} aria-expanded={open}
