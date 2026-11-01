@@ -49,6 +49,16 @@ export function sessionAt(rows: Session[] | undefined, end: string): Session | n
   return null
 }
 
+/** "Sunday 11 Oct: no trading session." Read from the price data; a holiday is a weekday with no bar. Null on a normal session. */
+export function noSessionNote(m: Market | null, day: string): string | null {
+  const noon = new Date(`${day}T12:00:00+05:30`)
+  const label = noon.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' }).replace(',', '')
+  const weekend = [0, 6].includes(new Date(`${day}T00:00:00Z`).getUTCDay())
+  if (!m) return weekend ? `${label}: no trading session.` : null
+  if (Object.values(m.sessions).some((rows) => rows.some((r) => r[0] === day))) return null
+  return weekend ? `${label}: no trading session.` : `${label}: no price data, likely a market holiday.`
+}
+
 /** The most unusual session in the window that crosses a threshold, or null. */
 export function signalFor(rows: Session[] | undefined, start: string, end: string, t: Thresholds): Signal | null {
   if (!rows) return null

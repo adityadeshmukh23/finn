@@ -1,5 +1,5 @@
 import { describe as suite, expect, it } from 'vitest'
-import { describe, signalFor, type Session } from '../market'
+import { describe, noSessionNote, signalFor, type Market, type Session } from '../market'
 
 const rows: Session[] = [
   ['2026-10-28', 100, 1.0, 1.1],
@@ -27,4 +27,12 @@ suite('describe', () => {
     expect(describe({ date: 'x', close: 1, chg_pct: -6.3, vol_x: 42, vol_hit: true, move_hit: true })).toBe('−6.3% on 42× volume')
     expect(describe({ date: 'x', close: 1, chg_pct: 0.9, vol_x: 3.4, vol_hit: true, move_hit: false })).toBe('3.4× volume, price +0.9%')
   })
+})
+
+suite('noSessionNote', () => {
+  const m = { sessions: { A: [['2026-10-09', 1, 0, 1], ['2026-10-12', 1, 0, 1]] } } as unknown as Market
+  it('is null on a trading day', () => expect(noSessionNote(m, '2026-10-12')).toBeNull())
+  it('names a weekend', () => expect(noSessionNote(m, '2026-10-11')).toMatch(/^Sunday,? 11 Oct: no trading session\.$/))
+  it('hedges a weekday with no bar', () => expect(noSessionNote(m, '2026-10-13')).toMatch(/no price data, likely a market holiday/))
+  it('still knows a weekend with no price data', () => expect(noSessionNote(null, '2026-10-10')).toMatch(/Saturday/))
 })

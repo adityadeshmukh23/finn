@@ -20,6 +20,16 @@ What FINN does, why it's built this way, what it gives up, and where it's weak. 
 
 **Free-tier choices.** Gemini's free tier for both slots (cheap: `gemini-3.5-flash-lite`; strong: `gemini-3.8-flash` with fallbacks), Vercel's free static hosting, GitHub Actions for CI, Yahoo Finance via yfinance for prices, screener.in as a link index only. Fetching is one request per 3 seconds per host, cached, with no logins, CAPTCHAs or paywalls touched. Total model cost: $0. The ledger and a $5 hard cap would apply the moment a paid model is configured. The privacy trade-off is stated: Google may use free-tier inputs, and we send only public filings and transcripts.
 
+## Design language: Ledger
+
+A finite morning ledger with receipts: paper and ink, numbers are the hero, every figure carries its source.
+
+- **Four type sizes, one family.** Figure 28/32, Title 17/22, Body 15/22, Meta 12/16, in the system stack with tabular numerals. Enforced by tokens in `index.css`; no ad-hoc sizes in components.
+- **Colour means something.** Green and red are the sign of a number or of a verdict's gap to a promise. Amber is "low confidence or unverified". Everything else is ink. A rise is never alarm-coloured. "Partially" is neutral, since it is neither.
+- **Rows, not cards.** A row is kicker, one line, one evidence line, with the figure in a right-hand column. The rank spine on the left is the ranking made visible: 4 px on #1, a hairline by #6. The top three start open.
+- **Thumb zone.** Today, Book, Research, Alerts in a bottom bar. Every control is at least 44 px. The window and date moved into a sheet; the top of the screen is for reading.
+- **Nothing looks live.** Times are absolute, in IST, never "6h ago". One as-of label sits under the title, and prices say which close they stop at.
+
 ## How each announcement type is treated
 
 Rules classify; "reads" means the cheap model reads the filing and the verifier checks it. Score is the event weight used for ranking (up to 5 more for recency, 3 per other high-priority filing from the same company).

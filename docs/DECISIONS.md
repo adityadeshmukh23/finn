@@ -160,3 +160,17 @@
 - **Verified end to end:** old build installed, shell poisoned to the stale-hash state (blank), then the fixed build served on the same origin and loaded normally: the page reloaded itself, rendered the briefing, and left 0 service workers and 0 caches.
 - **CI:** `npm run check:sw` after the web build fails if the build contains a caching worker, if the kill switch doesn't take over, delete caches, unregister and reload pages, if `index.html` references a file that isn't in `dist`, if the rewrite would answer a missing asset with HTML, or if `sw.js` or `index.html` aren't no-cache. Also confirmed to fail on a poisoned build.
 - **Cost:** no offline use and `vite-plugin-pwa` is gone from the dependencies (lockfile regenerated).
+
+## Polish block 1: Ledger design foundation (2026-11-01)
+
+- **Rows with a figure column, not cards.** Card 1 started at 382 px of 812; the first row now starts at 175 px. The figure picks a field the card already has (PAT YoY, else revenue YoY, else the stock's move, else its volume multiple) and computes nothing. Low confidence never gets a figure: the row says "figures withheld" in amber.
+- **System fonts, no Inter.** It was named in the stack but never loaded. A web font would cost 30 KB and a font swap for little on a phone whose system face is already good.
+- **Colour rule changes three things you can see:** the orange "hot" dot on every high-tier card is gone (it carried no information and coloured a +0.9% rise as an alarm), category is a text label, and "partially" went from amber to neutral so amber only ever means low confidence.
+- **Muted text darkened** for contrast at 12 px: `ink-3` from #8a8e97 to #6b6f78 in light, #6f747e to #8a8f99 in dark.
+- **Explicit times everywhere.** `when()` is deleted. "As of" on a past date is that window's end, and "Prices to the X close" now stops at the last session on or before it (it used to say 30 Oct whatever date you picked).
+- **The headline counts verdicts instead of "Met N of M".** "Met 0 of 1" hid that Kaynes' one row was partially met; it now reads "1 partially, of 1 checkable". The recorded headline is unchanged; the screen derives its line from the same counts.
+- **Quiet days say why, from the price data.** A weekend is named; a weekday with no bar reads "no price data, likely a market holiday" (20 Oct in the recording). No hard-coded holiday list.
+- **A price card no longer tells you to go and check the news.** It says "No filing in this window". The lookback that answers why Equitas moved comes with the company file (block 2).
+- **Book is new, Alerts became a tab.** Book lists the 18 holdings with the last close and day move, biggest move first. Alerts lists what fired, then the settings, and says plainly that nothing is sent to the phone.
+- **CI gains** `npm test` (vitest, pure functions only, no DOM or testing library) and a 130 KB gzip ceiling on JS and CSS.
+- **Known and left for later blocks:** Sun Pharma's low-confidence results can still take #1 (ranking is a stretch item, audit defect 9); Ask FINN's unrecorded case still shows the old sheet until block 2; dismiss is swipe-only until block 5; the research screen keeps its bordered panels, which read as receipts.

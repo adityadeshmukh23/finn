@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from '../api'
 import { clock, dayMonth, usd } from '../format'
-import { lastSessionBy, type Market } from '../market'
+import { lastSessionBy, noSessionNote, type Market } from '../market'
 import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
@@ -121,10 +121,10 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
                 </p>
                 <p className="mt-1 text-ink-2">
                   {data.counts.total === 0
-                    ? 'A quiet window. Widen it, or pick an earlier date to see a busy day.'
+                    ? `${day ? noSessionNote(market, day) ?? '' : ''} Nothing for FINN to rank. A wider window or another date has more.`.trim()
                     : customised
-                      ? 'Everything in this window is muted or below your threshold. It is listed below.'
-                      : 'Everything filed in this window was routine. It is listed below if you want to check.'}
+                      ? 'Everything in this window is muted or below your threshold. It is in the hidden list.'
+                      : 'Everything filed in this window was routine. It is in the hidden list.'}
                 </p>
                 {hours < 168 && (
                   <button onClick={() => onHours(168)} className="mt-3 min-h-11 rounded-full bg-ink px-4 font-semibold text-bg">Show 7 days</button>
@@ -132,12 +132,14 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
               </div>
             )}
 
-            <ul className="divide-y divide-line border-y border-line">
-              {cards.map((c, i) => (
-                <BriefRow key={c.lead.id} card={c} rank={i + 1}
-                           onDismiss={() => onDismiss(c.lead.id)} onAsk={() => onAsk(c)} />
-              ))}
-            </ul>
+            {cards.length > 0 && (
+              <ul className="divide-y divide-line border-y border-line">
+                {cards.map((c, i) => (
+                  <BriefRow key={c.lead.id} card={c} rank={i + 1}
+                            onDismiss={() => onDismiss(c.lead.id)} onAsk={() => onAsk(c)} />
+                ))}
+              </ul>
+            )}
 
             {dismissedHere > 0 && (
               <button onClick={() => onRestore(view.cards.map((c) => c.lead.id))} className="min-h-11 text-ink-3 underline underline-offset-4">
