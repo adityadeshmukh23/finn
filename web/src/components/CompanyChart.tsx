@@ -48,7 +48,7 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
         </span>
       </p>
       <p className="min-h-[18px] text-meta text-ink-3">{filed && `Filed since the previous close: ${filed}`}</p>
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-1 block w-full select-none" style={{ touchAction: 'pan-y' }} tabIndex={0} onKeyDown={onKey}
+      <svg viewBox={`0 0 ${W} ${H}`} className="mt-1 block w-full select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink" style={{ touchAction: 'pan-y' }} tabIndex={0} onKeyDown={onKey}
            role="img" aria-label={`Close over ${n} sessions, low ${money(lo)}, high ${money(hi)}. Use arrow keys to read a session.`}
            onPointerDown={pick} onPointerMove={(e) => { if (e.buttons || e.pointerType !== 'mouse') pick(e) }}>
         <line x1={x(at)} x2={x(at)} y1={0} y2={H} stroke="var(--line)" strokeWidth={1} />
