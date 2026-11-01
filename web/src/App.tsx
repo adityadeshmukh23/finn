@@ -7,9 +7,9 @@ import { CompanySheet } from './components/CompanySheet'
 import { LedgerSheet } from './components/LedgerSheet'
 import { Research } from './components/Research'
 import { ResearchHome } from './components/ResearchHome'
-import { Icon } from './components/Icon'
 import { TabBar } from './components/TabBar'
 import { Today } from './components/Today'
+import { WindowChip } from './components/WindowChip'
 import { windowLabel, WindowSheet } from './components/WindowSheet'
 import { dayMonth, todayIST } from './format'
 import type { Timeline } from './company'
@@ -143,6 +143,7 @@ export default function App() {
     setUndo(null)
   }
 
+  const chip = <WindowChip label={`${day ? `${dayMonth(day)} · ` : ''}${windowLabel(hours)}`} onOpen={() => setWindowOpen(true)} />
   const book = useMemo(() => new Set(Object.keys(data?.names ?? {})), [data])
   const skeleton = <div className="skeleton h-40 w-full" aria-label="Loading" />
 
@@ -150,15 +151,15 @@ export default function App() {
     <>
       <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(100px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
         <div hidden={route.tab !== 'today'}>
-          <Today data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
+          <Today chip={chip} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
                  loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
                  onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onLedger={() => setLedgerOpen(true)} />
         </div>
-        {route.tab === 'book' && (view ? <Book view={view} market={market} onOpen={setFile} /> : skeleton)}
+        {route.tab === 'book' && (view ? <Book chip={chip} view={view} market={market} onOpen={setFile} /> : skeleton)}
         {route.tab === 'research' && (route.symbol
           ? <Research symbol={route.symbol} onBack={closeResearch} />
           : <ResearchHome entries={researched} book={book} onOpen={openResearch} />)}
-        {route.tab === 'alerts' && <Alerts prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} onOpen={setFile} />}
+        {route.tab === 'alerts' && <Alerts chip={chip} prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} onOpen={setFile} />}
       </div>
 
       <TabBar tab={route.tab} onSelect={selectTab} dock={undo ? (
@@ -166,13 +167,7 @@ export default function App() {
           <span className="truncate">Dismissed {undo.symbol}</span>
           <button onClick={() => restore([undo.id])} className="min-h-11 min-w-11 px-4 font-semibold">Undo</button>
         </div>
-      ) : route.tab !== 'research' && (
-        <button onClick={() => setWindowOpen(true)} aria-label={`Change window and date. Showing ${windowLabel(hours)}${day ? ` to ${dayMonth(day)}` : ''}`}
-                className="flex min-h-11 w-full items-center justify-between gap-3 px-4 text-left">
-          <span className="truncate text-ink-2">Showing <span className="font-semibold text-ink">{windowLabel(hours)}</span>{day && <> to <span className="font-semibold text-ink">{dayMonth(day)}</span></>}</span>
-          <span className="flex shrink-0 items-center gap-1 text-meta text-ink-3">Change<Icon name="down" size={14} className="rotate-180" /></span>
-        </button>
-      )} />
+      ) : null} />
 
       {file && view && (
         <CompanySheet symbol={file} name={view.names[file] ?? file} card={view.cards.find((c) => c.symbol === file) ?? null}

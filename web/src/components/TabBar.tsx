@@ -9,7 +9,7 @@ const TABS: { id: Tab; label: string; icon: IconName }[] = [
   { id: 'alerts', label: 'Alerts', icon: 'bell' },
 ]
 
-/** `dock` is the one slot above the tabs: the window picker, or an undo. Both sit in the page's reserved bottom space. */
+/** `dock` is the slot above the tabs, used only while an undo is live, in the page's reserved bottom space. */
 export function TabBar({ tab, onSelect, dock }: { tab: Tab; onSelect: (t: Tab) => void; dock?: ReactNode }) {
   return (
     <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)]">

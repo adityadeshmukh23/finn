@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Digest } from '../api'
 import { dayMonth } from '../format'
 import { fmtPct, lastSessionBy, sessionAt, type Market } from '../market'
@@ -14,7 +15,7 @@ export function filingCount(d: Digest, symbol: string): number {
 const inr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: n >= 1000 ? 0 : 2 })}`
 
 /** The 18 holdings as a ledger: last close, day move, what was filed. Biggest move first. */
-export function Book({ view, market, onOpen }: { view: Digest; market: Market | null; onOpen: (sym: string) => void }) {
+export function Book({ chip, view, market, onOpen }: { chip: ReactNode; view: Digest; market: Market | null; onOpen: (sym: string) => void }) {
   const end = view.window.end
   const last = market ? lastSessionBy(market, end) : null
   const rows = Object.entries(view.names).map(([symbol, name]) => ({
@@ -23,7 +24,10 @@ export function Book({ view, market, onOpen }: { view: Digest; market: Market | 
 
   return (
     <main>
-      <h1 className="text-title font-semibold text-ink">Book</h1>
+      <header className="flex items-center justify-between gap-3">
+        <h1 className="text-title font-semibold text-ink">Book</h1>
+        {chip}
+      </header>
       <p className="text-meta text-ink-3">
         {rows.length} holdings{last ? `, closes on ${dayMonth(last)}` : ''}. Biggest move first; filings are for this briefing's window. A mock portfolio.
       </p>

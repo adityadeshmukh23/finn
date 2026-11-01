@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { ALERT_CATEGORIES, DEFAULT_PREFS, type AlertPrefs } from '../alerts'
 import type { Card } from '../api'
 import { CATEGORY_LABEL, dayMonth } from '../format'
@@ -22,7 +23,8 @@ function Stepper({ label, value, step, min, max, unit, prefix = '', onChange }: 
   )
 }
 
-export function Alerts({ prefs, onChange, cards, onOpen }: {
+export function Alerts({ chip, prefs, onChange, cards, onOpen }: {
+  chip: ReactNode
   prefs: AlertPrefs; onChange: (p: AlertPrefs) => void; cards: Card[]; onOpen: (sym: string) => void
 }) {
   const fired = cards.filter((c) => c.market)
@@ -31,7 +33,10 @@ export function Alerts({ prefs, onChange, cards, onOpen }: {
 
   return (
     <main>
-      <h1 className="text-title font-semibold text-ink">Alerts</h1>
+      <header className="flex items-center justify-between gap-3">
+        <h1 className="text-title font-semibold text-ink">Alerts</h1>
+        {chip}
+      </header>
       <p className="text-meta text-ink-3">Checked against end-of-day prices when you open FINN. Nothing is sent to your phone.</p>
 
       <p className="mt-5 font-semibold text-ink">{fired.length === 0 ? 'None fired in this briefing' : `${fired.length} fired in this briefing`}</p>

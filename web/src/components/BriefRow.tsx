@@ -122,16 +122,9 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
 
         {open && (
           <div className="pb-3">
-            {lead.why && !isResults && !isPeople && lead.category !== 'market' && <p className="text-ink-2">{lead.why}</p>}
-            {card.results && isResults && <ResultsTable r={card.results} />}
-            {isPeople && <People people={card.people!} />}
-            {lead.read && (
-              <p className="mt-2 text-meta text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page} of the filing</p>
-            )}
             {card.why_rank && (
-              <p className="mt-2 text-meta text-ink-3"><span className="font-semibold text-ink-2">#{rank}</span> {card.why_rank}</p>
+              <p className="text-meta text-ink-3"><span className="font-semibold text-ink-2">#{rank}</span> {card.why_rank}</p>
             )}
-
             <div className="mt-1 flex items-center gap-4">
               <FilingLink url={lead.url} label={lead.category === 'market' ? 'NSE quote' : 'Filing'} />
               {extra > 0 && (
@@ -143,6 +136,12 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
                 Ask FINN
               </button>
             </div>
+            {lead.why && !isResults && !isPeople && lead.category !== 'market' && <p className="text-ink-2">{lead.why}</p>}
+            {card.results && isResults && <ResultsTable r={card.results} />}
+            {isPeople && <People people={card.people!} />}
+            {lead.read && (
+              <p className="mt-2 text-meta text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page} of the filing</p>
+            )}
 
             {more && (
               <ul className="mt-1 space-y-2 border-t border-line pt-2">

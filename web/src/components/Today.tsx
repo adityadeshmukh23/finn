@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import type { Card, Digest } from '../api'
 import { lastMaterialBefore, type Timeline } from '../company'
 import { usd } from '../format'
@@ -27,6 +27,7 @@ function Skeleton() {
 }
 
 interface Props {
+  chip: ReactNode
   data: Digest | null
   view: Digest | null
   market: Market | null
@@ -46,7 +47,7 @@ interface Props {
   onLedger: () => void
 }
 
-export function Today({ data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
+export function Today({ chip, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onLedger }: Props) {
   const [details, setDetails] = useState(false)
   const span = windowLabel(hours)
   // Rank what's left, so the numbers, the lead rule and the "why #N" lines stay true after a dismiss.
@@ -55,8 +56,9 @@ export function Today({ data, view, market, timeline, day, hours, onHours, loadi
 
   return (
     <>
-      <header>
+      <header className="flex items-center justify-between gap-3">
         <h1 className="text-title font-bold text-ink">FINN</h1>
+        {chip}
       </header>
       <p className="text-meta text-ink-3">{data ? asOfLine(data) : 'Loading the briefing'}</p>
 
