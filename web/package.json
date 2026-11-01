@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check:sw": "node scripts/check-sw.mjs"
+    "check:sw": "node scripts/check-sw.mjs",
+    "test": "vitest run",
+    "check:size": "node scripts/check-size.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -27,6 +29,7 @@
     "tailwindcss": "^4.3.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vitest": "^3.2.7"
   }
 }

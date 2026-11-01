@@ -25,3 +25,5 @@ jobs:
           if git ls-files | grep -E '\.pdf$|(^|/)\.env$|\.sqlite$'; then echo "Refusing: tracked PDF, .env or sqlite"; exit 1; fi
       - name: Web build, and no stale-app-shell risk (no caching service worker; kill switch works)
         run: cd web && npm ci && npm run build && npm run check:sw
+      - name: Web tests and bundle-size ceiling
+        run: cd web && npm test && npm run check:size
