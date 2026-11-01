@@ -12,12 +12,12 @@ function Pct({ v }: { v: number | null }) {
 function Row({ label, row, note }: { label: string; row: ResultRow | null; note?: string }) {
   return (
     <tr className="border-t border-line">
-      <th scope="row" className="py-1.5 pr-2 text-left font-normal text-ink-2">{label}</th>
+      <th scope="row" className="py-1.5 text-left font-normal text-ink-2">{label}</th>
       {row ? (
         <>
-          <td className="py-1.5 text-right font-semibold text-ink">{inr(row.current)}</td>
-          <td className="py-1.5 text-right"><Pct v={row.qoq_pct} /></td>
-          <td className="py-1.5 text-right"><Pct v={row.yoy_pct} /></td>
+          <td className="whitespace-nowrap py-1.5 pl-2 text-right font-semibold text-ink">{inr(row.current)}</td>
+          <td className="whitespace-nowrap py-1.5 pl-2 text-right"><Pct v={row.qoq_pct} /></td>
+          <td className="whitespace-nowrap py-1.5 pl-2 text-right"><Pct v={row.yoy_pct} /></td>
         </>
       ) : (
         <td colSpan={3} className="py-1.5 text-right text-ink-3">{note}</td>
@@ -43,7 +43,7 @@ export function ResultsTable({ r }: { r: Results }) {
     )
   }
   return (
-    <div className="mt-1 rounded-xl bg-raised px-3 pb-3">
+    <div className="mt-1 rounded-xl bg-raised px-2.5 pb-3 min-[360px]:px-3">
       <div className="flex items-center justify-between gap-2 text-meta text-ink-3">
         <span><span className="font-semibold capitalize text-ink-2">{r.basis}</span> · {r.unit} · qtr to {r.quarter}</span>
         {source}
