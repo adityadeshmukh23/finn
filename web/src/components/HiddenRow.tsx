@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { HiddenGroup } from '../api'
 import { clock } from '../format'
+import { plainHeadline } from '../plain'
 import { Icon } from './Icon'
 
 export function HiddenRow({ groups, total }: { groups: HiddenGroup[]; total: number }) {
@@ -34,7 +35,7 @@ export function HiddenRow({ groups, total }: { groups: HiddenGroup[]; total: num
                   {g.items.map((it) => (
                     <li key={it.id}>
                       <span className="font-semibold text-ink">{it.symbol}</span>{' '}
-                      <span className="text-ink-2">{it.headline}</span>
+                      <span className="text-ink-2">{plainHeadline(it.headline)}</span>
                       <span className="flex items-center gap-3 text-meta text-ink-3">
                         {clock(it.ts)}
                         {it.url && (

@@ -1,6 +1,7 @@
 import type { Card, Results } from './api'
 import type { TimelineItem } from './company'
 import { dayMonth } from './format'
+import { plainHeadline } from './plain'
 import { fmtPct, fmtX } from './market'
 
 /** The one number a row is about, and the line beside it. Nothing here is computed: it picks fields the card already has. */
@@ -41,11 +42,11 @@ export function rowLine(card: Card, last: TimelineItem | null = null): string {
   const { lead, market: m } = card
   if (lead.category === 'market') {
     const price = m && !m.move_hit && m.chg_pct !== null ? `Price ${fmtPct(m.chg_pct)}. ` : ''
-    const before = last ? `. Last, ${dayMonth(last.ts)}: ${last.headline}` : ''
+    const before = last ? `. Last, ${dayMonth(last.ts)}: ${plainHeadline(last.headline)}` : ''
     return `${price}No filing in this window${before}`
   }
   if (shownResults(card) && rowFigure(card)?.label === 'PAT YoY') return lead.headline.replace(/, [+−-][\d.]+% YoY/, '')
-  return lead.headline
+  return plainHeadline(lead.headline)
 }
 
 /** A figure-less results filing says so in amber, because the page has numbers we would not vouch for. */

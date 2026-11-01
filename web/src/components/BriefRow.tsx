@@ -5,6 +5,7 @@ import { CATEGORY_LABEL, clock, dayMonth } from '../format'
 import { figuresWithheld, rowFigure, rowLine } from '../figure'
 import { describe } from '../market'
 import { swipeDismisses, swipeMayStart } from '../swipe'
+import { plainHeadline } from '../plain'
 import { Icon } from './Icon'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
@@ -156,7 +157,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
                 {card.items.map((it) => (
                   <li key={it.id}>
                     <p className="text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(it)}</span> · {clock(it.ts)}</p>
-                    <p className="text-ink">{it.headline}</p>
+                    <p className="text-ink">{plainHeadline(it.headline)}</p>
                     <FilingLink url={it.url} />
                   </li>
                 ))}

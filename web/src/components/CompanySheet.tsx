@@ -4,6 +4,7 @@ import { filingsAsOf, groupSameDay, latestPeople, latestResults, material, routi
 import { CATEGORY_LABEL, clock, dayMonth, verdictLine } from '../format'
 import type { Session } from '../market'
 import { CompanyChart } from './CompanyChart'
+import { plainHeadline } from '../plain'
 import { Icon } from './Icon'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
@@ -19,7 +20,7 @@ function GroupRow({ g }: { g: FilingGroup }) {
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="flex min-h-11 w-full items-start gap-3 py-2.5 text-left">
         <span className="min-w-0 flex-1">
           <span className="block text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(g.category)}</span> · {dayMonth(g.day)} · {g.items.length} filings</span>
-          <span className="block text-ink">{g.lead.headline}</span>
+          <span className="block text-ink">{plainHeadline(g.lead.headline)}</span>
         </span>
         <Icon name="down" size={14} className={`mt-1 text-ink-3 ${open ? 'rotate-180' : ''}`} />
       </button>
@@ -33,7 +34,7 @@ function FilingRow({ it }: { it: TimelineItem }) {
     <>
       <span className="min-w-0 flex-1">
         <span className="block text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(it.category)}</span> · {clock(it.ts)}</span>
-        <span className="block text-ink">{it.headline}</span>
+        <span className="block text-ink">{plainHeadline(it.headline)}</span>
         {it.read && <span className="block text-meta text-ink-3">Summary checked against p.{it.read.page} of the filing</span>}
       </span>
       {it.url && <Icon name="external" size={14} className="mt-1 text-ink-3" />}
@@ -102,7 +103,7 @@ export function CompanySheet({ symbol, name, card, filings, sessions, end, since
       {leadRead && card && (
         <section className="mt-5">
           <h3 className="font-semibold text-ink">{category(card.lead.category)}, {dayMonth(card.lead.ts)}</h3>
-          <p className="mt-1 text-ink">{card.lead.headline}</p>
+          <p className="mt-1 text-ink">{plainHeadline(card.lead.headline)}</p>
           <blockquote className="mt-2 border-l-2 border-line pl-3 italic text-ink-2">“{leadRead.quote}”</blockquote>
           <a href={`${card.lead.url}#page=${leadRead.page}`} target="_blank" rel="noopener noreferrer"
              className="inline-flex min-h-11 min-w-11 items-center gap-1 text-meta text-ink-3 underline underline-offset-4">
