@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from '../api'
 import { clock, dayMonth, usd } from '../format'
 import { lastSessionBy, type Market } from '../market'
-import { BriefCard } from './BriefCard'
+import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
 import { Sheet } from './Sheet'
@@ -31,13 +31,15 @@ function priceLine(m: Market | null, end: string): string {
 
 function Skeleton() {
   return (
-    <ul className="mt-4 space-y-3" aria-label="Loading briefing">
-      {[0, 1, 2].map((i) => (
-        <li key={i} className="space-y-2.5 rounded-2xl border border-line bg-surface p-4">
-          <div className="skeleton h-3 w-24" />
-          <div className="skeleton h-3 w-40" />
-          <div className="skeleton h-4 w-full" />
-          <div className="skeleton h-3 w-3/4" />
+    <ul className="mt-4 divide-y divide-line border-y border-line" aria-label="Loading briefing">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <li key={i} className="flex gap-3 py-3 pl-3">
+          <div className="flex-1 space-y-2">
+            <div className="skeleton h-4 w-32" />
+            <div className="skeleton h-4 w-full" />
+            <div className="skeleton h-3 w-24" />
+          </div>
+          <div className="skeleton h-7 w-16" />
         </li>
       ))}
     </ul>
@@ -91,7 +93,7 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
         {loading && <Skeleton />}
 
         {!loading && error && (
-          <div className="rounded-2xl border border-line bg-surface p-5">
+          <div className="border-y border-line py-4">
             <p className="font-semibold text-ink">Couldn't load the briefing</p>
             <p className="mt-1 text-ink-2">{error}</p>
             <button onClick={() => onReload()} className="mt-3 min-h-11 rounded-full bg-ink px-4 font-semibold text-bg">Try again</button>
@@ -113,7 +115,7 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
             </section>
 
             {cards.length === 0 && (
-              <div className="rounded-2xl border border-line bg-surface p-5">
+              <div className="border-y border-line py-4">
                 <p className="font-semibold text-ink">
                   {data.counts.total === 0 ? `No filings in the last ${windowLabel}` : customised ? 'Nothing passes your alert settings' : 'Nothing material'}
                 </p>
@@ -130,9 +132,9 @@ export function Today({ data, view, market, manifest, researched, latestDay, hou
               </div>
             )}
 
-            <ul className="space-y-3">
+            <ul className="divide-y divide-line border-y border-line">
               {cards.map((c, i) => (
-                <BriefCard key={c.lead.id} card={c} rank={i + 1}
+                <BriefRow key={c.lead.id} card={c} rank={i + 1}
                            onDismiss={() => onDismiss(c.lead.id)} onAsk={() => onAsk(c)} />
               ))}
             </ul>

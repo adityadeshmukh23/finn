@@ -9,7 +9,7 @@ function Stepper({ label, value, step, min, max, unit, prefix = '', onChange }: 
   onChange: (v: number) => void
 }) {
   const set = (v: number) => onChange(Math.min(max, Math.max(min, Math.round(v * 10) / 10)))
-  const btn = 'h-11 w-11 rounded-full border border-line text-body font-semibold text-ink disabled:opacity-30'
+  const btn = 'h-11 w-11 rounded-full border border-line font-semibold text-ink disabled:opacity-30'
   return (
     <div className="mt-2 flex items-center justify-between gap-3">
       <span className="text-ink-2">{label}</span>

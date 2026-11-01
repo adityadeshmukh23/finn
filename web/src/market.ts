@@ -72,7 +72,7 @@ export function signalFor(rows: Session[] | undefined, start: string, end: strin
 }
 
 export const fmtPct = (n: number) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(1)}%`
-const fmtX = (n: number) => `${n >= 10 ? Math.round(n) : n.toFixed(1)}×`
+export const fmtX = (n: number) => `${n >= 10 ? Math.round(n) : n.toFixed(1)}×`
 
 /** "−12.2% on 49× volume", leading with whatever crossed the line. */
 export function describe(sig: Signal): string {
@@ -110,7 +110,7 @@ export function applyMarket(d: Digest, m: Market | null, t: Thresholds, names: R
       tier: 'high',
       reason: 'Unusual move, no filing',
       headline: describe(sig),
-      why: `No ${sym} filing in this window. Check for news, block deals or a sector move.`,
+      why: `No ${sym} filing in this window.`,
       url: `https://www.nseindia.com/get-quotes/equity?symbol=${encodeURIComponent(sym)}`,
       ts: new Date(closeTime(sig.date)).toISOString(),
       nse_category: '',

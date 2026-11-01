@@ -12,7 +12,7 @@ function Pct({ v }: { v: number | null }) {
 function Row({ label, row, note }: { label: string; row: ResultRow | null; note?: string }) {
   return (
     <tr className="border-t border-line">
-      <th scope="row" className="py-1.5 pr-2 text-left font-medium text-ink-2">{label}</th>
+      <th scope="row" className="py-1.5 pr-2 text-left font-normal text-ink-2">{label}</th>
       {row ? (
         <>
           <td className="py-1.5 text-right font-semibold text-ink">{inr(row.current)}</td>
@@ -29,27 +29,26 @@ function Row({ label, row, note }: { label: string; row: ResultRow | null; note?
 /** Revenue, EBITDA, PBT, PAT: this quarter, QoQ and YoY. Figures were matched on the cited page; maths is ours. */
 export function ResultsTable({ r }: { r: Results }) {
   if (r.status !== 'extracted') {
-    return <p className="mt-3 rounded-xl bg-raised p-3 text-meta text-ink-2">{r.note}. Open the filing for the figures.</p>
+    return <p className="mt-1 rounded-xl bg-raised p-3 text-ink-2">{r.note}. The filing has the figures.</p>
   }
   const source = (
-    <a href={r.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap underline underline-offset-4">p.{r.page}<Icon name="external" size={12} className="ml-0.5" /></a>
+    <a href={r.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 min-w-11 items-center justify-end gap-1 whitespace-nowrap underline underline-offset-4">p.{r.page}<Icon name="external" size={12} /></a>
   )
   if (r.confidence === 'low') {
     return (
-      <p className="mt-3 rounded-xl bg-raised p-3 text-meta text-ink-2">
-        <span className="font-semibold text-ink">Low confidence, figures not shown.</span> {r.confidence_note} Check the table on {source}.
-      </p>
+      <div className="mt-1 rounded-xl bg-raised px-3 pt-3 text-ink-2">
+        <p>{r.confidence_note}</p>
+        <p className="text-meta text-ink-3">The table is on {source}</p>
+      </div>
     )
   }
   return (
-    <div className="mt-3 rounded-xl bg-raised p-3">
-      <div className="flex items-baseline justify-between gap-2 text-meta text-ink-3">
-        <span>
-          <span className="font-semibold text-ink-2">{r.basis}</span> · {r.unit} · qtr to {r.quarter}
-        </span>
+    <div className="mt-1 rounded-xl bg-raised px-3 pb-3">
+      <div className="flex items-center justify-between gap-2 text-meta text-ink-3">
+        <span><span className="font-semibold capitalize text-ink-2">{r.basis}</span> · {r.unit} · qtr to {r.quarter}</span>
         {source}
       </div>
-      <table className="mt-1.5 w-full text-meta">
+      <table className="w-full">
         <thead>
           <tr className="text-meta text-ink-3">
             <th className="pb-1 text-left font-normal"><span className="sr-only">Metric</span></th>

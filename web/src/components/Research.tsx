@@ -42,14 +42,14 @@ function Src({ docs, doc, page, children }: { docs: Record<string, ResearchDoc>;
   const title = d.kind === 'annual_report' ? d.title : `${d.period} call`
   return (
     <a href={page ? `${d.url}#page=${page}` : d.url} target="_blank" rel="noopener noreferrer"
-       className="whitespace-nowrap text-ink-3 underline underline-offset-4">
-      {children ?? <>{title}{page ? ` p.${page}` : ''}</>}<Icon name="external" size={12} className="ml-0.5" />
+       className="inline-flex min-h-11 min-w-11 items-center gap-0.5 whitespace-nowrap text-ink-3 underline underline-offset-4">
+      {children ?? <>{title}{page ? ` p.${page}` : ''}</>}<Icon name="external" size={12} />
     </a>
   )
 }
 
 function Quote({ text }: { text: string }) {
-  return <blockquote className="border-l-2 border-line pl-3 text-body italic text-ink-2">“{text}”</blockquote>
+  return <blockquote className="border-l-2 border-line pl-3 italic text-ink-2">“{text}”</blockquote>
 }
 
 function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc>; judge: string }) {
@@ -60,10 +60,10 @@ function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc
     <li className="border-t border-line py-3 first:border-0">
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full text-left">
         <div className="flex items-start justify-between gap-3">
-          <span className="text-body font-semibold text-ink">{r.label}</span>
+          <span className="font-semibold text-ink">{r.label}</span>
           <Pill v={r.verdict} />
         </div>
-        <dl className="mt-1.5 grid grid-cols-[72px_minmax(0,1fr)] gap-x-2 gap-y-0.5 text-body ">
+        <dl className="mt-1.5 grid grid-cols-[72px_minmax(0,1fr)] gap-x-2 gap-y-0.5 ">
           <dt className="text-ink-3">Promised</dt>
           <dd className="text-ink">
             {r.promised.target || (r.kind === 'milestone' ? 'Milestone' : 'No number')}
@@ -81,7 +81,7 @@ function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc
             </>
           )}
         </dl>
-        {r.reason && <p className="mt-1 text-body text-ink-2">{r.reason}</p>}
+        {r.reason && <p className="mt-1 text-ink-2">{r.reason}</p>}
         {r.restated > 0 && !open && (
           <p className="mt-1 text-meta text-ink-3">
             {r.revisions.length > 0 ? `Revised ${r.revisions.length}× on later calls`
@@ -113,7 +113,7 @@ function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc
                 Delivered{d.text ? `: ${d.text} ${d.period}` : ''}{d.label && d.label !== r.label ? ` · ${d.label}` : ''}
               </p>
               {d.quote ? <Quote text={d.quote} />
-                : <p className="text-body text-ink-2">{d.how === 'printed' ? 'As printed in the statement of profit and loss.' : `${d.how.charAt(0).toUpperCase()}${d.how.slice(1)}.`}</p>}
+                : <p className="text-ink-2">{d.how === 'printed' ? 'As printed in the statement of profit and loss.' : `${d.how.charAt(0).toUpperCase()}${d.how.slice(1)}.`}</p>}
               <p className="text-meta text-ink-3">
                 {d.how === 'found by searching later calls' && 'Found by searching later calls · '}
                 <Src docs={docs} doc={d.doc} page={d.page} />
@@ -142,10 +142,10 @@ function Financials({ f, docs }: { f: NonNullable<R['financials']>; docs: Record
   return (
     <section className="rounded-2xl border border-line bg-surface p-4">
       <div className="flex items-baseline justify-between gap-2">
-        <h2 className="text-body font-semibold text-ink">{f.fy} at a glance</h2>
+        <h2 className="font-semibold text-ink">{f.fy} at a glance</h2>
         <span className="text-meta"><Src docs={docs} doc={f.doc} page={f.page} /></span>
       </div>
-      <table className="mt-2 w-full text-body">
+      <table className="mt-2 w-full">
         <thead>
           <tr className="text-meta text-ink-3">
             <th className="pb-1 text-left font-normal">₹ crore, {f.basis}</th>
@@ -228,9 +228,9 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
       {!data && !error && <Skeleton />}
       {error && (
         <div className="mt-4 rounded-2xl border border-line bg-surface p-5">
-          <p className="text-body font-semibold text-ink">No research for {symbol} yet</p>
-          <p className="mt-1 text-body text-ink-2">{error}</p>
-          <button onClick={onBack} className="mt-3 rounded-full bg-ink px-3 py-1.5 text-meta font-semibold text-bg">Back to briefing</button>
+          <p className="font-semibold text-ink">No research for {symbol} yet</p>
+          <p className="mt-1 text-ink-2">{error}</p>
+          <button onClick={onBack} className="mt-3 min-h-11 rounded-full bg-ink px-4 font-semibold text-bg">Back to briefing</button>
         </div>
       )}
 
@@ -247,7 +247,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
           <section className="rounded-2xl bg-raised p-4">
             <p className="text-title font-bold text-ink">{verdictLine(data.scorecard.counts)}</p>
             {data.scorecard.credibility.line && (
-              <p className="mt-1 text-body text-ink-2">{data.scorecard.credibility.line}</p>
+              <p className="mt-1 text-ink-2">{data.scorecard.credibility.line}</p>
             )}
             <p className="mt-2 text-meta text-ink-3">Summarised by FINN from the verdicts below.</p>
           </section>
@@ -255,7 +255,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
           <div className="flex flex-wrap gap-1.5" role="group" aria-label="Filter by verdict">
             {ORDER.filter((v) => data.scorecard.counts[v] > 0).map((v) => (
               <button key={v} onClick={() => setFilter(filter === v ? null : v)} aria-pressed={filter === v}
-                      className={`rounded-full px-2.5 py-1 text-meta font-semibold ${filter === v ? 'bg-ink text-bg' : PILL[v]}`}>
+                      className={`min-h-11 rounded-full px-3 font-semibold ${filter === v ? 'bg-ink text-bg' : PILL[v]}`}>
                 {data.scorecard.counts[v]} {SHORT[v].toLowerCase()}
               </button>
             ))}
@@ -263,7 +263,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
 
           <section className="rounded-2xl border border-line bg-surface px-4 py-1">
             {due.length === 0 ? (
-              <p className="py-4 text-body text-ink-2">Nothing due yet: every promise found is for a later period.</p>
+              <p className="py-4 text-ink-2">Nothing due yet: every promise found is for a later period.</p>
             ) : (
               <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} judge={judge} />)}</ul>
             )}
@@ -271,8 +271,8 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
 
           {notDue.length > 0 && (
             <section className="rounded-2xl border border-dashed border-line">
-              <button onClick={() => setLater(!later)} aria-expanded={later} className="flex w-full items-baseline justify-between gap-3 p-4 text-left">
-                <span className="text-body font-semibold text-ink">{notDue.length} promises not yet due</span>
+              <button onClick={() => setLater(!later)} aria-expanded={later} className="flex min-h-14 w-full items-baseline justify-between gap-3 p-4 text-left">
+                <span className="font-semibold text-ink">{notDue.length} promises not yet due</span>
                 <span className="text-meta text-ink-3">{later ? 'Close' : `Current guidance, ${[...new Set(notDue.map((r) => r.due))].slice(0, 3).join(', ')}`}</span>
               </button>
               {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} judge={judge} />)}</ul>}
@@ -281,8 +281,8 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
 
           {data.dropped.length > 0 && (
             <section className="rounded-2xl border border-dashed border-line">
-              <button onClick={() => setDrops(!drops)} aria-expanded={drops} className="flex w-full items-baseline justify-between gap-3 p-4 text-left">
-                <span className="text-body font-semibold text-ink">
+              <button onClick={() => setDrops(!drops)} aria-expanded={drops} className="flex min-h-14 w-full items-baseline justify-between gap-3 p-4 text-left">
+                <span className="font-semibold text-ink">
                   {data.dropped.length} {data.dropped.length === 1 ? 'claim' : 'claims'} dropped by the verifier
                 </span>
                 <span className="text-meta text-ink-3">{drops ? 'Close' : 'See why'}</span>
@@ -290,7 +290,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
               {drops && (
                 <ul className="space-y-2.5 border-t border-dashed border-line p-4">
                   {data.dropped.map((x, i) => (
-                    <li key={i} className="text-body ">
+                    <li key={i} className="">
                       <span className="font-semibold text-ink">{x.what}</span>{' '}
                       <span className="text-ink-3">· {STAGE[x.stage] ?? x.stage} · </span>
                       <span className="text-meta"><Src docs={docs} doc={x.doc} page={x.page} /></span>
