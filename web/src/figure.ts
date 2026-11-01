@@ -48,3 +48,6 @@ export function rowLine(card: Card): string {
 /** A figure-less results filing says so in amber, because the page has numbers we would not vouch for. */
 export const figuresWithheld = (card: Card) =>
   card.lead.category === 'results' && card.results?.status === 'extracted' && card.results.confidence === 'low'
+
+/** Results with no number we can show: low confidence, no table found, or no read at all. */
+export const resultsWithoutFigures = (card: Card) => card.lead.category === 'results' && !shownResults(card)

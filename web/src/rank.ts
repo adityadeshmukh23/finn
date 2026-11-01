@@ -1,4 +1,5 @@
 import type { Card } from './api'
+import { resultsWithoutFigures } from './figure'
 import { describe } from './market'
 
 /**
@@ -45,12 +46,22 @@ function alsoLine(c: Card): string {
   return `, plus ${also.slice(0, 2).join(' and ')}${also.length > 2 ? ` and ${also.length - 2} more` : ''}`
 }
 
-/** Sort cards and attach `why_rank`. Cards must already have their final items (after mutes). */
+/**
+ * Sort cards and attach `why_rank`. Cards must already have their final items (after mutes).
+ * Results we can't show a number for don't take #1: the first thing on screen should say something.
+ * The highest-scoring other card leads instead; scores themselves don't change.
+ */
 export function rankCards(cards: Card[]): Card[] {
-  const scored = cards.map((c) => ({ ...c, score: scoreCard(c) })).sort((a, b) => b.score - a.score)
+  const sorted = cards.map((c) => ({ ...c, score: scoreCard(c) })).sort((a, b) => b.score - a.score)
+  const leadAt = sorted.findIndex((c) => !resultsWithoutFigures(c))
+  const scored = leadAt > 0 ? [sorted[leadAt], ...sorted.slice(0, leadAt), ...sorted.slice(leadAt + 1)] : sorted
   return scored.map((c, i) => {
     let tail = ''
-    if (i > 0) {
+    if (i === 0 && leadAt > 0) {
+      tail = `; leads because #2 has no figures to show`
+    } else if (leadAt > 0 && i <= leadAt) {
+      tail = '; no figures to show, so it does not lead'
+    } else if (i > 0) {
       const prev = scored[i - 1]
       const heavier = scored.slice(0, i).filter((x) => x.lead.base > c.lead.base).length
       if (prev.lead.base === c.lead.base) {

@@ -174,3 +174,7 @@
 - **Book is new, Alerts became a tab.** Book lists the 18 holdings with the last close and day move, biggest move first. Alerts lists what fired, then the settings, and says plainly that nothing is sent to the phone.
 - **CI gains** `npm test` (vitest, pure functions only, no DOM or testing library) and a 130 KB gzip ceiling on JS and CSS.
 - **Known and left for later blocks:** Sun Pharma's low-confidence results can still take #1 (ranking is a stretch item, audit defect 9); Ask FINN's unrecorded case still shows the old sheet until block 2; dismiss is swipe-only until block 5; the research screen keeps its bordered panels, which read as receipts.
+
+## Polish: block 1 review fixes (2026-11-01)
+
+- **Results we can't show a number for don't take #1.** Sun Pharma's low-confidence results outscored Reliance and led the default screen with no figure. The highest-scoring other card now leads, and both "why #N" lines say so; scores don't change. On the 62 non-empty recorded briefings at default settings, 38 now lead with a figure; the other 24 lead with management (9), legal (8), M&A (6) or news (1), which have no number by nature and stay first by design.
