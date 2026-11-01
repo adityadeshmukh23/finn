@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { dayMonth } from '../format'
 import { fmtPct, fmtX, type Session } from '../market'
 
-const W = 340, CLOSE_H = 108, LABEL_ROOM = 24, GAP = 10, VOL_H = 40, H = CLOSE_H + GAP + VOL_H, PAD = 8
+const W = 340, CLOSE_H = 108, LABEL_ROOM = 24, GAP = 22, VOL_H = 40, H = CLOSE_H + GAP + VOL_H, PAD = 8
 
 const money = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: n >= 1000 ? 0 : 2 })}`
 
@@ -26,8 +26,10 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
   const x = (i: number) => (n === 1 ? W / 2 : PAD + (i * (W - 2 * PAD)) / (n - 1))
   const y = (c: number) => (hi === lo ? CLOSE_H / 2 : LABEL_ROOM + ((hi - c) * (CLOSE_H - 2 * LABEL_ROOM)) / (hi - lo))
   const vols = sessions.map((s) => s[3] ?? 0)
-  const vMax = Math.max(...vols, volX, 1)
-  const vh = (v: number) => (v / vMax) * (VOL_H - 2)
+  // One spike must not flatten the rest: bars stop at twice the alert line, and the biggest says what it really was.
+  const cap = Math.max(volX * 2, 3)
+  const vh = (v: number) => (Math.min(v, cap) / cap) * VOL_H
+  const peak = vols.indexOf(Math.max(...vols))
   const barW = Math.max(2, (W - 2 * PAD) / n - 3)
   const path = sessions.map((s, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(s[1]).toFixed(1)}`).join(' ')
   const [date, close, chg, vx] = sessions[at]
@@ -66,8 +68,13 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
         <g transform={`translate(0 ${CLOSE_H + GAP})`}>
           {vols.map((v, i) => {
             const h = Math.max(1.5, vh(v))
-            return <rect key={i} x={x(i) - barW / 2} y={VOL_H - h} width={barW} height={h} rx={Math.min(2, barW / 2)}
-                         fill={v >= volX ? 'var(--ink)' : 'var(--ink-3)'} opacity={v >= volX ? 1 : 0.45} />
+            return (
+              <g key={i}>
+                <rect x={x(i) - barW / 2} y={VOL_H - h} width={barW} height={h} rx={Math.min(2, barW / 2)}
+                      fill={v >= volX ? 'var(--ink)' : 'var(--ink-3)'} opacity={v >= volX ? 1 : 0.45} />
+                {v > cap && <rect x={x(i) - barW / 2 - 1} y={5} width={barW + 2} height={2} fill="var(--surface)" />}
+              </g>
+            )
           })}
           <line x1={0} x2={W} y1={VOL_H} y2={VOL_H} stroke="var(--line)" strokeWidth={1} />
         </g>
@@ -75,10 +82,11 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
       {/* The line never goes above its high or below its low, so these two can't collide with it. */}
       <PriceLabel text={`High ${money(hi)}`} xPct={(x(closes.indexOf(hi)) / W) * 100} topPct={0} />
       <PriceLabel text={`Low ${money(lo)}`} xPct={(x(closes.indexOf(lo)) / W) * 100} topPct={((CLOSE_H - LABEL_ROOM + 2) / H) * 100} />
+      {vols[peak] > cap && <PriceLabel text={fmtX(vols[peak])} xPct={(x(peak) / W) * 100} topPct={((CLOSE_H + 2) / H) * 100} />}
       </div>
       <p className="mt-0.5 flex justify-between text-meta text-ink-3"><span>{dayMonth(sessions[0][0])}</span><span>{dayMonth(sessions[n - 1][0])}</span></p>
       <p className="mt-1 text-meta text-ink-3">
-        {n} {n === 1 ? 'session' : 'sessions'}. Bars are volume against the 20-session average, solid at {volX}× or more, faint below it.
+        {n} {n === 1 ? 'session' : 'sessions'}. Bars are volume against the 20-session average, solid at {volX}× or more, faint below it, and stop at {cap}×.
         {markers.size > 0 && ' Dots are material filings.'}
       </p>
     </div>
