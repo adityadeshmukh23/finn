@@ -90,7 +90,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
 
         {!loading && data && view && (
           <>
-            <section className={compact ? '-mb-2 mt-1' : ''}>
+            <section className={compact ? 'mt-1' : ''}>
               <div className="flex items-center justify-between gap-3">
                 <p className="text-ink">
                   <span className="text-figure font-semibold">{cards.length}</span>{' '}
