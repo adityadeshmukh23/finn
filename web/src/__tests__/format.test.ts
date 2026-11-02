@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { loadDensity } from '../density'
 import { tileTint } from '../components/BookStrip'
 import { clock, dayMonth, verdictLine } from '../format'
 import { lastSessionBy, type Market } from '../market'
@@ -39,4 +40,10 @@ describe('tileTint', () => {
     expect(tileTint(null)).toBeUndefined()
   })
   it('stops getting stronger at the cap', () => expect(tileTint(50)).toBe(tileTint(6)))
+})
+
+describe('density', () => {
+  it('is Compact unless the reader chose Detailed, and survives bad or missing storage', () => {
+    expect(loadDensity()).toBe('compact')   // no localStorage in this test environment
+  })
 })

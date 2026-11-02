@@ -48,6 +48,14 @@ describe('rowLine', () => {
     const last = { id: '1', ts: '2026-10-29T12:00:00+05:30', tier: 'high', base: 95, category: 'management_change', reason: '', headline: 'Resignation of MD & CEO', url: '', read: null } as const
     expect(rowLine(c, last)).toBe('No filing in this window. Last, 29 Oct: Resignation of MD & CEO')
   })
+  it('a collapsed Compact row leads with the fact, and drops a same-day effective date', () => {
+    const c = card({ lead: lead('market', ''), market: sig(-6.3, 42, true, true) })
+    const last = { id: '1', ts: '2026-10-29T15:00:00+05:30', tier: 'high', base: 95, category: 'management_change', reason: '', headline: 'Resignation of Mr. P N Vasudevan as Managing Director & CEO of the company w.e.f. October 29, 2026', url: '', read: null } as const
+    expect(rowLine(c, last, true)).toBe('Last filing, 29 Oct: P N Vasudevan resigns as MD & CEO')
+    expect(rowLine(c, { ...last, headline: 'Resignation of Mr. P N Vasudevan as Managing Director & CEO of the company w.e.f. November 2, 2026' }, true))
+      .toBe('Last filing, 29 Oct: P N Vasudevan resigns as MD & CEO, effective 2 Nov 2026')
+    expect(rowLine(c, null, true)).toBe('No filing in this window')
+  })
   it('states a price move on a volume-only alert, and never says to go and look elsewhere', () => {
     const c = card({ lead: lead('market', ''), market: sig(2.9, 24, false, true) })
     expect(rowLine(c)).toBe('Price +2.9%. No filing in this window')

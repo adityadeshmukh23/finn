@@ -11,6 +11,7 @@ import { TabBar } from './components/TabBar'
 import { Today } from './components/Today'
 import { WindowChip } from './components/WindowChip'
 import { windowLabel, WindowSheet } from './components/WindowSheet'
+import { loadDensity } from './density'
 import { dayMonth, todayIST } from './format'
 import type { Timeline } from './company'
 import type { Market } from './market'
@@ -49,6 +50,7 @@ export default function App() {
   const [timeline, setTimeline] = useState<Timeline | null>(null)
   const [ledgerOpen, setLedgerOpen] = useState(false)
   const [windowOpen, setWindowOpen] = useState(false)
+  const [density] = useState(loadDensity)
   const [spent, setSpent] = useState<number | null>(null)
   const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
   const [manifest, setManifest] = useState<Manifest | null>(null)
@@ -152,7 +154,7 @@ export default function App() {
     <>
       <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(100px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
         <div hidden={route.tab !== 'today'}>
-          <Today chip={chip} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
+          <Today key={density} chip={chip} density={density} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
                  loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
                  onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} />
         </div>

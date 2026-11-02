@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import type { Card, Digest } from '../api'
 import { lastMaterialBefore, type Timeline } from '../company'
+import type { Density } from '../density'
 import { usd } from '../format'
 import { noSessionNote, type Market } from '../market'
 import { rankCards } from '../rank'
@@ -30,6 +31,7 @@ function Skeleton() {
 
 interface Props {
   chip: ReactNode
+  density: Density
   data: Digest | null
   view: Digest | null
   market: Market | null
@@ -50,7 +52,7 @@ interface Props {
   onLedger: () => void
 }
 
-export function Today({ chip, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger }: Props) {
+export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger }: Props) {
   const [details, setDetails] = useState(false)
   const span = windowLabel(hours)
   // Rank what's left, so the numbers, the lead rule and the "why #N" lines stay true after a dismiss.
@@ -133,7 +135,7 @@ export function Today({ chip, data, view, market, timeline, day, hours, onHours,
             {cards.length > 0 && (
               <ul className="divide-y divide-line border-y border-line">
                 {cards.map((c, i) => (
-                  <BriefRow key={c.lead.id} card={c} rank={i + 1}
+                  <BriefRow key={c.lead.id} card={c} rank={i + 1} compact={density === 'compact'}
                             onDismiss={(top) => onDismiss(c.lead.id, c.symbol, top)} onAsk={() => onAsk(c)}
                             last={c.lead.category === 'market' ? lastMaterialBefore(timeline?.[c.symbol], view.window.start) : null} />
                 ))}

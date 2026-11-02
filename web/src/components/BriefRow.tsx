@@ -30,10 +30,12 @@ interface Props {
   onDismiss: (top: number) => void
   onAsk: () => void
   last: TimelineItem | null
+  compact: boolean
 }
 
-export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
-  const [open, setOpen] = useState(rank <= 3)
+export function BriefRow({ card, rank, onDismiss, onAsk, last, compact }: Props) {
+  const [open, setOpen] = useState(!compact && rank <= 3)
+  const [table, setTable] = useState(!compact)
   const row = useRef<HTMLLIElement>(null)
   const [more, setMore] = useState(false)
   const [dx, setDx] = useState(0)
@@ -42,7 +44,8 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
   const { lead } = card
   const extra = card.items.length + card.folded.length
   const figure = rowFigure(card)
-  const big = rank <= 3 ? 'text-figure' : 'text-title'
+  const big = rank === 1 || (!compact && rank <= 3) ? 'text-figure' : 'text-title'
+  const glance = compact && !open
   const signColour = figure?.sign === 'up' ? 'text-up' : figure?.sign === 'down' ? 'text-down' : 'text-ink'
   const m = card.market
   const stockLine = m && lead.category !== 'market' && !(figure && figure.label.includes('volume')) ? `Stock ${describe(m)}, ${dayMonth(m.date)} close` : ''
@@ -98,21 +101,24 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
       >
         <span aria-hidden="true" className="absolute inset-y-3 left-0 rounded-full bg-ink" style={{ width: spine(rank) }} />
         <button onClick={() => { if (!swiped.current) setOpen(!open); swiped.current = false }} aria-expanded={open}
-                className="block w-full pb-3 text-left">
-          <span className="flex min-h-11 items-center pr-11">
+                className={`block w-full text-left ${compact ? (glance && rank === 1 ? 'pt-2.5' : 'py-2.5') : 'pb-3'}`}>
+          <span className={`flex items-center gap-2 ${compact ? 'justify-between' : 'min-h-11 pr-11'}`}>
             <span className="truncate">
               <span className="font-semibold text-ink">{card.symbol}</span>
               <span className="text-meta text-ink-3"> · {category(lead)}</span>
             </span>
+            {compact && <Icon name="down" size={14} className={`text-ink-3 ${open ? 'rotate-180' : ''}`} />}
           </span>
           <span className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
-            <span className={`block text-ink ${open ? '' : 'line-clamp-2'}`}>{rowLine(card, last)}</span>
-            <span className="mt-0.5 block text-meta text-ink-3">
-              {lead.category === 'market' ? `${dayMonth(m?.date ?? lead.ts)} close` : clock(lead.ts)}
-              {figuresWithheld(card) && <span className="text-flag"> · Low confidence, figures withheld</span>}
-              {stockLine && <span className="block">{stockLine}</span>}
-            </span>
+            <span className={`block text-ink ${open ? '' : 'line-clamp-2'}`}>{rowLine(card, last, glance)}</span>
+            {(!glance || figuresWithheld(card)) && (
+              <span className="mt-0.5 block text-meta text-ink-3">
+                {!glance && (lead.category === 'market' ? `${dayMonth(m?.date ?? lead.ts)} close` : clock(lead.ts))}
+                {figuresWithheld(card) && <span className="text-flag">{!glance && ' · '}Low confidence, figures withheld</span>}
+                {!glance && stockLine && <span className="block">{stockLine}</span>}
+              </span>
+            )}
           </span>
           {figure && (
             <span className="shrink-0 text-right">
@@ -122,30 +128,47 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last }: Props) {
           )}
           </span>
         </button>
-        <button onClick={leave} aria-label={`Dismiss ${card.symbol}`}
-                className="absolute right-0 top-0 flex h-11 w-11 items-center justify-end text-ink-2 hover:text-ink">
-          <Icon name="close" size={24} />
-        </button>
+        {!compact && (
+          <button onClick={leave} aria-label={`Dismiss ${card.symbol}`}
+                  className="absolute right-0 top-0 flex h-11 w-11 items-center justify-end text-ink-2 hover:text-ink">
+            <Icon name="close" size={24} />
+          </button>
+        )}
 
-        {/* #1 always says why, even collapsed or after a dismiss moved it up. */}
-        {card.why_rank && (open || rank === 1) && (
+        {/* #1 always says why, even collapsed or after a dismiss moved it up. In Compact it also carries the one button. */}
+        {glance && rank === 1 && (
+          <div className="flex items-center gap-3 pb-2.5 pt-1">
+            <p className="min-w-0 flex-1 text-meta text-ink-3"><span className="text-ink-2">#1</span> {card.why_short}</p>
+            <button onClick={onAsk} className="min-h-11 shrink-0 rounded-full bg-ink px-4 font-semibold text-bg active:scale-95">Ask FINN</button>
+          </div>
+        )}
+        {!glance && card.why_rank && (open || rank === 1) && (
           <p className={`text-meta text-ink-3 ${open ? '' : 'pb-3'}`}><span className="font-semibold text-ink-2">#{rank}</span> {card.why_rank}</p>
         )}
         {open && (
           <div className="pb-3">
-            <div className="mt-1 flex items-center gap-4">
+            <div className="mt-1 flex flex-wrap items-center gap-x-4">
               <FilingLink url={lead.url} label={lead.category === 'market' ? 'NSE quote' : 'Filing'} />
               {extra > 0 && (
                 <button onClick={() => setMore(!more)} aria-expanded={more} className="min-h-11 min-w-11 text-ink-2">
                   {more ? 'Less' : `+${extra} more`}
                 </button>
               )}
+              {compact && <button onClick={leave} aria-label={`Dismiss ${card.symbol}`} className="min-h-11 min-w-11 text-ink-2">Dismiss</button>}
               <button onClick={onAsk} className="ml-auto min-h-11 rounded-full bg-ink px-4 font-semibold text-bg active:scale-95">
                 Ask FINN
               </button>
             </div>
             {lead.why && !isResults && !isPeople && lead.category !== 'market' && <p className="text-ink-2">{lead.why}</p>}
-            {card.results && isResults && <ResultsTable r={card.results} />}
+            {card.results && isResults && (
+              card.results.status === 'extracted' && card.results.confidence !== 'low' && !table ? (
+                <button onClick={() => setTable(true)} aria-expanded={false}
+                        className="mt-1 flex min-h-11 w-full items-center justify-between gap-2 rounded-xl bg-raised px-3 text-left">
+                  <span>Results table <span className="text-meta text-ink-3">· {card.results.basis} · p.{card.results.page}</span></span>
+                  <Icon name="down" size={14} className="text-ink-3" />
+                </button>
+              ) : <ResultsTable r={card.results} />
+            )}
             {isPeople && <People people={card.people!} />}
             {lead.read && (
               <p className="mt-2 text-meta text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page} of the filing</p>

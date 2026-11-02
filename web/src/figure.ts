@@ -37,11 +37,18 @@ export function rowFigure(card: Card): RowFigure | null {
   return null
 }
 
-/** The row's sentence. Drops what the figure beside it already says. */
-export function rowLine(card: Card, last: TimelineItem | null = null): string {
+/** "…, effective 29 Oct 2026" says nothing when the filing itself is dated 29 Oct. */
+function withoutSameDay(line: string, ts: string): string {
+  const m = line.match(/, effective (\d{1,2} [A-Z][a-z]{2}) \d{4}$/)
+  return m && m[1] === dayMonth(ts) ? line.slice(0, m.index) : line
+}
+
+/** The row's sentence. Drops what the figure beside it already says. `short` is the collapsed Compact row. */
+export function rowLine(card: Card, last: TimelineItem | null = null, short = false): string {
   const { lead, market: m } = card
   if (lead.category === 'market') {
     const price = m && !m.move_hit && m.chg_pct !== null ? `Price ${fmtPct(m.chg_pct)}. ` : ''
+    if (short && last) return `${price}Last filing, ${dayMonth(last.ts)}: ${withoutSameDay(plainHeadline(last.headline), last.ts)}`
     const before = last ? `. Last, ${dayMonth(last.ts)}: ${plainHeadline(last.headline)}` : ''
     return `${price}No filing in this window${before}`
   }
