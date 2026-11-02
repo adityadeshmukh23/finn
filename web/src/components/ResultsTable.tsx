@@ -46,7 +46,7 @@ export function ResultsTable({ r }: { r: Results }) {
   return (
     <div className="mt-1 rounded-xl bg-raised px-2.5 pb-3 min-[360px]:px-3">
       <div className="flex items-center justify-between gap-2 text-meta text-ink-3">
-        <span><span className="font-semibold capitalize text-ink-2">{r.basis}</span> · {r.unit} · qtr to {r.quarter}</span>
+        <span><span className="font-semibold capitalize text-ink-2">{r.basis}</span> · {r.unit} · {r.period ? `${r.period} qtr` : `qtr to ${r.quarter}`}</span>
         {source}
       </div>
       <table className="w-full">

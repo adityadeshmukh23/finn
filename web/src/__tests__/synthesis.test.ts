@@ -17,8 +17,8 @@ describe('synthesis', () => {
   it('the default screen says what happened, with real numbers', () => {
     const d = load('digest-2026-10-30-24.json')
     expect(synthesis(d.cards, d.window.start, timeline)).toEqual([
-      { symbol: 'RELIANCE', text: 'Reliance Industries PAT +32.1% YoY' },
-      { symbol: 'EQUITASBNK', text: 'Equitas Small Finance Bank −6.3% on 42× volume; 29 Oct filing: CEO/CFO/MD-level change' },
+      { symbol: 'RELIANCE', text: 'Reliance Industries PAT +32.1% YoY (Sep 2026 qtr)' },
+      { symbol: 'EQUITASBNK', text: 'Equitas Small Finance Bank −6.3% 30 Oct, 42× volume; 29 Oct filing: CEO/CFO/MD-level change' },
     ])
   })
   it('skips results it cannot show while anything else can speak', () => {
@@ -36,7 +36,8 @@ describe('synthesis', () => {
       for (const s of synthesis(d.cards, d.window.start, timeline)) {
         const card = d.cards.find((c) => c.symbol === s.symbol)!
         const fig = rowFigure(card)
-        const allowed = `${fig?.value ?? ''} ${fig?.label ?? ''} ${card.company}`
+        const r = card.results
+        const allowed = `${fig?.value ?? ''} ${fig?.label ?? ''} ${card.company} ${r?.status === 'extracted' ? r.period : ''}`
         const body = s.text.replace(/\d{1,2} [A-Z][a-z]{2} filing/, '')
         for (const n of body.match(/\d+(?:\.\d+)?/g) ?? []) expect(allowed, `${n} in "${s.text}"`).toContain(n)
         expect(s.text, f).not.toMatch(/because|due to|driven|buy|sell|should/i)

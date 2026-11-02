@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { bookTally, filingsAsOf, groupSameDay, lastMaterialBefore, sessionIndexFor, sessionsAsOf, type TimelineItem } from '../company'
+import { bookTally, filedForSession, filingsAsOf, filingsInWindow, groupSameDay, lastMaterialBefore, moveContext, sessionsAsOf, type TimelineItem } from '../company'
 import type { Session } from '../market'
 
 const item = (id: string, ts: string, tier: TimelineItem['tier'] = 'high', base = 50): TimelineItem =>
@@ -19,10 +19,20 @@ describe('as-of filters never look ahead', () => {
   })
 })
 
-describe('sessionIndexFor', () => {
-  it('marks a filing in market hours on that day', () => expect(sessionIndexFor('2026-10-29T12:00:00+05:30', sessions)).toBe(1))
-  it('marks an after-hours filing on the next close', () => expect(sessionIndexFor('2026-10-29T18:00:00+05:30', sessions)).toBe(2))
-  it('has no session for a filing after the last close', () => expect(sessionIndexFor('2026-10-30T19:00:00+05:30', sessions)).toBeNull())
+describe('filedForSession', () => {
+  const dated = [item('after', '2026-10-29T18:00:00+05:30'), item('hours', '2026-10-29T12:00:00+05:30'), item('note', '2026-10-29T13:00:00+05:30', 'routine'), item('late', '2026-10-30T19:00:00+05:30')]
+  const ids = (d: string) => filedForSession(dated, sessions, d).map((r) => r.id)
+  it('a filing in market hours belongs to that day', () => expect(ids('2026-10-29')).toEqual(['hours']))
+  it('an after-hours filing belongs to the next close', () => expect(ids('2026-10-30')).toEqual(['after']))
+  it('a filing after the last close has no session yet', () => expect(ids('2026-10-28')).toEqual([]))
+  it('a session it does not know has nothing', () => expect(ids('2026-10-01')).toEqual([]))
+  it('moveContext names the previous close and uses the same list', () => {
+    const c = moveContext(dated, sessions, '2026-10-30', '2026-10-29T20:00:00+05:30')
+    expect([c.previous, c.filed.map((r) => r.id)]).toEqual(['2026-10-29', ['after']])
+  })
+  it('filingsInWindow counts routine filings too', () => {
+    expect(filingsInWindow(dated, '2026-10-29T00:00:00+05:30', '2026-10-29T23:00:00+05:30').map((r) => r.id)).toEqual(['after', 'hours', 'note'])
+  })
 })
 
 describe('lastMaterialBefore', () => {

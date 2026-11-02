@@ -162,7 +162,7 @@ export default function App() {
                  loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
                  onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} onBook={() => { window.location.hash = 'book' }} onHowTo={() => setHowTo(true)} />
         </div>
-        {route.tab === 'book' && (view ? <Book chip={chip} view={view} market={market} onOpen={setFile} /> : skeleton)}
+        {route.tab === 'book' && (view ? <Book chip={chip} view={view} market={market} timeline={timeline} onOpen={setFile} /> : skeleton)}
         {route.tab === 'research' && (route.symbol
           ? <Research symbol={route.symbol} onBack={closeResearch} />
           : <ResearchHome entries={researched} book={book} onOpen={openResearch} />)}

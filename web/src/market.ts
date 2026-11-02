@@ -81,7 +81,11 @@ export function signalFor(rows: Session[] | undefined, start: string, end: strin
   return best
 }
 
-export const fmtPct = (n: number) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(1)}%`
+/** One decimal, and no sign on what rounds to zero: "−0.0%" says more than the number does. */
+export const fmtPct = (n: number) => {
+  const t = Math.abs(n).toFixed(1)
+  return `${t === '0.0' ? '' : n > 0 ? '+' : '−'}${t}%`
+}
 export const fmtX = (n: number) => `${n >= 10 ? Math.round(n) : n.toFixed(1)}×`
 
 /** "−12.2% on 49× volume", leading with whatever crossed the line. */
@@ -94,10 +98,10 @@ export function describe(sig: Signal): string {
 }
 
 const MARKET_BOOST = 6         // per threshold crossed, added to a card that also has filings
-const MARKET_ONLY_BASE = 65    // a move with no filing: above board changes and order wins
+const MARKET_ONLY_BASE = 65    // a move with no surfaced filing in the window: above board changes and order wins
 const MARKET_ONLY_MAX = 20     // …plus up to this much by how far past the threshold it went (49× volume ≈ results)
 
-/** Attach signals to cards and add a card for any holding that moved with no filing in the window. */
+/** Attach signals to cards and add a card for any holding that moved with nothing surfaced in the window. */
 export function applyMarket(d: Digest, m: Market | null, t: Thresholds, names: Record<string, string>): Digest {
   if (!m) return d
   const { start, end } = d.window
@@ -118,9 +122,9 @@ export function applyMarket(d: Digest, m: Market | null, t: Thresholds, names: R
       symbol: sym,
       category: 'market',
       tier: 'high',
-      reason: 'Unusual move, no filing',
+      reason: 'Unusual price or volume',
       headline: describe(sig),
-      why: `No ${sym} filing in this window.`,
+      why: '',
       url: `https://www.nseindia.com/get-quotes/equity?symbol=${encodeURIComponent(sym)}`,
       ts: new Date(closeTime(sig.date)).toISOString(),
       nse_category: '',

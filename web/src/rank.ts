@@ -1,5 +1,6 @@
 import type { Card } from './api'
 import { resultsWithoutFigures } from './figure'
+import { dayMonth } from './format'
 import { describe } from './market'
 
 /**
@@ -23,7 +24,7 @@ const EVENT: Record<string, string> = {
   'Equity issuance': 'Equity issuance',
   'Order win': 'Order win',
   'Capex / expansion': 'Capex',
-  'Unusual move, no filing': 'Price/volume alert with no filing behind it',
+  'Unusual price or volume': 'Price or volume alert',
 }
 
 const label = (reason: string) => EVENT[reason] ?? (reason || 'A material filing')
@@ -84,7 +85,7 @@ export function rankCards(cards: Card[]): Card[] {
     } else if (scored.length > 1) {
       tail = '; the heaviest event in this window'
     }
-    const moved = c.market && c.lead.category !== 'market' ? `; stock ${describe(c.market)}` : ''
+    const moved = c.market && c.lead.category !== 'market' ? `; stock ${describe(c.market)}, ${dayMonth(c.market.date)} close` : ''
     return { ...c, why_rank: `${label(c.lead.reason)}${alsoLine(c)}${moved}${tail}.`, why_short: `${label(c.lead.reason)}${tail}.` }
   })
 }

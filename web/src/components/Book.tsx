@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react'
 import type { Digest } from '../api'
+import { filingsInWindow, type Timeline } from '../company'
 import { dayMonth } from '../format'
 import { fmtPct, lastSessionBy, sessionAt, type Market } from '../market'
 import { Icon } from './Icon'
 
-/** Filings this holding made in the window, surfaced and hidden alike. */
-export function filingCount(d: Digest, symbol: string): number {
+/** Filings this holding made in the window, surfaced and hidden alike. The company file's list when it's loaded. */
+export function filingCount(d: Digest, symbol: string, timeline: Timeline | null = null): number {
+  if (timeline) return filingsInWindow(timeline[symbol], d.window.start, d.window.end).length
   const card = d.cards.find((c) => c.symbol === symbol)
   const surfaced = card && card.lead.category !== 'market' ? 1 + card.items.length + card.folded.length : 0
   const hidden = d.hidden.reduce((n, g) => n + g.items.filter((it) => it.symbol === symbol).length, 0)
@@ -15,11 +17,11 @@ export function filingCount(d: Digest, symbol: string): number {
 const inr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: n >= 1000 ? 0 : 2 })}`
 
 /** The 18 holdings as a ledger: last close, day move, what was filed. Biggest move first. */
-export function Book({ chip, view, market, onOpen }: { chip: ReactNode; view: Digest; market: Market | null; onOpen: (sym: string) => void }) {
+export function Book({ chip, view, market, timeline, onOpen }: { chip: ReactNode; view: Digest; market: Market | null; timeline: Timeline | null; onOpen: (sym: string) => void }) {
   const end = view.window.end
   const last = market ? lastSessionBy(market, end) : null
   const rows = Object.entries(view.names).map(([symbol, name]) => ({
-    symbol, name, session: market ? sessionAt(market.sessions[symbol], end) : null, filings: filingCount(view, symbol),
+    symbol, name, session: market ? sessionAt(market.sessions[symbol], end) : null, filings: filingCount(view, symbol, timeline),
   })).sort((a, b) => Math.abs(b.session?.[2] ?? 0) - Math.abs(a.session?.[2] ?? 0))
 
   return (

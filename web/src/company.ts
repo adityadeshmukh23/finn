@@ -33,11 +33,46 @@ export const sessionsAsOf = (rows: Session[] | undefined, end: string, n = 20): 
   return (rows ?? []).filter((r) => closeTime(r[0]) <= e).slice(-n)
 }
 
-/** Which session a filing belongs to: the first close at or after it, so a filing after hours marks the next day. */
-export function sessionIndexFor(ts: string, sessions: Session[]): number | null {
-  const t = new Date(ts).getTime()
-  const i = sessions.findIndex((s) => closeTime(s[0]) >= t)
-  return i === -1 ? null : i
+/**
+ * Material filings that belong to a session: after the previous close, up to this one, so a filing after hours
+ * belongs to the next day. The one source for the chart's dots and for what a price row says was filed.
+ * `sessions` must be the full list, so the first session shown on a chart still knows its previous close.
+ */
+export function filedForSession(rows: TimelineItem[] | undefined, sessions: Session[] | undefined, date: string): TimelineItem[] {
+  const i = (sessions ?? []).findIndex((s) => s[0] === date)
+  if (i === -1) return []
+  const from = i > 0 ? closeTime(sessions![i - 1][0]) : -Infinity
+  const to = closeTime(date)
+  return (rows ?? []).filter((r) => {
+    const t = new Date(r.ts).getTime()
+    return r.tier !== 'routine' && t > from && t <= to
+  })
+}
+
+/** Every filing a holding made in a briefing window, material or routine. */
+export const filingsInWindow = (rows: TimelineItem[] | undefined, start: string, end: string): TimelineItem[] => {
+  const s = new Date(start).getTime(), e = new Date(end).getTime()
+  return (rows ?? []).filter((r) => {
+    const t = new Date(r.ts).getTime()
+    return t > s && t <= e
+  })
+}
+
+/** What FINN holds around a price or volume move. It says what was filed and when, never why the stock moved. */
+export interface MoveContext {
+  date: string                  // the session that crossed the threshold
+  previous: string | null       // the session before it
+  filed: TimelineItem[]         // material filings between those two closes
+  last: TimelineItem | null     // the heaviest on the last filing day before the window
+}
+
+export function moveContext(rows: TimelineItem[] | undefined, sessions: Session[] | undefined, date: string, start: string): MoveContext {
+  const i = (sessions ?? []).findIndex((s) => s[0] === date)
+  return {
+    date, previous: i > 0 ? sessions![i - 1][0] : null,
+    filed: filedForSession(rows, sessions, date),
+    last: lastMaterialBefore(rows, start),
+  }
 }
 
 /**

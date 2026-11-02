@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { STATIC, type Card, type ResearchEntry } from '../api'
-import { filingsAsOf, groupSameDay, latestPeople, latestResults, material, routine, sessionIndexFor, sessionsAsOf, type FilingGroup, type TimelineItem } from '../company'
+import { filedForSession, filingsAsOf, groupSameDay, latestPeople, latestResults, material, routine, sessionsAsOf, type FilingGroup, type TimelineItem } from '../company'
 import { CATEGORY_LABEL, clock, dayMonth, verdictLine } from '../format'
 import type { Session } from '../market'
 import { CompanyChart } from './CompanyChart'
@@ -73,12 +73,12 @@ export function CompanySheet({ symbol, name, card, filings, sessions, end, since
 
   const byIndex = useMemo(() => {
     const m = new Map<number, TimelineItem[]>()
-    for (const it of keep) {
-      const i = sessionIndexFor(it.ts, closes)
-      if (i !== null) m.set(i, [...(m.get(i) ?? []), it])
-    }
+    closes.forEach((s, i) => {
+      const filed = filedForSession(keep, sessions, s[0])
+      if (filed.length) m.set(i, filed)
+    })
     return m
-  }, [keep, closes])
+  }, [keep, closes, sessions])
 
   const fromCard = card ? [card.lead, ...card.items].filter((it) => it.category !== 'market') : []
   const leadRead = card?.lead.read ?? null

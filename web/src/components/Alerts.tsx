@@ -81,7 +81,7 @@ export function Alerts({ chip, prefs, onChange, cards, onOpen }: {
       </div>
 
       <p className="mt-5 font-semibold text-ink">Price and volume</p>
-      <p className="text-meta text-ink-3">A holding with no filing still gets a card when it crosses one of these.</p>
+      <p className="text-meta text-ink-3">A holding with nothing material filed in the window still gets a row when it crosses one of these.</p>
       <Stepper label="Volume vs 20-day average" value={prefs.volX} step={0.5} min={1.5} max={10} unit="×"
                onChange={(volX) => onChange({ ...prefs, volX })} />
       <Stepper label="Price move in a day" value={prefs.movePct} step={1} min={1} max={20} unit="%" prefix="±"

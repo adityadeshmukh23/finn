@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from 'react'
 import type { Card, Digest } from '../api'
-import { bookTally, lastMaterialBefore, type Timeline } from '../company'
+import { bookTally, moveContext, type Timeline } from '../company'
 import type { Density } from '../density'
-import { usd } from '../format'
-import { noSessionNote, type Market } from '../market'
+import { dayMonth, usd } from '../format'
+import { lastSessionBy, noSessionNote, type Market } from '../market'
 import { rankCards, TOP_ROWS } from '../rank'
 import { briefingEnd, compactEnd, synthesis } from '../synthesis'
 import { BookStrip } from './BookStrip'
@@ -64,6 +64,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
   const compact = density === 'compact'
   const shown = compact && !showMore ? cards.slice(0, TOP_ROWS) : cards
   const tally = compact && market && view ? bookTally(market.sessions, view.window.end) : null
+  const closes = tally && market && view ? lastSessionBy(market, view.window.end) : null
   const says = view ? synthesis(cards, view.window.start, timeline) : []
 
   return (
@@ -115,7 +116,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
                   ))}
                 </p>
               )}
-              {!compact && <div className="mt-2"><BookStrip view={view} market={market} onOpen={onOpen} /></div>}
+              {!compact && <div className="mt-2"><BookStrip view={view} market={market} timeline={timeline} onOpen={onOpen} /></div>}
               {!compact && details && <p className="mt-2 text-meta text-ink-3">
                 {briefingStats(data, view, hours)}
                 {view.quiet.length > 0 && <span className="mt-1 block">Nothing from {view.quiet.length} holdings: {view.quiet.join(', ')}.</span>}
@@ -146,7 +147,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
                 {shown.map((c, i) => (
                   <BriefRow key={c.lead.id} card={c} rank={i + 1} compact={compact}
                             onDismiss={(top) => onDismiss(c.lead.id, c.symbol, top)} onAsk={() => onAsk(c)}
-                            last={c.lead.category === 'market' ? lastMaterialBefore(timeline?.[c.symbol], view.window.start) : null} />
+                            context={c.lead.category === 'market' && c.market && timeline ? moveContext(timeline[c.symbol], market?.sessions[c.symbol], c.market.date, view.window.start) : null} />
                 ))}
               </ul>
             )}
@@ -162,7 +163,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
                 )}
                 {tally && (
                   <button onClick={onBook} className="flex min-h-11 w-full items-center justify-between gap-3 text-left text-ink-2">
-                    Book: {tally.up} up, {tally.down} down{tally.flat > 0 && `, ${tally.flat} flat`}
+                    Book{closes ? `, ${dayMonth(closes)} close` : ''}: {tally.up} up, {tally.down} down{tally.flat > 0 && `, ${tally.flat} flat`}
                     <Icon name="chevron" size={14} className="shrink-0 text-ink-3" />
                   </button>
                 )}

@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
-import type { TimelineItem } from '../company'
+import type { MoveContext } from '../company'
 import { CATEGORY_LABEL, clock, dayMonth } from '../format'
-import { figuresWithheld, rowFigure, rowLine } from '../figure'
+import { closedBeforeFiling, figuresWithheld, moveLine, rowFigure, rowLine } from '../figure'
 import { describe } from '../market'
 import { swipeDismisses, swipeMayStart } from '../swipe'
 import { plainHeadline } from '../plain'
@@ -29,11 +29,11 @@ interface Props {
   rank: number
   onDismiss: (top: number) => void
   onAsk: () => void
-  last: TimelineItem | null
+  context: MoveContext | null
   compact: boolean
 }
 
-export function BriefRow({ card, rank, onDismiss, onAsk, last, compact }: Props) {
+export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Props) {
   const [open, setOpen] = useState(!compact && rank <= 3)
   const [table, setTable] = useState(!compact)
   const row = useRef<HTMLLIElement>(null)
@@ -48,7 +48,10 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last, compact }: Props)
   const glance = compact && !open
   const signColour = figure?.sign === 'up' ? 'text-up' : figure?.sign === 'down' ? 'text-down' : 'text-ink'
   const m = card.market
-  const stockLine = m && lead.category !== 'market' && !(figure && figure.label.includes('volume')) ? `Stock ${describe(m)}, ${dayMonth(m.date)} close` : ''
+  // A move beside a filing reads as its effect, so the line says when the close came first. The order is all FINN claims.
+  const before = closedBeforeFiling(card)
+  const stockLine = m && lead.category !== 'market' && (figure?.kind !== 'market' || before)
+    ? `Stock ${describe(m)}, ${dayMonth(m.date)} close${before ? ', before this filing' : ''}` : ''
   const isResults = lead.category === 'results'
   const isPeople = lead.category === 'management_change' && !!card.people?.length
 
@@ -111,12 +114,13 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last, compact }: Props)
           </span>
           <span className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
-            <span className={`text-ink ${open ? 'block' : 'line-clamp-2'}`}>{rowLine(card, last, glance)}</span>
+            <span className={`text-ink ${open ? 'block' : 'line-clamp-2'}`}>{rowLine(card, context, glance)}</span>
             {(!glance || figuresWithheld(card)) && (
               <span className="mt-0.5 block text-meta text-ink-3">
-                {!glance && (lead.category === 'market' ? `${dayMonth(m?.date ?? lead.ts)} close` : clock(lead.ts))}
+                {!glance && lead.category !== 'market' && clock(lead.ts)}
                 {figuresWithheld(card) && <span className="text-flag">{!glance && ' · '}Low confidence, figures withheld</span>}
                 {!glance && stockLine && <span className="block">{stockLine}</span>}
+                {!glance && context && <span className="block">{moveLine(context)}</span>}
               </span>
             )}
           </span>
@@ -148,7 +152,8 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last, compact }: Props)
         {open && (
           <div className="pb-3">
             <div className="mt-1 flex flex-wrap items-center gap-x-4">
-              <FilingLink url={lead.url} label={lead.category === 'market' ? 'NSE quote' : 'Filing'} />
+              {/* A results row's figures may come from another filing that day: the link opens the one they were read from. */}
+              <FilingLink url={isResults && card.results?.status === 'extracted' ? card.results.url : lead.url} label={lead.category === 'market' ? 'NSE quote' : 'Filing'} />
               {extra > 0 && (
                 <button onClick={() => setMore(!more)} aria-expanded={more} className="min-h-11 min-w-11 text-ink-2">
                   {more ? 'Less' : `+${extra} more`}
@@ -164,7 +169,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last, compact }: Props)
               card.results.status === 'extracted' && card.results.confidence !== 'low' && !table ? (
                 <button onClick={() => setTable(true)} aria-expanded={false}
                         className="mt-1 flex min-h-11 w-full items-center justify-between gap-2 rounded-xl bg-raised px-3 text-left">
-                  <span>Results table <span className="text-meta text-ink-3">· {card.results.basis} · p.{card.results.page}</span></span>
+                  <span>Results table <span className="text-meta text-ink-3">· {card.results.period ? `${card.results.period} qtr · ` : ''}{card.results.basis} · p.{card.results.page}</span></span>
                   <Icon name="down" size={14} className="text-ink-3" />
                 </button>
               ) : <ResultsTable r={card.results} />

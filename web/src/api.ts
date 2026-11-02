@@ -27,6 +27,7 @@ export type Results =
       status: 'extracted'
       basis: 'consolidated' | 'standalone' | 'unknown'
       quarter: string
+      period?: string | null    // the quarter's end as 'Sep 2026'; null when the label isn't a date we can read
       page: number
       unit: string
       revenue_label: string

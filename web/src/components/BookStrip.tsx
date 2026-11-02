@@ -1,4 +1,5 @@
 import type { Digest } from '../api'
+import type { Timeline } from '../company'
 import { dayMonth } from '../format'
 import { fmtPct, sessionAt, type Market } from '../market'
 import { filingCount } from './Book'
@@ -14,10 +15,10 @@ export function tileTint(chg: number | null): string | undefined {
 }
 
 /** The whole book in one swipeable row, biggest move first, so what's off screen matters least. */
-export function BookStrip({ view, market, onOpen }: { view: Digest; market: Market | null; onOpen: (sym: string) => void }) {
+export function BookStrip({ view, market, timeline, onOpen }: { view: Digest; market: Market | null; timeline: Timeline | null; onOpen: (sym: string) => void }) {
   const end = view.window.end
   const tiles = Object.keys(view.names).map((symbol) => ({
-    symbol, session: market ? sessionAt(market.sessions[symbol], end) : null, filings: filingCount(view, symbol),
+    symbol, session: market ? sessionAt(market.sessions[symbol], end) : null, filings: filingCount(view, symbol, timeline),
   })).sort((a, b) => Math.abs(b.session?.[2] ?? 0) - Math.abs(a.session?.[2] ?? 0))
   return (
     <ul aria-label="Your book, biggest move first" className="-mx-4 flex gap-1.5 overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">

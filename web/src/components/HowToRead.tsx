@@ -9,6 +9,7 @@ const KEY: [React.ReactNode, string][] = [
   [<span className="text-flag">Amber</span>, 'Low confidence. FINN shows the page, not a figure it can\'t vouch for.'],
   ['p.12', 'Every figure links to the page it was read from.'],
   ['As of', 'This is a recording. Nothing here updates.'],
+  ['30 Oct', 'A date beside a move is the close it happened on. FINN says what was filed and when, never why a stock moved.'],
   ['Filtered', 'Routine filings FINN set aside. They are all listed, with the reason.'],
 ]
 

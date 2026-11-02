@@ -21,12 +21,13 @@ export function clauseFor(card: Card, windowStart: string, timeline: Timeline | 
   const fig = rowFigure(card)
   if (card.lead.category === 'market' && fig) {
     const last = lastMaterialBefore(timeline?.[card.symbol], windowStart)
-    const move = fig.label === 'volume' ? `${fig.value} volume` : `${fig.value} ${fig.label}`
-    return `${name} ${move}${last ? `; ${dayMonth(last.ts)} filing: ${lower(eventLabel(last.reason))}` : ''}`
+    return `${name} ${fig.value} ${fig.label}${last ? `; ${dayMonth(last.ts)} filing: ${lower(eventLabel(last.reason))}` : ''}`
   }
   if (card.lead.category === 'results') {
     if (resultsWithoutFigures(card)) return `${name} results filed, figures withheld`
-    if (fig) return `${name} ${fig.label.replace(' YoY', '')} ${fig.value} YoY`
+    const r = card.results
+    const basis = r?.status === 'extracted' && r.period ? ` (${r.period} qtr)` : ''
+    if (fig) return `${name} ${fig.label.replace(' YoY', '')} ${fig.value} YoY${basis}`
   }
   return `${name}: ${lower(eventLabel(card.lead.reason))}`
 }
