@@ -15,11 +15,11 @@ function shortDate(s: string): string {
   return s
 }
 
-const shortRole = (r: string) => r
+export const shortRole = (r: string) => r
   .replace(/^an? /i, '')
   .replace(/\s+of the company$/i, '')
   .replace(/Managing Director (?:&|and) (?:CEO|Chief Executive Officer)/i, 'MD & CEO')
-  .replace(/Chief Financial Officer/i, 'CFO')
+  .replace(/Chief Financial Officer(?: \(CFO\))?(?: and Key Manag\w+ Personnel)?/i, 'CFO')
   .replace(/Chief Executive Officer/i, 'CEO')
 
 const TITLE = '(?:(?:Mr|Ms|Mrs|Smt|Shri|Dr)\\.? )?'

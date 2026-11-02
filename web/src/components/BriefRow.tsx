@@ -115,7 +115,8 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
           <span className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
             {/* Results get a third line at 320 px: the quarter and basis must not be the part that's cut. */}
-            <span className={`text-ink ${open ? 'block' : isResults ? 'line-clamp-3' : 'line-clamp-2'}`}>{rowLine(card, context, glance)}</span>
+            {/* With no number on #1, this sentence has to say what happened, so it is never cut. */}
+            <span className={`text-ink ${open || (rank === 1 && !figure) ? 'block' : isResults ? 'line-clamp-3' : 'line-clamp-2'}`}>{rowLine(card, context, glance)}</span>
             {(!glance || figuresWithheld(card)) && (
               <span className="mt-0.5 block text-meta text-ink-3">
                 {!glance && lead.category !== 'market' && clock(lead.ts)}

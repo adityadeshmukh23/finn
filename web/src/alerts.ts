@@ -44,10 +44,7 @@ export function applyAlerts(raw: Digest, p: AlertPrefs, m: Market | null = null)
     const keep = all.filter((it) => !muted(it, p)).sort((a, b) => b.score - a.score)
     out.push(...all.filter((it) => muted(it, p)))
     if (keep.length === 0) continue
-    // A market boost rides on the lead; if the lead was muted, carry it to the new lead.
-    const boost = c.lead.score - (raw.cards.find((x) => x.symbol === c.symbol)?.lead.score ?? c.lead.score)
-    const lead = keep[0] === c.lead ? keep[0] : { ...keep[0], score: keep[0].score + boost }
-    cards.push({ ...c, lead, items: keep.slice(1) })
+    cards.push({ ...c, lead: keep[0], items: keep.slice(1) })
   }
   const hidden = out.length ? [{ reason: MUTED_REASON, count: out.length, items: out }, ...d.hidden] : d.hidden
   return {

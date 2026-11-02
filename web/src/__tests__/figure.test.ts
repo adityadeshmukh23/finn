@@ -8,7 +8,7 @@ const results = (confidence: string, pat: number | null, rev: number | null) => 
   rows: { pat: { yoy_pct: pat }, revenue: { yoy_pct: rev }, pbt: {}, ebitda: null },
 }) as unknown as Results
 const card = (over: Partial<Card>): Card => ({ symbol: 'X', company: 'X', sector: '', size: '', score: 90, lead: lead('results', 'h'), items: [], routine_count: 0, folded: [], ...over })
-const sig = (chg: number | null, vol: number | null, move_hit: boolean, vol_hit: boolean) => ({ date: '2026-10-30', close: 1, chg_pct: chg, vol_x: vol, move_hit, vol_hit })
+const sig = (chg: number | null, vol: number | null, move_hit: boolean, vol_hit: boolean) => ({ date: '2026-10-30', close: 1, chg_pct: chg, vol_x: vol, move_hit, vol_hit, strength: 1 })
 
 describe('rowFigure', () => {
   it('leads confident results with PAT YoY', () => {

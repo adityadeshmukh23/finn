@@ -24,8 +24,8 @@ suite('signalFor', () => {
 
 suite('describe', () => {
   it('leads with whatever crossed the line', () => {
-    expect(describe({ date: 'x', close: 1, chg_pct: -6.3, vol_x: 42, vol_hit: true, move_hit: true })).toBe('−6.3% on 42× volume')
-    expect(describe({ date: 'x', close: 1, chg_pct: 0.9, vol_x: 3.4, vol_hit: true, move_hit: false })).toBe('3.4× volume, price +0.9%')
+    expect(describe({ date: 'x', close: 1, chg_pct: -6.3, vol_x: 42, vol_hit: true, move_hit: true, strength: 1 })).toBe('−6.3% on 42× volume')
+    expect(describe({ date: 'x', close: 1, chg_pct: 0.9, vol_x: 3.4, vol_hit: true, move_hit: false, strength: 1 })).toBe('3.4× volume, price +0.9%')
   })
 })
 

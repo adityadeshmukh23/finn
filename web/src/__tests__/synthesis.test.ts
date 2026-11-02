@@ -18,7 +18,7 @@ describe('synthesis', () => {
     const d = load('digest-2026-10-30-24.json')
     expect(synthesis(d.cards, d.window.start, timeline)).toEqual([
       { symbol: 'RELIANCE', text: 'Reliance Industries PAT +32.1% YoY (Sep 2026 qtr)' },
-      { symbol: 'EQUITASBNK', text: 'Equitas Small Finance Bank −6.3% 30 Oct, 42× volume; 29 Oct filing: CEO, CFO or MD change' },
+      { symbol: 'EQUITASBNK', text: 'Equitas Small Finance Bank −6.3% 30 Oct, 42× volume; 29 Oct filing: top management change' },
     ])
   })
   it('skips results it cannot show while anything else can speak', () => {

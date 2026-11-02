@@ -24,6 +24,7 @@ export interface Signal {
   vol_x: number | null
   vol_hit: boolean
   move_hit: boolean
+  strength: number     // how far past the investor's lines, for ranking: price counts twice what volume does
 }
 
 export interface Thresholds { volX: number; movePct: number }
@@ -59,6 +60,8 @@ export function noSessionNote(m: Market | null, day: string): string | null {
   return weekend ? `${label}: no trading session.` : `${label}: no price data, likely a market holiday.`
 }
 
+const VOLUME_SHARE = 0.5
+
 /** The most unusual session in the window that crosses a threshold, or null. */
 export function signalFor(rows: Session[] | undefined, start: string, end: string, t: Thresholds): Signal | null {
   if (!rows) return null
@@ -75,7 +78,8 @@ export function signalFor(rows: Session[] | undefined, start: string, end: strin
     const strength = Math.max(volHit ? vx! / t.volX : 0, moveHit ? Math.abs(chg!) / t.movePct : 0)
     if (strength > bestStrength) {
       bestStrength = strength
-      best = { date, close, chg_pct: chg, vol_x: vx, vol_hit: volHit, move_hit: moveHit }
+      const ranked = Math.max(volHit ? (vx! / t.volX) * VOLUME_SHARE : 0, moveHit ? Math.abs(chg!) / t.movePct : 0)
+      best = { date, close, chg_pct: chg, vol_x: vx, vol_hit: volHit, move_hit: moveHit, strength: ranked }
     }
   }
   return best
@@ -97,9 +101,8 @@ export function describe(sig: Signal): string {
   return `${vol}${move ? `, price ${move}` : ''}`
 }
 
-const MARKET_BOOST = 6         // per threshold crossed, added to a card that also has filings
-const MARKET_ONLY_BASE = 65    // a move with no surfaced filing in the window: above board changes and order wins
-const MARKET_ONLY_MAX = 20     // …plus up to this much by how far past the threshold it went (49× volume ≈ results)
+export const MOVE_BASE = 65     // a move with no surfaced filing in the window: above board changes and order wins
+export const moveAlone = (strength: number) => Math.min(25, 4 * strength)   // …plus this by how far past the lines it went
 
 /** Attach signals to cards and add a card for any holding that moved with nothing surfaced in the window. */
 export function applyMarket(d: Digest, m: Market | null, t: Thresholds, names: Record<string, string>): Digest {
@@ -107,16 +110,13 @@ export function applyMarket(d: Digest, m: Market | null, t: Thresholds, names: R
   const { start, end } = d.window
   const cards: Card[] = d.cards.map((c) => {
     const sig = signalFor(m.sessions[c.symbol], start, end, t)
-    if (!sig) return c
-    const boost = MARKET_BOOST * (Number(sig.vol_hit) + Number(sig.move_hit))
-    return { ...c, market: sig, lead: { ...c.lead, score: c.lead.score + boost } }
+    return sig ? { ...c, market: sig } : c
   })
   const have = new Set(cards.map((c) => c.symbol))
   for (const [sym, rows] of Object.entries(m.sessions)) {
     if (have.has(sym)) continue
     const sig = signalFor(rows, start, end, t)
     if (!sig) continue
-    const strength = Math.max(sig.vol_hit ? sig.vol_x! / t.volX : 0, sig.move_hit ? Math.abs(sig.chg_pct!) / t.movePct : 0)
     const lead: Item = {
       id: `market-${sym}-${sig.date}`,
       symbol: sym,
@@ -128,8 +128,8 @@ export function applyMarket(d: Digest, m: Market | null, t: Thresholds, names: R
       url: `https://www.nseindia.com/get-quotes/equity?symbol=${encodeURIComponent(sym)}`,
       ts: new Date(closeTime(sig.date)).toISOString(),
       nse_category: '',
-      base: MARKET_ONLY_BASE,
-      score: MARKET_ONLY_BASE + Math.min(MARKET_ONLY_MAX, 4 * strength),
+      base: MOVE_BASE,
+      score: MOVE_BASE + moveAlone(sig.strength),
       read: null,
     }
     cards.push({
