@@ -48,21 +48,26 @@ function alsoLine(c: Card): string {
   return `, plus ${also.slice(0, 2).join(' and ')}${also.length > 2 ? ` and ${also.length - 2} more` : ''}`
 }
 
+export const TOP_ROWS = 3
+
 /**
- * Sort cards and attach `why_rank`. Cards must already have their final items (after mutes).
- * Results we can't show a number for don't take #1: the first thing on screen should say something.
- * The highest-scoring other card leads instead; scores themselves don't change.
+ * Sort cards and attach `why_rank` and the shorter `why_short`. Cards must already have their final items (after mutes).
+ * The top rows are what a first-time reader sees, so results we can't show a number for stay out of them
+ * while another row can take the place. Scores don't change; only the order does.
  */
 export function rankCards(cards: Card[]): Card[] {
   const sorted = cards.map((c) => ({ ...c, score: scoreCard(c) })).sort((a, b) => b.score - a.score)
-  const leadAt = sorted.findIndex((c) => !resultsWithoutFigures(c))
-  const scored = leadAt > 0 ? [sorted[leadAt], ...sorted.slice(0, leadAt), ...sorted.slice(leadAt + 1)] : sorted
+  const head = sorted.filter((c) => !resultsWithoutFigures(c)).slice(0, TOP_ROWS)
+  const scored = [...head, ...sorted.filter((c) => !head.includes(c))]
+  const lowest = head[head.length - 1]
+  const passed = (c: Card) => !!lowest && resultsWithoutFigures(c) && c.score > lowest.score
+  const anyPassed = sorted.some(passed)
   return scored.map((c, i) => {
     let tail = ''
-    if (i === 0 && leadAt > 0) {
-      tail = `; leads because #2 has no figures to show`
-    } else if (leadAt > 0 && i <= leadAt) {
-      tail = '; no figures to show, so it does not lead'
+    if (head.length > 0 && passed(c)) {
+      tail = '; no figures to show, so it sits below rows that have them'
+    } else if (i === 0 && anyPassed) {
+      tail = '; the heaviest event with figures to show'
     } else if (i > 0) {
       const prev = scored[i - 1]
       const heavier = scored.slice(0, i).filter((x) => x.lead.base > c.lead.base).length
@@ -80,6 +85,6 @@ export function rankCards(cards: Card[]): Card[] {
       tail = '; the heaviest event in this window'
     }
     const moved = c.market && c.lead.category !== 'market' ? `; stock ${describe(c.market)}` : ''
-    return { ...c, why_rank: `${label(c.lead.reason)}${alsoLine(c)}${moved}${tail}.` }
+    return { ...c, why_rank: `${label(c.lead.reason)}${alsoLine(c)}${moved}${tail}.`, why_short: `${label(c.lead.reason)}${tail}.` }
   })
 }

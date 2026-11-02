@@ -62,6 +62,7 @@ export interface Card {
   results?: Results | null // quarterly table read from the results filing, figures verified on the page
   people?: Person[]        // management changes read from the filings, verified against their text
   why_rank?: string        // set in the browser: why this card sits at this rank
+  why_short?: string       // the same without other filings or the price move, for a collapsed #1
   market?: Signal          // set in the browser: a price/volume threshold crossed in this window
 }
 

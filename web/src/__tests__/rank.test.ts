@@ -22,11 +22,19 @@ describe('rankCards', () => {
   it('a low-confidence results card does not lead, even on the higher score', () => {
     const out = rankCards([card('SUN', 100, low), card('REL', 95, high)])
     expect(out.map((c) => c.symbol)).toEqual(['REL', 'SUN'])
-    expect(out[0].why_rank).toContain('leads because #2 has no figures')
-    expect(out[1].why_rank).toContain('no figures to show')
+    expect(out[0].why_rank).toContain('the heaviest event with figures to show')
+    expect(out[1].why_rank).toContain('no figures to show, so it sits below')
   })
   it('leaves the order alone when the top card has figures', () => {
     expect(rankCards([card('REL', 100, high), card('SUN', 95, low)]).map((c) => c.symbol)).toEqual(['REL', 'SUN'])
+  })
+  it('stays out of the top 3 while other rows can take the places', () => {
+    const out = rankCards([card('SUN', 100, low), card('A', 95, high), card('B', 90, high), card('C', 85, null, 'litigation'), card('D', 80, null, 'litigation')])
+    expect(out.map((c) => c.symbol)).toEqual(['A', 'B', 'C', 'SUN', 'D'])
+    expect(out[0].why_short).toBe('Fresh quarterly results; the heaviest event with figures to show.')
+  })
+  it('fills the top 3 with what speaks first when fewer than 3 can', () => {
+    expect(rankCards([card('SUN', 100, low), card('MAR', 99, low), card('A', 95, high)]).map((c) => c.symbol)).toEqual(['A', 'SUN', 'MAR'])
   })
   it('re-ranking what is left after a dismiss is stable and keeps the rule', () => {
     const once = rankCards([card('SUN', 100, low), card('REL', 95, high), card('POL', 80, null, 'litigation')])
@@ -58,10 +66,16 @@ describe('on the recording, at default alert settings', () => {
       if (cards.length > 1) expect(rankCards(cards.slice(1))[0].why_rank, f).toMatch(/^\S.{8,}\.$/)
     }
   })
-  it('no recorded briefing leads with results it cannot show, unless nothing else is there', () => {
+  it('no recorded top 3 holds results it cannot show while another row could take the place', () => {
     for (const f of digests) {
       const { cards } = applyAlerts(read<Digest>(f), DEFAULT_PREFS, market)
-      if (cards.some((c) => !resultsWithoutFigures(c))) expect(resultsWithoutFigures(cards[0]), f).toBe(false)
+      const speaking = cards.filter((c) => !resultsWithoutFigures(c)).length
+      cards.slice(0, Math.min(3, speaking)).forEach((c) => expect(resultsWithoutFigures(c), `${f} ${c.symbol}`).toBe(false))
     }
+  })
+  it('the default top 3 is Reliance, Equitas, Polycab, with Sun Pharma at #4 and nothing lost', () => {
+    const { cards } = applyAlerts(read<Digest>('digest-2026-10-30-24.json'), DEFAULT_PREFS, market)
+    expect(cards.slice(0, 4).map((c) => c.symbol)).toEqual(['RELIANCE', 'EQUITASBNK', 'POLYCAB', 'SUNPHARMA'])
+    expect(cards).toHaveLength(9)
   })
 })
