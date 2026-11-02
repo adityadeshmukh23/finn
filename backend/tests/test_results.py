@@ -79,6 +79,18 @@ def test_page_finder_prefers_the_consolidated_table():
 def test_headline_leads_with_the_number_in_indian_format():
     view = {"status": "extracted", "confidence": "high", "basis": "consolidated",
             "rows": results.compute(table(), PAGE, lender=False)["rows"]}
-    assert results.headline(view) == "PAT ₹1,085 cr, +6.6% YoY; revenue +16.9%"
+    assert results.headline(view) == "PAT ₹1,085 cr, +6.6% YoY; revenue +16.9% YoY (consolidated)"
+    dated = {**view, "period": "Sep 2026", "basis": "standalone"}
+    assert results.headline(dated) == "PAT ₹1,085 cr, +6.6% YoY; revenue +16.9% YoY (Sep 2026 qtr, standalone)"
     assert results._crore(332861.0) == "3,32,861" and results._crore(99.44) == "99.4"
     assert results.headline({**view, "confidence": "low"}) is None
+
+
+def test_period_reads_every_quarter_label_in_the_recording():
+    for label in ["30 Sep 26", "30.09.2026", "September 30, 2026", "30 September 2026", "30th Sept 2026", "30-Sep-26", "30th Sep'26"]:
+        assert results.period(label) == "Sep 2026", label
+
+
+def test_period_refuses_what_is_not_a_date():
+    for label in ["491271", "", "September 30", "Q2", "45.13.2026"]:
+        assert results.period(label) is None, label

@@ -24,6 +24,17 @@ def test_timeline_lists_every_company_filing_newest_first(tmp_path):
     assert any(r.get("results", {}).get("status") == "extracted" for rows in tl.values() for r in rows)
 
 
+def test_every_filing_on_a_card_or_in_the_hidden_list_is_in_the_company_file(tmp_path):
+    m = build_static.build(tmp_path)
+    tl = json.loads((tmp_path / "timeline.json").read_text())
+    ids = {r["id"] for rows in tl.values() for r in rows}
+    for day in m["days"]:
+        for h in m["windows"]:
+            d = json.loads((tmp_path / f"digest-{day}-{h}.json").read_text())
+            shown = [it for c in d["cards"] for it in [c["lead"], *c["items"], *c["folded"]]]
+            assert not [it["id"] for it in [*shown, *(i for g in d["hidden"] for i in g["items"])] if it["id"] not in ids]
+
+
 def test_bundled_prices_cover_the_demo_and_fire_the_default_alerts(tmp_path):
     m = build_static.build(tmp_path)
     mk = json.loads((tmp_path / "market.json").read_text())

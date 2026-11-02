@@ -195,6 +195,26 @@ def _save(rec: dict) -> dict:
     return rec
 
 
+_MONTHS = ("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+
+
+def period(label: str) -> str | None:
+    """'30th Sep'26', '30.09.2026', 'September 30, 2026' -> 'Sep 2026'. None when the label isn't a date we can read."""
+    t = (label or "").strip().lower()
+    if m := re.fullmatch(r"\d{1,2}[./-](\d{1,2})[./-](\d{2}|\d{4})", t):
+        month, year = int(m.group(1)), m.group(2)
+        if not 1 <= month <= 12:
+            return None
+        name = _MONTHS[month - 1]
+    elif m := re.search(r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b.*?(?:'|\b)(\d{4}|\d{2})\s*$", t):
+        name, year = m.group(1), m.group(2)
+        if len(year) == 2 and not t[0].isdigit():    # 'September 30' is a day with no year
+            return None
+    else:
+        return None
+    return f"{name.title()} {'20' + year if len(year) == 2 else year}"
+
+
 def card_view(rec: dict | None) -> dict | None:
     """What the briefing card needs, or None when there's nothing honest to show."""
     if not rec:
@@ -203,7 +223,7 @@ def card_view(rec: dict | None) -> dict | None:
         return {"status": rec.get("status"), "note": rec.get("note", "")}
     t = rec["extracted"]
     return {
-        "status": "extracted", "basis": t["basis"], "quarter": t["quarter_label"], "page": t["page"],
+        "status": "extracted", "basis": t["basis"], "quarter": t["quarter_label"], "period": period(t["quarter_label"]), "page": t["page"],
         "unit": rec["unit_note"], "revenue_label": t["revenue_label"], "lender": rec["lender"],
         "rows": rec["rows"], "margins": rec["margins"],
         "confidence": rec["confidence"], "confidence_note": rec["confidence_note"],
@@ -221,7 +241,7 @@ def _crore(v: float) -> str:
 
 
 def headline(view: dict | None) -> str | None:
-    """'PAT ₹1,085 cr, +6.6% YoY; revenue +16.9%' when confident, else None (keep the period headline)."""
+    """'PAT ₹1,085 cr, +6.6% YoY; revenue +16.9% YoY (Sep 2026 qtr, consolidated)' when confident, else None (keep the period headline)."""
     if not view or view.get("status") != "extracted" or view["confidence"] == "low":
         return None
     pat, rev = view["rows"]["pat"], view["rows"]["revenue"]
@@ -232,5 +252,6 @@ def headline(view: dict | None) -> str | None:
     if pat["yoy_pct"] is not None:
         out += f", {sign(pat['yoy_pct'])} YoY"
     if rev["yoy_pct"] is not None:
-        out += f"; revenue {sign(rev['yoy_pct'])}"
-    return out + (" (standalone)" if view["basis"] == "standalone" else "")
+        out += f"; revenue {sign(rev['yoy_pct'])} YoY"
+    labels = [f"{view['period']} qtr" if view.get("period") else "", view["basis"] if view["basis"] != "unknown" else ""]
+    return out + (f" ({', '.join(x for x in labels if x)})" if any(labels) else "")
