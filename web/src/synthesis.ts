@@ -38,6 +38,11 @@ export function synthesis(cards: Card[], windowStart: string, timeline: Timeline
     .map((c) => ({ symbol: c.symbol, text: clauseFor(c, windowStart, timeline) }))
 }
 
+/** The Compact closing line. The count at the top already says what's left to look at. */
+export function compactEnd(handled: number, filtered: number): string {
+  return `${handled > 0 ? `${handled} handled, ` : ''}${filtered > 0 ? `${filtered} filtered. ` : ''}Nothing else is waiting.`
+}
+
 const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`
 
 /** The last line of a briefing. "Handled" only ever counts what the investor actually cleared. */

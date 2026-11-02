@@ -111,7 +111,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, last, compact }: Props)
           </span>
           <span className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
-            <span className={`block text-ink ${open ? '' : 'line-clamp-2'}`}>{rowLine(card, last, glance)}</span>
+            <span className={`text-ink ${open ? 'block' : 'line-clamp-2'}`}>{rowLine(card, last, glance)}</span>
             {(!glance || figuresWithheld(card)) && (
               <span className="mt-0.5 block text-meta text-ink-3">
                 {!glance && (lead.category === 'market' ? `${dayMonth(m?.date ?? lead.ts)} close` : clock(lead.ts))}

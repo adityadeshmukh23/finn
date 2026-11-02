@@ -21,6 +21,13 @@ export function asOfLine(d: Digest): string {
   return at ? `${label}, as of ${clock(at)} IST` : label
 }
 
+/** The briefing's bookkeeping: what came in and what happened to it. */
+export function briefingStats(data: Digest, view: Digest, hours: number): string {
+  const alerts = view.cards.filter((c) => c.market).length
+  const dups = data.counts.duplicates_dropped
+  return `${data.counts.total} filings in the last ${windowLabel(hours)}${alerts ? ` · ${alerts} price or volume alerts` : ''} · ${view.counts.hidden} hidden${dups ? ` · ${dups} ${dups === 1 ? 'duplicate' : 'duplicates'} dropped` : ''}`
+}
+
 function priceLine(m: Market | null, end: string): string {
   if (!m) return 'Prices unavailable: price and volume alerts are off.'
   const last = lastSessionBy(m, end) ?? m.through
@@ -29,6 +36,7 @@ function priceLine(m: Market | null, end: string): string {
 
 interface Props {
   data: Digest | null
+  view: Digest | null
   market: Market | null
   manifest: Manifest | null
   researched: ResearchEntry[]
@@ -43,7 +51,7 @@ interface Props {
   onClose: () => void
 }
 
-export function WindowSheet({ data, market, manifest, researched, latestDay, hours, onHours, asOf, onAsOf, loading, refreshing, onRefresh, onClose }: Props) {
+export function WindowSheet({ data, view, market, manifest, researched, latestDay, hours, onHours, asOf, onAsOf, loading, refreshing, onRefresh, onClose }: Props) {
   return (
     <Sheet title="Briefing window" onClose={onClose}>
       <div role="radiogroup" aria-label="Time window" className="flex rounded-full bg-raised p-0.5">
@@ -65,6 +73,13 @@ export function WindowSheet({ data, market, manifest, researched, latestDay, hou
                 className="mt-3 min-h-11 w-full rounded-full border border-line font-medium text-ink-2 disabled:opacity-40">
           {refreshing ? 'Fetching' : asOf ? 'Past briefings are fixed' : 'Fetch the latest filings'}
         </button>
+      )}
+      {data && view && (
+        <>
+          <p className="mt-5 font-semibold text-ink">This briefing</p>
+          <p className="mt-1 text-ink-2">{briefingStats(data, view, hours)}.</p>
+          {view.quiet.length > 0 && <p className="mt-1 text-ink-2">Nothing from {view.quiet.length} holdings: {view.quiet.join(', ')}.</p>}
+        </>
       )}
       <p className="mt-5 font-semibold text-ink">{STATIC ? 'This is a recording' : 'Sources'}</p>
       {data && <p className="mt-1 text-ink-2">{asOfLine(data)}. {priceLine(market, data.window.end)}.</p>}

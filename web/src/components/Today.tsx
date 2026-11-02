@@ -1,16 +1,16 @@
 import { useState, type ReactNode } from 'react'
 import type { Card, Digest } from '../api'
-import { lastMaterialBefore, type Timeline } from '../company'
+import { bookTally, lastMaterialBefore, type Timeline } from '../company'
 import type { Density } from '../density'
 import { usd } from '../format'
 import { noSessionNote, type Market } from '../market'
-import { rankCards } from '../rank'
-import { briefingEnd, synthesis } from '../synthesis'
+import { rankCards, TOP_ROWS } from '../rank'
+import { briefingEnd, compactEnd, synthesis } from '../synthesis'
 import { BookStrip } from './BookStrip'
 import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
-import { asOfLine, windowLabel } from './WindowSheet'
+import { asOfLine, briefingStats, windowLabel } from './WindowSheet'
 
 function Skeleton() {
   return (
@@ -50,14 +50,19 @@ interface Props {
   onAsk: (c: Card) => void
   onOpen: (sym: string) => void
   onLedger: () => void
+  onBook: () => void
 }
 
-export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger }: Props) {
+export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook }: Props) {
   const [details, setDetails] = useState(false)
+  const [showMore, setShowMore] = useState(false)
   const span = windowLabel(hours)
   // Rank what's left, so the numbers, the lead rule and the "why #N" lines stay true after a dismiss.
   const cards = rankCards((view?.cards ?? []).filter((c) => !dismissed.has(c.lead.id)))
   const dismissedHere = (view?.cards.length ?? 0) - cards.length
+  const compact = density === 'compact'
+  const shown = compact && !showMore ? cards.slice(0, TOP_ROWS) : cards
+  const tally = compact && market && view ? bookTally(market.sessions, view.window.end) : null
   const says = view ? synthesis(cards, view.window.start, timeline) : []
 
   return (
@@ -68,7 +73,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
       </header>
       <p className="text-meta text-ink-3">{data ? asOfLine(data) : 'Loading the briefing'}</p>
 
-      <main className="mt-3 space-y-4">
+      <main className={compact ? 'space-y-4' : 'mt-3 space-y-4'}>
         {loading && <Skeleton />}
 
         {!loading && error && (
@@ -81,18 +86,20 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
 
         {!loading && data && view && (
           <>
-            <section>
+            <section className={compact ? '-mb-2 mt-1' : ''}>
               <div className="flex items-center justify-between gap-3">
                 <p className="text-ink">
                   <span className="text-figure font-semibold">{cards.length}</span>{' '}
                   {cards.length === 1 ? 'company needs' : 'companies need'} a look
                 </p>
-                <button onClick={() => setDetails(!details)} aria-expanded={details}
-                        className="-mr-2 flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1 px-2 text-meta text-ink-3">
-                  Details<Icon name="down" size={14} className={details ? 'rotate-180' : ''} />
-                </button>
+                {!compact && (
+                  <button onClick={() => setDetails(!details)} aria-expanded={details}
+                          className="-mr-2 flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1 px-2 text-meta text-ink-3">
+                    Details<Icon name="down" size={14} className={details ? 'rotate-180' : ''} />
+                  </button>
+                )}
               </div>
-              {says.length > 0 && (
+              {!compact && says.length > 0 && (
                 <p className="text-ink-2">
                   {says.map((s, i) => (
                     <span key={s.symbol}>
@@ -104,11 +111,9 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
                   ))}
                 </p>
               )}
-              <div className="mt-2"><BookStrip view={view} market={market} onOpen={onOpen} /></div>
-              {details && <p className="mt-2 text-meta text-ink-3">
-                {data.counts.total} filings in the last {span}
-                {cards.some((c) => c.market) && ` · ${cards.filter((c) => c.market).length} price or volume alerts`} · {view.counts.hidden} hidden
-                {data.counts.duplicates_dropped > 0 && ` · ${data.counts.duplicates_dropped} ${data.counts.duplicates_dropped === 1 ? 'duplicate' : 'duplicates'} dropped`}
+              {!compact && <div className="mt-2"><BookStrip view={view} market={market} onOpen={onOpen} /></div>}
+              {!compact && details && <p className="mt-2 text-meta text-ink-3">
+                {briefingStats(data, view, hours)}
                 {view.quiet.length > 0 && <span className="mt-1 block">Nothing from {view.quiet.length} holdings: {view.quiet.join(', ')}.</span>}
                 <span className="mt-1 block">Tiles show each holding's last close, tinted by the move. A dot means a filing in this window.</span>
               </p>}
@@ -134,12 +139,33 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
 
             {cards.length > 0 && (
               <ul className="divide-y divide-line border-y border-line">
-                {cards.map((c, i) => (
-                  <BriefRow key={c.lead.id} card={c} rank={i + 1} compact={density === 'compact'}
+                {shown.map((c, i) => (
+                  <BriefRow key={c.lead.id} card={c} rank={i + 1} compact={compact}
                             onDismiss={(top) => onDismiss(c.lead.id, c.symbol, top)} onAsk={() => onAsk(c)}
                             last={c.lead.category === 'market' ? lastMaterialBefore(timeline?.[c.symbol], view.window.start) : null} />
                 ))}
               </ul>
+            )}
+
+            {compact && (
+              <div className="-mt-4 divide-y divide-line">
+                {cards.length > TOP_ROWS && (
+                  <button onClick={() => setShowMore(!showMore)} aria-expanded={showMore}
+                          className="flex min-h-11 w-full items-center justify-between gap-3 text-left font-semibold text-ink">
+                    {showMore ? 'Show the top 3 only' : `${cards.length - TOP_ROWS} more ${cards.length - TOP_ROWS === 1 ? 'company' : 'companies'}`}
+                    <Icon name="down" size={14} className={`shrink-0 text-ink-3 ${showMore ? 'rotate-180' : ''}`} />
+                  </button>
+                )}
+                {tally && (
+                  <button onClick={onBook} className="flex min-h-11 w-full items-center justify-between gap-3 text-left text-ink-2">
+                    Book: {tally.up} up, {tally.down} down{tally.flat > 0 && `, ${tally.flat} flat`}
+                    <Icon name="chevron" size={14} className="shrink-0 text-ink-3" />
+                  </button>
+                )}
+                {(view.cards.length > 0 || view.counts.hidden > 0) && (view.counts.hidden > 0
+                  ? <HiddenRow groups={view.hidden} total={view.counts.hidden} label={compactEnd(dismissedHere, view.counts.hidden)} />
+                  : <p className="flex min-h-11 items-center text-ink-2">{compactEnd(dismissedHere, 0)}</p>)}
+              </div>
             )}
 
             {dismissedHere > 0 && (
@@ -148,9 +174,9 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
               </button>
             )}
 
-            <HiddenRow groups={view.hidden} total={view.counts.hidden} />
+            {!compact && <HiddenRow groups={view.hidden} total={view.counts.hidden} />}
 
-            {(view.cards.length > 0 || view.counts.hidden > 0) && (
+            {!compact && (view.cards.length > 0 || view.counts.hidden > 0) && (
               <p className="flex items-start gap-2 font-semibold text-ink">
                 <Icon name="check" size={20} className="mt-px" />
                 {briefingEnd(cards.length, dismissedHere, view.counts.hidden)}

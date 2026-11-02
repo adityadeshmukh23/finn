@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { filingsAsOf, groupSameDay, lastMaterialBefore, sessionIndexFor, sessionsAsOf, type TimelineItem } from '../company'
+import { bookTally, filingsAsOf, groupSameDay, lastMaterialBefore, sessionIndexFor, sessionsAsOf, type TimelineItem } from '../company'
 import type { Session } from '../market'
 
 const item = (id: string, ts: string, tier: TimelineItem['tier'] = 'high', base = 50): TimelineItem =>
@@ -49,5 +49,15 @@ describe('groupSameDay', () => {
   })
   it('keeps different categories and different days apart', () => {
     expect(groupSameDay(day).map((x) => x.lead.id)).toEqual(['res', 'ceo', 'old'])
+  })
+})
+
+describe('bookTally', () => {
+  const s = { A: [['2026-10-29', 1, -1, 1], ['2026-10-30', 1, 2, 1]], B: [['2026-10-30', 1, -3, 1]], C: [['2026-10-30', 1, 0, 1]], D: [['2026-10-30', 1, null, null]] } as Record<string, Session[]>
+  it('counts the last close at the as-of moment', () => {
+    expect(bookTally(s, '2026-10-30T20:00:00+05:30')).toEqual({ up: 1, down: 1, flat: 1 })
+  })
+  it('never looks ahead', () => {
+    expect(bookTally(s, '2026-10-29T20:00:00+05:30')).toEqual({ up: 0, down: 1, flat: 0 })
   })
 })

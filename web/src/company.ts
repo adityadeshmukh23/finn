@@ -70,6 +70,19 @@ export function groupSameDay(rows: TimelineItem[]): FilingGroup[] {
   }))
 }
 
+/** The book in one line: how many holdings closed up, down and flat at the as-of moment. */
+export function bookTally(sessions: Record<string, Session[]>, end: string): { up: number; down: number; flat: number } {
+  const tally = { up: 0, down: 0, flat: 0 }
+  for (const rows of Object.values(sessions)) {
+    const chg = sessionsAsOf(rows, end, 1)[0]?.[2]
+    if (chg === undefined || chg === null) continue
+    if (chg > 0) tally.up++
+    else if (chg < 0) tally.down++
+    else tally.flat++
+  }
+  return tally
+}
+
 export const material = (rows: TimelineItem[]) => rows.filter((r) => r.tier !== 'routine')
 export const routine = (rows: TimelineItem[]) => rows.filter((r) => r.tier === 'routine')
 export const latestResults = (rows: TimelineItem[]) => rows.find((r) => r.results)

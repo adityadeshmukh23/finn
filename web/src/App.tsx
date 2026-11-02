@@ -147,6 +147,8 @@ export default function App() {
   }
 
   const chip = <WindowChip label={`${day ? `${dayMonth(day)} · ` : ''}${windowLabel(hours)}`} onOpen={() => setWindowOpen(true)} />
+  // Compact Today has the as-of line right under the chip, so the date isn't said twice. Book and Alerts have no such line.
+  const todayChip = density === 'compact' ? <WindowChip label={`Last ${windowLabel(hours)}`} onOpen={() => setWindowOpen(true)} /> : chip
   const book = useMemo(() => new Set(Object.keys(data?.names ?? {})), [data])
   const skeleton = <div className="skeleton h-40 w-full" aria-label="Loading" />
 
@@ -154,9 +156,9 @@ export default function App() {
     <>
       <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(100px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
         <div hidden={route.tab !== 'today'}>
-          <Today key={density} chip={chip} density={density} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
+          <Today key={density} chip={todayChip} density={density} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
                  loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
-                 onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} />
+                 onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} onBook={() => { window.location.hash = 'book' }} />
         </div>
         {route.tab === 'book' && (view ? <Book chip={chip} view={view} market={market} onOpen={setFile} /> : skeleton)}
         {route.tab === 'research' && (route.symbol
@@ -182,7 +184,7 @@ export default function App() {
                       }} onClose={() => setFile(null)} />
       )}
       {windowOpen && (
-        <WindowSheet data={data} market={market} manifest={manifest} researched={researched} latestDay={latestDay}
+        <WindowSheet data={data} view={view} market={market} manifest={manifest} researched={researched} latestDay={latestDay}
                      hours={hours} onHours={setHours} asOf={asOf} onAsOf={setAsOf} loading={loading} refreshing={refreshing}
                      onRefresh={() => load(true)} onClose={() => setWindowOpen(false)} />
       )}

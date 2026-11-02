@@ -6,7 +6,7 @@ import type { Digest } from '../api'
 import type { Timeline } from '../company'
 import { rowFigure } from '../figure'
 import type { Market } from '../market'
-import { briefingEnd, synthesis } from '../synthesis'
+import { briefingEnd, compactEnd, synthesis } from '../synthesis'
 
 const demo = join(__dirname, '../../public/demo')
 const read = <T,>(f: string) => JSON.parse(readFileSync(join(demo, f), 'utf8')) as T
@@ -51,5 +51,13 @@ describe('briefingEnd', () => {
     expect(briefingEnd(9, 0, 11)).toBe('9 companies to look at, 11 filtered. Nothing else is waiting.')
     expect(briefingEnd(1, 2, 0)).toBe('2 handled, 1 company to look at, 0 filtered. Nothing else is waiting.')
     expect(briefingEnd(0, 9, 11)).toBe('9 handled, 11 filtered. Nothing else is waiting.')
+  })
+})
+
+describe('compactEnd', () => {
+  it('says what was filtered and cleared', () => {
+    expect(compactEnd(0, 11)).toBe('11 filtered. Nothing else is waiting.')
+    expect(compactEnd(2, 11)).toBe('2 handled, 11 filtered. Nothing else is waiting.')
+    expect(compactEnd(0, 0)).toBe('Nothing else is waiting.')
   })
 })
