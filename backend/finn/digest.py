@@ -149,9 +149,18 @@ def build(items: list[Announcement], as_of: datetime, hours: int, meta: dict[str
         its.sort(key=lambda r: r["score"], reverse=True)
         extra_high = sum(1 for r in its[1:] if r["tier"] == HIGH)
         m = meta.get(sym, {})
-        res = next((results_mod.card_view(results[r["id"]]) for r in [*its, *folded.get(sym, [])] if r["id"] in results), None)
-        if res and its[0]["category"] == "results" and (h := results_mod.headline(res)):
-            its[0] = {**its[0], "headline": h}
+        source = next((r for r in [*its, *folded.get(sym, [])] if r["id"] in results), None)
+        res = results_mod.card_view(results[source["id"]]) if source else None
+        if res and (h := results_mod.headline(res)):
+            # Lead with the filing the figures were read from, so the card and the company file put them on the same
+            # document. It takes the old lead's place and score, so the order doesn't change.
+            if its[0]["category"] == "results":
+                if source in its and source["tier"] == its[0]["tier"]:
+                    i = its.index(source)
+                    its[0], its[i] = {**source, "score": its[0]["score"]}, {**its[0], "score": source["score"]}
+                else:
+                    its[0] = {**its[0], "headline": h}
+            its = [{**r, "headline": h} if r["id"] == source["id"] else r for r in its]
         cards.append({
             "symbol": sym,
             "company": m.get("name", sym),

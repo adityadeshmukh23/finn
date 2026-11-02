@@ -35,6 +35,17 @@ def test_every_filing_on_a_card_or_in_the_hidden_list_is_in_the_company_file(tmp
             assert not [it["id"] for it in [*shown, *(i for g in d["hidden"] for i in g["items"])] if it["id"] not in ids]
 
 
+def test_a_filing_reads_the_same_on_the_card_and_in_the_company_file(tmp_path):
+    m = build_static.build(tmp_path)
+    tl = {r["id"]: r for rows in json.loads((tmp_path / "timeline.json").read_text()).values() for r in rows}
+    for day in m["days"]:
+        for h in m["windows"]:
+            d = json.loads((tmp_path / f"digest-{day}-{h}.json").read_text())
+            for c in d["cards"]:
+                for it in [c["lead"], *c["items"], *c["folded"]]:
+                    assert it["headline"] == tl[it["id"]]["headline"], (day, h, c["symbol"])
+
+
 def test_bundled_prices_cover_the_demo_and_fire_the_default_alerts(tmp_path):
     m = build_static.build(tmp_path)
     mk = json.loads((tmp_path / "market.json").read_text())
