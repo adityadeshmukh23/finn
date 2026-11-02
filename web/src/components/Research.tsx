@@ -22,7 +22,7 @@ const PILL: Record<Verdict, string> = {
 }
 const ORDER: Verdict[] = ['missed', 'partially', 'met', 'not_found', 'too_vague']
 const STAGE: Record<string, string> = {
-  promise: 'Promise', reported: 'Reported figure', evidence: "Judge's evidence", verdict: "Judge's reasoning",
+  promise: 'Promise', reported: 'Reported figure', evidence: 'Evidence', verdict: 'Reasoning',
   annual_report: 'Annual-report figure', read: 'Call',
 }
 
@@ -52,7 +52,7 @@ function Quote({ text }: { text: string }) {
   return <blockquote className="border-l-2 border-line pl-3 italic text-ink-2">“{text}”</blockquote>
 }
 
-function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc>; judge: string }) {
+function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
   const [open, setOpen] = useState(false)
   const d = r.delivered
   const later = r.later ?? r.revisions.map((v) => ({ ...v, change: 'revised' as const }))
@@ -122,8 +122,9 @@ function Row({ r, docs, judge }: { r: ScoreRow; docs: Record<string, ResearchDoc
           )}
           <p className="text-meta text-ink-3">
             {r.verdict === 'not_yet_due' ? `Due ${r.due}; the latest call is earlier.`
-              : r.verdict_by === 'model' ? `Verdict judged by ${judge} from the quotes above; every quote was found on its page.`
-                : r.verdict === 'too_vague' || r.verdict === 'not_found' ? 'Set by FINN’s rules.' : 'Verdict computed by FINN from the figures, not by a model.'}
+              : r.verdict_by === 'model' ? 'A judgement from the quotes above, each found on its page.'
+                : r.verdict === 'too_vague' ? 'No number or date to check it against.'
+                  : r.verdict === 'not_found' ? 'FINN found no reported figure in these documents.' : 'Worked out from the figures above.'}
           </p>
         </div>
       )}
@@ -265,7 +266,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
             {due.length === 0 ? (
               <p className="py-4 text-ink-2">Nothing due yet: every promise found is for a later period.</p>
             ) : (
-              <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} judge={judge} />)}</ul>
+              <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>
             )}
           </section>
 
@@ -275,7 +276,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
                 <span className="font-semibold text-ink">{notDue.length} promises not yet due</span>
                 <span className="text-meta text-ink-3">{later ? 'Close' : `Current guidance, ${[...new Set(notDue.map((r) => r.due))].slice(0, 3).join(', ')}`}</span>
               </button>
-              {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} judge={judge} />)}</ul>}
+              {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>}
             </section>
           )}
 
@@ -283,7 +284,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
             <section className="rounded-2xl border border-dashed border-line">
               <button onClick={() => setDrops(!drops)} aria-expanded={drops} className="flex min-h-14 w-full items-baseline justify-between gap-3 p-4 text-left">
                 <span className="font-semibold text-ink">
-                  {data.dropped.length} {data.dropped.length === 1 ? 'claim' : 'claims'} dropped by the verifier
+                  {data.dropped.length} {data.dropped.length === 1 ? 'claim' : 'claims'} left out: FINN couldn't confirm {data.dropped.length === 1 ? 'it' : 'them'}
                 </span>
                 <span className="text-meta text-ink-3">{drops ? 'Close' : 'See why'}</span>
               </button>
@@ -298,7 +299,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
                     </li>
                   ))}
                   <li className="text-meta text-ink-3">
-                    A model's claim is shown only if its quote is found word for word on the cited page and every figure is in the quote. These weren't, so they're left out rather than shown.
+                    A claim appears only if its quote is word for word on the cited page and every figure is in the quote. These weren't.
                   </li>
                 </ul>
               )}
@@ -309,11 +310,9 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
 
           <footer className="space-y-2 px-1 text-meta text-ink-3">
             <p>
-              <span className="font-semibold text-ink-2">How verdicts are set.</span> Every numeric verdict is computed by FINN against the first
+              <span className="font-semibold text-ink-2">How verdicts are set.</span> Every numeric verdict is worked out against the first
               stated target: met at or above it; partially within 1 point of a margin target or at least 80% of a growth or amount target;
-              otherwise missed. Milestones are judged{judge ? ` by ${judge}` : ''} from verbatim quotes.
-              {judgeCall && judgeCall.fallbacks.length > 0 && <> {judge} answered because {judgeCall.fallbacks.map((f) => `${model(f.model)} ${why(f.why)}`).join(' and ')}.</>}
-              {' '}Promises and figures were read by {model(data.models.extract_guidance[0]?.model)}.
+              otherwise missed. Milestones are a judgement from verbatim quotes.
             </p>
             <p>
               <span className="font-semibold text-ink-2">Sources.</span> Only these documents, listed on screener.in and served by BSE or the
@@ -323,6 +322,15 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
               {data.docs.skipped.length > 0 && <> Not used: {data.docs.skipped.map((s) => `${s.listed_as} (${s.why})`).join('; ')}.</>}
             </p>
             <p>Recorded {new Date(data.generated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}.</p>
+            <details>
+              <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-ink-2">How this was built</summary>
+              <p>
+                Promises and figures were read by {model(data.models.extract_guidance[0]?.model)}.
+                {judge && <> Milestones were judged by {judge}.</>}
+                {judgeCall && judgeCall.fallbacks.length > 0 && <> {judge} answered because {judgeCall.fallbacks.map((f) => `${model(f.model)} ${why(f.why)}`).join(' and ')}.</>}
+                {' '}Verdicts on numbers are computed by code, never by a model.
+              </p>
+            </details>
           </footer>
         </main>
       )}

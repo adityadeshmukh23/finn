@@ -1,4 +1,5 @@
 import type { ResultRow, Results } from '../api'
+import { plainNote } from '../format'
 import { Icon } from './Icon'
 
 const inr = (v: number | null) =>
@@ -29,7 +30,7 @@ function Row({ label, row, note }: { label: string; row: ResultRow | null; note?
 /** Revenue, EBITDA, PBT, PAT: this quarter, QoQ and YoY. Figures were matched on the cited page; maths is ours. */
 export function ResultsTable({ r }: { r: Results }) {
   if (r.status !== 'extracted') {
-    return <p className="mt-1 rounded-xl bg-raised p-3 text-ink-2">{r.note}. The filing has the figures.</p>
+    return <p className="mt-1 rounded-xl bg-raised p-3 text-ink-2">{plainNote(r.note)}. The filing has the figures.</p>
   }
   const source = (
     <a href={r.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 min-w-11 items-center justify-end gap-1 whitespace-nowrap underline underline-offset-4">p.{r.page}<Icon name="external" size={12} /></a>
@@ -38,7 +39,7 @@ export function ResultsTable({ r }: { r: Results }) {
     return (
       <div className="mt-1 rounded-xl bg-raised px-3 pt-3 text-ink-2">
         <p className="font-semibold text-flag">Low confidence, figures withheld</p>
-        <p>{r.confidence_note}</p>
+        <p>{plainNote(r.confidence_note)}</p>
         <p className="text-meta text-ink-3">The table is on {source}</p>
       </div>
     )
@@ -69,7 +70,7 @@ export function ResultsTable({ r }: { r: Results }) {
         {r.margins.ebitda !== null && <>EBITDA margin {r.margins.ebitda}% · </>}
         {r.margins.pat !== null && <>PAT margin {r.margins.pat}% · </>}
         {!r.lender && 'EBITDA = PBT + finance costs + D&A − other income, computed by FINN. '}
-        {r.confidence === 'medium' && <span className="text-flag">Medium confidence: {r.confidence_note}</span>}
+        {r.confidence === 'medium' && <span className="text-flag">Medium confidence: {plainNote(r.confidence_note)}</span>}
       </p>
     </div>
   )

@@ -31,7 +31,7 @@ describe('a price row and the company file agree, on every recording', () => {
         const raw = (timeline[c.symbol] ?? []).filter((r) => r.tier !== 'routine' && new Date(r.ts).getTime() > from && new Date(r.ts).getTime() <= to)
         const ctx = moveContext(timeline[c.symbol], sessions, c.market!.date, d.window.start)
         expect(ctx.filed.map((r) => r.id), `${f} ${c.symbol}`).toEqual(raw.map((r) => r.id))
-        expect(moveLine(ctx).startsWith('No material filing'), `${f} ${c.symbol}`).toBe(raw.length === 0)
+        expect(moveLine(ctx).startsWith('Nothing material filed'), `${f} ${c.symbol}`).toBe(raw.length === 0)
         const said = rowLine(c, ctx, true)
         expect(said, f).not.toMatch(/no filing|in this window|last filing/i)
         if (ctx.last) expect((timeline[c.symbol] ?? []).some((r) => r.id === ctx.last!.id), f).toBe(true)

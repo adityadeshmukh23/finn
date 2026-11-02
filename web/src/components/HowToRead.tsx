@@ -1,5 +1,4 @@
 import type { Density } from '../density'
-import { usd } from '../format'
 import { Icon } from './Icon'
 import { Sheet } from './Sheet'
 
@@ -14,8 +13,8 @@ const KEY: [React.ReactNode, string][] = [
 ]
 
 /** What the marks mean, and how much to show. Also where a power user turns the full density back on. */
-export function HowToRead({ density, onDensity, spent, onLedger, onClose }: {
-  density: Density; onDensity: (d: Density) => void; spent: number | null; onLedger: () => void; onClose: () => void
+export function HowToRead({ density, onDensity, onLedger, onClose }: {
+  density: Density; onDensity: (d: Density) => void; onLedger: () => void; onClose: () => void
 }) {
   return (
     <Sheet title="How to read this" onClose={onClose}>
@@ -39,7 +38,7 @@ export function HowToRead({ density, onDensity, spent, onLedger, onClose }: {
         ))}
       </dl>
       <button onClick={onLedger} className="mt-3 flex min-h-11 w-full items-center justify-between gap-3 text-left text-ink-2">
-        {spent === null ? 'How FINN routes model calls' : `${usd(spent)} in model spend. See how`}
+        How this was built
         <Icon name="chevron" size={14} className="shrink-0 text-ink-3" />
       </button>
     </Sheet>

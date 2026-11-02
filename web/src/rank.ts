@@ -11,7 +11,7 @@ import { describe } from './market'
  */
 
 const EVENT: Record<string, string> = {
-  'Top management change': 'CEO/CFO/MD-level change',
+  'Top management change': 'CEO, CFO or MD change',
   'Quarterly results': 'Fresh quarterly results',
   'M&A': 'M&A',
   'Subsidiary IPO / listing': 'Subsidiary listing',
@@ -52,7 +52,7 @@ function alsoLine(c: Card): string {
 export const TOP_ROWS = 3
 
 /**
- * Sort cards and attach `why_rank` and the shorter `why_short`. Cards must already have their final items (after mutes).
+ * Sort cards and attach `why_rank` and `why_short`, which is only the event, for a collapsed #1. Cards must already have their final items (after mutes).
  * The top rows are what a first-time reader sees, so results we can't show a number for stay out of them
  * while another row can take the place. Scores don't change; only the order does.
  */
@@ -66,9 +66,9 @@ export function rankCards(cards: Card[]): Card[] {
   return scored.map((c, i) => {
     let tail = ''
     if (head.length > 0 && passed(c)) {
-      tail = '; no figures to show, so it sits below rows that have them'
+      tail = '; no figures to show, so rows with figures come first'
     } else if (i === 0 && anyPassed) {
-      tail = '; the heaviest event with figures to show'
+      tail = '; the biggest event with figures to show'
     } else if (i > 0) {
       const prev = scored[i - 1]
       const heavier = scored.slice(0, i).filter((x) => x.lead.base > c.lead.base).length
@@ -76,16 +76,16 @@ export function rankCards(cards: Card[]): Card[] {
         const pe = prev.items.filter((it) => it.tier === 'high').length
         const ce = c.items.filter((it) => it.tier === 'high').length
         tail = c.lead.category === 'market' ? `; a smaller move than #${i}`
-          : ce < pe ? `; fewer other high-priority filings than #${i}` : `; filed before #${i}`
+          : ce < pe ? `; fewer other major filings than #${i}` : `; filed before #${i}`
       } else if (prev.lead.base < c.lead.base) {
-        tail = prev.market ? `; #${i}'s price/volume move lifts it above` : `; older than #${i}, which outscores it on recency`
+        tail = prev.market ? `; #${i} also crossed a price or volume alert` : `; filed earlier than #${i}`
       } else if (heavier > 0) {
-        tail = `; below ${heavier} higher-weight ${heavier === 1 ? 'event' : 'events'}`
+        tail = `; below ${heavier} bigger ${heavier === 1 ? 'event' : 'events'}`
       }
     } else if (scored.length > 1) {
-      tail = '; the heaviest event in this window'
+      tail = '; the biggest event in this window'
     }
     const moved = c.market && c.lead.category !== 'market' ? `; stock ${describe(c.market)}, ${dayMonth(c.market.date)} close` : ''
-    return { ...c, why_rank: `${label(c.lead.reason)}${alsoLine(c)}${moved}${tail}.`, why_short: `${label(c.lead.reason)}${tail}.` }
+    return { ...c, why_rank: `${label(c.lead.reason)}${alsoLine(c)}${moved}${tail}.`, why_short: `${label(c.lead.reason)}.` }
   })
 }

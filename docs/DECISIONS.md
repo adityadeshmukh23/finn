@@ -217,3 +217,10 @@
 - **Every figure carries its labels.** A move names its close. Results name YoY, the quarter and the basis, also on a collapsed row. The quarter comes from the printed label by rules; a label that isn't a date gets no period rather than a guess. Consolidated is now stated as well as standalone.
 - **Known and left:** when a company files two results documents, the headline figure sits on the higher-scored filing on the card and on the one it was read from in the file (58 cases, same numbers, same day). The row's Filing link now opens the document the figures came from.
 - **Cost:** the first screen went over two targets set for Compact: 103 words (target 100) and 17 numbers (16). The labels were the point, so they stay.
+
+## Polish: plain language (2026-11-03)
+
+- **Investors read what it means; how it was made moves to one footnote.** Model names, fallback reasons, token talk and the README left investor screens. They live in "How this was built": a sheet from How to read this, and a collapsed section at the foot of each research page. A verdict now says "A judgement from the quotes above, each found on its page", which is what the reader needs; which model judged it is one tap down.
+- **Thin filings say what they are, from their class.** "Investor Presentation" reads "Results slides from the company". The class already said so. A rule adds no fact, and a test runs over every recorded filing for numbers that weren't in the original. Recorded notes are mapped at display time; the recordings stay as written.
+- **Budget won back:** 95 words (target 100) and 16 numbers (16), from 103 and 17, on the real build at 390x844 and 375x667. A collapsed #1 now gives only the event; the full reason is in the opened row.
+- **"Since the 29 Oct close" replaces "between the 29 and 30 Oct closes".** Shorter, and still exactly what was checked: a price row only exists when nothing material was filed in the window, so nothing material follows the move either.

@@ -32,6 +32,28 @@ const DECLARED = /declared (Interim|Final|Special) Dividend of Rs\.? ?([\d.]*\d)
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
+const DECK_PERIOD = /\bQ\d[^-]*?FY ?\d+/i
+const VAGUE_EXIT = /^Resignation of Director(?:\/KMP\/SMP| of the Company)$/i
+const VAGUE_BOARD = /^Change in Director\(s\) of the company$/i
+const PERIOD_ONLY = /^Results for the quarter ended (\w+ \d{4})$/
+
+/**
+ * A filing's line for an investor. Where NSE's subject says nothing on its own, the classification says what it is:
+ * "Investor Presentation" is the company's results slides. It adds no fact the subject and its class don't give.
+ */
+export function filingLine(it: { reason: string; headline: string }): string {
+  const h = it.headline.trim()
+  if (it.reason === 'Results deck') {
+    const period = h.match(DECK_PERIOD)
+    return `Results slides from the company${period ? `, ${period[0]}` : ''}`
+  }
+  if (VAGUE_EXIT.test(h)) return 'A director or senior officer resigned. The filing names who'
+  if (VAGUE_BOARD.test(h)) return 'Board change. The filing names who'
+  if (h === 'Concall transcript filed') return 'Earnings call transcript filed'
+  const m = h.match(PERIOD_ONLY)
+  return m ? `Results filed for the ${m[1]} quarter` : plainHeadline(h)
+}
+
 export function plainHeadline(raw: string): string {
   const h = raw.trim().replace(/^Please find enclosed (?:the )?/i, '')
   let m: RegExpMatchArray | null

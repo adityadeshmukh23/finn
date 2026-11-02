@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import type { Card, Digest } from '../api'
 import { bookTally, moveContext, type Timeline } from '../company'
 import type { Density } from '../density'
-import { dayMonth, usd } from '../format'
+import { dayMonth } from '../format'
 import { lastSessionBy, noSessionNote, type Market } from '../market'
 import { rankCards, TOP_ROWS } from '../rank'
 import { briefingEnd, compactEnd, synthesis } from '../synthesis'
@@ -43,7 +43,6 @@ interface Props {
   error: string | null
   onReload: () => void
   customised: boolean
-  spent: number | null
   dismissed: Set<string>
   onDismiss: (id: string, symbol: string, top: number) => void
   onRestore: (ids: string[]) => void
@@ -54,7 +53,7 @@ interface Props {
   onHowTo: () => void
 }
 
-export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook, onHowTo }: Props) {
+export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook, onHowTo }: Props) {
   const [details, setDetails] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const span = windowLabel(hours)
@@ -189,7 +188,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
             )}
 
             {!compact && <button onClick={onLedger} className="flex min-h-11 w-full items-center justify-between gap-3 px-1 text-left text-ink-2">
-              <span>{spent === null ? 'How FINN routes model calls' : `${usd(spent)} in model spend. See how`}</span>
+              <span>How this was built</span>
               <Icon name="chevron" className="text-ink-3" />
             </button>}
           </>

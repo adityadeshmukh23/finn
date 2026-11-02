@@ -87,7 +87,7 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
       <p className="mt-0.5 flex justify-between text-meta text-ink-3"><span>{dayMonth(sessions[0][0])}</span><span>{dayMonth(sessions[n - 1][0])}</span></p>
       <p className="mt-1 text-meta text-ink-3">
         {n} {n === 1 ? 'session' : 'sessions'}. Bars are volume against the 20-session average, solid at {volX}× or more, faint below it, and stop at {cap}×.
-        {markers.size > 0 && ' Dots are material filings.'}
+        {markers.size > 0 && ' Dots mark material filings.'}
       </p>
     </div>
   )

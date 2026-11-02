@@ -46,7 +46,7 @@ describe('rowLine', () => {
   it('a collapsed row gives the headline figure, the quarter and the basis, and leaves the rest for the open row', () => {
     const r = { ...results('high', 32.1, 28.6), period: 'Sep 2026', basis: 'consolidated' } as unknown as Results
     const c = card({ lead: lead('results', 'PAT ₹29,250 cr, +32.1% YoY; revenue +28.6% YoY (Sep 2026 qtr, consolidated)'), results: r })
-    expect(rowLine(c, null, true)).toBe('PAT ₹29,250 cr, Sep 2026 qtr, consolidated')
+    expect(rowLine(c, null, true)).toBe('PAT ₹29,250 cr (Sep 2026 qtr, consolidated)')
     expect(rowLine(c)).toBe('PAT ₹29,250 cr; revenue +28.6% YoY (Sep 2026 qtr, consolidated)')
   })
   const mk = card({ lead: lead('market', ''), market: sig(-6.3, 42, true, true) })
@@ -57,16 +57,24 @@ describe('rowLine', () => {
     expect(rowLine(mk, ctx({ last: { ...exit, headline: 'Resignation of Mr. P N Vasudevan as Managing Director & CEO of the company w.e.f. November 2, 2026' } }), true))
       .toBe('Filed 29 Oct: P N Vasudevan resigns as MD & CEO, effective 2 Nov 2026')
   })
+  it('gives results filed earlier as the lead figure, with its labels', () => {
+    const filed = { ...exit, reason: 'Quarterly results', headline: 'PAT ₹6,367 cr, +28.7% YoY; revenue +22.8% YoY (Sep 2026 qtr, consolidated)' }
+    expect(rowLine(mk, ctx({ last: filed }), true)).toBe('Filed 29 Oct: PAT ₹6,367 cr (Sep 2026 qtr, consolidated)')
+  })
+  it('says what a thin filing is', () => {
+    const deck = { ...exit, reason: 'Results deck', headline: 'Investor Presentation' }
+    expect(rowLine(mk, ctx({ last: deck }), true)).toBe('Filed 29 Oct: Results slides from the company')
+  })
   it('says nothing was filed only between the two closes it checked', () => {
-    expect(rowLine(mk, ctx())).toBe('No material filing between the 29 Oct and 30 Oct closes')
-    expect(moveLine(ctx({ filed: [exit, { ...exit, category: 'results' }, exit] }))).toBe('Filed between the 29 Oct and 30 Oct closes: Management, Results')
-    expect(moveLine(ctx({ previous: null }))).toBe('No material filing up to the 30 Oct close')
+    expect(rowLine(mk, ctx())).toBe('Nothing material filed since the 29 Oct close')
+    expect(moveLine(ctx({ filed: [exit, { ...exit, category: 'results' }, exit] }))).toBe('Since the 29 Oct close: Management, Results')
+    expect(moveLine(ctx({ previous: null }))).toBe('Nothing material filed up to the 30 Oct close')
   })
   it('makes no claim about filings when the timeline is not available', () => {
     expect(rowLine(mk, null)).toBe('Price or volume alert')
   })
   it('states a price move on a volume-only alert', () => {
-    expect(rowLine(card({ lead: lead('market', ''), market: sig(2.9, 24, false, true) }), ctx())).toBe('Price +2.9%. No material filing between the 29 Oct and 30 Oct closes')
+    expect(rowLine(card({ lead: lead('market', ''), market: sig(2.9, 24, false, true) }), ctx())).toBe('Price +2.9%. Nothing material filed since the 29 Oct close')
   })
   it('flags a close that came before the filing', () => {
     const filed = (ts: string) => card({ lead: { ...lead('results', 'h'), ts }, market: sig(4.6, 2, true, true) })

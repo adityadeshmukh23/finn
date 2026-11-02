@@ -12,20 +12,21 @@ export function LedgerSheet({ onClose }: { onClose: () => void }) {
 
   if (STATIC) {
     return (
-      <Sheet title="Cost ledger" onClose={onClose}>
+      <Sheet title="How this was built" onClose={onClose}>
         <p className="text-figure font-semibold text-ink">$0.00</p>
-        <p className="mt-1 text-ink-2">
-          Replay mode makes no model calls and holds no API key. The briefing is ranked by rules, so it costs nothing to build.
+        <p className="text-ink-2">to run this copy. It replays a recording, makes no AI calls and holds no keys.</p>
+        <p className="mt-3 text-ink-2">
+          Rules sort every filing first, at no cost. A low-cost AI model reads only the filings rules can't place, and a stronger one judges milestones in research. Code does all the arithmetic, and every quote and figure is checked against its page.
         </p>
         <p className="mt-3 text-meta text-ink-3">
-          Run FINN locally to see the live ledger: every model call with its tokens, cost, the free-tier limits and the $5 hard cap.
+          For live filings, another ticker, or the full log of AI calls with tokens, cost and the $5 hard cap, run FINN on your own machine. The README has the commands.
         </p>
       </Sheet>
     )
   }
 
   return (
-    <Sheet title="Cost ledger" onClose={onClose}>
+    <Sheet title="How this was built" onClose={onClose}>
       {err && <p className="text-flag">Couldn't load the ledger: {err}</p>}
       {!data && !err && <div className="skeleton h-24" />}
       {data && (

@@ -1,7 +1,7 @@
 import type { Card, Results } from './api'
 import type { MoveContext } from './company'
 import { CATEGORY_LABEL, dayMonth } from './format'
-import { plainHeadline } from './plain'
+import { filingLine } from './plain'
 import { closeTime, fmtPct, fmtX } from './market'
 
 /** The one number a row is about, and the line beside it. Nothing here is computed: it picks fields the card already has. */
@@ -47,10 +47,10 @@ function withoutSameDay(line: string, ts: string): string {
 
 /** What was filed between the two closes around a move, from the same list as the company file's chart. */
 export function moveLine(c: MoveContext): string {
-  const span = c.previous ? `between the ${dayMonth(c.previous)} and ${dayMonth(c.date)} closes` : `up to the ${dayMonth(c.date)} close`
-  if (c.filed.length === 0) return `No material filing ${span}`
+  const span = c.previous ? `since the ${dayMonth(c.previous)} close` : `up to the ${dayMonth(c.date)} close`
+  if (c.filed.length === 0) return `Nothing material filed ${span}`
   const kinds = [...new Set(c.filed.map((r) => CATEGORY_LABEL[r.category] ?? r.category))]
-  return `Filed ${span}: ${kinds.join(', ')}`
+  return `${span.charAt(0).toUpperCase()}${span.slice(1)}: ${kinds.join(', ')}`
 }
 
 /**
@@ -62,20 +62,17 @@ export function rowLine(card: Card, ctx: MoveContext | null = null, short = fals
   if (lead.category === 'market') {
     const price = m && !m.move_hit && m.chg_pct !== null ? `Price ${fmtPct(m.chg_pct)}. ` : ''
     if (!ctx) return `${price}Price or volume alert`
-    if (ctx.last) return `${price}Filed ${dayMonth(ctx.last.ts)}: ${withoutSameDay(plainHeadline(ctx.last.headline), ctx.last.ts)}`
+    if (ctx.last) return `${price}Filed ${dayMonth(ctx.last.ts)}: ${withoutSameDay(figureLead(filingLine(ctx.last)), ctx.last.ts)}`
     return `${price}${moveLine(ctx)}`
   }
   const r = shownResults(card)
-  if (r && short) return resultsLabel(lead.headline.replace(/[,;] .*$/, ''), r)
+  if (r && short) return figureLead(lead.headline)
   if (r && rowFigure(card)?.label === 'PAT YoY') return lead.headline.replace(/, [+−-][\d.]+% YoY/, '')
-  return plainHeadline(lead.headline)
+  return filingLine(lead)
 }
 
-/** "PAT ₹29,250 cr, Sep 2026 qtr, consolidated". */
-function resultsLabel(first: string, r: Extracted): string {
-  const parts = [first, r.period ? `${r.period} qtr` : '', r.basis === 'unknown' ? '' : r.basis]
-  return parts.filter(Boolean).join(', ')
-}
+/** "PAT ₹29,250 cr, +32.1% YoY; revenue +28.6% YoY (Sep 2026 qtr, consolidated)" to "PAT ₹29,250 cr (Sep 2026 qtr, consolidated)". */
+const figureLead = (headline: string) => headline.replace(/^(PAT ₹[\d,.-]+ cr)[,;].*?( \([^)]*\))?$/, '$1$2')
 
 /** True when the close shown on a filing's row came first: the move can't be a response to this filing. */
 export const closedBeforeFiling = (card: Card): boolean =>

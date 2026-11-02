@@ -284,7 +284,7 @@ export function fetchResearchIndex(): Promise<ResearchEntry[]> {
 export async function fetchResearch(symbol: string): Promise<Research> {
   const bundled = async () => {
     const r = await fetch(`/demo/research/${encodeURIComponent(symbol)}.json`)
-    if (!r.ok) throw new Error(`No research recorded for ${symbol} in this demo.`)
+    if (!r.ok) throw new Error(`FINN hasn't read ${symbol}'s earnings calls yet.`)
     return (await r.json()) as Research
   }
   if (STATIC) return bundled()

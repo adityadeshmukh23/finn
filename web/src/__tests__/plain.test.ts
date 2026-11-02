@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import type { Timeline } from '../company'
-import { plainHeadline as p } from '../plain'
+import { filingLine, plainHeadline as p } from '../plain'
 
 describe('plainHeadline', () => {
   it('management changes lead with the person', () => {
@@ -33,6 +33,28 @@ describe('plainHeadline', () => {
       const out = p(h)
       for (const n of nums(out)) expect(nums(h), `${n} in "${out}" from "${h}"`).toContain(n)
       expect(out.length, h).toBeLessThanOrEqual(h.length)
+    }
+  })
+})
+
+describe('filingLine', () => {
+  const line = (reason: string, headline: string) => filingLine({ reason, headline })
+  it('says what a thin filing is, from its class', () => {
+    expect(line('Results deck', 'Investor Presentation')).toBe('Results slides from the company')
+    expect(line('Results deck', 'General Updates- Q2 & H1 FY2027 Results Presentation')).toBe('Results slides from the company, Q2 & H1 FY2027')
+    expect(line('Results deck', 'Analyst Presentation.- Q2 / H1 FY27')).toBe('Results slides from the company, Q2 / H1 FY27')
+    expect(line('Board change', 'Resignation of Director/KMP/SMP')).toBe('A director or senior officer resigned. The filing names who')
+    expect(line('Quarterly results', 'Results for the quarter ended Sep 2026')).toBe('Results filed for the Sep 2026 quarter')
+  })
+  it('leaves a filing with content to the headline rules', () => {
+    expect(line('M&A', 'NCLAT allowed the appeal')).toBe('NCLAT allowed the appeal')
+  })
+  it('on every recorded filing: no number that was not in the original', () => {
+    const tl = JSON.parse(readFileSync(join(__dirname, '../../public/demo/timeline.json'), 'utf8')) as Timeline
+    const nums = (s: string) => (s.match(/\d+(?:[.,]\d+)*/g) ?? []).map((n) => n.replace(/^0+(?=\d)/, ''))
+    for (const r of Object.values(tl).flat()) {
+      const out = filingLine(r)
+      for (const n of nums(out)) expect(nums(r.headline), `${n} in "${out}" from "${r.headline}"`).toContain(n)
     }
   })
 })

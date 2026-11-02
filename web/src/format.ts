@@ -41,6 +41,15 @@ export function verdictLine(c: { met: number; partially: number; missed: number;
   return `${parts.join(', ')}, of ${checkable} checkable`
 }
 
+/** Recorded results notes, in an investor's words. The recordings stay as they were written. */
+export function plainNote(note: string): string {
+  if (/^Model found no quarterly table/i.test(note)) return "FINN couldn't find a quarterly table in the pages it read"
+  if (/scanned image/i.test(note)) return "The results PDF is a scanned image, so FINN couldn't read the figures"
+  const m = note.match(/^(\d+) figure\(s\) not found on the page were dropped\.$/)
+  if (m) return `${m[1]} ${m[1] === '1' ? "figure isn't" : "figures aren't"} shown because FINN couldn't find ${m[1] === '1' ? 'it' : 'them'} on the page.`
+  return note
+}
+
 export function todayIST(): string {
   return new Date().toLocaleDateString('en-CA', { timeZone: IST })
 }

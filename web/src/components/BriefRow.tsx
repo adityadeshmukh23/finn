@@ -5,7 +5,7 @@ import { CATEGORY_LABEL, clock, dayMonth } from '../format'
 import { closedBeforeFiling, figuresWithheld, moveLine, rowFigure, rowLine } from '../figure'
 import { describe } from '../market'
 import { swipeDismisses, swipeMayStart } from '../swipe'
-import { plainHeadline } from '../plain'
+import { filingLine } from '../plain'
 import { Icon } from './Icon'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
@@ -114,7 +114,8 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
           </span>
           <span className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
-            <span className={`text-ink ${open ? 'block' : 'line-clamp-2'}`}>{rowLine(card, context, glance)}</span>
+            {/* Results get a third line at 320 px: the quarter and basis must not be the part that's cut. */}
+            <span className={`text-ink ${open ? 'block' : isResults ? 'line-clamp-3' : 'line-clamp-2'}`}>{rowLine(card, context, glance)}</span>
             {(!glance || figuresWithheld(card)) && (
               <span className="mt-0.5 block text-meta text-ink-3">
                 {!glance && lead.category !== 'market' && clock(lead.ts)}
@@ -142,7 +143,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
         {/* #1 always says why, even collapsed or after a dismiss moved it up. In Compact it also carries the one button. */}
         {glance && rank === 1 && (
           <div className="flex items-center gap-3 pb-2.5 pt-1">
-            <p className="min-w-0 flex-1 text-meta text-ink-3"><span className="text-ink-2">#1</span> {card.why_short}</p>
+            <p className="min-w-0 flex-1 text-meta text-ink-3">{card.why_short}</p>
             <button onClick={onAsk} className="min-h-11 shrink-0 rounded-full bg-ink px-4 font-semibold text-bg active:scale-95">Ask FINN</button>
           </div>
         )}
@@ -185,7 +186,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
                 {card.items.map((it) => (
                   <li key={it.id}>
                     <p className="text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(it)}</span> · {clock(it.ts)}</p>
-                    <p className="text-ink">{plainHeadline(it.headline)}</p>
+                    <p className="text-ink">{filingLine(it)}</p>
                     <FilingLink url={it.url} />
                   </li>
                 ))}

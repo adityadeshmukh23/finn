@@ -22,8 +22,8 @@ describe('rankCards', () => {
   it('a low-confidence results card does not lead, even on the higher score', () => {
     const out = rankCards([card('SUN', 100, low), card('REL', 95, high)])
     expect(out.map((c) => c.symbol)).toEqual(['REL', 'SUN'])
-    expect(out[0].why_rank).toContain('the heaviest event with figures to show')
-    expect(out[1].why_rank).toContain('no figures to show, so it sits below')
+    expect(out[0].why_rank).toContain('the biggest event with figures to show')
+    expect(out[1].why_rank).toContain('no figures to show, so rows with figures come first')
   })
   it('leaves the order alone when the top card has figures', () => {
     expect(rankCards([card('REL', 100, high), card('SUN', 95, low)]).map((c) => c.symbol)).toEqual(['REL', 'SUN'])
@@ -31,7 +31,7 @@ describe('rankCards', () => {
   it('stays out of the top 3 while other rows can take the places', () => {
     const out = rankCards([card('SUN', 100, low), card('A', 95, high), card('B', 90, high), card('C', 85, null, 'litigation'), card('D', 80, null, 'litigation')])
     expect(out.map((c) => c.symbol)).toEqual(['A', 'B', 'C', 'SUN', 'D'])
-    expect(out[0].why_short).toBe('Fresh quarterly results; the heaviest event with figures to show.')
+    expect(out[0].why_short).toBe('Fresh quarterly results.')
   })
   it('fills the top 3 with what speaks first when fewer than 3 can', () => {
     expect(rankCards([card('SUN', 100, low), card('MAR', 99, low), card('A', 95, high)]).map((c) => c.symbol)).toEqual(['A', 'SUN', 'MAR'])
