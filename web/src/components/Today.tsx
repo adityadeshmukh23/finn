@@ -51,9 +51,10 @@ interface Props {
   onOpen: (sym: string) => void
   onLedger: () => void
   onBook: () => void
+  onHowTo: () => void
 }
 
-export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook }: Props) {
+export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, spent, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook, onHowTo }: Props) {
   const [details, setDetails] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const span = windowLabel(hours)
@@ -67,8 +68,11 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
 
   return (
     <>
-      <header className="flex items-center justify-between gap-3">
-        <h1 className="text-title font-bold text-ink">FINN</h1>
+      <header className="flex items-center gap-1">
+        <h1 className="flex-1 text-title font-bold text-ink">FINN</h1>
+        <button onClick={onHowTo} aria-label="How to read this" className="flex h-11 w-11 items-center justify-center text-ink-2">
+          <Icon name="info" size={22} />
+        </button>
         {chip}
       </header>
       <p className="text-meta text-ink-3">{data ? asOfLine(data) : 'Loading the briefing'}</p>
@@ -183,10 +187,10 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
               </p>
             )}
 
-            <button onClick={onLedger} className="flex min-h-11 w-full items-center justify-between gap-3 px-1 text-left text-ink-2">
+            {!compact && <button onClick={onLedger} className="flex min-h-11 w-full items-center justify-between gap-3 px-1 text-left text-ink-2">
               <span>{spent === null ? 'How FINN routes model calls' : `${usd(spent)} in model spend. See how`}</span>
               <Icon name="chevron" className="text-ink-3" />
-            </button>
+            </button>}
           </>
         )}
       </main>

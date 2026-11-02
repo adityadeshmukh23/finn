@@ -4,6 +4,7 @@ import { fetchDigest, fetchLedger, fetchManifest, fetchMarket, fetchResearchInde
 import { Alerts } from './components/Alerts'
 import { Book } from './components/Book'
 import { CompanySheet } from './components/CompanySheet'
+import { HowToRead } from './components/HowToRead'
 import { LedgerSheet } from './components/LedgerSheet'
 import { Research } from './components/Research'
 import { ResearchHome } from './components/ResearchHome'
@@ -11,7 +12,7 @@ import { TabBar } from './components/TabBar'
 import { Today } from './components/Today'
 import { WindowChip } from './components/WindowChip'
 import { windowLabel, WindowSheet } from './components/WindowSheet'
-import { loadDensity } from './density'
+import { loadDensity, saveDensity } from './density'
 import { dayMonth, todayIST } from './format'
 import type { Timeline } from './company'
 import type { Market } from './market'
@@ -50,7 +51,8 @@ export default function App() {
   const [timeline, setTimeline] = useState<Timeline | null>(null)
   const [ledgerOpen, setLedgerOpen] = useState(false)
   const [windowOpen, setWindowOpen] = useState(false)
-  const [density] = useState(loadDensity)
+  const [density, setDensity] = useState(loadDensity)
+  const [howTo, setHowTo] = useState(false)
   const [spent, setSpent] = useState<number | null>(null)
   const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
   const [manifest, setManifest] = useState<Manifest | null>(null)
@@ -158,7 +160,7 @@ export default function App() {
         <div hidden={route.tab !== 'today'}>
           <Today key={density} chip={todayChip} density={density} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
                  loading={loading} error={error} onReload={load} customised={customised} spent={spent} dismissed={dismissed}
-                 onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} onBook={() => { window.location.hash = 'book' }} />
+                 onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} onBook={() => { window.location.hash = 'book' }} onHowTo={() => setHowTo(true)} />
         </div>
         {route.tab === 'book' && (view ? <Book chip={chip} view={view} market={market} onOpen={setFile} /> : skeleton)}
         {route.tab === 'research' && (route.symbol
@@ -187,6 +189,10 @@ export default function App() {
         <WindowSheet data={data} view={view} market={market} manifest={manifest} researched={researched} latestDay={latestDay}
                      hours={hours} onHours={setHours} asOf={asOf} onAsOf={setAsOf} loading={loading} refreshing={refreshing}
                      onRefresh={() => load(true)} onClose={() => setWindowOpen(false)} />
+      )}
+      {howTo && (
+        <HowToRead density={density} onDensity={(d) => { setDensity(d); saveDensity(d) }} spent={spent}
+                   onLedger={() => { setHowTo(false); setLedgerOpen(true) }} onClose={() => setHowTo(false)} />
       )}
       {ledgerOpen && <LedgerSheet onClose={() => setLedgerOpen(false)} />}
     </>
