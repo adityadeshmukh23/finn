@@ -1,14 +1,19 @@
-# What README.md and COVER_NOTE.md will need to say
+# What COVER_NOTE.md needs changed
 
-A running list, kept during polish. Neither file has been edited yet.
+A running list. `COVER_NOTE.md` has not been edited. README.md, DESIGN.md and DECISIONS.md match the app as of the Compact first screen.
 
-## README.md
-- Screens are now Today, Book, Research, Alerts. Replace anything that describes a single scrolling page, and retake `docs/img`.
-- Window and as-of date open from the chip in the header on Today, Book and Alerts.
-- Today opens with a templated synthesis line and a book strip, and ends by saying nothing else is waiting.
-- Ask FINN opens the company file (price, volume, results, management, filings, research if recorded). Any NSE ticker can still be researched locally.
-- `npm test` and `npm run check:size` exist in `web/`, and CI runs both.
+## Exact changes, as of the Compact first screen
 
-## COVER_NOTE.md
-- The point of view is that FINN lets you stop looking: a finite briefing with receipts.
-- Colour and rank are information, not decoration: the spine is the rank, green and red are signs, amber is low confidence.
+| Now it says | It should say | Why |
+|---|---|---|
+| "The home screen is a ranked briefing, not a chatbox: one card per company for a window and as-of date I pick, with routine filings collapsed into a count I can open." | "The first screen is a ranked answer, not a chatbox: the top three companies with one number each, the rest one tap away, for a window and as-of date I pick, with routine filings collapsed into a count I can open." | The first screen changed |
+| "Results cards show revenue, EBITDA, PBT and PAT with QoQ and YoY" | "Opening a row shows revenue, EBITDA, PBT and PAT with QoQ and YoY" | The table is now one tap down |
+| "\"Ask FINN\" opens promised vs delivered: what management guided across five earnings calls against what it reported, from transcripts and annual reports only, with a page citation on every claim." | "\"Ask FINN\" opens the company file: price, volume, every filing, and promised vs delivered where recorded: what management guided across five earnings calls against what it reported, from transcripts and annual reports only, with a page citation on every claim." | Ask FINN no longer goes straight to research |
+
+The email body must stay under 400 words, and the first and third changes add about 25 words, so check the count after the edit.
+
+## Still to decide when the note is edited
+
+- **Key decisions:** one line on layering could fit: "First-time readers get one number per company; every figure stays one tap from its page."
+- **"A verifier bug found late":** still accurate, so keep it unless the bug gets fixed.
+- **Later blocks:** Guidance Walk, the measured-quality page, the ledger, Listen for and any new recordings will each add a line here when they land.

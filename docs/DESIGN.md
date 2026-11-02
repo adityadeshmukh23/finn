@@ -26,9 +26,9 @@ A finite morning ledger with receipts: paper and ink, numbers are the hero, ever
 
 - **Four type sizes, one family.** Figure 28/32, Title 17/22, Body 15/22, Meta 13/18, in the system stack with tabular numerals. Enforced by tokens in `index.css`; no ad-hoc sizes in components.
 - **Colour means something.** Green and red are the sign of a number or of a verdict's gap to a promise. Amber is "low confidence or unverified". Everything else is ink. A rise is never alarm-coloured. "Partially" is neutral, since it is neither.
-- **Rows, not cards.** A row is kicker, one line, one evidence line, with the figure in a right-hand column. The rank spine on the left is the ranking made visible: 4 px on #1, a hairline by #6. The top three start open.
+- **Three levels, one row shape.** Glance: the top 3 rows, one primary number each, at most two secondary items, one filled button on the screen, then "N more". Tap: why it ranks there, filing, results table behind one line, dismiss. Dig: company file and research. Every row is ticker and category, one line, figure on the right. A Compact / Detailed toggle in How to read this restores the full density. The rank spine on the left is the ranking made visible: 4 px on #1, a hairline by #6.
 - **Thumb zone.** Today, Book, Research, Alerts in a bottom bar. Every control is at least 44 px. The window and date open from a chip in the header: a docked picker cost 44 px of every screen for something rarely changed. Back closes an open sheet and nothing else.
-- **A finite briefing.** Today opens with a one-line synthesis and the book strip, and ends by saying what was filtered and that nothing else is waiting.
+- **A finite briefing.** Compact Today fits one screen at 375x667 and ends by saying what was filtered and that nothing else is waiting. Detailed adds a one-line synthesis and the book strip.
 - **Nothing looks live.** Times are absolute, in IST, never "6h ago". One as-of label sits under the title, and prices say which close they stop at.
 
 ## How each announcement type is treated

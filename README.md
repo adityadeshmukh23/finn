@@ -1,16 +1,16 @@
 # FINN
 
-A mobile-first investor briefing. You open a ranked list of what changed across your portfolio, not a chatbox: one card per company, the routine paperwork collapsed into a count you can inspect, and every number tied to the page it came from.
+A mobile-first investor briefing. You open a ranked answer to what changed across your portfolio, not a chatbox: the top three companies with one number each, the rest one tap away, the routine paperwork collapsed into a count you can inspect, and every number tied to the page it came from.
 
 **Try it on a phone: https://finn-olive.vercel.app** (a static replay of recorded data; see [what's recorded vs live](#whats-recorded-vs-live))
 
 <p>
-  <img src="docs/img/01-briefing.jpg" width="250" alt="Briefing: nine companies need a look, ranked cards, data-as-of badge">
-  <img src="docs/img/02-results-card.jpg" width="250" alt="Results card: Reliance PAT, revenue, EBITDA with QoQ and YoY, computed by code, page link">
+  <img src="docs/img/01-briefing.jpg" width="250" alt="Today: nine companies need a look, the top three rows with one number each, six more, the book, and what was filtered">
+  <img src="docs/img/02-results-card.jpg" width="250" alt="An opened row: Reliance with why it ranks first, its filing link, and the results table with QoQ and YoY, computed by code, and a page link">
   <img src="docs/img/03-research-bel.jpg" width="250" alt="Promised vs delivered for BEL: 3 of 6 checkable promises met">
 </p>
 
-*Screenshots are the static build at 375px wide: briefing, a results card, and BEL's promised-vs-delivered scorecard.*
+*Screenshots are the static build at 375px wide: Today, an opened row, and BEL's promised-vs-delivered scorecard.*
 
 ## Quickstart (Mac)
 
@@ -24,19 +24,21 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 ```
 
 - No API key is needed to run. Without one, FINN replays the recordings in `data/recordings/` or uses mock output, and says so.
-- `./run.sh research TICKER` makes live model calls, so it needs a free `GEMINI_API_KEY` in `.env` (get one at aistudio.google.com/apikey). It takes a few minutes per company and lands in the "Promised vs delivered" list on the home screen. If the free tier is out of quota it records nothing and tells you to re-run later.
+- `./run.sh research TICKER` makes live model calls, so it needs a free `GEMINI_API_KEY` in `.env` (get one at aistudio.google.com/apikey). It takes a few minutes per company and lands in the Research tab. If the free tier is out of quota it records nothing and tells you to re-run later.
 - A ticker that screener.in has no earnings-call transcripts for (ITC, for one) is refused with a plain message, not a guess.
 - Tests: `cd backend && ../.venv/bin/pytest -q` (151; no key needed).
 
 ## What it does
 
-**Push: the briefing.** A windowed digest (24h, 3 days, 7 days, plus an as-of date so it works on quiet days) of every NSE filing across the portfolio.
+**Push: the briefing.** The Today tab: a windowed digest (24h, 3 days, 7 days, plus an as-of date so it works on quiet days) of every NSE filing across the portfolio. Four tabs: Today, Book, Research, Alerts.
 
-- Rules classify and rank each filing; no model is involved in ranking. Routine filings collapse into a "hidden" row grouped by reason, with a count and every item inspectable.
-- Quarterly results get a table: revenue, EBITDA, PBT, PAT, this quarter vs last quarter and vs a year ago. The cheap model copies figures off the filing; code verifies each figure is printed on the cited page and does all the arithmetic. If it can't, the card shows no numbers and says why.
+- Three levels. The first screen shows the top three companies with one number each. Tapping a row gives why it ranks there, its filing and the results table. Ask FINN gives the company file. A Compact / Detailed toggle in "How to read this" keeps the full density for power users.
+
+- Rules classify and rank each filing; no model is involved in ranking. Routine filings collapse into a filtered count, grouped by reason, with every item inspectable.
+- Quarterly results get a table: revenue, EBITDA, PBT, PAT, this quarter vs last quarter and vs a year ago. The cheap model copies figures off the filing; code verifies each figure is printed on the cited page and does all the arithmetic. If it can't, the row shows no numbers and says why.
 - Management changes show who, role, effective date, reason (for exits) and background, all from the filing itself.
-- End-of-day price and volume alerts (default 2× volume or ±4% in a day), thresholds editable in the app. A move with no filing behind it gets its own card.
-- Each card says why it ranks where it does, and has **Ask FINN**, which opens research on that company.
+- End-of-day price and volume alerts (default 2× volume or ±4% in a day), thresholds editable in the app. A move with no filing behind it gets its own row, which names the company's last material filing.
+- Each row says why it ranks where it does. **Ask FINN** opens the company file: price and volume, verified results and management changes, every filing since the recording starts, and promised vs delivered where recorded.
 
 **Pull: promised vs delivered.** For a company, what management guided on its last five earnings calls, against what it then reported.
 
@@ -96,7 +98,7 @@ Models are set in one place (`.env`, mapped to tasks in `backend/finn/models.py`
 
 | | Public site | `./run.sh` locally |
 |---|---|---|
-| Briefing | Replay of NSE filings and Yahoo prices from 9 to 30 Oct 2026, labelled "Demo data as of 30 Oct, 8:29 pm" | Live NSE and Yahoo, falling back to the same snapshot with a "data as of" badge |
+| Briefing | Replay of NSE filings and Yahoo prices from 9 to 30 Oct 2026, labelled "Recorded filings, as of 30 Oct, 8:29 pm IST" | Live NSE and Yahoo, falling back to the same snapshot with a "data as of" badge |
 | Results and management cards | Recorded cheap-model reads of the 30 Oct filings | Same recordings; filings newer than the snapshot get rules only until you run `python -m scripts.read_filings` |
 | Research | Recorded for BEL, Kaynes, Coforge, Dixon and Asian Paints | Same, plus anything you record with `./run.sh research TICKER` |
 | Model calls | None. No key exists on any public host | Only if you add a key, and only for what isn't already recorded |
@@ -121,4 +123,4 @@ Unseen tickers: `backend/scripts/smoke_unseen.py` runs the document index, one t
 cd backend && ../.venv/bin/python -m scripts.record_snapshots 21 && ../.venv/bin/python -m scripts.build_static
 ```
 
-CI (`.github/workflows/ci.yml`) runs the tests, checks the demo data matches the snapshot and ranking code, fails if a PDF, `.env` or sqlite file is tracked, and builds the web app.
+CI (`.github/workflows/ci.yml`) runs the tests, checks the demo data matches the snapshot and ranking code, fails if a PDF, `.env` or sqlite file is tracked, and builds the web app. It also runs the web tests (`npm test`) and a 130 KB gzip bundle ceiling (`npm run check:size`).
