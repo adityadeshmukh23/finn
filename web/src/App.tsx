@@ -171,7 +171,7 @@ export default function App() {
       ) : null} />
 
       {file && view && (
-        <CompanySheet symbol={file} name={view.names[file] ?? file} card={view.cards.find((c) => c.symbol === file) ?? null}
+        <CompanySheet symbol={file} name={view.names[file] ?? file} sector={view.sectors?.[file] ?? ''} card={view.cards.find((c) => c.symbol === file) ?? null}
                       filings={timeline ? timeline[file] ?? [] : null} sessions={market?.sessions[file]} end={view.window.end}
                       since={manifest?.from ?? null} volX={prefs.volX} research={researched.find((r) => r.symbol === file)}
                       onResearch={() => {

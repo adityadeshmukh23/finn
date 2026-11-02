@@ -87,6 +87,7 @@ export interface Digest {
   hidden: HiddenGroup[]
   quiet: string[]
   names: Record<string, string>
+  sectors?: Record<string, string>   // absent on data built before it was added
   source: SourceStatus
   is_live_now: boolean
 }

@@ -52,6 +52,7 @@ function FilingRow({ it }: { it: TimelineItem }) {
 interface Props {
   symbol: string
   name: string
+  sector: string
   card: Card | null
   filings: TimelineItem[] | null    // null: the timeline file failed to load
   sessions: Session[] | undefined
@@ -64,7 +65,7 @@ interface Props {
 }
 
 /** Everything FINN verifiably holds on one company, as of the briefing's date. Sections with no data don't render. */
-export function CompanySheet({ symbol, name, card, filings, sessions, end, since, volX, research, onResearch, onClose }: Props) {
+export function CompanySheet({ symbol, name, sector, card, filings, sessions, end, since, volX, research, onResearch, onClose }: Props) {
   const [showRoutine, setShowRoutine] = useState(false)
   const past = useMemo(() => (filings ? filingsAsOf(filings, end) : []), [filings, end])
   const closes = useMemo(() => sessionsAsOf(sessions, end), [sessions, end])
@@ -89,7 +90,7 @@ export function CompanySheet({ symbol, name, card, filings, sessions, end, since
 
   return (
     <Sheet title={symbol} onClose={onClose}>
-      <p className="-mt-2 text-meta text-ink-3">{name}{card?.sector ? ` · ${card.sector}` : ''}</p>
+      <p className="-mt-2 text-meta text-ink-3">{name}{sector ? ` · ${sector}` : ''}</p>
 
       {last ? (
         <section className="mt-3">
