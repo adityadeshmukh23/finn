@@ -51,7 +51,8 @@ export function filingLine(it: { reason: string; headline: string }): string {
   if (VAGUE_BOARD.test(h)) return 'Board change. The filing names who'
   if (h === 'Concall transcript filed') return 'Earnings call transcript filed'
   const m = h.match(PERIOD_ONLY)
-  return m ? `Results filed for the ${m[1]} quarter` : plainHeadline(h)
+  // NSE subjects can run two sentences together: "…October 28, 2026.Further, a meeting…"
+  return m ? `Results filed for the ${m[1]} quarter` : plainHeadline(h).replace(/(\d)\.([A-Z])/g, '$1. $2')
 }
 
 export function plainHeadline(raw: string): string {

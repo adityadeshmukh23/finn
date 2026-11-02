@@ -46,6 +46,10 @@ describe('filingLine', () => {
     expect(line('Board change', 'Resignation of Director/KMP/SMP')).toBe('A director or senior officer resigned. The filing names who')
     expect(line('Quarterly results', 'Results for the quarter ended Sep 2026')).toBe('Results filed for the Sep 2026 quarter')
   })
+  it('separates two sentences run together, and leaves decimals alone', () => {
+    expect(line('M&A', 'From October 28, 2026.Further, a meeting')).toBe('From October 28, 2026. Further, a meeting')
+    expect(line('M&A', 'Demand of Rs. 2.83 crore')).toBe('Demand of Rs. 2.83 crore')
+  })
   it('leaves a filing with content to the headline rules', () => {
     expect(line('M&A', 'NCLAT allowed the appeal')).toBe('NCLAT allowed the appeal')
   })
