@@ -224,3 +224,21 @@
 - **Thin filings say what they are, from their class.** "Investor Presentation" reads "Results slides from the company". The class already said so. A rule adds no fact, and a test runs over every recorded filing for numbers that weren't in the original. Recorded notes are mapped at display time; the recordings stay as written.
 - **Budget won back:** 95 words (target 100) and 16 numbers (16), from 103 and 17, on the real build at 390x844 and 375x667. A collapsed #1 now gives only the event; the full reason is in the opened row.
 - **"Since the 29 Oct close" replaces "between the 29 and 30 Oct closes".** Shorter, and still exactly what was checked: a price row only exists when nothing material was filed in the window, so nothing material follows the move either.
+
+## Polish: results cards lead with their source (2026-11-03)
+
+- **When a company files two results documents the same day, the card now leads with the one the figures were read from.** They used to swap headlines between card and company file (58 cases): the figures sat on the higher-scored filing on the card and on their source in the file. The new lead keeps the old lead's score, so no card moved in any recorded briefing; 23 leads changed document. Fixed at the source rather than making the file copy the card's error.
+
+## Polish: ranking (2026-11-03)
+
+- **Approved as proposed, from a before and after on eight days.** On 27 Oct, Sterling's CFO swap led and HDFC Bank's MD & CEO change sat at #3. HDFC Bank now leads, then L&T's results and Reliance's Jio listing.
+- **Five changes:** a top change below CEO, MD or chair scores 7 less. Among filing events a large company gets +6 and a mid-size one +3. Other major filings count per kind of event, so one swap filed twice is one event. The flat +6 for a move becomes a scale where price counts twice what volume does, up to 10 on a filing and 25 alone. A filing can't pull a row below its move alone, so a results deck can't bury 24× volume.
+- **Size doesn't lift a move with no filing.** Without this, Infosys's smaller move passed KPIT's bigger one because Infosys is larger.
+- **The cost, accepted:** a #1 row with a number on fewer briefings, 35 of 62 against 38. On 27 Oct it has none. So a #1 with no number never cuts its sentence, and its reason line names who changed, from the filing's own disclosure. Where the row's sentence is already a verified summary, the sentence is the fact and the reason line keeps the event, rather than printing it twice.
+- **A rank line can't claim what the data doesn't show.** `ranking.test.ts` checks every phrase against the data on all 66 briefings at two alert settings, and after a dismiss. A phrase with no check fails. Confirmed by making one line lie: the test failed.
+- **Two bugs the windows view found before commit.** "Deputy Managing Director" matched the MD rule, so a deputy's exit took #1 on several days; deputies and vice chairs no longer count as the top role. And "the biggest event with figures to show" appeared on rows with no figures and when nothing outranked them.
+- **Left as flagged:** on 17 and 18 Oct, 7-day window, HDFC Bank's Deputy MD exit edges Polycab's results for #1 by about a point. On 29 Oct, 7-day window, Equitas passes Info Edge by 0.3. Tuning weights to win individual days would be fitting to the recording.
+
+## Polish: sector on every company file (2026-11-03)
+
+- **Holdings with no filing in the window had no sector.** The sheet read it from the card. A new additive `sectors` field on each digest fixes it for every entry point, and older data without the field still renders.

@@ -34,10 +34,10 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 
 - Three levels. The first screen shows the top three companies with one number each. Tapping a row gives why it ranks there, its filing and the results table. Ask FINN gives the company file. A Compact / Detailed toggle in "How to read this" keeps the full density for power users.
 
-- Rules classify and rank each filing; no model is involved in ranking. Routine filings collapse into a filtered count, grouped by reason, with every item inspectable.
+- Rules classify and rank each filing; no model is involved in ranking. The order weighs the kind of event, how senior a management change is, company size, other kinds of major filing, and how far a price or volume move went. Routine filings collapse into a filtered count, grouped by reason, with every item inspectable.
 - Quarterly results get a table: revenue, EBITDA, PBT, PAT, this quarter vs last quarter and vs a year ago. The cheap model copies figures off the filing; code verifies each figure is printed on the cited page and does all the arithmetic. If it can't, the row shows no numbers and says why.
 - Management changes show who, role, effective date, reason (for exits) and background, all from the filing itself.
-- End-of-day price and volume alerts (default 2× volume or ±4% in a day), thresholds editable in the app. A move with no filing behind it gets its own row, which names the company's last material filing.
+- End-of-day price and volume alerts (default 2× volume or ±4% in a day), thresholds editable in the app. A holding that crosses a line with nothing material filed in the window gets its own row, which says what was last filed and when. FINN reports what was filed and when, never why a stock moved.
 - Each row says why it ranks where it does. **Ask FINN** opens the company file: price and volume, verified results and management changes, every filing since the recording starts, and promised vs delivered where recorded.
 
 **Pull: promised vs delivered.** For a company, what management guided on its last five earnings calls, against what it then reported.
@@ -102,7 +102,7 @@ Models are set in one place (`.env`, mapped to tasks in `backend/finn/models.py`
 | Results and management cards | Recorded cheap-model reads of the 30 Oct filings | Same recordings; filings newer than the snapshot get rules only until you run `python -m scripts.read_filings` |
 | Research | Recorded for BEL, Kaynes, Coforge, Dixon and Asian Paints | Same, plus anything you record with `./run.sh research TICKER` |
 | Model calls | None. No key exists on any public host | Only if you add a key, and only for what isn't already recorded |
-| Cost ledger | $0.00, with a note that replay makes no calls | Live ledger: tokens, cost, free-tier limits, $5 hard cap |
+| How this was built (cost ledger) | $0.00, and how rules, models and checks fit together | Live ledger: tokens, cost, free-tier limits, $5 hard cap |
 | Backend | None. There is no live API behind the public link | FastAPI on :8000 |
 
 The public site cannot fetch live filings or research a new ticker. That is deliberate (no key to leak, nothing that sleeps or hits a cold start), and [docs/DESIGN.md](docs/DESIGN.md) says why.

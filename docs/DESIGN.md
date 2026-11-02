@@ -30,17 +30,20 @@ A finite morning ledger with receipts: paper and ink, numbers are the hero, ever
 - **Thumb zone.** Today, Book, Research, Alerts in a bottom bar. Every control is at least 44 px. The window and date open from a chip in the header: a docked picker cost 44 px of every screen for something rarely changed. Back closes an open sheet and nothing else.
 - **A finite briefing.** Compact Today fits one screen at 375x667 and ends by saying what was filtered and that nothing else is waiting. Detailed adds a one-line synthesis and the book strip.
 - **Nothing looks live.** Times are absolute, in IST, never "6h ago". One as-of label sits under the title, and prices say which close they stop at.
+- **Every figure carries its labels.** A move names its close. Results name YoY, the quarter and consolidated or standalone, even on a collapsed row.
+- **Timing, never cause.** FINN says what was filed and when. A close that came before a filing says so, and nothing says a filing moved a price.
+- **Investor words on investor screens.** Model names, fallback reasons and the README live in "How this was built", one tap down.
 
 ## How each announcement type is treated
 
-Rules classify; "reads" means the cheap model reads the filing and the verifier checks it. Score is the event weight used for ranking (up to 5 more for recency, 3 per other high-priority filing from the same company).
+Rules classify; "reads" means the cheap model reads the filing and the verifier checks it. Score is the event weight used for ranking. On top of it: up to 5 for recency, 6 for a large company and 3 for a mid-size one, 3 for each other kind of major filing, and up to 10 for how far a price or volume move went past the alert lines, with price counting twice what volume does.
 
 | Type | Tier, score | What the investor sees | Model |
 |---|---|---|---|
 | Quarterly results | high, 90 | Headline lead with the number ("PAT ₹29,250 cr, +32.1% YoY"), then Revenue, EBITDA, PBT, PAT with QoQ and YoY, computed by code, with page link. Low confidence: no numbers, the reason, and the page link | reads |
 | Results deck, results press release | medium, 35 to 45 | Folded into the company's results card ("+N more") | none |
 | Results newspaper ads | routine | Folded into the results card ("same numbers, already filed") | none |
-| Top management change (CEO, CFO, MD, whole-time or executive director, non-independent chair) | high, 95 | Who, role, effective date, reason (exits only) and background, from the filing's own disclosure | reads |
+| Top management change (CEO, CFO, MD, whole-time or executive director, non-independent chair) | high, 95; 88 below CEO, MD or chair | Who, role, effective date, reason (exits only) and background, from the filing's own disclosure | reads |
 | Board change (directors) | medium, 55 | One line and the filing | none |
 | M&A, subsidiary listing | high, 85 | One-line summary marked "checked against p.N" | reads |
 | Restructuring (sale, disposal) | medium, 50 | One-line summary | reads |
@@ -55,9 +58,9 @@ Rules classify; "reads" means the cheap model reads the filing and the verifier 
 | Concall notices and recordings, investor meetings, shareholder meetings and ballots | routine | Hidden, counted | none |
 | Trading-window notices, compliance certificates, ESOP grants, intra-group guarantees, auditor appointments, subsidiary housekeeping, senior staff changes | routine | Hidden, counted, grouped by reason | none |
 | Unplaceable ("Reg. 30", no NSE summary) | routine | Hidden, labelled "NSE gave no summary" rather than guessed; read by the cheap model when ambiguous | reads |
-| Price or volume threshold crossed, no filing | 65 plus up to 20 by how far past | Its own card ("−6.3% on 42× volume; no filing in this window") with an NSE quote link | none |
+| Price or volume threshold crossed, nothing surfaced in the window | 65 plus up to 25 by how far past. Also the floor for a filing row whose move scores higher | Its own row ("−6.3%, 30 Oct, 42× volume", what was last filed and when, what was filed since the previous close, from the same list as the company file's chart), with an NSE quote link | none |
 
-A card's own "why #N" line says what ranks it where it is, computed in the browser so it stays right when alert settings change the order.
+Results with no figures stay out of the top 3 while another row can take the place. A row's "why #N" line says the one thing that most separates it from the row above, computed in the browser so it stays right when alert settings change the order. A #1 with no number says what happened in full, naming who changed where the filing does. A test checks every claim these lines can make against the data, on every recording at two alert settings, and a phrase with no check fails.
 
 ## What I left out, and why
 
@@ -79,7 +82,7 @@ A card's own "why #N" line says what ranks it where it is, computed in the brows
 - **PDF tolerances are ours.** Words and numbers split by extraction are matched on letters, digits, "." and "%"; a transcript quote may be re-cited to one neighbouring page if it's verbatim on exactly one. A stricter verifier drops more true claims; a looser one admits paraphrase.
 - **Milestone verdicts rest on one quote each.** They're shown with the quote and page, and withheld if the reasoning uses an unsourced number or claims lateness without a date, but they remain a judgement.
 - **Source quality limits results cards.** Of 17 holdings with a results filing: 7 high confidence, 3 medium, 5 low (OCR'd or merged-column PDFs), 2 none (a scanned image; no table found). Those fail honestly rather than show a guess.
-- **Ranking weights are hand-set** and checked by reading the result, not against labelled data or investor behaviour. There is no precision or recall number for the classifier beyond the test cases.
+- **Ranking weights are hand-set** and checked by reading the result, not against labelled data or investor behaviour. Size is the market-cap band, because the mock portfolio has no position sizes. On 17 and 18 Oct, in the 7-day window, HDFC Bank's Deputy MD exit edges Polycab's results for #1 by about a point. There is no precision or recall number for the classifier beyond the test cases.
 - **Coverage depends on screener.in.** ITC lists no transcript links, so research is refused for it. Extraction isn't deterministic: two smoke runs on TCS read 18 and then 21 claims.
 
 ## Where I'd take it next
