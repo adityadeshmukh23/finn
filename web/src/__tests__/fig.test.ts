@@ -50,7 +50,7 @@ describe('units and decimals', () => {
 describe('numerals', () => {
   it('digits are ASCII from every function, so tabular figures line up', () => {
     const out = [fig.pct(-12.3), fig.margin(4), fig.multiple(4), fig.price(872.7), fig.price(1234), fig.crore(332861), fig.usd(1), fig.day('2026-10-30'), fig.clock('2026-10-30T19:40:00+05:30')]
-    for (const t of out) expect(t).not.toMatch(/[^\x20-\x7e₹×− ]/)
+    for (const t of out) expect(t.replace(/\s/g, ' ')).toMatch(/^[ -~₹×−]+$/)
   })
 
   it('the whole app sets tabular numerals', () => {
