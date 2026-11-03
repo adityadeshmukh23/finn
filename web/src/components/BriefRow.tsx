@@ -177,7 +177,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
                 </button>
               ) : <ResultsTable r={card.results} />
             )}
-            {isPeople && <People people={card.people!} filed={lead.ts} />}
+            {isPeople && <People people={card.people!} company={card.company} filed={lead.ts} />}
             {lead.read && (
               <p className="mt-2 text-meta text-ink-3" title={`"${lead.read.quote}"`}>Summary checked against p.{lead.read.page} of the filing</p>
             )}

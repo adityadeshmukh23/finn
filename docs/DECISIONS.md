@@ -347,3 +347,7 @@ Fixed before any label was filled in, so the rules can't bend to the result. No 
 - **An inline script in `index.html` sets the theme before first paint,** so a reader who chose light gets no dark flash. The `<html>` tag carries dark, so dark needs no script at all. A test holds the script's key and colour to `theme.ts`.
 - **The share image stays light.** It's a preview on someone else's page, not the app. The icon was already dark.
 
+## Polish: a search link beside each named person (2026-11-03)
+
+- **"Look up background" is the honest substitute for web bios.** A plain link opens a web search for the person and company in a new tab, marked "not checked by FINN". There's no scraping, fetch, model call or third-party script. The filing's own profile still shows where there is one. Web bios from a model stay out, because FINN couldn't verify them.
+

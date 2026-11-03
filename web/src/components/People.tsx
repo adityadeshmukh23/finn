@@ -1,6 +1,7 @@
 import type { Person } from '../api'
 import { Icon } from './Icon'
 import * as fig from '../fig'
+import { backgroundSearch } from '../lookup'
 
 const VERB: Record<Person['change'], string> = {
   appointed: 'joins as', resigned: 'resigns as', ceased: 'steps down as', retiring: 'retires as',
@@ -8,7 +9,7 @@ const VERB: Record<Person['change'], string> = {
 }
 
 /** Who, which role, from when, why: copied from the filing and checked against its text. */
-export function People({ people, filed, max = 3 }: { people: Person[]; filed?: string; max?: number }) {
+export function People({ people, company, filed, max = 3 }: { people: Person[]; company: string; filed?: string; max?: number }) {
   if (people.length === 0) return null
   const shown = people.slice(0, max)
   return (
@@ -21,8 +22,15 @@ export function People({ people, filed, max = 3 }: { people: Person[]; filed?: s
           </p>
           {p.reason && <p className="mt-0.5 text-meta text-ink-2">Reason given: “{p.reason}”</p>}
           {p.profile && <p className="mt-0.5 text-meta text-ink-2">Background (from the filing): {p.profile}</p>}
-          <a href={p.url} target="_blank" rel="noopener noreferrer"
-             className="inline-flex min-h-11 min-w-11 items-center gap-1 text-meta text-ink-3 underline underline-offset-4">p.{p.page}<Icon name="external" size={12} /></a>
+          <p className="flex flex-wrap items-center gap-x-4 text-meta text-ink-3">
+            <a href={p.url} target="_blank" rel="noopener noreferrer"
+               className="inline-flex min-h-11 min-w-11 items-center gap-1 underline underline-offset-4">p.{p.page}<Icon name="external" size={12} /></a>
+            <span className="inline-flex flex-wrap items-center gap-x-1.5">
+              <a href={backgroundSearch(p.person, company)} target="_blank" rel="noopener noreferrer" aria-label={`Search the web for background on ${p.person}; not checked by FINN`}
+                 className="inline-flex min-h-11 items-center gap-1 underline underline-offset-4">Look up background<Icon name="external" size={12} /></a>
+              <span>not checked by FINN</span>
+            </span>
+          </p>
         </li>
       ))}
       {people.length > max && <li className="pb-3 text-meta text-ink-3">+{people.length - max} more changes in the filings</li>}

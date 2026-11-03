@@ -67,6 +67,11 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 - Every claim carries a quote, document, period and page. A verifier drops any quote that isn't on its cited page and any number that isn't in its quote. Dropped claims are listed in the app.
 - Code sets the verdict on every numeric promise. A stronger model only groups restatements and judges milestones. If the documents don't say, FINN says so.
 
+## What was left out
+
+- Web bios from a model: FINN can't verify them. Bios come from the filing, plus a "Look up background" search link, not checked by FINN.
+- The other research lenses, real push notifications and a live backend. [docs/DESIGN.md](docs/DESIGN.md) says why, and [docs/BRIEF_COVERAGE.md](docs/BRIEF_COVERAGE.md) maps the whole brief.
+
 ## Architecture
 
 ```mermaid
