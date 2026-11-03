@@ -9,7 +9,7 @@ I built FINN, a mobile-first investor agent.
 - Repo: [REPO LINK]
 - Build history: [BUILD HISTORY LINKS]
 
-**What I built.** Briefing first, chat second. Today is a ranked list of what changed across a portfolio, with routine filings collapsed into a count you can open. Detailed is the default and shows each company's reason and figures; Compact shows the top three. Ask FINN opens a company file, and Research sets what management promised on earnings calls against what it delivered, with a page on every claim.
+**What I built.** Briefing first, chat second. Today is a ranked list of what changed across a portfolio, with routine filings collapsed into a count you can open. Detailed is the default and shows each company's reason and figures; Compact shows the top three. Ask FINN opens a company file; Research sets management's promises against delivery, with a page on every claim.
 
 **Key decisions.**
 - The public site is a static replay: no key to leak, no cold start, no live data. `./run.sh` runs live for any NSE ticker.
@@ -21,20 +21,20 @@ I built FINN, a mobile-first investor agent.
 **Left out.**
 - Web bios: LinkedIn means logging in.
 - Push notifications and a live backend: a static demo can't break mid-review.
-- Cash quality: one lens verified end to end beats several that aren't.
+- Cash quality: one verified lens beats several unverified.
 - Tap-to-explain figures: out of time.
-- Classifier accuracy: I prepared a blind 60-filing gold set but didn't label it, so I report no number.
-- Company logos: a third-party request on a site that says nothing is live.
+- Classifier accuracy: I prepared a blind 60-filing gold set but never labelled it, so no number.
+- Company logos: they'd be the site's only third-party request.
 
 **Weak spots.**
-- Asian Paints has no checkable promise; its management guides in words.
-- Free tiers were flaky, so research is recorded ahead of time.
+- Asian Paints has no checkable promise: it guides in words.
+- Free tiers were flaky, so research is pre-recorded.
 - "Not found" can be a search miss.
-- Ranking weights are hand-set, with no preference data to test them.
+- Ranking weights are hand-set and untested.
 - I tested with three people, which proves nothing.
 - Mobile PDF page links aren't tested on every device.
 
-**Next.** Real push on a hosted API, more lenses on the same verified data, and a company report card in the spirit of Simply Wall St, built only from verified facts (results confirmed, promises met, filings) with no composite score.
+**Next.** Real push, more lenses on the same verified data, and a company report card in the spirit of Simply Wall St, built only from verified facts (results confirmed, promises met, filings) with no composite score.
 
 Thanks,
 Aditya Deshmukh

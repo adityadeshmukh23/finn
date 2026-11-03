@@ -1,6 +1,6 @@
-# What COVER_NOTE.md needs changed
+# What COVER_NOTE.md needed changed
 
-A running list. `COVER_NOTE.md` has not been edited. README.md, DESIGN.md and DECISIONS.md match the app at the tag `submission-candidate`: Detailed by default, the Guidance Walk, and a gold set that wasn't labelled. The 2-minute tour and link previews follow the tag. Monogram badges were tried after it and removed because they did not look good; the layout is text-first.
+`COVER_NOTE.md` has been rewritten and carries these. This list is kept as the record of why. README.md, DESIGN.md and DECISIONS.md match the app: Detailed by default, the Guidance Walk, a text-first layout after monogram badges were tried and removed because they did not look good, and a gold set that wasn't labelled.
 
 ## Exact changes
 
