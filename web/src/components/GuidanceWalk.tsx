@@ -106,7 +106,7 @@ function Delivered({ walk }: { walk: Walk }) {
     <Row value={`Delivered ${delivered(walk)}`} who={who} chip={d.quote ? 'Quote' : working ? 'Working' : null} page={d.page} url={d.url} body={
       <>
         {d.quote && <Quote text={d.quote} />}
-        {d.printed_in && <p className="text-meta text-ink-3">Printed in {d.printed_in === 'million' ? fig.MILLION_UNIT : d.printed_in}: {d.period}, then the year before.</p>}
+        {d.printed_in && <p className="text-meta text-ink-3">Printed in {d.printed_in === 'million' ? fig.MILLION_UNIT : d.printed_in}: {d.period}, then the year before, after the note number.</p>}
         {working && <p className="text-ink-2">Worked out from {working}.</p>}
       </>
     } />
