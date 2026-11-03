@@ -9,14 +9,14 @@ I built FINN, a mobile-first investor agent.
 - Repo: [REPO LINK]
 - Build history: [BUILD HISTORY LINKS]
 
-**What I built.** Briefing first, chat second. Today is a ranked list of what changed across a portfolio, with routine filings collapsed into a count you can open. Detailed, the default, shows each company's reason and figures; Compact shows the top three. Ask FINN opens a company file; Research sets management's promises against delivery, with a page on every claim.
+**What I built.** Briefing first, chat second. Today ranks what changed across a portfolio and collapses routine filings into a count you can open. Detailed, the default, shows each company's reason and figures; Compact shows the top three. Ask FINN opens a company file; Research sets management's promises against delivery, with a page on every claim.
 
 **Key decisions.**
-- The public link is a recorded replay as of 30 Oct; the engine fetches live NSE data and works on any ticker via ./run.sh TICKER (tested on TCS and Titan). Static means no key to leak and no cold start.
-- The model extracts; code computes every number and numeric verdict. A verifier checks every claim against its page, which proves it's there, not that it's the right column.
+- The public link is a recorded replay as of 30 Oct; the engine fetches live NSE data and works on any ticker via ./run.sh TICKER (tested on TCS and Titan). No key to leak, no cold start.
+- The model extracts; code computes every number and numeric verdict. A verifier checks every claim against its page: that proves it's there, not the right column.
 - Rules, then a cheap model, then a strong one, all free tier: $0, though my ledger undercounts Google's calls.
 
-**What I measured and fixed.** Building Compact cut the first screen from about 52 to about 24 text elements at 390x844. My own audit found wrong figures on the Equitas and HUL results cards, and 55 price cards saying nothing was filed when filings existed. All fixed, with tests. Now 104 of 104 figures match, read from the PDF text layer. Results figures show for 9 of 17 cards; the rest are withheld on purpose.
+**What I measured and fixed.** Building Compact cut the first screen from about 52 to about 24 text elements at 390x844. My own audit found wrong figures on the Equitas and HUL cards, and 55 price cards wrongly saying nothing was filed. All fixed, with tests. Now 104 of 104 figures match, read from the PDF text layer. Results figures show for 9 of 17 cards; the rest are withheld on purpose.
 
 **Left out.**
 - Web bios: LinkedIn means logging in, so bios come from the filing plus a search link.
@@ -31,7 +31,7 @@ I built FINN, a mobile-first investor agent.
 - Free tiers were flaky, so research is pre-recorded.
 - "Not found" can be a search miss.
 - Ranking weights are hand-set and untested.
-- Mobile PDF page links aren't tested on every device.
+- Mobile PDF page links aren't tested everywhere.
 
 **Next.** Real push, more lenses on the same verified data, and a company report card in the spirit of Simply Wall St, built only from verified facts (results confirmed, promises met, filings) with no composite score.
 
