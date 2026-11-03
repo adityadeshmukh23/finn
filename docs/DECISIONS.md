@@ -263,3 +263,18 @@
 - **Left as is, for a decision:** Reliance's and L&T's PAT is the printed line before the share of associates. Reliance would read +33.8% rather than +32.1%. It matches its label, so the audit counts it as correct.
 - **Left as is, not resolved by FINN:** BEL's p.21 closing passage also gives order inflow over ₹20,000 cr against ₹55,000 cr guided a call earlier. That statement never joined the order inflow row, so the row shows ₹55,000 cr with no later statement and no flag.
 
+## Polish: blocks B and C, one formatter and a contrast check (2026-11-03)
+
+- **Every number and date now goes through `fig.ts`.** There were about 80 call sites and 11 implementations, and they disagreed: 17% beside 8.8%, ₹872.7 beside ₹197.84.
+- **The golden was written first, so the move could be measured.** It renders every screen over all 66 briefings and 5 scorecards with no DOM library, with toggles closed and open, and hashes the numbers a reader or screen reader meets. On 82,273 tokens across 336 screens, the move changed 1,500 tokens, all under the two rules approved: a price under ₹1,000 always has two decimals, and a margin always has one. Nothing else changed.
+- **Whole-rupee prices are part of that rule.** ₹298 is now ₹298.00, 708 of the 1,500. The plan's example only showed ₹872.7 to ₹872.70.
+- **Colour now takes its sign from the same function as the text.** A move that rounds to 0.0% is neutral rather than green or red. This hits 6 recorded sessions, including Bajaj Finance on 30 Oct, and the golden can't see it because it hashes numbers, not colours. Book's up and down tally still counts the raw move, so "0.0%" can count as up.
+- **`crore` stays "up to one decimal".** The plan's table said "else 1", but a fixed decimal would turn 12 into 12.0, which is a third change nobody approved.
+- **Months read Sep, not en-IN's Sept,** to agree with "Sep 2026 qtr". No recorded date hits this, but September filings on a live run would.
+- **A guard fails on a raw format outside `fig.ts`.** CSS positions, SVG coordinates and one rule written in words are named exceptions, and an exception that stops matching fails too. Confirmed by adding `toFixed` and a raw ₹ to Book.
+- **Server strings get their own grammar test,** since the guard can't see them. It passes on every recording. Reading the code for it found two gaps recordings don't exercise: a loss wrote a hyphen (PAT ₹-12 cr) and a lakh-crore target grouped the Western way (₹100,000 cr). Both are fixed in the backend. Demo data is unchanged.
+- **The contrast test covers every pair, in both themes, from source.** The three known light-mode failures are fixed with a small change, not block G's palette: green moves about 3% darker (#15803d to #147c3b), which also shifts every green figure slightly, and the Met pill gets its own text token (#137438).
+- **The matrix found a fourth failure, and my plan had been wrong.** The plan said every dark pair passed, but I hadn't checked tiles. `ink-2` on the strongest green Book strip tile is 4.25 in dark mode, so the tile's number is now `ink`. Detailed mode only.
+- **Radius and easing tokens are named but unused,** so they add nothing to the page until blocks G and I. The existing 180 and 220 ms sheet timings stay until block I.
+- **Limits.** The golden proves a figure kept its format, not that it's right; that's the audit. The matrix checks tokens at the tile's strongest tint, and it doesn't cover opacity-dimmed disabled buttons.
+
