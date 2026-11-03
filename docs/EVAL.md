@@ -62,8 +62,8 @@ All of these had passed the verifier. It proves a number or quote is on the cite
 **Limits to keep in mind when it's scored.**
 
 - **Per-category counts are tiny: 10 at most, and 1 for capex. No percentage will be shown below 20 items,** so categories get counts, and only the whole set could get a percentage.
-- **47 of 60 rows say "summary only".** The excerpt comes only from PDFs already on disk, and the rest aren't fetched for this. On those rows the reviewer reads the same one-line subject FINN's rules read, so agreement there shows the rule reads the line as a person would. It doesn't show the line was right about the filing.
-- **Having an excerpt isn't random.** PDFs are on disk mostly where FINN needed to read the filing.
+- **2 of 60 rows say "summary only".** The filings' PDFs were fetched for this at one request every 3 seconds, and these 2 have no text to extract. On those rows the reviewer reads the same one-line subject FINN's rules read, so agreement there shows the rule reads the line as a person would. It doesn't show the line was right about the filing.
+- **An excerpt is the first page or so, not the whole filing.** A long filing can change subject after it.
 - **The sample is drawn from FINN's own labels.** That guarantees every label is seen, but it isn't a random draw from all filings, so a raw agreement figure isn't an estimate of accuracy on filings as a whole. The key records each label's size so the figure can be weighted.
 - **One reviewer's labels.** There's no second reader to measure how far two people would disagree.
 - **The key is frozen.** A disagreement found in scoring may lead to a rule fix, but the score stays as measured against the committed key, and any later figure says it's a re-run.

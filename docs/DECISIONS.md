@@ -311,4 +311,4 @@
 - **Nothing is scored until the labels are in.** There's no scoring script yet, and no agreement figure exists, on purpose.
 - **Postal ballot found while checking the categories.** The glossary has it, a recorded HDFC Bank filing is one, and FINN's rules file it under `agm_egm`. It isn't changed now: changing the classifier before the labels would move what's being measured.
 - **The verifier's statistics reproduce from the recordings:** 166 shown, 51 dropped, 17 of them "quote not found", and 38 of 39 filing reads.
-
+- **Later the same day: the 47 summary-only rows got their PDFs.** On those rows the reviewer and the rules would have read the same line, so labels there would have measured little. Fetched at one request every 3 seconds, cached and not committed. 58 of 60 rows now have an excerpt, with the same ids and order. The other 2 have no extractable text. The key wasn't touched.
