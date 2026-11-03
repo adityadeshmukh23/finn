@@ -174,6 +174,33 @@ def revenue_parts(t: dict, page: str) -> dict | None:
     return None
 
 
+TAX_BAND = (10, 35)    # implied tax, %. Recorded cards the audit passed run 22.6 to 28.8; India's corporate rate is about 25
+
+
+def inconsistencies(checked: dict) -> list[str]:
+    """Checks that don't need the page, for what the page check can't see: a figure that's printed but from the wrong column.
+    Failing one doesn't prove an error (a tax credit can do it), so the card is withheld rather than corrected."""
+    names = {"current": "this quarter", "previous": "the prior quarter", "year_ago": "the year-ago quarter"}
+    out = []
+    for c in COLS:
+        pbt, pat = checked["pbt"][c], checked["pat"][c]
+        if pbt is None or pat is None or pbt <= 0:      # no tax rate to read off a loss
+            continue
+        tax = round((1 - pat / pbt) * 100, 1)
+        if pat > pbt:
+            out.append(f"PAT is above PBT in {names[c]}")
+        elif not TAX_BAND[0] <= tax <= TAX_BAND[1]:
+            out.append(f"implied tax of {tax:g}% in {names[c]} is outside {TAX_BAND[0]}% to {TAX_BAND[1]}%")
+    label = {"revenue": "Revenue", "other_income": "Other income", "finance_costs": "Finance costs",
+             "depreciation": "Depreciation", "pbt": "PBT", "pat": "PAT"}
+    for name, row in checked.items():
+        v = row["current"]
+        # Small round figures can repeat by chance (a ₹74 cr finance cost two quarters running).
+        if v is not None and abs(v) >= 100 and v in (row["previous"], row["year_ago"]):
+            out.append(f"{label[name]} repeats a figure from another column")
+    return out
+
+
 def compute(t: dict, page_text: str, lender: bool) -> dict:
     """Verify each figure on the cited page, convert to ₹ crore, derive EBITDA, QoQ and YoY.
 
@@ -223,10 +250,13 @@ def compute(t: dict, page_text: str, lender: bool) -> dict:
         margins[m] = round(v / rev * 100, 1) if v is not None and rev else None
 
     core = [checked[m]["current"] for m in ("revenue", "pbt", "pat")]
+    odd = inconsistencies(checked)
     if summed and not summed["proved"]:
         confidence, why = "low", PARTS_DONT_ADD
     elif k is None or t["basis"] == "unknown" or any(v is None for v in core):
         confidence, why = "low", "Some headline figures couldn't be matched to the page or the unit is unclear."
+    elif odd:
+        confidence, why = "low", f"The figures don't fit together: {odd[0]}."
     elif failed or t["basis"] == "standalone":
         confidence = "medium"
         why = ("Standalone figures; no consolidated table in the pages read." if t["basis"] == "standalone" and not failed
@@ -235,7 +265,7 @@ def compute(t: dict, page_text: str, lender: bool) -> dict:
         confidence, why = "high", "Every figure shown was found on the cited page."
     return {"rows": rows, "margins": margins, "confidence": confidence, "confidence_note": why,
             "dropped": failed, "unit_note": "₹ crore" + ("" if t["unit"] == "crore" else f" (converted from {t['unit']})"),
-            "revenue_how": summed.get("how") if summed else None}
+            "revenue_how": summed.get("how") if summed else None, "inconsistent": odd}
 
 
 def extract(a: Announcement, lender: bool) -> dict:

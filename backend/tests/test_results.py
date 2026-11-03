@@ -135,6 +135,45 @@ Total income 10,224.30 10,782.79 8,729.91"""
     assert results.revenue_parts(table(), page) is None
 
 
+def checked(**over):
+    f = lambda c, p, y: {"current": c, "previous": p, "year_ago": y}  # noqa: E731
+    base = {"revenue": f(9976.51, 10541.94, 8531.27), "other_income": f(247.79, 240.85, 198.64), "finance_costs": f(55.4, 47.83, 43.87),
+            "depreciation": f(313.67, 304.19, 304.93), "pbt": f(1477.78, 2095.75, 1391.52), "pat": f(1085.35, 1559.45, 1018.23)}
+    return base | {k: f(*v) for k, v in over.items()}
+
+
+def test_consistent_figures_pass():
+    assert results.inconsistencies(checked()) == []
+
+
+def test_pat_above_pbt_fails():
+    assert results.inconsistencies(checked(pat=(1500.0, 1559.45, 1018.23))) == ["PAT is above PBT in this quarter"]
+
+
+def test_implausible_implied_tax_fails_in_any_column():
+    # Equitas as recorded: PBT 28,738.39 with the June quarter's 18,360.69 as PAT.
+    assert results.inconsistencies(checked(pbt=(28738.39, 24407.3, 3353.81), pat=(18360.69, None, 2413.53))) == [
+        "implied tax of 36.1% in this quarter is outside 10% to 35%"]
+    assert "the year-ago quarter" in results.inconsistencies(checked(pat=(1085.35, 1559.45, 1300.0)))[0]
+
+
+def test_a_loss_has_no_tax_rate_to_check():
+    assert results.inconsistencies(checked(pbt=(-100.0, 2095.75, 1391.52), pat=(-80.0, 1559.45, 1018.23))) == []
+
+
+def test_a_current_figure_repeating_another_column_fails():
+    assert results.inconsistencies(checked(revenue=(9976.51, 9976.51, 8531.27))) == ["Revenue repeats a figure from another column"]
+    assert results.inconsistencies(checked(finance_costs=(74.0, 74.0, 124.0))) == []     # small round figures repeat by chance
+
+
+def test_an_inconsistent_card_goes_low_and_says_why():
+    t = table()
+    t["pat"] = {"current": 1500.0, "previous": 1559.45, "year_ago": 1018.23}
+    out = results.compute(t, PAGE + "\n1,500.00", lender=False)
+    assert out["confidence"] == "low" and out["confidence_note"] == "The figures don't fit together: PAT is above PBT in this quarter."
+    assert results.compute(table(), PAGE, lender=False)["inconsistent"] == []
+
+
 SCRAMBLED = "\n".join(f"{n:,.2f}" for n in range(1200, 1240))     # one token per line, as Equitas's OCR layer comes out
 
 
