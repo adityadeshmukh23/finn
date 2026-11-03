@@ -208,13 +208,128 @@ function Skeleton() {
   )
 }
 
+/** The recorded scorecard for one company. Rendered directly by the figures golden test. */
+export function Scorecard({ data }: { data: R }) {
+  const [filter, setFilter] = useState<Verdict | null>(null)
+  const [later, setLater] = useState(false)
+  const [drops, setDrops] = useState(false)
+  const docs = useMemo(() => {
+    const all = [...data.docs.calls, ...(data.docs.annual_report ? [data.docs.annual_report] : [])]
+    return Object.fromEntries(all.map((d) => [d.id, d]))
+  }, [data])
+
+  const judgeCall = data.models.verdict[0]
+  const judge = model(judgeCall?.model)
+  const rows = data.scorecard.rows
+  const due = rows.filter((r) => r.verdict !== 'not_yet_due' && (!filter || r.verdict === filter))
+  const notDue = rows.filter((r) => r.verdict === 'not_yet_due')
+  const calls = data.docs.calls
+
+  return (
+    <main className="mt-2 space-y-4">
+      <section>
+        <h1 className="text-title font-bold text-ink">{data.name || data.symbol}</h1>
+        <p className="text-meta text-ink-3">
+          {data.symbol} · {calls.length} earnings calls, {calls[0]?.period} to {calls[calls.length - 1]?.period}
+          {data.docs.annual_report && <> · {data.docs.annual_report.title}</>}
+        </p>
+      </section>
+
+      <section className="rounded-2xl bg-raised p-4">
+        <p className="text-title font-bold text-ink">{verdictLine(data.scorecard.counts)}</p>
+        {data.scorecard.credibility.line && (
+          <p className="mt-1 text-ink-2">{data.scorecard.credibility.line}</p>
+        )}
+        <p className="mt-2 text-meta text-ink-3">Summarised by FINN from the verdicts below.</p>
+      </section>
+
+      <div className="flex flex-wrap gap-1.5" role="group" aria-label="Filter by verdict">
+        {ORDER.filter((v) => data.scorecard.counts[v] > 0).map((v) => (
+          <button key={v} onClick={() => setFilter(filter === v ? null : v)} aria-pressed={filter === v}
+                  className={`min-h-11 rounded-full px-3 font-semibold ${filter === v ? 'bg-ink text-bg' : PILL[v]}`}>
+            {data.scorecard.counts[v]} {SHORT[v].toLowerCase()}
+          </button>
+        ))}
+      </div>
+
+      <section className="rounded-2xl border border-line bg-surface px-4 py-1">
+        {due.length === 0 ? (
+          <p className="py-4 text-ink-2">Nothing due yet: every promise found is for a later period.</p>
+        ) : (
+          <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>
+        )}
+      </section>
+
+      {notDue.length > 0 && (
+        <section className="rounded-2xl border border-dashed border-line">
+          <button onClick={() => setLater(!later)} aria-expanded={later} className="flex min-h-14 w-full items-baseline justify-between gap-3 p-4 text-left">
+            <span className="font-semibold text-ink">{notDue.length} promises not yet due</span>
+            <span className="text-meta text-ink-3">{later ? 'Close' : `Current guidance, ${[...new Set(notDue.map((r) => r.due))].slice(0, 3).join(', ')}`}</span>
+          </button>
+          {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>}
+        </section>
+      )}
+
+      {data.dropped.length > 0 && (
+        <section className="rounded-2xl border border-dashed border-line">
+          <button onClick={() => setDrops(!drops)} aria-expanded={drops} className="flex min-h-14 w-full items-baseline justify-between gap-3 p-4 text-left">
+            <span className="font-semibold text-ink">
+              {data.dropped.length} {data.dropped.length === 1 ? 'claim' : 'claims'} left out: FINN couldn't confirm {data.dropped.length === 1 ? 'it' : 'them'}
+            </span>
+            <span className="text-meta text-ink-3">{drops ? 'Close' : 'See why'}</span>
+          </button>
+          {drops && (
+            <ul className="space-y-2.5 border-t border-dashed border-line p-4">
+              {data.dropped.map((x, i) => (
+                <li key={i} className="">
+                  <span className="font-semibold text-ink">{x.what}</span>{' '}
+                  <span className="text-ink-3">· {STAGE[x.stage] ?? x.stage} · </span>
+                  <span className="text-meta"><Src docs={docs} doc={x.doc} page={x.page} /></span>
+                  <p className="text-ink-2">{x.why.charAt(0).toUpperCase() + x.why.slice(1)}.</p>
+                </li>
+              ))}
+              <li className="text-meta text-ink-3">
+                A claim appears only if its quote is word for word on the cited page and every figure is in the quote. These weren't.
+              </li>
+            </ul>
+          )}
+        </section>
+      )}
+
+      {data.financials && <Financials f={data.financials} docs={docs} />}
+
+      <footer className="space-y-2 px-1 text-meta text-ink-3">
+        <p>
+          <span className="font-semibold text-ink-2">How verdicts are set.</span> Every numeric verdict is worked out against the first
+          stated target: met at or above it; partially within 1 point of a margin target or at least 80% of a growth or amount target;
+          otherwise missed. Milestones are a judgement from verbatim quotes.
+        </p>
+        <p>
+          <span className="font-semibold text-ink-2">Sources.</span> Only these documents, listed on screener.in and served by BSE or the
+          company: {calls.map((c, i) => <span key={c.id}>{i ? ', ' : ''}<Src docs={docs} doc={c.id} page={null}>{c.period}</Src></span>)}
+          {data.docs.annual_report && <>, <Src docs={docs} doc={data.docs.annual_report.id} page={null}>{data.docs.annual_report.title}</Src></>}.
+          Nothing from outside them.
+          {data.docs.skipped.length > 0 && <> Not used: {data.docs.skipped.map((s) => `${s.listed_as} (${s.why})`).join('; ')}.</>}
+        </p>
+        <p>Recorded {new Date(data.generated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}.</p>
+        <details>
+          <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-ink-2">How this was built</summary>
+          <p>
+            Promises and figures were read by {model(data.models.extract_guidance[0]?.model)}.
+            {judge && <> Milestones were judged by {judge}.</>}
+            {judgeCall && judgeCall.fallbacks.length > 0 && <> {judge} answered because {judgeCall.fallbacks.map((f) => `${model(f.model)} ${why(f.why)}`).join(' and ')}.</>}
+            {' '}Verdicts on numbers are computed by code, never by a model.
+          </p>
+        </details>
+      </footer>
+    </main>
+  )
+}
+
 export function Research({ symbol, onBack }: { symbol: string; onBack: () => void }) {
   const [data, setData] = useState<R | null>(null)
   const [error, setError] = useState<Error | null>(null)
   const [attempt, setAttempt] = useState(0)
-  const [filter, setFilter] = useState<Verdict | null>(null)
-  const [later, setLater] = useState(false)
-  const [drops, setDrops] = useState(false)
 
   useEffect(() => {
     let live = true
@@ -224,19 +339,6 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
     window.scrollTo(0, 0)
     return () => { live = false }
   }, [symbol, attempt])
-
-  const docs = useMemo(() => {
-    if (!data) return {}
-    const all = [...data.docs.calls, ...(data.docs.annual_report ? [data.docs.annual_report] : [])]
-    return Object.fromEntries(all.map((d) => [d.id, d]))
-  }, [data])
-
-  const judgeCall = data?.models.verdict[0]
-  const judge = model(judgeCall?.model)
-  const rows = data?.scorecard.rows ?? []
-  const due = rows.filter((r) => r.verdict !== 'not_yet_due' && (!filter || r.verdict === filter))
-  const notDue = rows.filter((r) => r.verdict === 'not_yet_due')
-  const calls = data?.docs.calls ?? []
 
   return (
     <div>
@@ -267,105 +369,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
         </div>
       )}
 
-      {data && (
-        <main className="mt-2 space-y-4">
-          <section>
-            <h1 className="text-title font-bold text-ink">{data.name || data.symbol}</h1>
-            <p className="text-meta text-ink-3">
-              {data.symbol} · {calls.length} earnings calls, {calls[0]?.period} to {calls[calls.length - 1]?.period}
-              {data.docs.annual_report && <> · {data.docs.annual_report.title}</>}
-            </p>
-          </section>
-
-          <section className="rounded-2xl bg-raised p-4">
-            <p className="text-title font-bold text-ink">{verdictLine(data.scorecard.counts)}</p>
-            {data.scorecard.credibility.line && (
-              <p className="mt-1 text-ink-2">{data.scorecard.credibility.line}</p>
-            )}
-            <p className="mt-2 text-meta text-ink-3">Summarised by FINN from the verdicts below.</p>
-          </section>
-
-          <div className="flex flex-wrap gap-1.5" role="group" aria-label="Filter by verdict">
-            {ORDER.filter((v) => data.scorecard.counts[v] > 0).map((v) => (
-              <button key={v} onClick={() => setFilter(filter === v ? null : v)} aria-pressed={filter === v}
-                      className={`min-h-11 rounded-full px-3 font-semibold ${filter === v ? 'bg-ink text-bg' : PILL[v]}`}>
-                {data.scorecard.counts[v]} {SHORT[v].toLowerCase()}
-              </button>
-            ))}
-          </div>
-
-          <section className="rounded-2xl border border-line bg-surface px-4 py-1">
-            {due.length === 0 ? (
-              <p className="py-4 text-ink-2">Nothing due yet: every promise found is for a later period.</p>
-            ) : (
-              <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>
-            )}
-          </section>
-
-          {notDue.length > 0 && (
-            <section className="rounded-2xl border border-dashed border-line">
-              <button onClick={() => setLater(!later)} aria-expanded={later} className="flex min-h-14 w-full items-baseline justify-between gap-3 p-4 text-left">
-                <span className="font-semibold text-ink">{notDue.length} promises not yet due</span>
-                <span className="text-meta text-ink-3">{later ? 'Close' : `Current guidance, ${[...new Set(notDue.map((r) => r.due))].slice(0, 3).join(', ')}`}</span>
-              </button>
-              {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>}
-            </section>
-          )}
-
-          {data.dropped.length > 0 && (
-            <section className="rounded-2xl border border-dashed border-line">
-              <button onClick={() => setDrops(!drops)} aria-expanded={drops} className="flex min-h-14 w-full items-baseline justify-between gap-3 p-4 text-left">
-                <span className="font-semibold text-ink">
-                  {data.dropped.length} {data.dropped.length === 1 ? 'claim' : 'claims'} left out: FINN couldn't confirm {data.dropped.length === 1 ? 'it' : 'them'}
-                </span>
-                <span className="text-meta text-ink-3">{drops ? 'Close' : 'See why'}</span>
-              </button>
-              {drops && (
-                <ul className="space-y-2.5 border-t border-dashed border-line p-4">
-                  {data.dropped.map((x, i) => (
-                    <li key={i} className="">
-                      <span className="font-semibold text-ink">{x.what}</span>{' '}
-                      <span className="text-ink-3">· {STAGE[x.stage] ?? x.stage} · </span>
-                      <span className="text-meta"><Src docs={docs} doc={x.doc} page={x.page} /></span>
-                      <p className="text-ink-2">{x.why.charAt(0).toUpperCase() + x.why.slice(1)}.</p>
-                    </li>
-                  ))}
-                  <li className="text-meta text-ink-3">
-                    A claim appears only if its quote is word for word on the cited page and every figure is in the quote. These weren't.
-                  </li>
-                </ul>
-              )}
-            </section>
-          )}
-
-          {data.financials && <Financials f={data.financials} docs={docs} />}
-
-          <footer className="space-y-2 px-1 text-meta text-ink-3">
-            <p>
-              <span className="font-semibold text-ink-2">How verdicts are set.</span> Every numeric verdict is worked out against the first
-              stated target: met at or above it; partially within 1 point of a margin target or at least 80% of a growth or amount target;
-              otherwise missed. Milestones are a judgement from verbatim quotes.
-            </p>
-            <p>
-              <span className="font-semibold text-ink-2">Sources.</span> Only these documents, listed on screener.in and served by BSE or the
-              company: {calls.map((c, i) => <span key={c.id}>{i ? ', ' : ''}<Src docs={docs} doc={c.id} page={null}>{c.period}</Src></span>)}
-              {data.docs.annual_report && <>, <Src docs={docs} doc={data.docs.annual_report.id} page={null}>{data.docs.annual_report.title}</Src></>}.
-              Nothing from outside them.
-              {data.docs.skipped.length > 0 && <> Not used: {data.docs.skipped.map((s) => `${s.listed_as} (${s.why})`).join('; ')}.</>}
-            </p>
-            <p>Recorded {new Date(data.generated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}.</p>
-            <details>
-              <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-ink-2">How this was built</summary>
-              <p>
-                Promises and figures were read by {model(data.models.extract_guidance[0]?.model)}.
-                {judge && <> Milestones were judged by {judge}.</>}
-                {judgeCall && judgeCall.fallbacks.length > 0 && <> {judge} answered because {judgeCall.fallbacks.map((f) => `${model(f.model)} ${why(f.why)}`).join(' and ')}.</>}
-                {' '}Verdicts on numbers are computed by code, never by a model.
-              </p>
-            </details>
-          </footer>
-        </main>
-      )}
+      {data && <Scorecard data={data} />}
     </div>
   )
 }
