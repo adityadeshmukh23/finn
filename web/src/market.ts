@@ -1,4 +1,5 @@
 import type { Card, Digest, Item } from './api'
+import * as fig from './fig'
 
 /**
  * Price and volume alerts. The numbers (day move, volume multiple vs the prior 20 sessions) are
@@ -52,8 +53,7 @@ export function sessionAt(rows: Session[] | undefined, end: string): Session | n
 
 /** "Sunday 11 Oct: no trading session." Read from the price data; a holiday is a weekday with no bar. Null on a normal session. */
 export function noSessionNote(m: Market | null, day: string): string | null {
-  const noon = new Date(`${day}T12:00:00+05:30`)
-  const label = noon.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' }).replace(',', '')
+  const label = fig.weekdayDay(day)
   const weekend = [0, 6].includes(new Date(`${day}T00:00:00Z`).getUTCDay())
   if (!m) return weekend ? `${label}: no trading session.` : null
   if (Object.values(m.sessions).some((rows) => rows.some((r) => r[0] === day))) return null
@@ -85,17 +85,10 @@ export function signalFor(rows: Session[] | undefined, start: string, end: strin
   return best
 }
 
-/** One decimal, and no sign on what rounds to zero: "−0.0%" says more than the number does. */
-export const fmtPct = (n: number) => {
-  const t = Math.abs(n).toFixed(1)
-  return `${t === '0.0' ? '' : n > 0 ? '+' : '−'}${t}%`
-}
-export const fmtX = (n: number) => `${n >= 10 ? Math.round(n) : n.toFixed(1)}×`
-
 /** "−12.2% on 49× volume", leading with whatever crossed the line. */
 export function describe(sig: Signal): string {
-  const move = sig.chg_pct === null ? '' : fmtPct(sig.chg_pct)
-  const vol = sig.vol_x === null ? '' : `${fmtX(sig.vol_x)} volume`
+  const move = sig.chg_pct === null ? '' : fig.pct(sig.chg_pct)
+  const vol = sig.vol_x === null ? '' : `${fig.multiple(sig.vol_x)} volume`
   if (sig.move_hit && sig.vol_hit) return `${move} on ${vol}`
   if (sig.move_hit) return `${move} in a day${vol ? ` (${vol})` : ''}`
   return `${vol}${move ? `, price ${move}` : ''}`

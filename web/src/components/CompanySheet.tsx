@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { Card, ResearchEntry } from '../api'
 import { filedForSession, filingsAsOf, groupSameDay, latestPeople, latestResults, material, routine, sessionsAsOf, type FilingGroup, type TimelineItem } from '../company'
-import { CATEGORY_LABEL, clock, dayMonth, verdictLine } from '../format'
+import { CATEGORY_LABEL, verdictLine } from '../format'
 import type { Session } from '../market'
 import { CompanyChart } from './CompanyChart'
 import { filingLine } from '../plain'
@@ -9,6 +9,7 @@ import { Icon } from './Icon'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
 import { Sheet } from './Sheet'
+import * as fig from '../fig'
 
 const category = (c: string) => CATEGORY_LABEL[c] ?? c
 
@@ -19,7 +20,7 @@ function GroupRow({ g }: { g: FilingGroup }) {
     <li>
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="flex min-h-11 w-full items-start gap-3 py-2.5 text-left">
         <span className="min-w-0 flex-1">
-          <span className="block text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(g.category)}</span> · {dayMonth(g.day)} · {g.items.length} filings</span>
+          <span className="block text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(g.category)}</span> · {fig.day(g.day)} · {g.items.length} filings</span>
           <span className="block text-ink">{filingLine(g.lead)}</span>
         </span>
         <Icon name="down" size={14} className={`mt-1 text-ink-3 ${open ? 'rotate-180' : ''}`} />
@@ -33,7 +34,7 @@ function FilingRow({ it }: { it: TimelineItem }) {
   const body = (
     <>
       <span className="min-w-0 flex-1">
-        <span className="block text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(it.category)}</span> · {clock(it.ts)}</span>
+        <span className="block text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(it.category)}</span> · {fig.clock(it.ts)}</span>
         <span className="block text-ink">{filingLine(it)}</span>
         {it.read && <span className="block text-meta text-ink-3">Summary checked against p.{it.read.page} of the filing</span>}
       </span>
@@ -103,7 +104,7 @@ export function CompanySheet({ symbol, name, sector, card, filings, sessions, en
 
       {leadRead && card && (
         <section className="mt-5">
-          <h3 className="font-semibold text-ink">{category(card.lead.category)}, {dayMonth(card.lead.ts)}</h3>
+          <h3 className="font-semibold text-ink">{category(card.lead.category)}, {fig.day(card.lead.ts)}</h3>
           <p className="mt-1 text-ink">{filingLine(card.lead)}</p>
           <blockquote className="mt-2 border-l-2 border-line pl-3 italic text-ink-2">“{leadRead.quote}”</blockquote>
           <a href={`${card.lead.url}#page=${leadRead.page}`} target="_blank" rel="noopener noreferrer"
@@ -115,14 +116,14 @@ export function CompanySheet({ symbol, name, sector, card, filings, sessions, en
 
       {results && (
         <section className="mt-5">
-          <h3 className="font-semibold text-ink">Latest results{resultsAt ? `, filed ${dayMonth(resultsAt.ts)}` : ''}</h3>
+          <h3 className="font-semibold text-ink">Latest results{resultsAt ? `, filed ${fig.day(resultsAt.ts)}` : ''}</h3>
           <ResultsTable r={results} />
         </section>
       )}
 
       {people && people.length > 0 && (
         <section className="mt-5">
-          <h3 className="font-semibold text-ink">Latest management change{peopleAt ? `, filed ${dayMonth(peopleAt.ts)}` : ''}</h3>
+          <h3 className="font-semibold text-ink">Latest management change{peopleAt ? `, filed ${fig.day(peopleAt.ts)}` : ''}</h3>
           <People people={people} />
         </section>
       )}
@@ -142,8 +143,8 @@ export function CompanySheet({ symbol, name, sector, card, filings, sessions, en
       <section className="mt-5">
         <h3 className="font-semibold text-ink">
           {filings === null ? 'Filings' : keep.length === 0 && quiet.length === 0
-            ? `No filings${since ? ` since ${dayMonth(since)}` : ''}`
-            : `${keep.length} material ${keep.length === 1 ? 'filing' : 'filings'}${since ? ` since ${dayMonth(since)}` : ''}`}
+            ? `No filings${since ? ` since ${fig.day(since)}` : ''}`
+            : `${keep.length} material ${keep.length === 1 ? 'filing' : 'filings'}${since ? ` since ${fig.day(since)}` : ''}`}
         </h3>
         {filings === null && (fromCard.length > 0
           ? <ul className="divide-y divide-line">{fromCard.map((it) => <FilingRow key={it.id} it={it} />)}</ul>

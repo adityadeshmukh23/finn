@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { dayMonth } from '../format'
-import { fmtPct, fmtX, type Session } from '../market'
+import { type Session } from '../market'
+import * as fig from '../fig'
 
 const W = 340, CLOSE_H = 108, LABEL_ROOM = 24, GAP = 22, VOL_H = 40, H = CLOSE_H + GAP + VOL_H, PAD = 8
 
-const money = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: n >= 1000 ? 0 : 2 })}`
+const SIGN: Record<fig.Sign, string> = { up: 'text-up', down: 'text-down', none: 'text-ink' }
 
 function PriceLabel({ text, xPct, topPct }: { text: string; xPct: number; topPct: number }) {
   const side = xPct < 20 ? { left: 0 } : xPct > 80 ? { right: 0 } : { left: `${xPct}%`, transform: 'translateX(-50%)' }
@@ -47,17 +47,17 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
   return (
     <div>
       <p aria-live="polite">
-        <span className={`text-figure font-semibold ${chg === null ? 'text-ink' : chg < 0 ? 'text-down' : chg > 0 ? 'text-up' : 'text-ink'}`}>
-          {chg === null ? money(close) : fmtPct(chg)}
+        <span className={`text-figure font-semibold ${chg === null ? 'text-ink' : SIGN[fig.pctChange(chg).sign]}`}>
+          {chg === null ? fig.price(close) : fig.pct(chg)}
         </span>
         <span className="ml-2 text-meta text-ink-3">
-          {dayMonth(date)} close{chg !== null && `, ${money(close)}`}{vx !== null && `, ${fmtX(vx)} volume`}
+          {fig.day(date)} close{chg !== null && `, ${fig.price(close)}`}{vx !== null && `, ${fig.multiple(vx)} volume`}
         </span>
       </p>
       <p className="min-h-[18px] text-meta text-ink-3">{filed && `Filed since the previous close: ${filed}`}</p>
       <div className="relative mt-1">
       <svg viewBox={`0 0 ${W} ${H}`} className="block w-full select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink" style={{ touchAction: 'pan-y' }} tabIndex={0} onKeyDown={onKey}
-           role="img" aria-label={`Close over ${n} sessions, low ${money(lo)}, high ${money(hi)}. Use arrow keys to read a session.`}
+           role="img" aria-label={`Close over ${n} sessions, low ${fig.price(lo)}, high ${fig.price(hi)}. Use arrow keys to read a session.`}
            onPointerDown={pick} onPointerMove={(e) => { if (e.buttons || e.pointerType !== 'mouse') pick(e) }}>
         <line x1={x(at)} x2={x(at)} y1={0} y2={H} stroke="var(--line)" strokeWidth={1} />
         <path d={path} fill="none" stroke="var(--ink)" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
@@ -80,13 +80,13 @@ export function CompanyChart({ sessions, markers, volX, labelFor }: {
         </g>
       </svg>
       {/* The line never goes above its high or below its low, so these two can't collide with it. */}
-      <PriceLabel text={`High ${money(hi)}`} xPct={(x(closes.indexOf(hi)) / W) * 100} topPct={0} />
-      <PriceLabel text={`Low ${money(lo)}`} xPct={(x(closes.indexOf(lo)) / W) * 100} topPct={((CLOSE_H - LABEL_ROOM + 2) / H) * 100} />
-      {vols[peak] > cap && <PriceLabel text={fmtX(vols[peak])} xPct={(x(peak) / W) * 100} topPct={((CLOSE_H + 2) / H) * 100} />}
+      <PriceLabel text={`High ${fig.price(hi)}`} xPct={(x(closes.indexOf(hi)) / W) * 100} topPct={0} />
+      <PriceLabel text={`Low ${fig.price(lo)}`} xPct={(x(closes.indexOf(lo)) / W) * 100} topPct={((CLOSE_H - LABEL_ROOM + 2) / H) * 100} />
+      {vols[peak] > cap && <PriceLabel text={fig.multiple(vols[peak])} xPct={(x(peak) / W) * 100} topPct={((CLOSE_H + 2) / H) * 100} />}
       </div>
-      <p className="mt-0.5 flex justify-between text-meta text-ink-3"><span>{dayMonth(sessions[0][0])}</span><span>{dayMonth(sessions[n - 1][0])}</span></p>
+      <p className="mt-0.5 flex justify-between text-meta text-ink-3"><span>{fig.day(sessions[0][0])}</span><span>{fig.day(sessions[n - 1][0])}</span></p>
       <p className="mt-1 text-meta text-ink-3">
-        {n} {n === 1 ? 'session' : 'sessions'}. Bars are volume against the 20-session average, solid at {volX}× or more, faint below it, and stop at {cap}×.
+        {n} {n === 1 ? 'session' : 'sessions'}. Bars are volume against the 20-session average, solid at {fig.times(volX)} or more, faint below it, and stop at {fig.times(cap)}.
         {markers.size > 0 && ' Dots mark material filings.'}
       </p>
     </div>

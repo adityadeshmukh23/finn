@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 import type { Digest } from '../api'
 import { filingsInWindow, type Timeline } from '../company'
-import { dayMonth } from '../format'
-import { fmtPct, lastSessionBy, sessionAt, type Market } from '../market'
+import { lastSessionBy, sessionAt, type Market } from '../market'
 import { Icon } from './Icon'
+import * as fig from '../fig'
 
 /** Filings this holding made in the window, surfaced and hidden alike. The company file's list when it's loaded. */
 export function filingCount(d: Digest, symbol: string, timeline: Timeline | null = null): number {
@@ -14,7 +14,7 @@ export function filingCount(d: Digest, symbol: string, timeline: Timeline | null
   return surfaced + hidden
 }
 
-const inr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: n >= 1000 ? 0 : 2 })}`
+const SIGN: Record<fig.Sign, string> = { up: 'text-up', down: 'text-down', none: 'text-ink' }
 
 /** The 18 holdings as a ledger: last close, day move, what was filed. Biggest move first. */
 export function Book({ chip, view, market, timeline, onOpen }: { chip: ReactNode; view: Digest; market: Market | null; timeline: Timeline | null; onOpen: (sym: string) => void }) {
@@ -31,7 +31,7 @@ export function Book({ chip, view, market, timeline, onOpen }: { chip: ReactNode
         {chip}
       </header>
       <p className="text-meta text-ink-3">
-        {rows.length} holdings{last ? `, closes on ${dayMonth(last)}` : ''}. Biggest move first; filings are for this briefing's window. A mock portfolio.
+        {rows.length} holdings{last ? `, closes on ${fig.day(last)}` : ''}. Biggest move first; filings are for this briefing's window. A mock portfolio.
       </p>
       <ul className="mt-3 divide-y divide-line border-y border-line">
         {rows.map((r) => {
@@ -45,10 +45,10 @@ export function Book({ chip, view, market, timeline, onOpen }: { chip: ReactNode
                 </span>
               </span>
               <span className="shrink-0 text-right">
-                <span className={`block font-semibold ${chg === null ? 'text-ink-3' : chg < 0 ? 'text-down' : chg > 0 ? 'text-up' : 'text-ink'}`}>
-                  {chg === null ? 'n/a' : fmtPct(chg)}
+                <span className={`block font-semibold ${chg === null ? 'text-ink-3' : SIGN[fig.pctChange(chg).sign]}`}>
+                  {chg === null ? 'n/a' : fig.pct(chg)}
                 </span>
-                <span className="block text-meta text-ink-3">{r.session ? inr(r.session[1]) : 'no price'}</span>
+                <span className="block text-meta text-ink-3">{r.session ? fig.price(r.session[1]) : 'no price'}</span>
               </span>
             </>
           )

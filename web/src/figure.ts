@@ -1,18 +1,17 @@
 import type { Card, Results } from './api'
 import type { MoveContext } from './company'
-import { CATEGORY_LABEL, dayMonth } from './format'
+import { CATEGORY_LABEL } from './format'
 import { filingLine } from './plain'
-import { closeTime, fmtPct, fmtX } from './market'
+import { closeTime } from './market'
+import * as fig from './fig'
 
 /** The one number a row is about, and the line beside it. Nothing here is computed: it picks fields the card already has. */
 export interface RowFigure {
   value: string
   label: string
-  sign: 'up' | 'down' | 'none'
+  sign: fig.Sign
   kind: 'results' | 'market'
 }
-
-const signOf = (n: number): RowFigure['sign'] => (n > 0 ? 'up' : n < 0 ? 'down' : 'none')
 
 type Extracted = Extract<Results, { status: 'extracted' }>
 
@@ -25,29 +24,29 @@ export function rowFigure(card: Card): RowFigure | null {
   const r = shownResults(card)
   if (r) {
     const pat = r.rows.pat.yoy_pct
-    if (pat !== null) return { value: fmtPct(pat), label: 'PAT YoY', sign: signOf(pat), kind: 'results' }
+    if (pat !== null) return { value: fig.pct(pat), label: 'PAT YoY', sign: fig.pctChange(pat).sign, kind: 'results' }
     const rev = r.rows.revenue.yoy_pct
-    if (rev !== null) return { value: fmtPct(rev), label: 'Revenue YoY', sign: signOf(rev), kind: 'results' }
+    if (rev !== null) return { value: fig.pct(rev), label: 'Revenue YoY', sign: fig.pctChange(rev).sign, kind: 'results' }
   }
   const m = card.market
   if (!m) return null
-  const day = dayMonth(m.date)
+  const day = fig.day(m.date)
   if (m.move_hit && m.chg_pct !== null) {
-    return { value: fmtPct(m.chg_pct), label: m.vol_x !== null ? `${day}, ${fmtX(m.vol_x)} volume` : `${day} close`, sign: signOf(m.chg_pct), kind: 'market' }
+    return { value: fig.pct(m.chg_pct), label: m.vol_x !== null ? `${day}, ${fig.multiple(m.vol_x)} volume` : `${day} close`, sign: fig.pctChange(m.chg_pct).sign, kind: 'market' }
   }
-  if (m.vol_x !== null) return { value: fmtX(m.vol_x), label: `volume, ${day}`, sign: 'none', kind: 'market' }
+  if (m.vol_x !== null) return { value: fig.multiple(m.vol_x), label: `volume, ${day}`, sign: 'none', kind: 'market' }
   return null
 }
 
 /** "…, effective 29 Oct 2026" says nothing when the filing itself is dated 29 Oct. */
 function withoutSameDay(line: string, ts: string): string {
   const m = line.match(/, effective (\d{1,2} [A-Z][a-z]{2}) \d{4}$/)
-  return m && m[1] === dayMonth(ts) ? line.slice(0, m.index) : line
+  return m && m[1] === fig.day(ts) ? line.slice(0, m.index) : line
 }
 
 /** What was filed between the two closes around a move, from the same list as the company file's chart. */
 export function moveLine(c: MoveContext): string {
-  const span = c.previous ? `since the ${dayMonth(c.previous)} close` : `up to the ${dayMonth(c.date)} close`
+  const span = c.previous ? `since the ${fig.day(c.previous)} close` : `up to the ${fig.day(c.date)} close`
   if (c.filed.length === 0) return `Nothing material filed ${span}`
   const kinds = [...new Set(c.filed.map((r) => CATEGORY_LABEL[r.category] ?? r.category))]
   return `${span.charAt(0).toUpperCase()}${span.slice(1)}: ${kinds.join(', ')}`
@@ -60,19 +59,16 @@ export function moveLine(c: MoveContext): string {
 export function rowLine(card: Card, ctx: MoveContext | null = null, short = false): string {
   const { lead, market: m } = card
   if (lead.category === 'market') {
-    const price = m && !m.move_hit && m.chg_pct !== null ? `Price ${fmtPct(m.chg_pct)}. ` : ''
+    const price = m && !m.move_hit && m.chg_pct !== null ? `Price ${fig.pct(m.chg_pct)}. ` : ''
     if (!ctx) return `${price}Price or volume alert`
-    if (ctx.last) return `${price}Filed ${dayMonth(ctx.last.ts)}: ${withoutSameDay(figureLead(filingLine(ctx.last)), ctx.last.ts)}`
+    if (ctx.last) return `${price}Filed ${fig.day(ctx.last.ts)}: ${withoutSameDay(fig.headlineFigureOnly(filingLine(ctx.last)), ctx.last.ts)}`
     return `${price}${moveLine(ctx)}`
   }
   const r = shownResults(card)
-  if (r && short) return figureLead(lead.headline)
-  if (r && rowFigure(card)?.label === 'PAT YoY') return lead.headline.replace(/, [+−-][\d.]+% YoY/, '')
+  if (r && short) return fig.headlineFigureOnly(lead.headline)
+  if (r && rowFigure(card)?.label === 'PAT YoY') return fig.headlineWithoutYoY(lead.headline)
   return filingLine(lead)
 }
-
-/** "PAT ₹29,250 cr, +32.1% YoY; revenue +28.6% YoY (Sep 2026 qtr, consolidated)" to "PAT ₹29,250 cr (Sep 2026 qtr, consolidated)". */
-const figureLead = (headline: string) => headline.replace(/^(PAT ₹[\d,.-]+ cr)[,;].*?( \([^)]*\))?$/, '$1$2')
 
 /** True when the close shown on a filing's row came first: the move can't be a response to this filing. */
 export const closedBeforeFiling = (card: Card): boolean =>

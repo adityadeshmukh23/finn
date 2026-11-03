@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Icon } from './Icon'
+import * as fig from '../fig'
 import { verdictLine } from '../format'
 import { fetchResearch, NotRecorded, type Research as R, type ResearchDoc, type ScoreRow, type Verdict } from '../api'
 
@@ -30,7 +31,6 @@ const model = (m: string | null | undefined) => (m ?? '').replace(/^[a-z]+:/, ''
 const why = (w: string) =>
   /504|deadline|timed out/i.test(w) ? 'timed out' : /503|demand|overload/i.test(w) ? 'overloaded'
     : /quota/i.test(w) ? 'out of quota' : /429|rate/i.test(w) ? 'rate-limited' : 'unavailable'
-const inr = (v: number | null) => (v === null ? '–' : v.toLocaleString('en-IN', { maximumFractionDigits: Math.abs(v) >= 100 ? 0 : 1 }))
 
 function Pill({ v }: { v: Verdict }) {
   return <span className={`shrink-0 rounded-full px-2 py-0.5 text-meta font-semibold ${PILL[v]}`}>{SHORT[v]}</span>
@@ -87,7 +87,7 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
         {r.restated > 0 && !open && (
           <p className="mt-1 text-meta text-ink-3">
             {differsOn ? `Two statements on the ${differsOn} call differ`
-              : r.revisions.length > 0 ? `Revised ${r.revisions.length}× on later calls`
+              : r.revisions.length > 0 ? `Revised ${fig.times(r.revisions.length)} on later calls`
                 : later.every((x) => x.change === 'restated') ? `Restated on ${calls} later ${calls === 1 ? 'call' : 'calls'}`
                   : `Discussed again on ${calls} later ${calls === 1 ? 'call' : 'calls'}`}
           </p>
@@ -159,7 +159,7 @@ function Financials({ f, docs }: { f: NonNullable<R['financials']>; docs: Record
       <table className="mt-2 w-full">
         <thead>
           <tr className="text-meta text-ink-3">
-            <th className="pb-1 text-left font-normal">₹ crore, {f.basis}</th>
+            <th className="pb-1 text-left font-normal">{fig.CRORE_UNIT}, {fig.basis(f.basis)}</th>
             <th className="pb-1 text-right font-normal">{f.fy}</th>
             <th className="pb-1 text-right font-normal">{f.prev_fy}</th>
             <th className="pb-1 text-right font-normal">Growth</th>
@@ -171,10 +171,10 @@ function Financials({ f, docs }: { f: NonNullable<R['financials']>; docs: Record
             return (
               <tr key={k} className="border-t border-line">
                 <th scope="row" className="py-1.5 text-left font-medium text-ink-2">{label}</th>
-                <td className="py-1.5 text-right font-semibold text-ink">{inr(f.figures[k].current)}</td>
-                <td className="py-1.5 text-right text-ink-2">{inr(f.figures[k].previous)}</td>
-                <td className={`py-1.5 text-right ${gr === null ? 'text-ink-3' : gr < 0 ? 'text-down' : 'text-up'}`}>
-                  {gr === null ? 'n.m.' : `${gr >= 0 ? '+' : '−'}${Math.abs(gr).toFixed(1)}%`}
+                <td className="py-1.5 text-right font-semibold text-ink">{fig.crore(f.figures[k].current)}</td>
+                <td className="py-1.5 text-right text-ink-2">{fig.crore(f.figures[k].previous)}</td>
+                <td className={`py-1.5 text-right ${gr === null ? 'text-ink-3' : fig.pctChange(gr).sign === 'down' ? 'text-down' : fig.pctChange(gr).sign === 'up' ? 'text-up' : 'text-ink'}`}>
+                  {gr === null ? fig.NOT_MEANINGFUL : fig.pct(gr)}
                 </td>
               </tr>
             )
@@ -182,8 +182,8 @@ function Financials({ f, docs }: { f: NonNullable<R['financials']>; docs: Record
         </tbody>
       </table>
       <p className="mt-2 text-meta text-ink-3">
-        {margin('ebitda') !== null && <>EBITDA margin {margin('ebitda')!.toFixed(1)}% · </>}
-        {margin('pat') !== null && <>PAT margin {margin('pat')!.toFixed(1)}% · </>}
+        {margin('ebitda') !== null && <>EBITDA margin {fig.margin(margin('ebitda')!)} · </>}
+        {margin('pat') !== null && <>PAT margin {fig.margin(margin('pat')!)} · </>}
         Figures matched on the page; EBITDA (PBT + finance costs + D&A − other income), growth and margins computed by FINN.
       </p>
     </section>
@@ -311,7 +311,7 @@ export function Scorecard({ data }: { data: R }) {
           Nothing from outside them.
           {data.docs.skipped.length > 0 && <> Not used: {data.docs.skipped.map((s) => `${s.listed_as} (${s.why})`).join('; ')}.</>}
         </p>
-        <p>Recorded {new Date(data.generated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}.</p>
+        <p>Recorded {fig.dayYear(data.generated_at)}.</p>
         <details>
           <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-ink-2">How this was built</summary>
           <p>

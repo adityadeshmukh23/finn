@@ -1,8 +1,8 @@
 import type { Card } from './api'
 import { resultsWithoutFigures, rowFigure } from './figure'
-import { dayMonth } from './format'
 import { describe, MOVE_BASE, moveAlone } from './market'
 import { shortRole } from './plain'
+import * as fig from './fig'
 
 /**
  * Card order and the line that explains it. Deterministic, from what the card carries: the lead event's weight, set
@@ -94,7 +94,7 @@ export function rankCards(cards: Card[]): Card[] {
     else if (i > 0) tail = belowTail(c, scored[i - 1], i)
     else if (sorted[0].score > c.score) tail = rowFigure(c) ? '; the biggest event with figures to show' : '; the biggest event FINN can show in full'
     else if (scored.length > 1) tail = '; the biggest event in this window'
-    const moved = c.market && c.lead.category !== 'market' ? `; stock ${describe(c.market)}, ${dayMonth(c.market.date)} close` : ''
+    const moved = c.market && c.lead.category !== 'market' ? `; stock ${describe(c.market)}, ${fig.day(c.market.date)} close` : ''
     const event = `${label(c.lead.reason)}.`
     return {
       ...c,

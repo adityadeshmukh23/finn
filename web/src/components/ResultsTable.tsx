@@ -1,13 +1,12 @@
 import type { ResultRow, Results } from '../api'
 import { plainNote } from '../format'
 import { Icon } from './Icon'
-
-const inr = (v: number | null) =>
-  v === null ? '–' : v.toLocaleString('en-IN', { maximumFractionDigits: Math.abs(v) >= 100 ? 0 : 1 })
+import * as fig from '../fig'
 
 function Pct({ v }: { v: number | null }) {
-  if (v === null) return <span className="text-ink-3" title="Not meaningful: missing figure or a loss in the base period">n.m.</span>
-  return <span className={v < 0 ? 'text-down' : 'text-up'}>{v > 0 ? '+' : v < 0 ? '−' : ''}{Math.abs(v).toFixed(1)}%</span>
+  if (v === null) return <span className="text-ink-3" title="Not meaningful: missing figure or a loss in the base period">{fig.NOT_MEANINGFUL}</span>
+  const { text, sign } = fig.pctChange(v)
+  return <span className={sign === 'down' ? 'text-down' : sign === 'up' ? 'text-up' : 'text-ink'}>{text}</span>
 }
 
 function Row({ label, row, note }: { label: string; row: ResultRow | null; note?: string }) {
@@ -16,7 +15,7 @@ function Row({ label, row, note }: { label: string; row: ResultRow | null; note?
       <th scope="row" className="py-1.5 text-left font-normal text-ink-2">{label}</th>
       {row ? (
         <>
-          <td className="whitespace-nowrap py-1.5 pl-2 text-right font-semibold text-ink">{inr(row.current)}</td>
+          <td className="whitespace-nowrap py-1.5 pl-2 text-right font-semibold text-ink">{fig.crore(row.current)}</td>
           <td className="whitespace-nowrap py-1.5 pl-2 text-right"><Pct v={row.qoq_pct} /></td>
           <td className="whitespace-nowrap py-1.5 pl-2 text-right"><Pct v={row.yoy_pct} /></td>
         </>
@@ -47,7 +46,7 @@ export function ResultsTable({ r }: { r: Results }) {
   return (
     <div className="mt-1 rounded-xl bg-raised px-2.5 pb-3 min-[360px]:px-3">
       <div className="flex items-center justify-between gap-2 text-meta text-ink-3">
-        <span><span className="font-semibold capitalize text-ink-2">{r.basis}</span> · {r.unit} · {r.period ? `${r.period} qtr` : `qtr to ${r.quarter}`}</span>
+        <span><span className="font-semibold capitalize text-ink-2">{fig.basis(r.basis)}</span> · {r.unit} · {fig.period(r.period, r.quarter)}</span>
         {source}
       </div>
       <table className="w-full">
@@ -67,8 +66,8 @@ export function ResultsTable({ r }: { r: Results }) {
         </tbody>
       </table>
       <p className="mt-2 text-meta text-ink-3">
-        {r.margins.ebitda !== null && <>EBITDA margin {r.margins.ebitda}% · </>}
-        {r.margins.pat !== null && <>PAT margin {r.margins.pat}% · </>}
+        {r.margins.ebitda !== null && <>EBITDA margin {fig.margin(r.margins.ebitda)} · </>}
+        {r.margins.pat !== null && <>PAT margin {fig.margin(r.margins.pat)} · </>}
         {r.revenue_how && <>Revenue is the {r.revenue_how}. </>}
         {!r.lender && 'EBITDA = PBT + finance costs + D&A − other income, computed by FINN. '}
         {r.confidence === 'medium' && <span className="text-flag">Medium confidence: {plainNote(r.confidence_note)}</span>}

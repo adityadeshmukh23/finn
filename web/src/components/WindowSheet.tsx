@@ -1,7 +1,7 @@
 import { STATIC, type Digest, type Manifest, type ResearchEntry } from '../api'
-import { clock, dayMonth } from '../format'
 import { lastSessionBy, type Market } from '../market'
 import { Sheet } from './Sheet'
+import * as fig from '../fig'
 
 export const WINDOWS = [
   { hours: 24, label: '24h' },
@@ -18,7 +18,7 @@ export function asOfLine(d: Digest): string {
   const label = fresh ? 'Live NSE' : s.source === 'unavailable' ? 'No data' : 'Recorded filings'
   // A past date in the replay is "as of" the end of that window; otherwise the snapshot's own fetch time.
   const at = STATIC ? d.window.end : s.as_of
-  return at ? `${label}, as of ${clock(at)} IST` : label
+  return at ? `${label}, as of ${fig.clock(at)} IST` : label
 }
 
 /** The briefing's bookkeeping: what came in and what happened to it. */
@@ -31,7 +31,7 @@ export function briefingStats(data: Digest, view: Digest, hours: number): string
 function priceLine(m: Market | null, end: string): string {
   if (!m) return 'Prices unavailable: price and volume alerts are off.'
   const last = lastSessionBy(m, end) ?? m.through
-  return `Prices to the ${last ? dayMonth(last) : '?'} close, Yahoo Finance${m.message ? `. ${m.message}` : ''}`
+  return `Prices to the ${last ? fig.day(last) : '?'} close, Yahoo Finance${m.message ? `. ${m.message}` : ''}`
 }
 
 interface Props {
@@ -86,7 +86,7 @@ export function WindowSheet({ data, view, market, manifest, researched, latestDa
       {data?.source.message && <p className="mt-1 text-ink-2">{data.source.message}</p>}
       {STATIC && (
         <p className="mt-2 text-ink-2">
-          {manifest ? `NSE filings for ${manifest.holdings} holdings, ${dayMonth(manifest.from)} to ${dayMonth(manifest.to)}` : 'Recorded NSE filings'}
+          {manifest ? `NSE filings for ${manifest.holdings} holdings, ${fig.day(manifest.from)} to ${fig.day(manifest.to)}` : 'Recorded NSE filings'}
           {researched.length > 0 && `, and research on ${researched.length} companies`}. Nothing here updates.
         </p>
       )}

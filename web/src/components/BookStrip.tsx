@@ -1,8 +1,8 @@
 import type { Digest } from '../api'
 import type { Timeline } from '../company'
-import { dayMonth } from '../format'
-import { fmtPct, sessionAt, type Market } from '../market'
+import { sessionAt, type Market } from '../market'
 import { filingCount } from './Book'
+import * as fig from '../fig'
 
 const FULL_TINT_AT_PCT = 6     // a 6% day takes the strongest tint
 const MAX_TINT = 26            // percent of the sign colour mixed into the tile
@@ -27,10 +27,10 @@ export function BookStrip({ view, market, timeline, onOpen }: { view: Digest; ma
         return (
           <li key={symbol} className="shrink-0">
             <button onClick={() => onOpen(symbol)} style={{ backgroundColor: tileTint(chg) }}
-                    aria-label={`${symbol}, ${chg === null ? 'no price' : `${fmtPct(chg)} on ${dayMonth(session![0])}`}${filings ? `, ${filings} ${filings === 1 ? 'filing' : 'filings'}` : ''}`}
+                    aria-label={`${symbol}, ${chg === null ? 'no price' : `${fig.pct(chg)} on ${fig.day(session![0])}`}${filings ? `, ${filings} ${filings === 1 ? 'filing' : 'filings'}` : ''}`}
                     className="relative block min-h-11 min-w-11 rounded-lg border border-line py-0.5 pl-2 pr-3.5 text-left text-meta">
               <span className="block font-semibold text-ink">{symbol}</span>
-              <span className="block text-ink-2">{chg === null ? 'n/a' : fmtPct(chg)}</span>
+              <span className="block text-ink-2">{chg === null ? 'n/a' : fig.pct(chg)}</span>
               {filings > 0 && <span aria-hidden="true" className="absolute right-1 bottom-1.5 h-1.5 w-1.5 rounded-full bg-ink" />}
             </button>
           </li>

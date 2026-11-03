@@ -2,7 +2,6 @@ import { useState, type ReactNode } from 'react'
 import type { Card, Digest } from '../api'
 import { bookTally, moveContext, type Timeline } from '../company'
 import type { Density } from '../density'
-import { dayMonth } from '../format'
 import { lastSessionBy, noSessionNote, type Market } from '../market'
 import { rankCards, TOP_ROWS } from '../rank'
 import { briefingEnd, compactEnd, synthesis } from '../synthesis'
@@ -11,6 +10,7 @@ import { BriefRow } from './BriefRow'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
 import { asOfLine, briefingStats, windowLabel } from './WindowSheet'
+import * as fig from '../fig'
 
 function Skeleton() {
   return (
@@ -162,7 +162,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
                 )}
                 {tally && (
                   <button onClick={onBook} className="flex min-h-11 w-full items-center justify-between gap-3 text-left text-ink-2">
-                    Book{closes ? `, ${dayMonth(closes)} close` : ''}: {tally.up} up, {tally.down} down{tally.flat > 0 && `, ${tally.flat} flat`}
+                    Book{closes ? `, ${fig.day(closes)} close` : ''}: {tally.up} up, {tally.down} down{tally.flat > 0 && `, ${tally.flat} flat`}
                     <Icon name="chevron" size={14} className="shrink-0 text-ink-3" />
                   </button>
                 )}

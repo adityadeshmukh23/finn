@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import type { HiddenGroup } from '../api'
-import { clock } from '../format'
 import { filingLine } from '../plain'
 import { Icon } from './Icon'
+import * as fig from '../fig'
 
 /** `label` swaps the summary header for one plain line, for the Compact screen. */
 export function HiddenRow({ groups, total, label }: { groups: HiddenGroup[]; total: number; label?: string }) {
@@ -42,7 +42,7 @@ export function HiddenRow({ groups, total, label }: { groups: HiddenGroup[]; tot
                       <span className="font-semibold text-ink">{it.symbol}</span>{' '}
                       <span className="text-ink-2">{filingLine(it)}</span>
                       <span className="flex items-center gap-3 text-meta text-ink-3">
-                        {clock(it.ts)}
+                        {fig.clock(it.ts)}
                         {it.url && (
                           <a href={it.url} target="_blank" rel="noopener noreferrer"
                              className="inline-flex min-h-11 min-w-11 items-center gap-1 underline underline-offset-4">filing<Icon name="external" size={12} /></a>

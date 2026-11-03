@@ -1,12 +1,13 @@
 import type { ReactNode } from 'react'
 import { ALERT_CATEGORIES, DEFAULT_PREFS, type AlertPrefs } from '../alerts'
 import type { Card } from '../api'
-import { CATEGORY_LABEL, dayMonth } from '../format'
+import { CATEGORY_LABEL } from '../format'
 import { describe } from '../market'
 import { Icon } from './Icon'
+import * as fig from '../fig'
 
-function Stepper({ label, value, step, min, max, unit, prefix = '', onChange }: {
-  label: string; value: number; step: number; min: number; max: number; unit: string; prefix?: string
+function Stepper({ label, value, step, min, max, show, onChange }: {
+  label: string; value: number; step: number; min: number; max: number; show: (v: number) => string
   onChange: (v: number) => void
 }) {
   const set = (v: number) => onChange(Math.min(max, Math.max(min, Math.round(v * 10) / 10)))
@@ -16,7 +17,7 @@ function Stepper({ label, value, step, min, max, unit, prefix = '', onChange }: 
       <span className="text-ink-2">{label}</span>
       <div className="flex items-center gap-2">
         <button className={btn} onClick={() => set(value - step)} disabled={value <= min} aria-label={`Lower ${label}`}>−</button>
-        <span className="w-12 text-center font-semibold text-ink" aria-live="polite">{prefix}{value}{unit}</span>
+        <span className="w-12 text-center font-semibold text-ink" aria-live="polite">{show(value)}</span>
         <button className={btn} onClick={() => set(value + step)} disabled={value >= max} aria-label={`Raise ${label}`}>+</button>
       </div>
     </div>
@@ -47,7 +48,7 @@ export function Alerts({ chip, prefs, onChange, cards, onOpen }: {
               <button onClick={() => onOpen(c.symbol)} className="flex min-h-11 w-full items-center justify-between gap-3 py-2 text-left">
               <span className="shrink-0">
                 <span className="block font-semibold text-ink">{c.symbol}</span>
-                <span className="block text-meta text-ink-3">{dayMonth(c.market!.date)} close</span>
+                <span className="block text-meta text-ink-3">{fig.day(c.market!.date)} close</span>
               </span>
               <span className="flex items-center gap-2 text-right text-ink-2">{describe(c.market!)}<Icon name="chevron" className="text-ink-3" /></span>
               </button>
@@ -82,9 +83,9 @@ export function Alerts({ chip, prefs, onChange, cards, onOpen }: {
 
       <p className="mt-5 font-semibold text-ink">Price and volume</p>
       <p className="text-meta text-ink-3">A holding with nothing material filed in the window still gets a row when it crosses one of these.</p>
-      <Stepper label="Volume vs 20-day average" value={prefs.volX} step={0.5} min={1.5} max={10} unit="×"
+      <Stepper label="Volume vs 20-day average" value={prefs.volX} step={0.5} min={1.5} max={10} show={fig.times}
                onChange={(volX) => onChange({ ...prefs, volX })} />
-      <Stepper label="Price move in a day" value={prefs.movePct} step={1} min={1} max={20} unit="%" prefix="±"
+      <Stepper label="Price move in a day" value={prefs.movePct} step={1} min={1} max={20} show={fig.plusMinusPct}
                onChange={(movePct) => onChange({ ...prefs, movePct })} />
       <button onClick={() => onChange(DEFAULT_PREFS)} className="mt-3 min-h-11 text-ink-3 underline underline-offset-4">
         Reset to defaults

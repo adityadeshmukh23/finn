@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import type { Card, Item } from '../api'
 import type { MoveContext } from '../company'
-import { CATEGORY_LABEL, clock, dayMonth } from '../format'
+import { CATEGORY_LABEL } from '../format'
 import { closedBeforeFiling, figuresWithheld, moveLine, rowFigure, rowLine } from '../figure'
 import { describe } from '../market'
 import { swipeDismisses, swipeMayStart } from '../swipe'
@@ -9,6 +9,7 @@ import { filingLine } from '../plain'
 import { Icon } from './Icon'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
+import * as fig from '../fig'
 
 const category = (it: Item) => CATEGORY_LABEL[it.category] ?? it.category
 
@@ -51,7 +52,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
   // A move beside a filing reads as its effect, so the line says when the close came first. The order is all FINN claims.
   const before = closedBeforeFiling(card)
   const stockLine = m && lead.category !== 'market' && (figure?.kind !== 'market' || before)
-    ? `Stock ${describe(m)}, ${dayMonth(m.date)} close${before ? ', before this filing' : ''}` : ''
+    ? `Stock ${describe(m)}, ${fig.day(m.date)} close${before ? ', before this filing' : ''}` : ''
   const isResults = lead.category === 'results'
   const isPeople = lead.category === 'management_change' && !!card.people?.length
 
@@ -119,7 +120,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
             <span className={`text-ink ${open || (rank === 1 && !figure) ? 'block' : isResults ? 'line-clamp-3' : 'line-clamp-2'}`}>{rowLine(card, context, glance)}</span>
             {(!glance || figuresWithheld(card)) && (
               <span className="mt-0.5 block text-meta text-ink-3">
-                {!glance && lead.category !== 'market' && clock(lead.ts)}
+                {!glance && lead.category !== 'market' && fig.clock(lead.ts)}
                 {figuresWithheld(card) && <span className="text-flag">{!glance && ' · '}Low confidence, figures withheld</span>}
                 {!glance && stockLine && <span className="block">{stockLine}</span>}
                 {!glance && context && <span className="block">{moveLine(context)}</span>}
@@ -171,7 +172,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
               card.results.status === 'extracted' && card.results.confidence !== 'low' && !table ? (
                 <button onClick={() => setTable(true)} aria-expanded={false}
                         className="mt-1 flex min-h-11 w-full items-center justify-between gap-2 rounded-xl bg-raised px-3 text-left">
-                  <span>Results table <span className="text-meta text-ink-3">· {card.results.period ? `${card.results.period} qtr · ` : ''}{card.results.basis} · p.{card.results.page}</span></span>
+                  <span>Results table <span className="text-meta text-ink-3">· {card.results.period ? `${fig.period(card.results.period, card.results.quarter)} · ` : ''}{fig.basis(card.results.basis)} · p.{card.results.page}</span></span>
                   <Icon name="down" size={14} className="text-ink-3" />
                 </button>
               ) : <ResultsTable r={card.results} />
@@ -186,7 +187,7 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
                 {card.results && !isResults && <li><ResultsTable r={card.results} /></li>}
                 {card.items.map((it) => (
                   <li key={it.id}>
-                    <p className="text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(it)}</span> · {clock(it.ts)}</p>
+                    <p className="text-meta text-ink-3"><span className="font-semibold text-ink-2">{category(it)}</span> · {fig.clock(it.ts)}</p>
                     <p className="text-ink">{filingLine(it)}</p>
                     <FilingLink url={it.url} />
                   </li>

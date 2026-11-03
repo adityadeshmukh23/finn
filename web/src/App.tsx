@@ -13,11 +13,11 @@ import { Today } from './components/Today'
 import { WindowChip } from './components/WindowChip'
 import { windowLabel, WindowSheet } from './components/WindowSheet'
 import { loadDensity, saveDensity } from './density'
-import { dayMonth, todayIST } from './format'
 import type { Timeline } from './company'
 import type { Market } from './market'
 import { sheetHistory } from './sheetHistory'
 import { parseHash, tabHash, type Route, type Tab } from './route'
+import * as fig from './fig'
 
 const DISMISSED_KEY = 'finn.dismissed'
 const MIN_ROW_VISIBLE = 96
@@ -89,7 +89,7 @@ export default function App() {
   useEffect(() => { fetchTimeline().then(setTimeline) }, [])
 
   useEffect(() => { if (STATIC) fetchManifest().then(setManifest).catch(() => setManifest(null)) }, [])
-  const latestDay = STATIC ? manifest?.to ?? null : todayIST()
+  const latestDay = STATIC ? manifest?.to ?? null : fig.todayIso()
   const day = asOf ?? latestDay
 
   // Only the latest request may update the screen; a slower earlier one (another window or date) is dropped.
@@ -142,7 +142,7 @@ export default function App() {
     setUndo(null)
   }
 
-  const chip = <WindowChip label={`${day ? `${dayMonth(day)} · ` : ''}${windowLabel(hours)}`} onOpen={() => setWindowOpen(true)} />
+  const chip = <WindowChip label={`${day ? `${fig.day(day)} · ` : ''}${windowLabel(hours)}`} onOpen={() => setWindowOpen(true)} />
   // Compact Today has the as-of line right under the chip, so the date isn't said twice. Book and Alerts have no such line.
   const todayChip = density === 'compact' ? <WindowChip label={`Last ${windowLabel(hours)}`} onOpen={() => setWindowOpen(true)} /> : chip
   const book = useMemo(() => new Set(Object.keys(data?.names ?? {})), [data])

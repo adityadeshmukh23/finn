@@ -1,5 +1,6 @@
 import { describe as suite, expect, it } from 'vitest'
-import { describe, fmtPct, noSessionNote, signalFor, type Market, type Session } from '../market'
+import { pct as fmtPct } from '../fig'
+import { describe, noSessionNote, signalFor, type Market, type Session } from '../market'
 
 const rows: Session[] = [
   ['2026-10-28', 100, 1.0, 1.1],

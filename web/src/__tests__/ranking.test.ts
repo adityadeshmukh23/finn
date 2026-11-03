@@ -3,10 +3,10 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { applyAlerts, DEFAULT_PREFS } from '../alerts'
 import type { Card, Digest } from '../api'
-import { dayMonth } from '../format'
 import { resultsWithoutFigures, rowFigure, rowLine } from '../figure'
 import { describe as describeMove, type Market } from '../market'
 import { eventLabel, otherMajor, namesTopRole, rankCards, scoreCard, scoreParts } from '../rank'
+import * as fig from '../fig'
 
 const demo = join(__dirname, '../../public/demo')
 const read = <T,>(f: string) => JSON.parse(readFileSync(join(demo, f), 'utf8')) as T
@@ -87,7 +87,7 @@ function checkClaims(cards: Card[], where: string) {
       const s = market.sessions[c.symbol].find((x) => x[0] === m.date)!
       expect([s[2], s[3]], at).toEqual([m.chg_pct, m.vol_x])
       expect(stock[1], at).toBe(describeMove(m))
-      expect(stock[2], at).toBe(dayMonth(m.date))
+      expect(stock[2], at).toBe(fig.day(m.date))
       text = text.slice(stock[0].length)
     }
     const a = prev && scoreParts(prev), b = scoreParts(c)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchLedger, STATIC, type Ledger } from '../api'
-import { usd } from '../format'
 import { Sheet } from './Sheet'
+import * as fig from '../fig'
 
 export function LedgerSheet({ onClose }: { onClose: () => void }) {
   const [data, setData] = useState<Ledger | null>(null)
@@ -32,8 +32,8 @@ export function LedgerSheet({ onClose }: { onClose: () => void }) {
       {data && (
         <div className="space-y-5">
           <div>
-            <p className="text-figure font-semibold text-ink">{usd(data.spent_usd)}</p>
-            <p className="text-ink-2">spent of the {usd(data.budget_usd)} hard cap</p>
+            <p className="text-figure font-semibold text-ink">{fig.usd(data.spent_usd)}</p>
+            <p className="text-ink-2">spent of the {fig.usd(data.budget_usd)} hard cap</p>
             <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-raised">
               <div className="h-full bg-ink-2" style={{ width: `${Math.min(100, (data.spent_usd / data.budget_usd) * 100)}%` }} />
             </div>
@@ -45,7 +45,7 @@ export function LedgerSheet({ onClose }: { onClose: () => void }) {
             </div>
             <div className="rounded-xl bg-raised p-3">
               <dt className="text-ink-3">Today</dt>
-              <dd className="font-semibold text-ink">{data.today.live_calls} calls · {usd(data.today.usd)}</dd>
+              <dd className="font-semibold text-ink">{data.today.live_calls} calls · {fig.usd(data.today.usd)}</dd>
             </div>
           </dl>
           <ul className="space-y-2">
@@ -75,7 +75,7 @@ export function LedgerSheet({ onClose }: { onClose: () => void }) {
                     <td className="py-2 text-ink">{r.purpose}</td>
                     <td className="py-2 text-ink-2">{r.model.replace('claude-', '')}</td>
                     <td className="py-2 text-right text-ink">{r.calls}</td>
-                    <td className="py-2 text-right text-ink">{usd(r.usd)}</td>
+                    <td className="py-2 text-right text-ink">{fig.usd(r.usd)}</td>
                   </tr>
                 ))}
               </tbody>

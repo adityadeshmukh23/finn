@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { loadDensity } from '../density'
 import { tileTint } from '../components/BookStrip'
-import { clock, dayMonth, verdictLine } from '../format'
+import { clock, day as dayMonth } from '../fig'
+import { verdictLine } from '../format'
 import { lastSessionBy, type Market } from '../market'
 
 describe('explicit time labels', () => {

@@ -2,8 +2,8 @@ import type { Card } from './api'
 import type { Timeline } from './company'
 import { lastMaterialBefore } from './company'
 import { resultsWithoutFigures, rowFigure } from './figure'
-import { dayMonth } from './format'
 import { eventLabel } from './rank'
+import * as fig from './fig'
 
 /**
  * The line at the top of Today. Templates only, no model: every clause is filled from one card's own fields
@@ -18,16 +18,16 @@ const lower = (s: string) => (/^[A-Z][a-z]/.test(s) ? s[0].toLowerCase() + s.sli
 
 export function clauseFor(card: Card, windowStart: string, timeline: Timeline | null): string {
   const name = card.company
-  const fig = rowFigure(card)
-  if (card.lead.category === 'market' && fig) {
+  const figure = rowFigure(card)
+  if (card.lead.category === 'market' && figure) {
     const last = lastMaterialBefore(timeline?.[card.symbol], windowStart)
-    return `${name} ${fig.value} ${fig.label}${last ? `; ${dayMonth(last.ts)} filing: ${lower(eventLabel(last.reason))}` : ''}`
+    return `${name} ${figure.value} ${figure.label}${last ? `; ${fig.day(last.ts)} filing: ${lower(eventLabel(last.reason))}` : ''}`
   }
   if (card.lead.category === 'results') {
     if (resultsWithoutFigures(card)) return `${name} results filed, figures withheld`
     const r = card.results
-    const basis = r?.status === 'extracted' && r.period ? ` (${r.period} qtr)` : ''
-    if (fig) return `${name} ${fig.label.replace(' YoY', '')} ${fig.value} YoY${basis}`
+    const basis = r?.status === 'extracted' && r.period ? ` (${fig.period(r.period, r.quarter)})` : ''
+    if (figure) return `${name} ${figure.label.replace(' YoY', '')} ${figure.value} YoY${basis}`
   }
   return `${name}: ${lower(eventLabel(card.lead.reason))}`
 }
