@@ -759,17 +759,7 @@
      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=f32d2ed7-e599-42b4-ab37-d8e5e79ae0ca.pdf#page=20",
      "target": "28%+"
     },
-    "revisions": [
-     {
-      "call": "Q1 FY27",
-      "speaker": "Manoj Jain",
-      "quote": "The revenue growth of 15%, EBITDA margin 21% to 23%, order inflow of more than INR20,000 crores including QRSAM, the R&D investment more than INR2,200 crores, capex more than INR1,200 crores with a typical defence non-defence business of 90:10.",
-      "doc": "T-Q1FY27",
-      "page": 21,
-      "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d2a747a3-664c-4c5d-9373-fcddc0d2a3ae.pdf#page=21",
-      "target": "21%–23%"
-     }
-    ],
+    "revisions": [],
     "restated": 2,
     "later": [
      {
@@ -780,7 +770,7 @@
       "page": 5,
       "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d2a747a3-664c-4c5d-9373-fcddc0d2a3ae.pdf#page=5",
       "target": "28%+",
-      "change": "restated"
+      "change": "differs"
      },
      {
       "call": "Q1 FY27",
@@ -790,7 +780,7 @@
       "page": 21,
       "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=d2a747a3-664c-4c5d-9373-fcddc0d2a3ae.pdf#page=21",
       "target": "21%–23%",
-      "change": "revised"
+      "change": "differs"
      }
     ],
     "delivered": null

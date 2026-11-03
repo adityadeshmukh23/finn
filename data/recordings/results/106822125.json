@@ -80,5 +80,7 @@
  "dropped": [
   "other_income.previous"
  ],
- "unit_note": "₹ crore"
+ "unit_note": "₹ crore",
+ "revenue_how": null,
+ "inconsistent": []
 }

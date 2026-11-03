@@ -88,5 +88,7 @@
   "pat.previous",
   "pat.year_ago"
  ],
- "unit_note": "₹ crore (converted from million)"
+ "unit_note": "₹ crore (converted from million)",
+ "revenue_how": null,
+ "inconsistent": []
 }

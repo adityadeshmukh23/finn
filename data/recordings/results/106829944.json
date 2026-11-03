@@ -85,5 +85,10 @@
  "dropped": [
   "revenue.current"
  ],
- "unit_note": "₹ crore (converted from lakh)"
+ "unit_note": "₹ crore (converted from lakh)",
+ "revenue_how": null,
+ "inconsistent": [
+  "implied tax of 65.9% in this quarter is outside 10% to 35%",
+  "implied tax of 54.4% in the prior quarter is outside 10% to 35%"
+ ]
 }

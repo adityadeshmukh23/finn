@@ -48,11 +48,11 @@
  "lender": false,
  "rows": {
   "revenue": {
-   "current": 18037.0,
-   "previous": 17149.0,
-   "year_ago": 15715.0,
-   "qoq_pct": 5.2,
-   "yoy_pct": 14.8
+   "current": 18226.0,
+   "previous": 17341.0,
+   "year_ago": 15919.0,
+   "qoq_pct": 5.1,
+   "yoy_pct": 14.5
   },
   "pbt": {
    "current": 3814.0,
@@ -77,11 +77,13 @@
   }
  },
  "margins": {
-  "ebitda": 22.7,
-  "pat": 15.5
+  "ebitda": 22.4,
+  "pat": 15.3
  },
  "confidence": "high",
  "confidence_note": "Every figure shown was found on the cited page.",
  "dropped": [],
- "unit_note": "₹ crore"
+ "unit_note": "₹ crore",
+ "revenue_how": "sum of 3 printed lines",
+ "inconsistent": []
 }

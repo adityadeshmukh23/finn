@@ -84,5 +84,7 @@
  "confidence": "high",
  "confidence_note": "Every figure shown was found on the cited page.",
  "dropped": [],
- "unit_note": "₹ crore (converted from million)"
+ "unit_note": "₹ crore (converted from million)",
+ "revenue_how": null,
+ "inconsistent": []
 }

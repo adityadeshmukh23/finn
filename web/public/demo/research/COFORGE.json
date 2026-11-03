@@ -458,17 +458,7 @@
      "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q2-FY26.pdf#page=13",
      "target": "75%–80%"
     },
-    "revisions": [
-     {
-      "call": "Q3 FY26",
-      "speaker": "Sudhir Singh",
-      "quote": "Finally, free cash flow for the quarter came in at 110%, significantly ahead of our guidance of around 70% to 80% FCF on a sustained basis.",
-      "doc": "T-Q3FY26",
-      "page": 2,
-      "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=2",
-      "target": "70%–80%"
-     }
-    ],
+    "revisions": [],
     "restated": 1,
     "later": [
      {
@@ -479,7 +469,7 @@
       "page": 2,
       "url": "https://www.coforge.com/hubfs/Coforge-Limited-Earnings-Call-Transcript-Q3-FY26.pdf#page=2",
       "target": "70%–80%",
-      "change": "revised"
+      "change": "no period"
      }
     ],
     "delivered": null

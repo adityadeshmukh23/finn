@@ -83,5 +83,7 @@
   "pbt.year_ago",
   "pat.previous"
  ],
- "unit_note": "₹ crore"
+ "unit_note": "₹ crore",
+ "revenue_how": null,
+ "inconsistent": []
 }
