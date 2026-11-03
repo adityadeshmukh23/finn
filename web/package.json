@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "check:sw": "node scripts/check-sw.mjs",
+    "check:demo": "node scripts/check-demo.mjs",
     "test": "vitest run",
     "check:size": "node scripts/check-size.mjs"
   },
