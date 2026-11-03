@@ -74,7 +74,7 @@ Where each claim in `docs/BUILD_HISTORY.md` can be checked. Find a commit with `
 
 | Claim | Where |
 |---|---|
-| Nine phases, in order; links are placeholders to fill | **Mine.** The phase boundaries are my grouping of the commits above by date and theme |
+| Nine phases, in order; each names the attached transcript file that covers it | **Mine.** The phase boundaries are my grouping of the commits above by date and theme; the phase-to-file mapping is by date and the commits each log cites. Files 05 and 06 are not named under any phase |
 | Known limits paragraph | `COVER_NOTE.md` ("Key decisions", "Weak spots"); `docs/EVAL.md` ("What these checks can't show", "What can't be measured here"); `docs/BRIEF_COVERAGE.md` |
 | Public link is a recorded replay as of 30 Oct | `COVER_NOTE.md`, "Key decisions" |
 | 9 of 17 cards show figures; the rest withheld | `COVER_NOTE.md`; `docs/EVAL.md` |

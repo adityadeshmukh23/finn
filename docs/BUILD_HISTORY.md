@@ -26,6 +26,8 @@ This table groups the work by phase, from the git log, and hashes are commits in
 | 8 | Guidance Walk, 3 Nov | Show a promise change over time | Nine walks chosen by rule with no model calls, the stepped line in the scorecard row, a Research home front door (`60998f8`, `b897359`, `c62b5cc`) | 111 recorded promises give only 9 usable walks, so the front door says the split: 1 revised and delivered, 5 held and delivered, 3 revised and open |
 | 9 | Final polish and documents, 3 Nov | Submission-ready | Dark by default, cover note, brief coverage table, a CI check for missing research files (`40e3cf3`, `388a837`, `c9b2413`, `134aaf2`) | Removed monogram badges that did not look good (`7943aa9`); recorded that the gold set wasn't labelled, so no accuracy is claimed (`2f9149c`) |
 
+Transcripts are attached as finn_build_history.zip, numbered in date order; they cover the work by phase and do not map one to one onto the table's rows. Further logs are available on request.
+
 ## Moments where I steered
 
 - **Static recorded demo over a live backend.** The free Docker host needed a paid plan; the remaining free option sleeps for about a minute, which a reviewer opening the link would hit (`DECISIONS.md`, 31 Oct).
@@ -41,15 +43,15 @@ This table groups the work by phase, from the git log, and hashes are commits in
 
 The nine phases above are in order. Links to each conversation:
 
-1. Setup, plan and LLM provider change: [LINK]
-2. Deploy and static replay: [LINK]
-3. Push mode: [LINK]
-4. Pull mode: [LINK]
-5. Polish audit: [LINK]
-6. Correctness block: [LINK]
-7. Formatter and tokens: [LINK]
-8. Guidance Walk: [LINK]
-9. Final polish and documents: [LINK]
+1. Setup, plan and LLM provider change: `01-setup-and-llm-provider.md`
+2. Deploy and static replay: `02-deploy-and-static-replay.md`
+3. Push mode: `03-push-mode.md`
+4. Pull mode: `04-pull-mode.md`
+5. Polish audit: `07-polish-audit-and-ux.md`
+6. Correctness block: `08-plan-correctness-and-formatter.md`
+7. Formatter and tokens: `08-plan-correctness-and-formatter.md`
+8. Guidance Walk: `09-guidance-walk-and-final-polish.md`
+9. Final polish and documents: `09-guidance-walk-and-final-polish.md`
 
 Full logs are available on request.
 
