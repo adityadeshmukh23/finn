@@ -162,7 +162,7 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
                 )}
                 {tally && (
                   <button onClick={onBook} className="flex min-h-11 w-full items-center justify-between gap-3 text-left text-ink-2">
-                    {closes && view && closes !== view.window.end.slice(0, 10) ? `Book, ${fig.day(closes)} close` : 'Book at the close'}: {tally.up} up, {tally.down} down{tally.flat > 0 && `, ${tally.flat} flat`}
+                    {closes && view && closes !== view.window.end.slice(0, 10) ? `Book, ${fig.day(closes)} close` : 'Book close'}: {tally.up} up, {tally.down} down{tally.flat > 0 && `, ${tally.flat} flat`}
                     <Icon name="chevron" size={14} className="shrink-0 text-ink-3" />
                   </button>
                 )}
