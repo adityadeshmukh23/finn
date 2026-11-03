@@ -34,6 +34,7 @@ export type Results =
       lender: boolean
       rows: { revenue: ResultRow; ebitda: ResultRow | null; pbt: ResultRow; pat: ResultRow }
       margins: { ebitda: number | null; pat: number | null }
+      revenue_how?: string | null   // 'sum of 3 printed lines' when the filing prints revenue only as parts
       confidence: 'high' | 'medium' | 'low'
       confidence_note: string
       url: string

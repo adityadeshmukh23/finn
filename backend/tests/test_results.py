@@ -86,6 +86,55 @@ def test_headline_leads_with_the_number_in_indian_format():
     assert results.headline({**view, "confidence": "low"}) is None
 
 
+# HUL Q2 consolidated, as pypdf extracts it: columns are this quarter, year ago, previous quarter.
+PARTS_PAGE = """(Rs in crores)
+Revenue from operations
+18,037 15,715 17,149 Sale of products 35,186 31,267 63,636
+34 27 35 Sale of services 69 54 127
+155 177 157 Other operating revenue 312 355 705
+160 147 188 Other income 348 348 751
+18,386 16,066 17,529 TOTAL INCOME 35,915 32,024 65,219
+74 124 75 Finance costs 149 246 410
+363 322 353 Depreciation and amortisation expense 716 648 1,333
+3,814 3,702 3,632 Profit before tax 7,446 6,969 13,812
+2,796 2,694 2,680 PROFIT FOR THE PERIOD 5,476 5,462 15,059"""
+
+
+def parts_table():
+    f = lambda c, p, y: {"current": c, "previous": p, "year_ago": y}  # noqa: E731
+    return table(revenue=f(18037.0, 17149.0, 15715.0), other_income=f(160.0, 188.0, 147.0), finance_costs=f(74.0, 75.0, 124.0),
+                 depreciation=f(363.0, 353.0, 322.0), pbt=f(3814.0, 3632.0, 3702.0), pat=f(2796.0, 2680.0, 2694.0))
+
+
+def test_revenue_printed_only_as_parts_is_summed_by_code():
+    out = results.compute(parts_table(), PARTS_PAGE, lender=False)
+    r = out["rows"]["revenue"]
+    assert (r["current"], r["previous"], r["year_ago"]) == (18226.0, 17341.0, 15919.0)
+    assert r["qoq_pct"] == 5.1 and r["yoy_pct"] == 14.5
+    assert out["margins"]["pat"] == 15.3
+    assert out["revenue_how"] == "sum of 3 printed lines" and out["confidence"] == "high"
+
+
+def test_parts_that_do_not_reach_the_total_withhold_the_card():
+    page = PARTS_PAGE.replace("18,386 16,066 17,529 TOTAL", "18,999 16,066 17,529 TOTAL")
+    out = results.compute(parts_table(), page, lender=False)
+    assert out["confidence"] == "low" and out["confidence_note"] == results.PARTS_DONT_ADD
+    assert out["rows"]["revenue"]["current"] is None and out["revenue_how"] is None
+
+
+def test_a_revenue_line_that_is_the_total_is_left_alone():
+    out = results.compute(table(), PAGE, lender=False)
+    assert out["rows"]["revenue"]["current"] == 9976.51 and out["revenue_how"] is None
+    # Parts are printed but the model read the total line under them.
+    page = """Revenue from operations
+(a) Sale of products 9,000.00 9,500.00 8,000.00
+(b) Other operating revenue 976.51 1,041.94 531.27
+Total revenue from operations 9,976.51 10,541.94 8,531.27
+Other income 247.79 240.85 198.64
+Total income 10,224.30 10,782.79 8,729.91"""
+    assert results.revenue_parts(table(), page) is None
+
+
 SCRAMBLED = "\n".join(f"{n:,.2f}" for n in range(1200, 1240))     # one token per line, as Equitas's OCR layer comes out
 
 

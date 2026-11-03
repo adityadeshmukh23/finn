@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 from . import http, llm
 from .config import settings
 from .sources.nse import Announcement
-from .verify import number_in
+from .verify import number_in, rejoin_numbers
 
 MAX_PAGES = 45
 CANDIDATES = 3
@@ -120,6 +120,60 @@ def pct(a: float | None, b: float | None) -> float | None:
     return round((a - b) / b * 100, 1)
 
 
+COLS = ("current", "previous", "year_ago")
+_CELL = re.compile(r"\(?\d[\d,]*(?:\.\d+)?\)?|(?<!\S)[-–](?!\S)")
+_REV_HEADING = re.compile(r"revenuefromoperations|incomefromoperations|totalrevenue")
+PARTS_DONT_ADD = "Revenue is printed only as parts, and they don't add up to the total on the page."
+
+
+def _cells(line: str) -> list[float]:
+    """A table line's figures in order. Brackets are negative, a lone dash is nil."""
+    def num(c: str) -> float:
+        return 0.0 if c in "-–" else -float(c.strip("()").replace(",", "")) if c.startswith("(") else float(c.strip("()").replace(",", ""))
+    return [num(c) for c in _CELL.findall(rejoin_numbers(line))]
+
+
+def _label(line: str) -> str:
+    return re.sub(r"[^a-z]", "", line.lower())
+
+
+def revenue_parts(t: dict, page: str) -> dict | None:
+    """When "Revenue from operations" is a heading with no figures and the figures read are one line under it, revenue is
+    that line and the ones after it, up to other income. HUL prints Sale of products, Sale of services and Other operating
+    revenue that way. Code adds them, and proves the sum: parts + other income must equal the total income line.
+
+    None when the line read is the total. {"proved": False} when it's a part and the sum can't be proved."""
+    want = [t["revenue"][c] for c in COLS]
+    if any(v is None for v in want):
+        return None
+    lines = [ln for ln in page.splitlines() if ln.strip()]
+    for i, line in enumerate(lines):
+        cells = _cells(line)
+        if not all(v in cells for v in want):
+            continue
+        if _REV_HEADING.search(_label(line)) or not any(
+                _REV_HEADING.search(_label(h)) and not _cells(h) for h in lines[max(0, i - 2):i]):
+            return None
+        at = [cells.index(v) for v in want]
+        parts = []
+        for j in range(i, min(i + 8, len(lines) - 1)):
+            row = _cells(lines[j])
+            if "otherincome" in _label(lines[j]):
+                total = _cells(lines[j + 1])
+                whole = all(float(v).is_integer() for v in want)
+                ok = (parts and "totalincome" in _label(lines[j + 1]) and len(row) > max(at) and len(total) > max(at)
+                      and all(abs(sum(p[k] for p in parts) + row[k] - total[k]) < (1.5 if whole else 0.05) for k in at))
+                if not ok:
+                    break
+                return {"proved": True, "how": f"sum of {len(parts)} printed lines",
+                        **{c: round(sum(p[k] for p in parts), 2) for c, k in zip(COLS, at)}}
+            if len(row) <= max(at):
+                break
+            parts.append(row)
+        return {"proved": False}
+    return None
+
+
 def compute(t: dict, page_text: str, lender: bool) -> dict:
     """Verify each figure on the cited page, convert to ₹ crore, derive EBITDA, QoQ and YoY.
 
@@ -139,6 +193,9 @@ def compute(t: dict, page_text: str, lender: bool) -> dict:
             else:
                 checked[name][col] = None
                 failed.append(f"{name}.{col}")
+    summed = revenue_parts(t, page_text)
+    if summed:
+        checked["revenue"] = {c: summed.get(c) for c in COLS}
 
     def crore(v):
         return None if v is None or k is None else round(v * k, 2)
@@ -166,7 +223,9 @@ def compute(t: dict, page_text: str, lender: bool) -> dict:
         margins[m] = round(v / rev * 100, 1) if v is not None and rev else None
 
     core = [checked[m]["current"] for m in ("revenue", "pbt", "pat")]
-    if k is None or t["basis"] == "unknown" or any(v is None for v in core):
+    if summed and not summed["proved"]:
+        confidence, why = "low", PARTS_DONT_ADD
+    elif k is None or t["basis"] == "unknown" or any(v is None for v in core):
         confidence, why = "low", "Some headline figures couldn't be matched to the page or the unit is unclear."
     elif failed or t["basis"] == "standalone":
         confidence = "medium"
@@ -175,7 +234,8 @@ def compute(t: dict, page_text: str, lender: bool) -> dict:
     else:
         confidence, why = "high", "Every figure shown was found on the cited page."
     return {"rows": rows, "margins": margins, "confidence": confidence, "confidence_note": why,
-            "dropped": failed, "unit_note": "₹ crore" + ("" if t["unit"] == "crore" else f" (converted from {t['unit']})")}
+            "dropped": failed, "unit_note": "₹ crore" + ("" if t["unit"] == "crore" else f" (converted from {t['unit']})"),
+            "revenue_how": summed.get("how") if summed else None}
 
 
 def extract(a: Announcement, lender: bool) -> dict:
@@ -271,7 +331,7 @@ def card_view(rec: dict | None) -> dict | None:
         blank = dict.fromkeys(("current", "previous", "year_ago", "qoq_pct", "yoy_pct"))
         rows = {m: None if m == "ebitda" and rec["lender"] else blank for m in METRICS}
         return view | {"rows": rows, "margins": {"ebitda": None, "pat": None}}
-    return view | {"rows": rec["rows"], "margins": rec["margins"]}
+    return view | {"rows": rec["rows"], "margins": rec["margins"], "revenue_how": rec.get("revenue_how")}
 
 
 def _crore(v: float) -> str:

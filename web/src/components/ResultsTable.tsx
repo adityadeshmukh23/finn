@@ -69,6 +69,7 @@ export function ResultsTable({ r }: { r: Results }) {
       <p className="mt-2 text-meta text-ink-3">
         {r.margins.ebitda !== null && <>EBITDA margin {r.margins.ebitda}% · </>}
         {r.margins.pat !== null && <>PAT margin {r.margins.pat}% · </>}
+        {r.revenue_how && <>Revenue is the {r.revenue_how}. </>}
         {!r.lender && 'EBITDA = PBT + finance costs + D&A − other income, computed by FINN. '}
         {r.confidence === 'medium' && <span className="text-flag">Medium confidence: {plainNote(r.confidence_note)}</span>}
       </p>
