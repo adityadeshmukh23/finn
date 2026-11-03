@@ -41,6 +41,21 @@ def page_scores(pages: list[str]) -> list[tuple[int, int, str]]:
     return sorted(out, key=lambda x: (-x[0], x[1]))
 
 
+# A printed figure: 1,234.56, (1,234.56), 12.5 or 1,23,456. Bare integers are left out: they're note numbers and years.
+_FIG = re.compile(r"\(?\d[\d,]*\.\d+\)?|\(?\d{1,3}(?:,\d{2,3})+\)?")
+NO_ROWS = "This PDF's table has no readable rows, so its columns can't be told apart."
+
+
+def has_rows(page: str) -> bool:
+    """False when the figures come out one to a line, as from a scrambled OCR layer. Then nothing ties a number to its
+    label or column, and finding it on the page proves nothing: Equitas's June-quarter profit passed as September's.
+    Across the recorded tables the share of figures alone on a line is 0 to 33%, and Equitas is 100%."""
+    lines = [ln.strip() for ln in page.splitlines() if ln.strip()]
+    figures = sum(len(_FIG.findall(ln)) for ln in lines)
+    lone = sum(1 for ln in lines if _FIG.fullmatch(ln))
+    return figures < 12 or lone / figures < 0.8
+
+
 class Figures(BaseModel):
     current: float | None = Field(description="this quarter, as printed")
     previous: float | None = Field(description="the immediately preceding quarter, as printed")
@@ -175,7 +190,10 @@ def extract(a: Announcement, lender: bool) -> dict:
         note = ("Results PDF is a scanned image; figures not extracted" if empty > len(pages) / 2
                 else "No results table found in this filing")
         return _save(rec | {"status": "no_table", "note": note})
-    user = "\n\n".join(f"[page {n}]\n{pages[n - 1][:5000]}" for _, n, _ in sorted(cands, key=lambda c: c[1]))
+    readable = [c for c in cands if has_rows(pages[c[1] - 1])]
+    if not readable:
+        return _save(rec | withheld(cands, lender))
+    user = "\n\n".join(f"[page {n}]\n{pages[n - 1][:5000]}" for _, n, _ in sorted(readable, key=lambda c: c[1]))
     res = llm.call("extract_results", SYSTEM, user, ResultsTable, mock=lambda: None, max_tokens=1200)
     if res.output is None:
         return {**rec, "status": "skipped", "note": res.note or res.source}
@@ -183,9 +201,27 @@ def extract(a: Announcement, lender: bool) -> dict:
     if not t["found"] or not 1 <= t["page"] <= len(pages):
         return _save(rec | {"status": "no_table", "note": "Model found no quarterly table in the candidate pages",
                             "candidates": [n for _, n, _ in cands]})
-    rec |= {"status": "extracted", "extracted": t, "candidates": [n for _, n, _ in cands], "lender": lender}
+    rec |= {"status": "extracted", "extracted": t, "candidates": [n for _, n, _ in readable], "lender": lender}
     rec |= compute(t, pages[t["page"] - 1], lender)
     return _save(rec)
+
+
+def withheld(cands: list[tuple[int, int, str]], lender: bool) -> dict:
+    """The record for a table found but not readable: no model call, no figures, and the page to go and read."""
+    _, page, basis = cands[0]
+    return {"status": "withheld", "page": page, "basis": basis, "lender": lender, "candidates": [n for _, n, _ in cands],
+            "confidence": "low", "confidence_note": NO_ROWS, "note": NO_ROWS}
+
+
+def recompute(rec: dict, pages: list[str], lender: bool) -> dict:
+    """Re-run the rules on a recorded extraction, with no model call."""
+    page = pages[rec["extracted"]["page"] - 1]
+    keep = {k: rec[k] for k in ("id", "symbol", "url")}
+    if not has_rows(page):
+        cands = [(0, n, rec["extracted"]["basis"]) for n in rec["candidates"]]
+        return _save(keep | withheld(cands, lender))
+    return _save(keep | {k: rec[k] for k in ("status", "extracted", "candidates")} | {"lender": lender}
+                 | compute(rec["extracted"], page, lender))
 
 
 def _save(rec: dict) -> dict:
@@ -219,16 +255,23 @@ def card_view(rec: dict | None) -> dict | None:
     """What the briefing card needs, or None when there's nothing honest to show."""
     if not rec:
         return None
-    if rec.get("status") != "extracted":
+    if rec.get("status") not in ("extracted", "withheld"):
         return {"status": rec.get("status"), "note": rec.get("note", "")}
-    t = rec["extracted"]
-    return {
-        "status": "extracted", "basis": t["basis"], "quarter": t["quarter_label"], "period": period(t["quarter_label"]), "page": t["page"],
-        "unit": rec["unit_note"], "revenue_label": t["revenue_label"], "lender": rec["lender"],
-        "rows": rec["rows"], "margins": rec["margins"],
+    t = rec.get("extracted") or {}
+    page = t.get("page", rec.get("page"))
+    view = {
+        "status": "extracted", "basis": t.get("basis", rec.get("basis")), "quarter": t.get("quarter_label", ""),
+        "period": period(t.get("quarter_label", "")), "page": page, "unit": rec.get("unit_note", ""),
+        "revenue_label": t.get("revenue_label", ""), "lender": rec["lender"],
         "confidence": rec["confidence"], "confidence_note": rec["confidence_note"],
-        "url": f"{rec['url']}#page={t['page']}",
+        "url": f"{rec['url']}#page={page}",
     }
+    if rec["confidence"] == "low":
+        # Withheld means withheld: the figures don't reach the data file either, so nothing downstream can show them.
+        blank = dict.fromkeys(("current", "previous", "year_ago", "qoq_pct", "yoy_pct"))
+        rows = {m: None if m == "ebitda" and rec["lender"] else blank for m in METRICS}
+        return view | {"rows": rows, "margins": {"ebitda": None, "pat": None}}
+    return view | {"rows": rec["rows"], "margins": rec["margins"]}
 
 
 def _crore(v: float) -> str:

@@ -53,9 +53,7 @@ def main() -> None:
             rec = done.get(a.id)
             if not rec or rec["status"] != "extracted":
                 continue
-            page = results._pages(a.url)[rec["extracted"]["page"] - 1]
-            r = results._save({k: rec[k] for k in ("id", "symbol", "url", "status", "extracted", "candidates")}
-                              | {"lender": lender} | results.compute(rec["extracted"], page, lender))
+            r = results.recompute(rec, results._pages(a.url), lender)
         elif a.id in done:
             r = done[a.id]
         else:

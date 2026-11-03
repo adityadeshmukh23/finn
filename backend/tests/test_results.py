@@ -86,6 +86,55 @@ def test_headline_leads_with_the_number_in_indian_format():
     assert results.headline({**view, "confidence": "low"}) is None
 
 
+SCRAMBLED = "\n".join(f"{n:,.2f}" for n in range(1200, 1240))     # one token per line, as Equitas's OCR layer comes out
+
+
+def test_a_page_of_lone_figures_has_no_rows():
+    assert not results.has_rows(SCRAMBLED)
+    assert results.has_rows(PAGE)
+    # Reliance prints a third of its figures alone on a line and its other rows read fine.
+    assert results.has_rows("\n".join(["1,234.56"] * 11 + ["Revenue 1,234.56 2,345.67 3,456.78"] * 8))
+    assert results.has_rows("Notice of meeting\n12.50\n")          # too few figures to call it a table at all
+
+
+def test_an_unreadable_table_is_withheld_with_no_model_call(monkeypatch):
+    from finn import llm
+    from finn.sources.nse import Announcement
+
+    def no_call(*a, **k):
+        raise AssertionError("the model must not be called on a page with no rows")
+    monkeypatch.setattr(llm, "call", no_call)
+    monkeypatch.setattr(results, "_save", lambda rec: rec)
+    page = "Consolidated results Quarter ended Revenue from operations Profit before tax\n" + SCRAMBLED
+    monkeypatch.setattr(results, "_pages", lambda url: ["Cover", page])
+    a = Announcement(id="1", symbol="X", company="X", desc="d", text="t", url="https://example.com/x.pdf", ts="2026-10-29 14:50:00")
+    rec = results.extract(a, lender=True)
+    assert rec["status"] == "withheld" and rec["confidence"] == "low" and rec["page"] == 2
+
+    view = results.card_view(rec)
+    assert view["status"] == "extracted" and view["confidence"] == "low" and view["confidence_note"] == results.NO_ROWS
+    assert view["url"].endswith("#page=2") and results.headline(view) is None
+    assert view["rows"]["pat"]["current"] is None and view["rows"]["ebitda"] is None
+
+
+def test_a_low_confidence_card_ships_no_figures():
+    t = table()
+    t["pat"]["current"] = 1058.35
+    rec = {"id": "1", "symbol": "X", "url": "u", "status": "extracted", "extracted": t, "lender": False}
+    rec |= results.compute(t, PAGE, lender=False)
+    assert rec["rows"]["revenue"]["current"] == 9976.51           # computed, and kept in the recording for the audit
+    view = results.card_view(rec)
+    assert all(v is None for r in view["rows"].values() for v in r.values())
+    assert view["margins"] == {"ebitda": None, "pat": None}
+
+
+def test_recompute_withholds_a_recorded_extraction_when_its_page_has_no_rows(monkeypatch):
+    monkeypatch.setattr(results, "_save", lambda rec: rec)
+    rec = {"id": "1", "symbol": "X", "url": "u", "status": "extracted", "extracted": table(), "candidates": [1], "lender": True}
+    out = results.recompute(rec, [""] * 11 + [SCRAMBLED], lender=True)     # table() cites page 12
+    assert out["status"] == "withheld" and "extracted" not in out and "rows" not in out
+
+
 def test_period_reads_every_quarter_label_in_the_recording():
     for label in ["30 Sep 26", "30.09.2026", "September 30, 2026", "30 September 2026", "30th Sept 2026", "30-Sep-26", "30th Sep'26"]:
         assert results.period(label) == "Sep 2026", label
