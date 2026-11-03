@@ -11,7 +11,7 @@ from datetime import date, datetime, time, timedelta
 
 from finn import digest, filings, market, mgmt, results
 from finn.config import REPO_ROOT, settings
-from finn.research import pvd
+from finn.research import pvd, walk
 from finn.sources import nse, prices
 
 WINDOWS = (24, 72, 168)
@@ -65,6 +65,9 @@ def build(out=OUT) -> dict:
     for c in research:
         shutil.copy(pvd.recording_path(c["symbol"]), out / "research" / f"{c['symbol']}.json")
     (out / "research" / "index.json").write_text(json.dumps({"companies": research}, ensure_ascii=False))
+
+    # Guidance walks: rules over the same recordings, no model. Outside research/, where each file is one company's.
+    (out / "walks.json").write_text(json.dumps(walk.build([c["symbol"] for c in research]), ensure_ascii=False, separators=(",", ":")))
 
     manifest = {"fetched_at": snap["fetched_at"], "from": snap["from"], "to": snap["to"],
                 "days": days, "windows": list(WINDOWS), "holdings": len(meta),
