@@ -55,7 +55,7 @@ describe('rowLine', () => {
   it('points a price row at a dated filing and never calls it the cause', () => {
     expect(rowLine(mk, ctx({ last: exit }), true)).toBe('Filed 29 Oct: P N Vasudevan resigns as MD & CEO')
     expect(rowLine(mk, ctx({ last: { ...exit, headline: 'Resignation of Mr. P N Vasudevan as Managing Director & CEO of the company w.e.f. November 2, 2026' } }), true))
-      .toBe('Filed 29 Oct: P N Vasudevan resigns as MD & CEO, effective 2 Nov 2026')
+      .toBe('Filed 29 Oct: P N Vasudevan resigns as MD & CEO, effective 2 Nov')
   })
   it('gives results filed earlier as the lead figure, with its labels', () => {
     const filed = { ...exit, reason: 'Quarterly results', headline: 'PAT ₹6,367 cr, +28.7% YoY; revenue +22.8% YoY (Sep 2026 qtr, consolidated)' }

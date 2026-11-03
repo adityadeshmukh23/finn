@@ -2,18 +2,7 @@
  * Short plain headlines from NSE's filing subjects. Display only: the link still opens the filing.
  * A rule fires only on a shape it fully understands, keeps every name and figure, and otherwise leaves the text alone.
  */
-const MONTHS: Record<string, string> = { january: 'Jan', february: 'Feb', march: 'Mar', april: 'Apr', may: 'May', june: 'Jun', july: 'Jul', august: 'Aug', september: 'Sep', october: 'Oct', november: 'Nov', december: 'Dec' }
-const MONTH = Object.keys(MONTHS).join('|')
-const US_DATE = new RegExp(`\\b(${MONTH}) (\\d{1,2}), (\\d{4})\\b`, 'i')
-const DAY_DATE = new RegExp(`\\b(\\d{1,2})(?:st|nd|rd|th)? (${MONTH}),? (\\d{4})\\b`, 'i')
-
-function shortDate(s: string): string {
-  const us = s.match(US_DATE)
-  if (us) return s.replace(US_DATE, `${+us[2]} ${MONTHS[us[1].toLowerCase()]} ${us[3]}`)
-  const d = s.match(DAY_DATE)
-  if (d) return s.replace(DAY_DATE, `${+d[1]} ${MONTHS[d[2].toLowerCase()]} ${d[3]}`)
-  return s
-}
+import * as fig from './fig'
 
 export const shortRole = (r: string) => r
   .replace(/^an? /i, '')
@@ -41,7 +30,7 @@ const PERIOD_ONLY = /^Results for the quarter ended (\w+ \d{4})$/
  * A filing's line for an investor. Where NSE's subject says nothing on its own, the classification says what it is:
  * "Investor Presentation" is the company's results slides. It adds no fact the subject and its class don't give.
  */
-export function filingLine(it: { reason: string; headline: string }): string {
+export function filingLine(it: { reason: string; headline: string; ts?: string }): string {
   const h = it.headline.trim()
   if (it.reason === 'Results deck') {
     const period = h.match(DECK_PERIOD)
@@ -52,18 +41,20 @@ export function filingLine(it: { reason: string; headline: string }): string {
   if (h === 'Concall transcript filed') return 'Earnings call transcript filed'
   const m = h.match(PERIOD_ONLY)
   // NSE subjects can run two sentences together: "…October 28, 2026.Further, a meeting…"
-  return m ? `Results filed for the ${m[1]} quarter` : plainHeadline(h).replace(/(\d)\.([A-Z])/g, '$1. $2')
+  return m ? `Results filed for the ${m[1]} quarter` : plainHeadline(h.replace(/(\d)\.([A-Z])/g, '$1. $2'), it.ts)
 }
 
-export function plainHeadline(raw: string): string {
+export const plainHeadline = (raw: string, filed?: string) => fig.printedDates(subjectLine(raw), filed)
+
+function subjectLine(raw: string): string {
   const h = raw.trim().replace(/^Please find enclosed (?:the )?/i, '')
   let m: RegExpMatchArray | null
   if ((m = h.match(CHANGE))) {
     const verb = m[1].toLowerCase() === 'appointment' ? 'appointed' : 'resigns as'
-    return `${m[2]} ${verb}${verb === 'appointed' ? ' as' : ''} ${shortRole(m[3])}, effective ${shortDate(m[4])}`
+    return `${m[2]} ${verb}${verb === 'appointed' ? ' as' : ''} ${shortRole(m[3])}, effective ${m[4]}`
   }
-  if ((m = h.match(CALL))) return `Earnings call transcript: ${m[1]} to ${shortDate(m[2])}`
-  if ((m = h.match(RELEASE))) return `Press release: ${m[1]} to ${shortDate(m[2])}`
+  if ((m = h.match(CALL))) return `Earnings call transcript: ${m[1]} to ${m[2]}`
+  if ((m = h.match(RELEASE))) return `Press release: ${m[1]} to ${m[2]}`
   if ((m = h.match(TITLED))) return `Press release: ${m[1]}`
   if ((m = h.match(PAID))) return `${cap(m[1].toLowerCase())} dividend of Rs. ${m[2]} approved`
   if ((m = h.match(DECLARED))) return `${cap(m[1].toLowerCase())} dividend of Rs. ${m[2]} per share declared`

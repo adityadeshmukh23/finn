@@ -70,6 +70,18 @@ describe('periods and basis', () => {
     expect(fig.basis('standalone')).toBe('standalone')
   })
 
+  it('dates as filings print them read as 30 Oct, with the year only when it differs from the filing', () => {
+    const filed = '2026-10-30T19:00:00+05:30'
+    for (const [printed, want] of [['October 30, 2026', '30 Oct'], ['26 th October, 2026', '26 Oct'], ['26th October, 2026', '26 Oct'], ['02nd November 2026', '2 Nov'],
+      ['03-Nov-2026', '3 Nov'], ['30th Sept 2026', '30 Sep'], ['1 February 2027', '1 Feb 2027'], ['January 1, 2027', '1 Jan 2027']]) {
+      expect(fig.printedDates(printed, filed), printed).toBe(want)
+    }
+    expect(fig.printedDates('on Wednesday, October 28, 2026, at 17:30', filed)).toBe('on Wednesday, 28 Oct, at 17:30')
+    expect(fig.printedDates('October 30, 2026')).toBe('30 Oct 2026')
+  })
+  it('leaves what is not a real date as printed', () => {
+    for (const s of ['February 30, 2026', 'Q2 FY27', '30.09.2026', 'May 2026', '']) expect(fig.printedDates(s, '2026-10-30T19:00:00+05:30')).toBe(s)
+  })
   it('dates are IST whatever the device says, with three-letter months', () => {
     expect(fig.day('2026-10-30')).toBe('30 Oct')
     expect(fig.day('2026-09-30')).toBe('30 Sep')

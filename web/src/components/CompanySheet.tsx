@@ -124,7 +124,7 @@ export function CompanySheet({ symbol, name, sector, card, filings, sessions, en
       {people && people.length > 0 && (
         <section className="mt-5">
           <h3 className="font-semibold text-ink">Latest management change{peopleAt ? `, filed ${fig.day(peopleAt.ts)}` : ''}</h3>
-          <People people={people} />
+          <People people={people} filed={card?.people?.length ? card.lead.ts : peopleAt?.ts} />
         </section>
       )}
 

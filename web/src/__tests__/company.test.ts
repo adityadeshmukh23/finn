@@ -70,4 +70,8 @@ describe('bookTally', () => {
   it('never looks ahead', () => {
     expect(bookTally(s, '2026-10-29T20:00:00+05:30')).toEqual({ up: 0, down: 1, flat: 0 })
   })
+  it('a move that shows as 0.0% is flat, whichever way it rounded', () => {
+    const near = { A: [['2026-10-30', 1, 0.04, 1]], B: [['2026-10-30', 1, -0.04, 1]], C: [['2026-10-30', 1, 0.05, 1]] } as Record<string, Session[]>
+    expect(bookTally(near, '2026-10-30T20:00:00+05:30')).toEqual({ up: 1, down: 0, flat: 2 })
+  })
 })

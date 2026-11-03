@@ -38,9 +38,9 @@ export function rowFigure(card: Card): RowFigure | null {
   return null
 }
 
-/** "…, effective 29 Oct 2026" says nothing when the filing itself is dated 29 Oct. */
+/** "…, effective 29 Oct" says nothing when the filing itself is dated 29 Oct. */
 function withoutSameDay(line: string, ts: string): string {
-  const m = line.match(/, effective (\d{1,2} [A-Z][a-z]{2}) \d{4}$/)
+  const m = line.match(/, effective (\d{1,2} [A-Z][a-z]{2})$/)
   return m && m[1] === fig.day(ts) ? line.slice(0, m.index) : line
 }
 

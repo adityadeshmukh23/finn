@@ -5,14 +5,22 @@ import type { Timeline } from '../company'
 import { filingLine, plainHeadline as p } from '../plain'
 
 describe('plainHeadline', () => {
+  const filed = '2026-10-30T19:00:00+05:30'
   it('management changes lead with the person', () => {
-    expect(p('Resignation of Mr. P N Vasudevan as Managing Director & CEO of the company w.e.f. October 29, 2026')).toBe('P N Vasudevan resigns as MD & CEO, effective 29 Oct 2026')
-    expect(p('Appointment of Ms Rinkoo Somani as Chief Financial Officer of the company w.e.f. October 27, 2026')).toBe('Rinkoo Somani appointed as CFO, effective 27 Oct 2026')
-    expect(p('Appointment of Mr Vineet Taneja as an Additional Non-Executive Independent Director of the Company of the company w.e.f. October 24, 2026')).toBe('Vineet Taneja appointed as Additional Non-Executive Independent Director, effective 24 Oct 2026')
+    expect(p('Resignation of Mr. P N Vasudevan as Managing Director & CEO of the company w.e.f. October 29, 2026', filed)).toBe('P N Vasudevan resigns as MD & CEO, effective 29 Oct')
+    expect(p('Appointment of Ms Rinkoo Somani as Chief Financial Officer of the company w.e.f. October 27, 2026', filed)).toBe('Rinkoo Somani appointed as CFO, effective 27 Oct')
+    expect(p('Appointment of Mr Vineet Taneja as an Additional Non-Executive Independent Director of the Company of the company w.e.f. October 24, 2026', filed)).toBe('Vineet Taneja appointed as Additional Non-Executive Independent Director, effective 24 Oct')
+  })
+  it('a date in another year than the filing keeps its year', () => {
+    expect(p('Appointment of Mr. Sanjay Sachdeva as Managing Director & CEO of the company w.e.f. April 01, 2027', filed)).toBe('Sanjay Sachdeva appointed as MD & CEO, effective 1 Apr 2027')
+  })
+  it('dates in a headline no rule recognises read the same way', () => {
+    expect(p('Record date for the purpose of Dividend is 03-Nov-2026', filed)).toBe('Record date for the purpose of Dividend is 3 Nov')
+    expect(p('Copy of Newspaper Publication dated 09th October, 2026', filed)).toBe('Copy of Newspaper Publication dated 9 Oct')
   })
   it('strips letter boilerplate', () => {
-    expect(p('Transcript of Earnings Conference Call on financial results for the quarter and half year ended September 30, 2026')).toBe('Earnings call transcript: quarter and half year to 30 Sep 2026')
-    expect(p('Please find enclosed the Press Release on the performance of the Company for the quarter and half year ended 30th September 2026')).toBe('Press release: quarter and half year to 30 Sep 2026')
+    expect(p('Transcript of Earnings Conference Call on financial results for the quarter and half year ended September 30, 2026', filed)).toBe('Earnings call transcript: quarter and half year to 30 Sep')
+    expect(p('Please find enclosed the Press Release on the performance of the Company for the quarter and half year ended 30th September 2026', filed)).toBe('Press release: quarter and half year to 30 Sep')
     expect(p('Press Release titled Bajaj Electricals Announces Evolution Of Board Leadership')).toBe('Press release: Bajaj Electricals Announces Evolution Of Board Leadership')
   })
   it('keeps the dividend figure', () => {
@@ -47,7 +55,7 @@ describe('filingLine', () => {
     expect(line('Quarterly results', 'Results for the quarter ended Sep 2026')).toBe('Results filed for the Sep 2026 quarter')
   })
   it('separates two sentences run together, and leaves decimals alone', () => {
-    expect(line('M&A', 'From October 28, 2026.Further, a meeting')).toBe('From October 28, 2026. Further, a meeting')
+    expect(filingLine({ reason: 'M&A', headline: 'From October 28, 2026.Further, a meeting', ts: '2026-10-28T10:00:00+05:30' })).toBe('From 28 Oct. Further, a meeting')
     expect(line('M&A', 'Demand of Rs. 2.83 crore')).toBe('Demand of Rs. 2.83 crore')
   })
   it('leaves a filing with content to the headline rules', () => {

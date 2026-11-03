@@ -75,6 +75,26 @@ export function day(ts: string): string {
 export const dayYear = (ts: string) =>
   threeLetterMonth(new Date(ts).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric', timeZone: IST }))
 
+const MONTH_PRINTED = '(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)'
+const ORDINAL = '(?:st|nd|rd|th)?'
+const PRINTED_DATE = new RegExp(`\\b(?:${MONTH_PRINTED} (\\d{1,2})${ORDINAL},? (\\d{4})|(\\d{1,2}) ?${ORDINAL}[ -]${MONTH_PRINTED}\\.?,?[ -](\\d{4}))\\b`, 'gi')
+const MONTH_INDEX = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+
+/**
+ * Dates as filings print them ("October 30, 2026", "26 th October, 2026", "03-Nov-2026") written as `day` writes them.
+ * The year goes only when it's the year of the filing: "effective 1 Apr" filed in October would read as a date gone by.
+ * With no filing date to compare with, it stays. Anything that isn't a real date is left as printed.
+ */
+export function printedDates(text: string, filed?: string): string {
+  return text.replace(PRINTED_DATE, (whole, monA, dayA, yearA, dayB, monB, yearB) => {
+    const [mon, d, y] = monA ? [monA, +dayA, yearA] : [monB, +dayB, yearB]
+    const m = MONTH_INDEX.indexOf(mon.slice(0, 3).toLowerCase())
+    if (new Date(Date.UTC(+y, m, d)).getUTCDate() !== d) return whole
+    const iso = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
+    return filed?.startsWith(y) ? day(iso) : dayYear(`${iso}T12:00:00+05:30`)
+  })
+}
+
 /** "Sunday 11 Oct", from an ISO date. */
 export const weekdayDay = (iso: string) =>
   threeLetterMonth(new Date(`${iso}T12:00:00+05:30`).toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'short', timeZone: IST }).replace(',', ''))

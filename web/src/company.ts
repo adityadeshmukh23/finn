@@ -1,4 +1,5 @@
 import type { Person, Results, Tier } from './api'
+import * as fig from './fig'
 import { closeTime, type Session } from './market'
 
 /** One filing in a company's timeline: the same classification and verified reads as the briefing. */
@@ -105,14 +106,15 @@ export function groupSameDay(rows: TimelineItem[]): FilingGroup[] {
   }))
 }
 
-/** The book in one line: how many holdings closed up, down and flat at the as-of moment. */
+/** The book in one line: how many holdings closed up, down and flat at the as-of moment. Rounds as the moves on screen do, so 0.0% is flat. */
 export function bookTally(sessions: Record<string, Session[]>, end: string): { up: number; down: number; flat: number } {
   const tally = { up: 0, down: 0, flat: 0 }
   for (const rows of Object.values(sessions)) {
     const chg = sessionsAsOf(rows, end, 1)[0]?.[2]
     if (chg === undefined || chg === null) continue
-    if (chg > 0) tally.up++
-    else if (chg < 0) tally.down++
+    const sign = fig.pctChange(chg).sign
+    if (sign === 'up') tally.up++
+    else if (sign === 'down') tally.down++
     else tally.flat++
   }
   return tally
