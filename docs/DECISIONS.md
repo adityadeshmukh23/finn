@@ -249,3 +249,17 @@
 - **Every recorded file now has a 15-second limit,** covering a body that stalls after the headers. The scorecard says "Still loading" at 5 seconds, then stops with what happened and Try again. Today's existing error state gets the same limit. Prices and the company timeline still degrade silently, as designed.
 - **A failure no longer blames the data.** Offline or a bad response used to read "No research for BEL yet", which says the work was never done. Only a 404 says that now.
 - **Untested on a real network:** whether a real phone stall matches this. The stall here is a request held open in headless Chrome.
+
+## Polish: block A, correctness found while planning (2026-11-03)
+
+- **Fixed before any visual work, because a formatter can't catch a number that was read wrongly.** All of these passed the verifier, which proves a figure is printed on the page, not that it's the right row or column. The errors are listed in `EVAL.md`.
+- **Equitas's figures are withheld, not corrected.** The page's text has every figure on its own line. ₹218 cr can be proved by hand, but rebuilding a table from loose numbers is the failure that caused this. The share of figures alone on a line is 0 to 33% on the other 14 tables and 100% here, so the rule sits at 80%. It runs before the model, so an unreadable page costs no call.
+- **Withheld now means withheld in the data too.** A low-confidence view used to carry its figures to the browser and rely on the UI to hide them. They no longer reach the data file, so Copy as note and Explain this number can't surface them later.
+- **HUL's revenue is summed by code and has to prove itself.** Parts plus other income must equal the printed total income line in all three columns, or the card goes low confidence. This fires on HUL only.
+- **"Revised" has to earn the word.** It needs a later call and a period stated in the quote. Two different figures on one call read "Two statements on this call differ". A different figure with no period reads "no period stated". Three of the five labelled revisions keep the word: Coforge's FY27 EBIT and Dixon's IT hardware and telecom.
+- **A general consistency check was added as a second net:** PAT can't exceed PBT, implied tax must be 10% to 35%, and a current figure can't repeat another column of its row. It catches Equitas on its own and Sterling Tools, which was already low, and changes no other card. Failing it withholds rather than corrects, because a real tax credit can fail it too.
+- **Rank order didn't change on any of the 66 briefings.** Equitas stays #2 on the default screen and #1 on the 29 Oct ones. Its row always led with the price move: the wrong figure only ever appeared in the results table.
+- **The audit is now a script, `audit_results.py`,** so the count can be reproduced. 104 of 104 figures match on the 9 cards that show any. It sets row labels by hand, reads the text layer and needs the local PDFs, so it stays out of CI. Recorded corrections are pinned in `test_results_recorded.py`, which does run in CI.
+- **Left as is, for a decision:** Reliance's and L&T's PAT is the printed line before the share of associates. Reliance would read +33.8% rather than +32.1%. It matches its label, so the audit counts it as correct.
+- **Left as is, not resolved by FINN:** BEL's p.21 closing passage also gives order inflow over ₹20,000 cr against ₹55,000 cr guided a call earlier. That statement never joined the order inflow row, so the row shows ₹55,000 cr with no later statement and no flag.
+

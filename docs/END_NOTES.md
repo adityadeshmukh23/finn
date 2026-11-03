@@ -1,6 +1,6 @@
 # What COVER_NOTE.md needs changed
 
-A running list. `COVER_NOTE.md` has not been edited. README.md, DESIGN.md and DECISIONS.md match the app as of the ranking change.
+A running list. `COVER_NOTE.md` has not been edited. README.md, DESIGN.md and DECISIONS.md match the app as of block A, the correctness fixes.
 
 ## Exact changes
 
@@ -19,4 +19,6 @@ The body, from "What it is" up to the sign-off, is 365 words today and 385 after
 - **Key decisions, optional:** "First-time readers get one number per company; every figure stays one tap from its page."
 - **"Rules rank and place filings":** still accurate, keep it.
 - **"A verifier bug found late":** still accurate, so keep it unless the bug gets fixed.
+- **"A verifier bug found late":** block A adds a stronger story: an audit against the PDFs found 4 wrong figures of 89 on two cards (Equitas, HUL), since fixed, and 104 of 104 match now. Optional, if words allow: "I audited results against the PDFs, found 4 wrong figures of 89, fixed the cause and published the list." That's 19 words, 4 over the room left, so it replaces something or gets cut. Say the figures only as they stand in `EVAL.md` on the day.
+- **Don't name the analyst on Kaynes' Q4 FY26 call.** Decided 3 Nov: not in the app, the notes or the docs.
 - **Later blocks:** Guidance Walk, the evaluation page, the ledger, Listen for and any new recordings will each add a line here when they land.
