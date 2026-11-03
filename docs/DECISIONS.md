@@ -333,3 +333,7 @@ Each is its own commit after the tag `submission-candidate`, so any can be dropp
 
 Fixed before any label was filled in, so the rules can't bend to the result. No model calls. `cannot_tell` rows are excluded and counted. Counts, per-category agreement and every disagreement with both labels are shown, and no category under 20 items gets a percentage. Postal ballot rows are reported separately, because FINN's rules never assign that label. The result says plainly that 60 filings is a small sample drawn from FINN's own labels, and that agreement is not accuracy across all filings.
 
+## Polish: monogram badges removed (2026-11-03)
+
+- **Monogram badges were tried and removed because they did not look good, which reverses the entry above.** The layout is text-first: rows lead with the ticker in type. The share image and the tour never mentioned them. Compact's first screen is back to 97 words and 16 numbers at 390x844 and 375x667, on the budget's count. The golden diff is empty.
+

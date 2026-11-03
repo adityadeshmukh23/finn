@@ -50,6 +50,7 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 
 **Push: the briefing.** The Today tab: a windowed digest (24h, 3 days, 7 days, plus an as-of date so it works on quiet days) of every NSE filing across the portfolio. Four tabs: Today, Book, Research, Alerts.
 
+- The layout is text-first. Monogram badges were tried and removed because they did not look good.
 - Two views, chosen on Today and remembered on the device. Detailed, the default, opens every row: why it ranks there, its filing and the results table, plus a one-line synthesis and the book strip. Compact shows the top three companies with one number each, the rest a tap away. Ask FINN gives the company file.
 
 - Rules classify and rank each filing; no model is involved in ranking. The order weighs the kind of event, how senior a management change is, company size, other kinds of major filing, and how far a price or volume move went. Routine filings collapse into a filtered count, grouped by reason, with every item inspectable.
