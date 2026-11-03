@@ -24,7 +24,7 @@ from pydantic import BaseModel, Field
 
 from .. import llm
 from ..config import settings
-from ..results import pct
+from ..results import group_indian, pct
 from ..verify import norm, number_in, numbers
 from .docs import Doc, DocSet, Period
 
@@ -371,8 +371,11 @@ def judge(promises: list[dict], actuals: list[dict], latest: str, evidence: dict
 UNIT_LABEL = {"%": "%", "crore": "cr", "usd_million": "$ mn", "usd_billion": "$ bn", "none": ""}
 
 
-def fmt_num(v: float) -> str:
-    return f"{v:,.2f}".rstrip("0").rstrip(".")
+def fmt_num(v: float, indian: bool = False) -> str:
+    whole, _, frac = f"{abs(v):,.2f}".partition(".")
+    if indian:
+        whole = group_indian(int(whole.replace(",", "")))
+    return ("−" if v < 0 else "") + f"{whole}.{frac}".rstrip("0").rstrip(".")
 
 
 def format_target(p: dict) -> str:
@@ -383,7 +386,7 @@ def format_target(p: dict) -> str:
         if u == "%":
             return f"{fmt_num(v)}%"
         if u == "crore":
-            return f"₹{fmt_num(v)} cr"
+            return f"₹{fmt_num(v, indian=True)} cr"
         if u in ("usd_million", "usd_billion"):
             return f"${fmt_num(v)} {'mn' if u == 'usd_million' else 'bn'}"
         return fmt_num(v)

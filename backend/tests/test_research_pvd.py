@@ -164,6 +164,13 @@ def _row(promised_call, *later):
             "revisions": []}
 
 
+def test_targets_group_crore_the_indian_way():
+    p = {"target_low": 100000.0, "target_high": None, "unit": "crore", "direction": "at_least"}
+    assert pvd.format_target(p) == "₹1,00,000 cr+"
+    assert pvd.format_value(3626.35, "crore") == "₹3,626.35 cr" and pvd.format_value(900, "crore") == "₹900 cr"
+    assert pvd.fmt_num(1500.5) == "1,500.5" and pvd.fmt_num(-5.25) == "−5.25"
+
+
 def test_two_figures_on_one_call_are_not_a_revision():
     r = pvd.settle_changes(_row("Q4 FY26",
                                 ("Q1 FY27", "28%+", "restated", "Overall on a yearly basis, we maintain the EBITDA margin of 28%"),

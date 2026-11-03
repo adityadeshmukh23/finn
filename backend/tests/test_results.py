@@ -223,6 +223,11 @@ def test_recompute_withholds_a_recorded_extraction_when_its_page_has_no_rows(mon
     assert out["status"] == "withheld" and "extracted" not in out and "rows" not in out
 
 
+def test_a_loss_takes_the_real_minus_sign():
+    assert results._crore(-1234.5) == "−1,234" and results._crore(-99.44) == "−99.4"
+    assert results._crore(332861.0) == "3,32,861"
+
+
 def test_period_reads_every_quarter_label_in_the_recording():
     for label in ["30 Sep 26", "30.09.2026", "September 30, 2026", "30 September 2026", "30th Sept 2026", "30-Sep-26", "30th Sep'26"]:
         assert results.period(label) == "Sep 2026", label

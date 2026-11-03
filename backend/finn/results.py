@@ -364,13 +364,17 @@ def card_view(rec: dict | None) -> dict | None:
     return view | {"rows": rec["rows"], "margins": rec["margins"], "revenue_how": rec.get("revenue_how")}
 
 
+def group_indian(whole: int) -> str:
+    """332861 -> '3,32,861'."""
+    head, tail = divmod(whole, 1000)
+    return f"{re.sub(r'(\d)(?=(\d{2})+$)', r'\1,', str(head))},{tail:03d}" if head else str(tail)
+
+
 def _crore(v: float) -> str:
-    """Indian grouping, whole crore from 100 up: 332861.0 -> '3,32,861', 99.44 -> '99.4'."""
+    """Indian grouping, whole crore from 100 up: 332861.0 -> '3,32,861', 99.44 -> '99.4'. A loss takes U+2212, not a hyphen."""
     if abs(v) < 100:
-        return f"{v:.1f}"
-    head, tail = divmod(round(abs(v)), 1000)
-    s = f"{re.sub(r'(\d)(?=(\d{2})+$)', r'\1,', str(head))},{tail:03d}" if head else str(tail)
-    return ("-" if v < 0 else "") + s
+        return f"{'−' if v < 0 else ''}{abs(v):.1f}"
+    return ("−" if v < 0 else "") + group_indian(round(abs(v)))
 
 
 def headline(view: dict | None) -> str | None:
