@@ -16,7 +16,7 @@ Every requirement in the brief, where it lives, and how far it got.
 | Pull: business snapshot, trajectory, balance sheet, cash quality, bull vs bear | Not built | One lens verified end to end was chosen over several that aren't |
 | Promised vs delivered worked example | Met | 5 companies across five calls, verdicts by code, Guidance Walk on 9 promises. Asian Paints has no checkable promise |
 | Primary sources only | Met | Transcripts and annual reports only, each claim with a quote and page |
-| Any-ticker generalisation | Partly | Works locally, not on the public link: `./run.sh TICKER`. A smoke test passed on TCS and Titan (document index, one transcript, one cheap-model read). ITC is refused, as screener.in lists no transcripts |
+| Any-ticker generalisation | Partly | Locally, not on the public link. The engine fetches live NSE data via ./run.sh TICKER and works where screener.in lists transcripts (tested on TCS and Titan; ITC is refused cleanly because none are listed). The test covered the document index, one transcript and one cheap-model read |
 | Interaction model | Met | Briefing first, chat second: Compact and Detailed views, Ask FINN opens a company file. No free-form chat or voice, by choice |
 | Model routing and cost | Met | Rules, then cheap, then strong model; recorded outputs replayed. $0 on free tiers; the ledger undercounts Google's calls. See `docs/COST.md` |
 | Submission | Partly | Link, repo and `COVER_NOTE.md` are ready. Share links in `docs/BUILD_HISTORY.md` are still to add |
