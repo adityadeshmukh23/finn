@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { Icon } from './Icon'
 import * as fig from '../fig'
 import { verdictLine } from '../format'
-import { fetchResearch, NotRecorded, type Research as R, type ResearchDoc, type ScoreRow, type Verdict } from '../api'
+import { lastRevision, lead, title } from '../walk'
+import { GuidanceWalk, Quote } from './GuidanceWalk'
+import { fetchResearch, fetchWalks, NotRecorded, type Research as R, type ResearchDoc, type ScoreRow, type Verdict, type Walk } from '../api'
 
 const LABEL: Record<Verdict, string> = {
   missed: 'Missed',
@@ -48,11 +50,7 @@ function Src({ docs, doc, page, children }: { docs: Record<string, ResearchDoc>;
   )
 }
 
-function Quote({ text }: { text: string }) {
-  return <blockquote className="border-l-2 border-line pl-3 italic text-ink-2">“{text}”</blockquote>
-}
-
-function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
+function Row({ r, docs, walk }: { r: ScoreRow; docs: Record<string, ResearchDoc>; walk?: Walk }) {
   const [open, setOpen] = useState(false)
   const d = r.delivered
   const later = r.later ?? r.revisions.map((v) => ({ ...v, change: 'revised' as const }))
@@ -62,9 +60,12 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
     <li className="border-t border-line py-3 first:border-0">
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full text-left">
         <div className="flex items-start justify-between gap-3">
-          <span className="font-semibold text-ink">{r.label}</span>
+          <span className="font-semibold text-ink">{walk && open ? title(walk) : walk?.label ?? r.label}</span>
           <Pill v={r.verdict} />
         </div>
+        {walk && open ? (
+          <p className={`mt-1.5 ${walk.group === 'revised_delivered' ? 'text-title font-semibold text-ink' : 'text-ink-2'}`}>{lead(walk)}</p>
+        ) : (
         <dl className="mt-1.5 grid grid-cols-[72px_minmax(0,1fr)] gap-x-2 gap-y-0.5 ">
           <dt className="text-ink-3">Promised</dt>
           <dd className="text-ink">
@@ -83,10 +84,12 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
             </>
           )}
         </dl>
+        )}
         {r.reason && <p className="mt-1 text-ink-2">{r.reason}</p>}
         {r.restated > 0 && !open && (
           <p className="mt-1 text-meta text-ink-3">
-            {differsOn ? `Two statements on the ${differsOn} call differ`
+            {walk && walk.group !== 'held_delivered' ? `Revised on the ${lastRevision(walk)} call`
+              : differsOn ? `Two statements on the ${differsOn} call differ`
               : r.revisions.length > 0 ? `Revised ${fig.times(r.revisions.length)} on later calls`
                 : later.every((x) => x.change === 'restated') ? `Restated on ${calls} later ${calls === 1 ? 'call' : 'calls'}`
                   : `Discussed again on ${calls} later ${calls === 1 ? 'call' : 'calls'}`}
@@ -94,7 +97,17 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
         )}
       </button>
 
-      {open && (
+      {open && walk && (
+        <div className="mt-1 space-y-2">
+          <GuidanceWalk walk={walk} />
+          <p className="text-meta text-ink-3">
+            {r.verdict === 'not_yet_due' ? `Due ${r.due}; the latest call is earlier.`
+              : `The verdict is against the first promise${r.verdict === 'partially' && walk.unit === 'crore' ? ': Partially means at least 80% of it' : ''}.`}
+          </p>
+        </div>
+      )}
+
+      {open && !walk && (
         <div className="mt-2.5 space-y-2.5">
           <Quote text={r.promised.quote} />
           <p className="text-meta text-ink-3">
@@ -209,7 +222,7 @@ function Skeleton() {
 }
 
 /** The recorded scorecard for one company. Rendered directly by the figures golden test. */
-export function Scorecard({ data }: { data: R }) {
+export function Scorecard({ data, walks = [] }: { data: R; walks?: Walk[] }) {
   const [filter, setFilter] = useState<Verdict | null>(null)
   const [later, setLater] = useState(false)
   const [drops, setDrops] = useState(false)
@@ -218,6 +231,7 @@ export function Scorecard({ data }: { data: R }) {
     return Object.fromEntries(all.map((d) => [d.id, d]))
   }, [data])
 
+  const walkOf = (id: string) => walks.find((w) => w.symbol === data.symbol && w.row === id)
   const judgeCall = data.models.verdict[0]
   const judge = model(judgeCall?.model)
   const rows = data.scorecard.rows
@@ -256,7 +270,7 @@ export function Scorecard({ data }: { data: R }) {
         {due.length === 0 ? (
           <p className="py-4 text-ink-2">Nothing due yet: every promise found is for a later period.</p>
         ) : (
-          <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>
+          <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} walk={walkOf(r.id)} />)}</ul>
         )}
       </section>
 
@@ -266,7 +280,7 @@ export function Scorecard({ data }: { data: R }) {
             <span className="font-semibold text-ink">{notDue.length} promises not yet due</span>
             <span className="text-meta text-ink-3">{later ? 'Close' : `Current guidance, ${[...new Set(notDue.map((r) => r.due))].slice(0, 3).join(', ')}`}</span>
           </button>
-          {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} />)}</ul>}
+          {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} walk={walkOf(r.id)} />)}</ul>}
         </section>
       )}
 
@@ -330,7 +344,9 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
   const [data, setData] = useState<R | null>(null)
   const [error, setError] = useState<Error | null>(null)
   const [attempt, setAttempt] = useState(0)
+  const [walks, setWalks] = useState<Walk[]>([])
 
+  useEffect(() => { fetchWalks().then(setWalks) }, [])
   useEffect(() => {
     let live = true
     setData(null)
@@ -369,7 +385,7 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
         </div>
       )}
 
-      {data && <Scorecard data={data} />}
+      {data && <Scorecard data={data} walks={walks} />}
     </div>
   )
 }

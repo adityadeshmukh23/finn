@@ -10,10 +10,12 @@ const src = join(__dirname, '..')
 
 const EXCEPTIONS: [file: string, text: string, why: string][] = [
   ['components/CompanyChart.tsx', '`${i ? \'L\' : \'M\'}${x(i).toFixed(1)} ${y(s[1]).toFixed(1)}`', 'SVG coordinates, never read by anyone'],
+  ['components/GuidanceWalk.tsx', 'const at = (n: number) => n.toFixed(1)', 'SVG coordinates, never read by anyone'],
   ['components/CompanyChart.tsx', 'left: `${xPct}%`', 'CSS position'],
   ['components/CompanyChart.tsx', 'top: `${topPct}%`', 'CSS position'],
   ['components/CompanyChart.tsx', "translateX(-50%)", 'CSS position'],
   ['components/Research.tsx', 'at least 80% of a growth', 'the rule itself, in words, and not a figure from a filing'],
+  ['components/Research.tsx', 'at least 80% of it', 'the same rule, in words, beside a verdict it explains'],
   ['components/BookStrip.tsx', '${share}%, var(--surface)', 'CSS colour mix'],
   ['components/LedgerSheet.tsx', 'width: `${Math.min(100, (data.spent_usd / data.budget_usd) * 100)}%`', 'CSS width of a bar'],
 ]

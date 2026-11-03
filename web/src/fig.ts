@@ -11,6 +11,7 @@ export type Sign = 'up' | 'down' | 'none'
 export const MISSING = '–'
 export const NOT_MEANINGFUL = 'n.m.'
 export const CRORE_UNIT = '₹ crore'
+export const MILLION_UNIT = '₹ million'
 
 /** One decimal, and no sign on what rounds to zero: "−0.0%" says more than the number does. Colour takes the same sign, so it can't disagree. */
 export function pctChange(n: number): { text: string; sign: Sign } {
@@ -45,6 +46,28 @@ export function crore(v: number | null): string {
   if (v === null) return MISSING
   const t = Math.abs(v).toLocaleString(LOCALE, { maximumFractionDigits: Math.abs(v) >= 100 ? 0 : 1 })
   return v < 0 ? `${MINUS}${t}` : t
+}
+
+/** "₹3,626 cr". */
+export const croreAmount = (v: number) => `₹${crore(v)} cr`
+
+/** Delivered against a margin or growth target, in percentage points: "+1.2 pts". */
+export function points(n: number): string {
+  const t = Math.abs(n).toFixed(1)
+  return t === '0.0' ? `${t} pts` : `${n > 0 ? '+' : MINUS}${t} pts`
+}
+
+/** Delivered as a share of an amount target: "80.6%". */
+export const ofTarget = (n: number) => `${n.toFixed(1)}%`
+
+/** What management said, as it said it: "₹1,000 cr+", "27%", "about ₹4,000 cr minimum", "₹3,500–4,000 cr". Stated figures keep their own decimals. */
+export function target(t: { low: number; high: number | null; floor: boolean; about: boolean }, unit: '%' | 'crore'): string {
+  const write = (s: string) => (unit === '%' ? `${s}%` : `₹${s} cr`)
+  const n = (v: number) => (unit === '%' ? String(v) : crore(v))
+  if (t.high !== null) return write(`${n(t.low)}–${n(t.high)}`)
+  const one = write(n(t.low))
+  if (t.about) return t.floor ? `about ${one} minimum` : `about ${one}`
+  return t.floor ? `${one}+` : one
 }
 
 export const usd = (n: number) => (n < 0.01 && n > 0 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`)

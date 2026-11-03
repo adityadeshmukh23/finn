@@ -13,7 +13,7 @@ vi.mock('react', async (original) => {
 })
 
 import { applyAlerts, DEFAULT_PREFS } from '../alerts'
-import type { Digest, Research as R } from '../api'
+import type { Digest, Research as R, Walk } from '../api'
 import type { Timeline } from '../company'
 import type { Market } from '../market'
 import { Alerts } from '../components/Alerts'
@@ -87,7 +87,8 @@ function everyScreen() {
   const scorecards = readdirSync(join(demo, 'research')).filter((f) => f !== 'index.json').sort()
   for (const f of scorecards) {
     const data = read<R>(`research/${f}`)
-    render(screens, `research/${f.replace('.json', '')}`, [false, <Scorecard data={data} />], [true, <Scorecard data={data} />])
+    const walks = read<Walk[]>('walks.json')
+    render(screens, `research/${f.replace('.json', '')}`, [false, <Scorecard data={data} walks={walks} />], [true, <Scorecard data={data} walks={walks} />])
   }
   return { screens, briefings: files.length, scorecards: scorecards.length }
 }

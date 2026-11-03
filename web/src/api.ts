@@ -288,6 +288,58 @@ export interface Research {
   dropped: { stage: string; what: string; doc: string; page: number | null; why: string }[]
 }
 
+export interface WalkStep {
+  call: string
+  speaker: string
+  low: number
+  high: number | null
+  floor: boolean
+  about: boolean
+  change: 'first' | 'held' | 'revised'
+  read: 'recorded' | 'from the quote'
+  quote: string
+  doc: string
+  page: number
+  url: string
+}
+
+export type WalkGap = { kind: 'points' | 'share'; value: number }
+
+export interface Walk {
+  symbol: string
+  name: string
+  row: string
+  group: 'revised_delivered' | 'held_delivered' | 'revised_open'
+  label: string
+  due: string
+  unit: '%' | 'crore'
+  verdict: Verdict
+  steps: WalkStep[]
+  delivered: null | {
+    value: number
+    unit: string
+    period: string
+    source: 'transcript' | 'annual_report'
+    speaker: string
+    quote: string
+    doc: string
+    page: number
+    url: string
+    title: string
+    printed_in?: string
+    workings?: { label: string; value: number }[]
+  }
+  vs_first: WalkGap | null
+  vs_last: WalkGap | null
+}
+
+let walks: Promise<Walk[]> | null = null
+/** One promise followed call by call. Never throws: without the file a scorecard row reads as it did before. */
+export function fetchWalks(): Promise<Walk[]> {
+  walks ??= fetchRecorded<Walk[]>('/demo/walks.json').catch(() => { walks = null; return [] })
+  return walks
+}
+
 export interface ResearchEntry { symbol: string; name: string; headline: string; counts: Record<Verdict, number>; latest_period: string; generated_at: string }
 
 let researchIndex: Promise<ResearchEntry[]> | null = null
