@@ -6,7 +6,6 @@ import type { Session } from '../market'
 import { CompanyChart } from './CompanyChart'
 import { filingLine } from '../plain'
 import { Icon } from './Icon'
-import { Badge } from './Badge'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
 import { Sheet } from './Sheet'
@@ -91,7 +90,7 @@ export function CompanySheet({ symbol, name, sector, card, filings, sessions, en
   const people = card?.people?.length ? card.people : peopleAt?.people
 
   return (
-    <Sheet title={symbol} badge={<Badge symbol={symbol} />} onClose={onClose}>
+    <Sheet title={symbol} onClose={onClose}>
       <p className="-mt-2 text-meta text-ink-3">{name}{sector ? ` · ${sector}` : ''}</p>
 
       {last ? (

@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 import type { Digest } from '../api'
 import { filingsInWindow, type Timeline } from '../company'
 import { lastSessionBy, sessionAt, type Market } from '../market'
-import { Badge } from './Badge'
 import { Icon } from './Icon'
 import * as fig from '../fig'
 
@@ -56,7 +55,7 @@ export function Book({ chip, view, market, timeline, onOpen }: { chip: ReactNode
           return (
             <li key={r.symbol}>
               <button onClick={() => onOpen(r.symbol)} className="flex min-h-14 w-full items-center gap-3 py-2 text-left">
-                <Badge symbol={r.symbol} />{body}<Icon name="chevron" className="text-ink-3" />
+                {body}<Icon name="chevron" className="text-ink-3" />
               </button>
             </li>
           )
