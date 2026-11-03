@@ -43,6 +43,7 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 **Pull: promised vs delivered.** For a company, what management guided on its last five earnings calls, against what it then reported.
 
 - Primary sources only: transcripts and the annual report. screener.in is used as an index of links, nothing else.
+- Where management restated a target, the Guidance Walk follows it call by call: speaker, quote and page at each step, then what was delivered. Code reports the gap ("80.6% of the first promise, 90.7% of the last statement"). The recordings support nine walks: 1 revised and delivered, 5 held and delivered, 3 revised and open.
 - Every claim carries a quote, document, period and page. A verifier drops any quote that isn't on its cited page and any number that isn't in its quote. Dropped claims are listed in the app.
 - Code sets the verdict on every numeric promise. A stronger model only groups restatements and judges milestones. If the documents don't say, FINN says so.
 
