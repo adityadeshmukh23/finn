@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { applyAlerts, DEFAULT_PREFS, loadPrefs, savePrefs, type AlertPrefs } from './alerts'
-import { fetchDigest, fetchManifest, fetchMarket, fetchResearchIndex, fetchTimeline, STATIC, type Card, type Digest, type Manifest, type ResearchEntry } from './api'
+import { fetchDigest, fetchManifest, fetchMarket, fetchResearchIndex, fetchTimeline, fetchWalks, STATIC, type Card, type Digest, type Manifest, type ResearchEntry, type Walk } from './api'
 import { Alerts } from './components/Alerts'
 import { Book } from './components/Book'
 import { CompanySheet } from './components/CompanySheet'
@@ -58,6 +58,7 @@ export default function App() {
   const [market, setMarket] = useState<Market | null>(null)
   const [route, setRoute] = useState<Route>(() => parseHash(window.location.hash))
   const [researched, setResearched] = useState<ResearchEntry[]>([])
+  const [walks, setWalks] = useState<Walk[]>([])
 
   // Each tab keeps its scroll position; the briefing stays mounted so open rows survive a tab switch.
   const scrolls = useRef<Record<string, number>>({})
@@ -76,7 +77,7 @@ export default function App() {
   }, [])
   useLayoutEffect(() => { window.scrollTo(0, scrolls.current[routeKey(route)] ?? 0) }, [route])
 
-  useEffect(() => { fetchResearchIndex().then(setResearched) }, [])
+  useEffect(() => { fetchResearchIndex().then(setResearched); fetchWalks().then(setWalks) }, [])
   const openResearch = (sym: string) => { window.location.hash = `research/${sym}` }
   const closeResearch = () => {
     if (window.history.length > 1) window.history.back()
@@ -158,8 +159,8 @@ export default function App() {
         </div>
         {route.tab === 'book' && (view ? <Book chip={chip} view={view} market={market} timeline={timeline} onOpen={setFile} /> : skeleton)}
         {route.tab === 'research' && (route.symbol
-          ? <Research symbol={route.symbol} onBack={closeResearch} />
-          : <ResearchHome entries={researched} book={book} onOpen={openResearch} />)}
+          ? <Research symbol={route.symbol} row={route.row} onBack={closeResearch} />
+          : <ResearchHome entries={researched} walks={walks} book={book} onOpen={openResearch} />)}
         {route.tab === 'alerts' && <Alerts chip={chip} prefs={prefs} onChange={changePrefs} cards={view?.cards ?? []} onOpen={setFile} />}
       </div>
 

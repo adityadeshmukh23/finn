@@ -83,11 +83,12 @@ function everyScreen() {
   files.forEach((f) => briefing(screens, f))
   const index = read<{ companies?: unknown[] }>('research/index.json')
   const entries = (Array.isArray(index) ? index : index.companies ?? []) as Parameters<typeof ResearchHome>[0]['entries']
-  render(screens, 'research/home', [false, <ResearchHome entries={entries} book={new Set()} onOpen={noop} />])
+  const walks = read<Walk[]>('walks.json')
+  const home = <ResearchHome entries={entries} walks={walks} book={new Set()} onOpen={noop} />
+  render(screens, 'research/home', [false, home], [true, home])
   const scorecards = readdirSync(join(demo, 'research')).filter((f) => f !== 'index.json').sort()
   for (const f of scorecards) {
     const data = read<R>(`research/${f}`)
-    const walks = read<Walk[]>('walks.json')
     render(screens, `research/${f.replace('.json', '')}`, [false, <Scorecard data={data} walks={walks} />], [true, <Scorecard data={data} walks={walks} />])
   }
   return { screens, briefings: files.length, scorecards: scorecards.length }

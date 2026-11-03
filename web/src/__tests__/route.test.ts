@@ -11,5 +11,8 @@ describe('parseHash', () => {
   it('keeps research deep links working', () => {
     expect(parseHash('#research/bel')).toEqual({ tab: 'research', symbol: 'BEL' })
   })
+  it('a walk link names its row, and its id keeps its case', () => {
+    expect(parseHash('#research/KAYNES/PQ1FY26-1')).toEqual({ tab: 'research', symbol: 'KAYNES', row: 'PQ1FY26-1' })
+  })
   it('falls back to Today on junk', () => expect(parseHash('#nope').tab).toBe('today'))
 })

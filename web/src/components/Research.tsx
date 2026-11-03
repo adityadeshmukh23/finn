@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Icon } from './Icon'
 import * as fig from '../fig'
 import { verdictLine } from '../format'
@@ -50,14 +50,24 @@ function Src({ docs, doc, page, children }: { docs: Record<string, ResearchDoc>;
   )
 }
 
-function Row({ r, docs, walk }: { r: ScoreRow; docs: Record<string, ResearchDoc>; walk?: Walk }) {
-  const [open, setOpen] = useState(false)
+// Room for the row's heading, its sentence and the stepped line, above the tab bar.
+const WALK_ROOM = 370
+
+function Row({ r, docs, walk, focus }: { r: ScoreRow; docs: Record<string, ResearchDoc>; walk?: Walk; focus?: string | null }) {
+  const [open, setOpen] = useState(focus === r.id)
+  const self = useRef<HTMLLIElement>(null)
+  // A walk link lands on its row. Only moves the page if the line wouldn't otherwise be on screen, so Kaynes keeps its header.
+  useEffect(() => {
+    if (focus !== r.id || !self.current) return
+    const top = self.current.getBoundingClientRect().top
+    if (top + WALK_ROOM > window.innerHeight) window.scrollTo(0, window.scrollY + top - 12)
+  }, [focus, r.id])
   const d = r.delivered
   const later = r.later ?? r.revisions.map((v) => ({ ...v, change: 'revised' as const }))
   const calls = new Set(later.map((x) => x.call)).size
   const differsOn = later.find((x) => x.change === 'differs')?.call
   return (
-    <li className="border-t border-line py-3 first:border-0">
+    <li ref={self} className="border-t border-line py-3 first:border-0">
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full text-left">
         <div className="flex items-start justify-between gap-3">
           <span className="font-semibold text-ink">{walk && open ? title(walk) : walk?.label ?? r.label}</span>
@@ -222,9 +232,9 @@ function Skeleton() {
 }
 
 /** The recorded scorecard for one company. Rendered directly by the figures golden test. */
-export function Scorecard({ data, walks = [] }: { data: R; walks?: Walk[] }) {
+export function Scorecard({ data, walks = [], focus = null }: { data: R; walks?: Walk[]; focus?: string | null }) {
   const [filter, setFilter] = useState<Verdict | null>(null)
-  const [later, setLater] = useState(false)
+  const [later, setLater] = useState(data.scorecard.rows.some((r) => r.id === focus && r.verdict === 'not_yet_due'))
   const [drops, setDrops] = useState(false)
   const docs = useMemo(() => {
     const all = [...data.docs.calls, ...(data.docs.annual_report ? [data.docs.annual_report] : [])]
@@ -270,7 +280,7 @@ export function Scorecard({ data, walks = [] }: { data: R; walks?: Walk[] }) {
         {due.length === 0 ? (
           <p className="py-4 text-ink-2">Nothing due yet: every promise found is for a later period.</p>
         ) : (
-          <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} walk={walkOf(r.id)} />)}</ul>
+          <ul>{due.map((r) => <Row key={r.id} r={r} docs={docs} walk={walkOf(r.id)} focus={focus} />)}</ul>
         )}
       </section>
 
@@ -280,7 +290,7 @@ export function Scorecard({ data, walks = [] }: { data: R; walks?: Walk[] }) {
             <span className="font-semibold text-ink">{notDue.length} promises not yet due</span>
             <span className="text-meta text-ink-3">{later ? 'Close' : `Current guidance, ${[...new Set(notDue.map((r) => r.due))].slice(0, 3).join(', ')}`}</span>
           </button>
-          {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} walk={walkOf(r.id)} />)}</ul>}
+          {later && <ul className="border-t border-dashed border-line px-4">{notDue.map((r) => <Row key={r.id} r={r} docs={docs} walk={walkOf(r.id)} focus={focus} />)}</ul>}
         </section>
       )}
 
@@ -340,11 +350,11 @@ export function Scorecard({ data, walks = [] }: { data: R; walks?: Walk[] }) {
   )
 }
 
-export function Research({ symbol, onBack }: { symbol: string; onBack: () => void }) {
+export function Research({ symbol, row = null, onBack }: { symbol: string; row?: string | null; onBack: () => void }) {
   const [data, setData] = useState<R | null>(null)
   const [error, setError] = useState<Error | null>(null)
   const [attempt, setAttempt] = useState(0)
-  const [walks, setWalks] = useState<Walk[]>([])
+  const [walks, setWalks] = useState<Walk[] | null>(null)
 
   useEffect(() => { fetchWalks().then(setWalks) }, [])
   useEffect(() => {
@@ -385,7 +395,9 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
         </div>
       )}
 
-      {data && <Scorecard data={data} walks={walks} />}
+      {/* A walk link waits for its walk, so the row doesn't open as one thing and become another. */}
+      {!error && data && !walks && row && <Skeleton />}
+      {data && (walks || !row) && <Scorecard data={data} walks={walks ?? []} focus={row} />}
     </div>
   )
 }
