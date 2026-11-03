@@ -341,3 +341,9 @@ Fixed before any label was filled in, so the rules can't bend to the result. No 
 
 - **A blind 60-filing gold set was prepared but not labelled in time, so no classifier accuracy number is reported.** This overrides the scoring plan above, which never ran. The files stay in `data/eval/`, with FINN's labels held back in a separate key. The app makes no accuracy claim. What stands is in `EVAL.md`: the results audit of 104 of 104 figures, read from the PDF text layer; the verifier's statistics, which prove a quote or number is on the page and not that it's the right column; the Equitas, HUL and BEL corrections; and the price rows and Book counts fixed against the company file. Ranking weights couldn't be evaluated, because there's no labelled preference data.
 
+## Polish: dark by default (2026-11-03)
+
+- **Dark is the default and light is one tap away.** A new visitor sees dark whatever the phone's own setting, which replaces following the OS. A saved choice wins, and the app works with storage blocked. The switch is an icon button beside (i), showing a moon or a sun for the active theme, plus Dark | Light in the (i) sheet.
+- **An inline script in `index.html` sets the theme before first paint,** so a reader who chose light gets no dark flash. The `<html>` tag carries dark, so dark needs no script at all. A test holds the script's key and colour to `theme.ts`.
+- **The share image stays light.** It's a preview on someone else's page, not the app. The icon was already dark.
+

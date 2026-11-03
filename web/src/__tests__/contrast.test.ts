@@ -22,8 +22,8 @@ function ratio(a: RGB, b: RGB) {
 function tokens(block: string): Record<string, RGB> {
   return Object.fromEntries([...block.matchAll(/--([\w-]+):\s*(#[0-9a-f]{6})/g)].map((m) => [m[1], rgb(m[2])]))
 }
-const light = tokens(css.slice(css.indexOf(':root {'), css.indexOf('@media (prefers-color-scheme: dark)')))
-const dark = tokens(css.slice(css.indexOf('@media (prefers-color-scheme: dark)'), css.indexOf('html, body')))
+const light = tokens(css.slice(css.indexOf(':root {'), css.indexOf(':root[data-theme="dark"]')))
+const dark = tokens(css.slice(css.indexOf(':root[data-theme="dark"]'), css.indexOf('html, body')))
 
 const TEXT = ['ink', 'ink-2', 'ink-3', 'up', 'down', 'flag']
 const GROUND = ['bg', 'surface', 'raised']

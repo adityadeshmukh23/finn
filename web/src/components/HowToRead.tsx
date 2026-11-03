@@ -1,6 +1,8 @@
 import type { Density } from '../density'
 import { DensityControl } from './DensityControl'
 import { Icon } from './Icon'
+import { Segmented } from './Segmented'
+import type { Theme } from '../theme'
 import { Sheet } from './Sheet'
 import { TOUR, type TourAction } from '../tour'
 
@@ -14,15 +16,17 @@ const KEY: [React.ReactNode, string][] = [
   ['Filtered', 'Routine filings FINN set aside. They are all listed, with the reason.'],
 ]
 
-/** What the marks mean, and how much to show. */
-export function HowToRead({ density, onDensity, onLedger, onTour, onClose }: {
-  density: Density; onDensity: (d: Density) => void; onLedger: () => void; onTour: (a: TourAction) => void; onClose: () => void
+const THEMES: [Theme, string][] = [['dark', 'Dark'], ['light', 'Light']]
+
+/** What the marks mean, how much to show, and which theme. */
+export function HowToRead({ density, onDensity, theme, onTheme, onLedger, onTour, onClose }: {
+  density: Density; onDensity: (d: Density) => void; theme: Theme; onTheme: (t: Theme) => void; onLedger: () => void; onTour: (a: TourAction) => void; onClose: () => void
 }) {
   return (
     <Sheet title="How to read this" onClose={onClose}>
       <section className="mb-4 rounded-2xl bg-raised p-3" aria-label="2-minute tour">
         <h3 className="font-semibold text-ink">2-minute tour</h3>
-        <p className="text-meta text-ink-3">Everything here is recorded. Nothing updates.</p>
+        <p className="text-meta text-ink-3">Everything here is recorded. Nothing updates. Dark by default: the moon button beside (i) switches to light.</p>
         <ol className="mt-1 divide-y divide-line">
           {TOUR.map((s) => (
             <li key={s.text}>
@@ -38,6 +42,7 @@ export function HowToRead({ density, onDensity, onLedger, onTour, onClose }: {
       <p className="mt-2 text-meta text-ink-3">
         {density === 'compact' ? 'The top 3, one number each. Tap a row for the rest.' : 'Everything open: top rows, tables, synthesis and the book strip.'}
       </p>
+      <Segmented label="Theme" options={THEMES} value={theme} onChange={onTheme} className="mt-3" />
       <dl className="mt-3 grid grid-cols-[52px_minmax(0,1fr)] gap-x-3 gap-y-2">
         {KEY.map(([mark, text]) => (
           <div key={text} className="contents">

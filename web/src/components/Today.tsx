@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import type { Card, Digest } from '../api'
 import { bookTally, moveContext, type Timeline } from '../company'
 import type { Density } from '../density'
+import type { Theme } from '../theme'
 import { lastSessionBy, noSessionNote, type Market } from '../market'
 import { rankCards, TOP_ROWS } from '../rank'
 import { briefingEnd, compactEnd, synthesis } from '../synthesis'
@@ -53,9 +54,11 @@ interface Props {
   onBook: () => void
   onHowTo: () => void
   onDensity: (d: Density) => void
+  theme: Theme
+  onTheme: (t: Theme) => void
 }
 
-export function Today({ chip, density, onDensity, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook, onHowTo }: Props) {
+export function Today({ chip, density, onDensity, theme, onTheme, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook, onHowTo }: Props) {
   const [details, setDetails] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const span = windowLabel(hours)
@@ -72,6 +75,10 @@ export function Today({ chip, density, onDensity, data, view, market, timeline, 
     <>
       <header className="flex items-center gap-1">
         <h1 className="flex-1 text-title font-bold text-ink">FINN</h1>
+        <button onClick={() => onTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={theme === 'dark' ? 'Dark theme on. Switch to light' : 'Light theme on. Switch to dark'}
+                className="flex h-11 w-11 items-center justify-center text-ink-2">
+          <Icon name={theme === 'dark' ? 'moon' : 'sun'} size={22} />
+        </button>
         <button onClick={onHowTo} aria-label="How to read this" className="flex h-11 w-11 items-center justify-center text-ink-2">
           <Icon name="info" size={22} />
         </button>

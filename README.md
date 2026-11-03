@@ -4,7 +4,7 @@ A mobile-first investor briefing. You open a ranked answer to what changed acros
 
 **Try it on a phone: https://finn-olive.vercel.app** (a static replay of recorded data; see [what's recorded vs live](#whats-recorded-vs-live))
 
-<img src="docs/img/00-hero.jpg" width="300" alt="Today in the Detailed view at 390 by 844: nine companies need a look, then Reliance's row with PAT +32.1% YoY, why it ranks first, and its results table">
+<img src="docs/img/00-hero.jpg" width="300" alt="Today in the Detailed view, dark, at 390 by 844: nine companies need a look, then Reliance's row with PAT +32.1% YoY, why it ranks first, and its results table">
 
 What to look at first:
 
@@ -22,7 +22,7 @@ What to look at first:
 
 ## 2-minute tour
 
-Everything on the public site is recorded data from 9 to 30 October 2026. The same steps are in the app, under (i).
+Everything on the public site is recorded data from 9 to 30 October 2026. The same steps are in the app, under (i). It opens dark; the button beside (i) switches to light.
 
 1. **Figures withheld.** Book, then EQUITASBNK: its results table was unreadable, so FINN withholds the figures and links the page.
 2. **A promise followed.** [The Kaynes walk](https://finn-olive.vercel.app/#research/KAYNES/PQ1FY26-1): one target from call to call, then what was delivered. Tap a page link.
@@ -50,6 +50,7 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 
 **Push: the briefing.** The Today tab: a windowed digest (24h, 3 days, 7 days, plus an as-of date so it works on quiet days) of every NSE filing across the portfolio. Four tabs: Today, Book, Research, Alerts.
 
+- Dark is the default and light is one tap away, from the button beside (i) or in the (i) sheet. A saved choice wins.
 - The layout is text-first. Monogram badges were tried and removed because they did not look good.
 - Two views, chosen on Today and remembered on the device. Detailed, the default, opens every row: why it ranks there, its filing and the results table, plus a one-line synthesis and the book strip. Compact shows the top three companies with one number each, the rest a tap away. Ask FINN gives the company file.
 
