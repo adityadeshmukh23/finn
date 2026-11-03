@@ -9,7 +9,7 @@ export function Quote({ text }: { text: string }) {
 }
 
 const at = (n: number) => n.toFixed(1)
-const H = 112, TOP = 34, BOTTOM = 84, AXIS = 106, EDGE = 5, STUB = 66, CHAR = 6.8, LINE = 15, CLEAR = 8
+const H = 116, TOP = 38, BOTTOM = 88, AXIS = 110, EDGE = 5, STUB = 66, CHAR = 7.4, LINE = 15, CLEAR = 8
 
 interface Mark { x: number; y: number; text: string; width: number }
 
@@ -46,7 +46,9 @@ function StepLine({ walk }: { walk: Walk }) {
   const path = levels.map((v, i) => `${i ? `V${at(y(v))}` : `M${at(x(0))} ${at(y(v))}`}H${at(x(i + 1))}`).join('')
 
   const marks: Mark[] = walk.steps.map((s, i) => {
-    const text = fig.target(s, walk.unit)
+    const whole = fig.target(s, walk.unit)
+    // The narrowest phones can't fit "minimum" on the line. The step below keeps the word.
+    const text = x(i) + CLEAR + whole.length * CHAR > W - EDGE ? whole.replace(' minimum', ' min') : whole
     return { x: x(i) + CLEAR, y: y(s.high ?? s.low) - 8, text, width: text.length * CHAR }
   })
   if (d) marks.push({ x: x(walk.steps.length) + CLEAR, y: y(d.value) - 8, text: delivered(walk), width: delivered(walk).length * CHAR })
