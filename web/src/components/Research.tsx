@@ -113,7 +113,7 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
                         : `Said again (no figure read from it) on the ${v.call} call`}
               </p>
               <Quote text={v.quote} />
-              <p className="text-meta text-ink-3"><Src docs={docs} doc={v.doc} page={v.page} /></p>
+              <p className="text-meta text-ink-3">{v.speaker || 'Speaker not recorded'}, <Src docs={docs} doc={v.doc} page={v.page} /></p>
             </div>
           ))}
           {later.length > 0 && <p className="text-meta text-ink-3">The verdict is against the first statement.</p>}
