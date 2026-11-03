@@ -68,6 +68,8 @@ All of these had passed the verifier. It proves a number or quote is on the cite
 - **One reviewer's labels.** There's no second reader to measure how far two people would disagree.
 - **The key is frozen.** A disagreement found in scoring may lead to a rule fix, but the score stays as measured against the committed key, and any later figure says it's a re-run.
 
+**How it will be scored, fixed before any label was filled in.** No model calls. `cannot_tell` rows are excluded and counted. The report gives counts, per-category agreement and every disagreement with both labels. No category under 20 items gets a percentage. Postal ballot rows are reported separately. It says plainly that 60 filings is a small sample drawn from FINN's own labels, and that agreement is not accuracy across all filings.
+
 ## What can't be measured here
 
 **Ranking weights.** There's no labelled preference data and no investor behaviour in this project. The weights were hand-set and then checked by reading the briefings. `ranking.test.ts` proves every rank explanation is true of the data, not that the order is the best one.

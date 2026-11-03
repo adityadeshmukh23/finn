@@ -321,3 +321,15 @@
 - **Cost:** Compact no longer quite fits at 375x667. The last line sits just under the tab bar.
 - **Plan changed on 3 Nov: the deadline is today.** Block E stops at the gold set unless the labels come in. Blocks F, G apart from a monogram badge, H, I and J aren't built. The tag `submission-candidate` marks the app before the last small additions, each of which is its own commit.
 
+## Polish: last small additions (2026-11-03)
+
+Each is its own commit after the tag `submission-candidate`, so any can be dropped alone.
+
+- **Monogram badges, and nothing else from the visual direction.** On Today rows, Book rows and the company file header. Row heights and positions are identical with and without them, measured on Today in both views and on Book. The first-screen cost is 3 words of badge letters. On the budget's count, without tab labels or dot separators, Compact is now 100 words and 16 numbers, so nothing was trimmed. Monograms over logos for the reason in the plan: a logo layer would be the only third-party request on a site that says nothing is live.
+- **A 2-minute tour in the (i) sheet and the README.** Each step opens something the app already has. A company file has no link of its own, so in the README those steps say "Book, then the ticker". The sheet opens them directly.
+- **Link previews use generated assets.** The share image is drawn by a committed script, with no artwork or company names. It says "A recorded demo", so a preview can't suggest a live product. The absolute image URLs assume the current Vercel address.
+
+## Polish: how the gold set will be scored (2026-11-03)
+
+Fixed before any label was filled in, so the rules can't bend to the result. No model calls. `cannot_tell` rows are excluded and counted. Counts, per-category agreement and every disagreement with both labels are shown, and no category under 20 items gets a percentage. Postal ballot rows are reported separately, because FINN's rules never assign that label. The result says plainly that 60 filings is a small sample drawn from FINN's own labels, and that agreement is not accuracy across all filings.
+
