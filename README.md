@@ -8,7 +8,7 @@ A mobile-first investor briefing. You open a ranked answer to what changed acros
 
 What to look at first:
 
-- **The table's labels.** Reliance's row says which quarter and which basis, and each row of the table links to the page it was read from.
+- **The table's labels.** Reliance's row says which quarter and which basis, and its table links to the page it was read from.
 - **What FINN won't say.** Open Equitas's file: its results table was unreadable, so the figures are withheld. Elsewhere, FINN says what was filed and when, never why a stock moved.
 - **A promise followed.** Research, then the Kaynes walk: every step has a speaker and a page, and code does the arithmetic.
 
