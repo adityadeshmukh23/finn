@@ -132,6 +132,7 @@ Unseen tickers: `backend/scripts/smoke_unseen.py` runs the document index, one t
 
 ## Docs
 
+- [docs/BRIEF_COVERAGE.md](docs/BRIEF_COVERAGE.md): every requirement in the brief, where it lives, and Met, Partly or Not built
 - [docs/DESIGN.md](docs/DESIGN.md): decisions and trade-offs, what was left out, known weak spots, next steps
 - [docs/COST.md](docs/COST.md): model routing, call counts, tokens, cost
 - [docs/DECISIONS.md](docs/DECISIONS.md): the running log, with the why behind each choice
