@@ -13,12 +13,12 @@ What to look at first:
 - **A promise followed.** Research, then the Kaynes walk: every step has a speaker and a page, and code does the arithmetic.
 
 <p>
-  <img src="docs/img/01-briefing.jpg" width="250" alt="Today: nine companies need a look, the top three rows with one number each, six more, the book, and what was filtered">
+  <img src="docs/img/01-briefing.jpg" width="250" alt="Today in Compact: nine companies need a look, the top three rows with one number each, six more, the book, and what was filtered">
   <img src="docs/img/02-results-card.jpg" width="250" alt="An opened row: Reliance with why it ranks first, its filing link, and the results table with QoQ and YoY, computed by code, and a page link">
   <img src="docs/img/03-research-bel.jpg" width="250" alt="Promised vs delivered for BEL: 3 of 6 checkable promises met">
 </p>
 
-*Screenshots are the static build at 375px wide: Today in its Compact view, an opened row, and BEL's promised-vs-delivered scorecard.*
+*Below the hero, the static build at 375px wide: Today in Compact, an opened row, and BEL's promised-vs-delivered scorecard.*
 
 ## 2-minute tour
 
@@ -44,7 +44,7 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 - No API key is needed to run. Without one, FINN replays the recordings in `data/recordings/` or uses mock output, and says so.
 - `./run.sh research TICKER` makes live model calls, so it needs a free `GEMINI_API_KEY` in `.env` (get one at aistudio.google.com/apikey). It takes a few minutes per company and lands in the Research tab. If the free tier is out of quota it records nothing and tells you to re-run later.
 - A ticker that screener.in has no earnings-call transcripts for (ITC, for one) is refused with a plain message, not a guess.
-- Tests: `cd backend && ../.venv/bin/pytest -q` (151; no key needed).
+- Tests: `cd backend && ../.venv/bin/pytest -q` and `cd web && npm test`. No key needed.
 
 ## What it does
 
