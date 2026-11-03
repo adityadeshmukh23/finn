@@ -10,6 +10,7 @@
   --color-ink-3: var(--ink-3);
   --color-line: var(--line);
   --color-up: var(--up);
+  --color-up-on-tint: var(--up-on-tint);
   --color-down: var(--down);
   --color-flag: var(--flag);
 
@@ -22,9 +23,20 @@
   --text-body--line-height: 22px;
   --text-meta: 13px;
   --text-meta--line-height: 18px;
+
+  /* Named now for later blocks; nothing uses them yet, so they add nothing to the page. */
+  --radius-badge: 11px;
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+  --ease-enter: cubic-bezier(.2, .8, .2, 1);
+  --ease-exit: cubic-bezier(.4, 0, 1, 1);
 }
 
-/* Colour means something: up and down are the sign of a number, flag is "low confidence or unverified". */
+/*
+ * Colour means something: up and down are the sign of a number, flag is "low confidence or unverified".
+ * contrast.test.ts holds every pair the app uses to WCAG AA, in both themes. These are today's colours, not block G's palette.
+ * up-on-tint is the sign colour on its own 12% tint, where plain up can't reach 4.5:1.
+ */
 :root {
   --bg: #f6f5f2;
   --surface: #ffffff;
@@ -33,7 +45,8 @@
   --ink-2: #4b4f58;
   --ink-3: #5f636c;
   --line: #e4e1da;
-  --up: #15803d;
+  --up: #147c3b;
+  --up-on-tint: #137438;
   --down: #b42318;
   --flag: #92600a;
   color-scheme: light;
@@ -49,6 +62,7 @@
     --ink-3: #9ca1ab;
     --line: #2b2f38;
     --up: #4ade80;
+    --up-on-tint: #4ade80;
     --down: #f87171;
     --flag: #e8c26a;
     color-scheme: dark;

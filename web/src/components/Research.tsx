@@ -14,7 +14,7 @@ const LABEL: Record<Verdict, string> = {
 }
 const SHORT: Record<Verdict, string> = { ...LABEL, not_found: 'Not found', too_vague: 'Too vague' }
 const PILL: Record<Verdict, string> = {
-  met: 'bg-up/12 text-up',
+  met: 'bg-up/12 text-up-on-tint',
   partially: 'bg-raised text-ink',
   missed: 'bg-down/12 text-down',
   not_found: 'bg-raised text-ink-2',
