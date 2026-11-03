@@ -4,6 +4,14 @@ A mobile-first investor briefing. You open a ranked answer to what changed acros
 
 **Try it on a phone: https://finn-olive.vercel.app** (a static replay of recorded data; see [what's recorded vs live](#whats-recorded-vs-live))
 
+<img src="docs/img/00-hero.jpg" width="300" alt="Today in the Detailed view at 390 by 844: nine companies need a look, then Reliance's row with PAT +32.1% YoY, why it ranks first, and its results table">
+
+What to look at first:
+
+- **The table's labels.** Reliance's row says which quarter and which basis, and each row of the table links to the page it was read from.
+- **What FINN won't say.** Open Equitas's file: its results table was unreadable, so the figures are withheld. Elsewhere, FINN says what was filed and when, never why a stock moved.
+- **A promise followed.** Research, then the Kaynes walk: every step has a speaker and a page, and code does the arithmetic.
+
 <p>
   <img src="docs/img/01-briefing.jpg" width="250" alt="Today: nine companies need a look, the top three rows with one number each, six more, the book, and what was filtered">
   <img src="docs/img/02-results-card.jpg" width="250" alt="An opened row: Reliance with why it ranks first, its filing link, and the results table with QoQ and YoY, computed by code, and a page link">
