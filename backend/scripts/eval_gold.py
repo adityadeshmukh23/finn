@@ -9,15 +9,18 @@ Which filings are sampled depends only on the snapshot and FINN's labels. Excerp
 is never committed, so this runs on a machine with that cache and CI checks the committed files instead. Nothing here scores anything.
 
 Usage (from backend/): python -m scripts.eval_gold
+       python -m scripts.eval_gold --fetch   # fetch the PDFs of summary-only rows, then refresh only their excerpts
 """
 import csv
 import io
 import json
 import random
 import re
+import sys
+import time
 from collections import defaultdict
 
-from finn import db, filings
+from finn import db, filings, http
 from finn.classify import classify
 from finn.config import settings
 from finn.sources import nse
@@ -167,6 +170,32 @@ def build(out=OUT) -> dict:
     return {"filings": len(rows), "summary_only": sum(b["excerpt"] == SUMMARY_ONLY for b in blind)}
 
 
+def fetch_missing(path=None, gap: float = 3.0) -> dict:
+    """Fetch the PDFs of rows still marked summary only, one request every `gap` seconds, into the local cache that's never committed.
+    Rewrites only the excerpts of the blind file: same ids, same order, labels untouched. The key isn't read or written."""
+    path = path or OUT / "gold_blind.csv"
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        blind = list(csv.DictReader(f))
+    urls = {r["id"]: r["url"] for r in nse.load_snapshot()["items"]}
+    failed = 0
+    for b in blind:
+        if b["excerpt"] != SUMMARY_ONLY:
+            continue
+        if cached_pdf_text(urls[b["id"]]) is None:
+            time.sleep(gap)
+            try:
+                http.get(urls[b["id"]], ttl=None, headers={"Referer": "https://www.nseindia.com/"})
+            except http.FetchError:
+                failed += 1
+                continue
+        b["excerpt"] = excerpt(cached_pdf_text(urls[b["id"]]))
+    with path.open("w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=BLIND_COLUMNS)
+        w.writeheader()
+        w.writerows(blind)
+    return {"rows": len(blind), "with_excerpt": sum(b["excerpt"] != SUMMARY_ONLY for b in blind), "not_fetched": failed}
+
+
 if __name__ == "__main__":
     # The counts printed say nothing about which label any filing has.
-    print(build())
+    print(fetch_missing() if "--fetch" in sys.argv else build())
