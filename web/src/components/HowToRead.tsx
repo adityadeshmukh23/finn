@@ -2,6 +2,7 @@ import type { Density } from '../density'
 import { DensityControl } from './DensityControl'
 import { Icon } from './Icon'
 import { Sheet } from './Sheet'
+import { TOUR, type TourAction } from '../tour'
 
 const KEY: [React.ReactNode, string][] = [
   [<span aria-hidden="true" className="inline-block h-4 w-1 rounded-full bg-ink align-middle" />, 'The line on the left is rank. The thicker it is, the more it matters today.'],
@@ -14,11 +15,25 @@ const KEY: [React.ReactNode, string][] = [
 ]
 
 /** What the marks mean, and how much to show. */
-export function HowToRead({ density, onDensity, onLedger, onClose }: {
-  density: Density; onDensity: (d: Density) => void; onLedger: () => void; onClose: () => void
+export function HowToRead({ density, onDensity, onLedger, onTour, onClose }: {
+  density: Density; onDensity: (d: Density) => void; onLedger: () => void; onTour: (a: TourAction) => void; onClose: () => void
 }) {
   return (
     <Sheet title="How to read this" onClose={onClose}>
+      <section className="mb-4 rounded-2xl bg-raised p-3" aria-label="2-minute tour">
+        <h3 className="font-semibold text-ink">2-minute tour</h3>
+        <p className="text-meta text-ink-3">Everything here is recorded. Nothing updates.</p>
+        <ol className="mt-1 divide-y divide-line">
+          {TOUR.map((s) => (
+            <li key={s.text}>
+              <button onClick={() => onTour(s.action)} className="flex min-h-11 w-full items-center gap-2 py-1.5 text-left text-ink-2">
+                <span className="min-w-0 flex-1">{s.text}</span>
+                <Icon name="chevron" size={14} className="shrink-0 text-ink-3" />
+              </button>
+            </li>
+          ))}
+        </ol>
+      </section>
       <DensityControl density={density} onDensity={onDensity} />
       <p className="mt-2 text-meta text-ink-3">
         {density === 'compact' ? 'The top 3, one number each. Tap a row for the rest.' : 'Everything open: top rows, tables, synthesis and the book strip.'}

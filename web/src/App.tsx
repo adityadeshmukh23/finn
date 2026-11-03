@@ -12,6 +12,7 @@ import { TabBar } from './components/TabBar'
 import { Today } from './components/Today'
 import { WindowChip } from './components/WindowChip'
 import { windowLabel, WindowSheet } from './components/WindowSheet'
+import type { TourAction } from './tour'
 import { loadDensity, saveDensity, type Density } from './density'
 import type { Timeline } from './company'
 import type { Market } from './market'
@@ -53,6 +54,15 @@ export default function App() {
   const [windowOpen, setWindowOpen] = useState(false)
   const [density, setDensity] = useState(loadDensity)
   const changeDensity = (d: Density) => { setDensity(d); saveDensity(d) }
+  const tourStep = (a: TourAction) => {
+    if (a.kind === 'go') {
+      sheetHistory.leaveTo(a.hash)
+      window.dispatchEvent(new HashChangeEvent('hashchange'))
+    }
+    setHowTo(false)
+    if (a.kind === 'file') setFile(a.symbol)
+    if (a.kind === 'ledger') setLedgerOpen(true)
+  }
   const [howTo, setHowTo] = useState(false)
   const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
   const [manifest, setManifest] = useState<Manifest | null>(null)
@@ -187,7 +197,7 @@ export default function App() {
                      onRefresh={() => load(true)} onClose={() => setWindowOpen(false)} />
       )}
       {howTo && (
-        <HowToRead density={density} onDensity={changeDensity}
+        <HowToRead density={density} onDensity={changeDensity} onTour={tourStep}
                    onLedger={() => { setHowTo(false); setLedgerOpen(true) }} onClose={() => setHowTo(false)} />
       )}
       {ledgerOpen && <LedgerSheet onClose={() => setLedgerOpen(false)} />}

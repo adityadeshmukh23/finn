@@ -12,6 +12,16 @@ A mobile-first investor briefing. You open a ranked answer to what changed acros
 
 *Screenshots are the static build at 375px wide: Today in its Compact view, an opened row, and BEL's promised-vs-delivered scorecard.*
 
+## 2-minute tour
+
+Everything on the public site is recorded data from 9 to 30 October 2026. The same steps are in the app, under (i).
+
+1. **Figures withheld.** Book, then EQUITASBNK: its results table was unreadable, so FINN withholds the figures and links the page.
+2. **A promise followed.** [The Kaynes walk](https://finn-olive.vercel.app/#research/KAYNES/PQ1FY26-1): one target from call to call, then what was delivered. Tap a page link.
+3. **Labels on every figure.** Book, then RELIANCE: read the results table's basis and period labels.
+4. **Your own thresholds.** [Alerts](https://finn-olive.vercel.app/#alerts): change a threshold and see which holdings cross it in the recorded closes.
+5. **What it cost.** (i), then How this was built: this copy replays recordings at $0.00. The full per-call cost ledger is on a local run.
+
 ## Quickstart (Mac)
 
 Needs Python 3.12 and Node 24 (what CI uses). First run installs dependencies; allow a couple of minutes once.
