@@ -312,3 +312,11 @@
 - **Postal ballot found while checking the categories.** The glossary has it, a recorded HDFC Bank filing is one, and FINN's rules file it under `agm_egm`. It isn't changed now: changing the classifier before the labels would move what's being measured.
 - **The verifier's statistics reproduce from the recordings:** 166 shown, 51 dropped, 17 of them "quote not found", and 38 of 39 filing reads.
 - **Later the same day: the 47 summary-only rows got their PDFs.** On those rows the reviewer and the rules would have read the same line, so labels there would have measured little. Fetched at one request every 3 seconds, cached and not committed. 58 of 60 rows now have an excerpt, with the same ids and order. The other 2 have no extractable text. The key wasn't touched.
+
+## Polish: Detailed is the default (2026-11-03)
+
+- **A new visitor now sees Detailed, which reverses "Compact is the default".** A reviewer opening the link once should meet the results table, the synthesis and the book strip, with no tap needed to find out how much FINN knows. A saved choice still wins.
+- **The choice moved onto Today,** as a Compact | Detailed control under the as-of line, and stays in How to read this. Burying it was how the depth stayed hidden.
+- **The budgets now apply to Compact only.** Compact is 16 numbers and 104 words on the count used this session, which includes tab labels; the control added 2 of those words. The block-level figure of 95 words used an earlier count, so compare like with like. Detailed has no budget and isn't trying to meet one: 185 words and 53 numbers at 390x844, 146 and 42 at 375x667.
+- **Cost:** Compact no longer quite fits at 375x667. The last line sits just under the tab bar.
+

@@ -12,7 +12,7 @@ import { TabBar } from './components/TabBar'
 import { Today } from './components/Today'
 import { WindowChip } from './components/WindowChip'
 import { windowLabel, WindowSheet } from './components/WindowSheet'
-import { loadDensity, saveDensity } from './density'
+import { loadDensity, saveDensity, type Density } from './density'
 import type { Timeline } from './company'
 import type { Market } from './market'
 import { sheetHistory } from './sheetHistory'
@@ -52,6 +52,7 @@ export default function App() {
   const [ledgerOpen, setLedgerOpen] = useState(false)
   const [windowOpen, setWindowOpen] = useState(false)
   const [density, setDensity] = useState(loadDensity)
+  const changeDensity = (d: Density) => { setDensity(d); saveDensity(d) }
   const [howTo, setHowTo] = useState(false)
   const [prefs, setPrefs] = useState<AlertPrefs>(loadPrefs)
   const [manifest, setManifest] = useState<Manifest | null>(null)
@@ -153,7 +154,7 @@ export default function App() {
     <>
       <div className="mx-auto min-h-dvh max-w-xl px-4 pb-[calc(100px+env(safe-area-inset-bottom)+1.5rem)] pt-[max(1rem,env(safe-area-inset-top))]">
         <div hidden={route.tab !== 'today'}>
-          <Today key={density} chip={todayChip} density={density} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
+          <Today key={density} chip={todayChip} density={density} onDensity={changeDensity} data={data} view={view} market={market} timeline={timeline} day={day} hours={hours} onHours={setHours}
                  loading={loading} error={error} onReload={load} customised={customised} dismissed={dismissed}
                  onDismiss={dismiss} onRestore={restore} onAsk={(c: Card) => setFile(c.symbol)} onOpen={setFile} onLedger={() => setLedgerOpen(true)} onBook={() => { window.location.hash = 'book' }} onHowTo={() => setHowTo(true)} />
         </div>
@@ -186,7 +187,7 @@ export default function App() {
                      onRefresh={() => load(true)} onClose={() => setWindowOpen(false)} />
       )}
       {howTo && (
-        <HowToRead density={density} onDensity={(d) => { setDensity(d); saveDensity(d) }}
+        <HowToRead density={density} onDensity={changeDensity}
                    onLedger={() => { setHowTo(false); setLedgerOpen(true) }} onClose={() => setHowTo(false)} />
       )}
       {ledgerOpen && <LedgerSheet onClose={() => setLedgerOpen(false)} />}

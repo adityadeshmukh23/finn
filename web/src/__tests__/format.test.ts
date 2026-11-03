@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { loadDensity } from '../density'
 import { tileTint } from '../components/BookStrip'
 import { clock, day as dayMonth } from '../fig'
@@ -45,6 +45,16 @@ describe('tileTint', () => {
 
 describe('density', () => {
   it('is Compact unless the reader chose Detailed, and survives bad or missing storage', () => {
-    expect(loadDensity()).toBe('compact')   // no localStorage in this test environment
+    expect(loadDensity()).toBe('detailed')   // no localStorage in this test environment: a new visitor
+  })
+})
+
+describe("a saved density wins", () => {
+  it("over the Detailed default", () => {
+    for (const [saved, shown] of [["compact", "compact"], ["detailed", "detailed"], [null, "detailed"], ["junk", "detailed"]] as const) {
+      vi.stubGlobal("localStorage", { getItem: () => saved })
+      expect(loadDensity()).toBe(shown)
+    }
+    vi.unstubAllGlobals()
   })
 })

@@ -7,6 +7,7 @@ import { rankCards, TOP_ROWS } from '../rank'
 import { briefingEnd, compactEnd, synthesis } from '../synthesis'
 import { BookStrip } from './BookStrip'
 import { BriefRow } from './BriefRow'
+import { DensityControl } from './DensityControl'
 import { HiddenRow } from './HiddenRow'
 import { Icon } from './Icon'
 import { asOfLine, briefingStats, windowLabel } from './WindowSheet'
@@ -51,9 +52,10 @@ interface Props {
   onLedger: () => void
   onBook: () => void
   onHowTo: () => void
+  onDensity: (d: Density) => void
 }
 
-export function Today({ chip, density, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook, onHowTo }: Props) {
+export function Today({ chip, density, onDensity, data, view, market, timeline, day, hours, onHours, loading, error, onReload, customised, dismissed, onDismiss, onRestore, onAsk, onOpen, onLedger, onBook, onHowTo }: Props) {
   const [details, setDetails] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const span = windowLabel(hours)
@@ -76,8 +78,9 @@ export function Today({ chip, density, data, view, market, timeline, day, hours,
         {chip}
       </header>
       <p className="text-meta text-ink-3">{data ? asOfLine(data) : 'Loading the briefing'}</p>
+      <DensityControl density={density} onDensity={onDensity} className="mt-2" />
 
-      <main className={compact ? 'space-y-4' : 'mt-3 space-y-4'}>
+      <main className="mt-2 space-y-4">
         {loading && <Skeleton />}
 
         {!loading && error && (

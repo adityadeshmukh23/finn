@@ -1,4 +1,5 @@
 import type { Density } from '../density'
+import { DensityControl } from './DensityControl'
 import { Icon } from './Icon'
 import { Sheet } from './Sheet'
 
@@ -12,20 +13,13 @@ const KEY: [React.ReactNode, string][] = [
   ['Filtered', 'Routine filings FINN set aside. They are all listed, with the reason.'],
 ]
 
-/** What the marks mean, and how much to show. Also where a power user turns the full density back on. */
+/** What the marks mean, and how much to show. */
 export function HowToRead({ density, onDensity, onLedger, onClose }: {
   density: Density; onDensity: (d: Density) => void; onLedger: () => void; onClose: () => void
 }) {
   return (
     <Sheet title="How to read this" onClose={onClose}>
-      <div role="radiogroup" aria-label="How much to show" className="flex rounded-full bg-raised p-0.5">
-        {(['compact', 'detailed'] as const).map((d) => (
-          <button key={d} role="radio" aria-checked={density === d} onClick={() => onDensity(d)}
-                  className={`min-h-11 flex-1 rounded-full font-semibold capitalize ${density === d ? 'bg-surface text-ink shadow-sm' : 'text-ink-3'}`}>
-            {d}
-          </button>
-        ))}
-      </div>
+      <DensityControl density={density} onDensity={onDensity} />
       <p className="mt-2 text-meta text-ink-3">
         {density === 'compact' ? 'The top 3, one number each. Tap a row for the rest.' : 'Everything open: top rows, tables, synthesis and the book strip.'}
       </p>

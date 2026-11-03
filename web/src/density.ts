@@ -2,12 +2,12 @@ export type Density = 'compact' | 'detailed'
 
 const KEY = 'finn.density'
 
-/** Compact unless the reader chose otherwise. Remembered on this device only. */
+/** Detailed unless the reader chose Compact. Remembered on this device only. */
 export function loadDensity(): Density {
   try {
-    return localStorage.getItem(KEY) === 'detailed' ? 'detailed' : 'compact'
+    return localStorage.getItem(KEY) === 'compact' ? 'compact' : 'detailed'
   } catch {
-    return 'compact'
+    return 'detailed'
   }
 }
 

@@ -60,7 +60,7 @@ function briefing(screens: Record<string, string[]>, f: string) {
   const view = applyAlerts(raw, DEFAULT_PREFS, market)
   const key = f.replace(/^digest-|\.json$/g, '')
   const today = (density: 'compact' | 'detailed') => (
-    <Today chip={null} density={density} data={raw} view={view} market={market} timeline={timeline} hours={24} onHours={noop} day={null}
+    <Today chip={null} density={density} onDensity={noop} data={raw} view={view} market={market} timeline={timeline} hours={24} onHours={noop} day={null}
            loading={false} error={null} onReload={noop} customised={false} dismissed={new Set()} onDismiss={noop} onRestore={noop}
            onAsk={noop} onOpen={noop} onLedger={noop} onBook={noop} onHowTo={noop} />
   )
