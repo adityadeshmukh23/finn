@@ -7,6 +7,7 @@ import { describe } from '../market'
 import { swipeDismisses, swipeMayStart } from '../swipe'
 import { filingLine } from '../plain'
 import { Icon } from './Icon'
+import { Badge } from './Badge'
 import { People } from './People'
 import { ResultsTable } from './ResultsTable'
 import * as fig from '../fig'
@@ -107,9 +108,12 @@ export function BriefRow({ card, rank, onDismiss, onAsk, context, compact }: Pro
         <button onClick={() => { if (!swiped.current) setOpen(!open); swiped.current = false }} aria-expanded={open}
                 className={`block w-full text-left ${compact ? (glance && rank === 1 ? 'pt-2.5' : 'py-2.5') : 'pb-3'}`}>
           <span className={`flex items-center gap-2 ${compact ? 'justify-between' : 'min-h-11 pr-11'}`}>
-            <span className="truncate">
-              <span className="font-semibold text-ink">{card.symbol}</span>
-              <span className="text-meta text-ink-3"> · {category(lead)}</span>
+            <span className="flex min-w-0 items-center gap-1.5">
+              <Badge symbol={card.symbol} />
+              <span className="truncate">
+                <span className="font-semibold text-ink">{card.symbol}</span>
+                <span className="text-meta text-ink-3"> · {category(lead)}</span>
+              </span>
             </span>
             {compact && <Icon name="down" size={14} className={`text-ink-3 ${open ? 'rotate-180' : ''}`} />}
           </span>

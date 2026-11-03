@@ -5,7 +5,7 @@ import { Icon } from './Icon'
 const FOCUSABLE = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'
 const DRAG_CLOSE_PX = 90
 
-export function Sheet({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+export function Sheet({ title, badge, onClose, children }: { title: string; badge?: ReactNode; onClose: () => void; children: ReactNode }) {
   const panel = useRef<HTMLDivElement>(null)
   const drag = useRef<number | null>(null)
   const [dy, setDy] = useState(0)
@@ -60,7 +60,7 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
              className="shrink-0 cursor-grab px-5 pt-2">
           <div className="mx-auto h-1.5 w-12 rounded-full bg-ink-3 sm:hidden" aria-hidden="true" />
           <div className="mt-1 flex min-h-11 items-center justify-between gap-3">
-            <h2 className="text-title font-semibold text-ink">{title}</h2>
+            <h2 className="flex items-center gap-2 text-title font-semibold text-ink">{badge}{title}</h2>
             <button onClick={onClose} className="-mr-3 flex h-11 w-11 items-center justify-center rounded-full text-ink-3 hover:text-ink" aria-label="Close">
               <Icon name="close" size={20} />
             </button>
