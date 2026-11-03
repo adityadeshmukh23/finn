@@ -56,6 +56,8 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
   const [open, setOpen] = useState(false)
   const d = r.delivered
   const later = r.later ?? r.revisions.map((v) => ({ ...v, change: 'revised' as const }))
+  const calls = new Set(later.map((x) => x.call)).size
+  const differsOn = later.find((x) => x.change === 'differs')?.call
   return (
     <li className="border-t border-line py-3 first:border-0">
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full text-left">
@@ -84,9 +86,10 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
         {r.reason && <p className="mt-1 text-ink-2">{r.reason}</p>}
         {r.restated > 0 && !open && (
           <p className="mt-1 text-meta text-ink-3">
-            {r.revisions.length > 0 ? `Revised ${r.revisions.length}× on later calls`
-              : later.every((x) => x.change === 'restated') ? `Restated on ${r.restated} later ${r.restated === 1 ? 'call' : 'calls'}`
-                : `Discussed again on ${r.restated} later ${r.restated === 1 ? 'call' : 'calls'}`}
+            {differsOn ? `Two statements on the ${differsOn} call differ`
+              : r.revisions.length > 0 ? `Revised ${r.revisions.length}× on later calls`
+                : later.every((x) => x.change === 'restated') ? `Restated on ${calls} later ${calls === 1 ? 'call' : 'calls'}`
+                  : `Discussed again on ${calls} later ${calls === 1 ? 'call' : 'calls'}`}
           </p>
         )}
       </button>
@@ -97,10 +100,17 @@ function Row({ r, docs }: { r: ScoreRow; docs: Record<string, ResearchDoc> }) {
           <p className="text-meta text-ink-3">
             {r.promised.speaker && <>{r.promised.speaker}, </>}<Src docs={docs} doc={r.promised.doc} page={r.promised.page} />
           </p>
-          {later.map((v) => (
+          {later.map((v, i) => (
             <div key={`${v.doc}-${v.page}`} className="space-y-1">
+              {v.change === 'differs' && later.findIndex((x) => x.change === 'differs' && x.call === v.call) === i && (
+                <p className="text-meta font-semibold text-flag">Two statements on this call differ</p>
+              )}
               <p className="text-meta font-semibold text-ink-2">
-                {v.change === 'revised' ? `Revised to ${v.target}` : v.change === 'restated' ? 'Restated' : 'Said again (no figure read from it)'} on the {v.call} call
+                {v.change === 'revised' ? `Revised to ${v.target} on the ${v.call} call`
+                  : v.change === 'restated' ? `Restated on the ${v.call} call`
+                    : v.change === 'differs' ? `${v.target} on the ${v.call} call`
+                      : v.change === 'no period' ? `${v.target} on the ${v.call} call, no period stated`
+                        : `Said again (no figure read from it) on the ${v.call} call`}
               </p>
               <Quote text={v.quote} />
               <p className="text-meta text-ink-3"><Src docs={docs} doc={v.doc} page={v.page} /></p>

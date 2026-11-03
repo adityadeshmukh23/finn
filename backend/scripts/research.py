@@ -23,9 +23,17 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("symbols", nargs="+")
     ap.add_argument("--reverify", action="store_true")
+    ap.add_argument("--relabel", action="store_true", help="re-apply the revision wording rules to a recording (no model calls)")
     args = ap.parse_args()
     failed = 0
     for sym in (s.upper() for s in args.symbols):
+        if args.relabel:
+            rec = pvd.load(sym)
+            for r in rec["scorecard"]["rows"]:
+                pvd.settle_changes(r)
+            pvd.recording_path(sym).write_text(json.dumps(rec, indent=1, ensure_ascii=False))
+            print(f"{sym}: relabelled")
+            continue
         if args.reverify:
             rec = pvd.load(sym)
             bad = pvd.reverify(rec, json.loads(gzip.decompress(pvd.pages_path(sym).read_bytes())))

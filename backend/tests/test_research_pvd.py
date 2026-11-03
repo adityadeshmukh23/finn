@@ -158,6 +158,43 @@ def test_restating_a_target_in_other_words_is_not_a_revision():
     assert [x["change"] for x in rows[0]["later"]] == ["restated", "no figure read"]
 
 
+def _row(promised_call, *later):
+    return {"promised": {"call": promised_call, "target": "28%+", "quote": "EBITDA margins will be more than 28%."},
+            "later": [{"call": c, "target": t, "change": ch, "quote": q, "doc": "T", "page": 1} for c, t, ch, q in later],
+            "revisions": []}
+
+
+def test_two_figures_on_one_call_are_not_a_revision():
+    r = pvd.settle_changes(_row("Q4 FY26",
+                                ("Q1 FY27", "28%+", "restated", "Overall on a yearly basis, we maintain the EBITDA margin of 28%"),
+                                ("Q1 FY27", "21%–23%", "revised", "The revenue growth of 15%, EBITDA margin 21% to 23%, this year")))
+    assert [v["change"] for v in r["later"]] == ["differs", "differs"] and r["revisions"] == []
+
+
+def test_a_different_figure_with_no_period_is_not_a_revision():
+    r = pvd.settle_changes(_row("Q2 FY26", ("Q3 FY26", "70%–80%", "revised", "ahead of our guidance of around 70% to 80% FCF on a sustained basis")))
+    assert r["later"][0]["change"] == "no period" and r["revisions"] == []
+
+
+@pytest.mark.parametrize("quote", ["raise our guidance for fiscal year 2027 to 16%", "more than INR4,000 crores in this fiscal",
+                                   "16% for FY27", "16% for the year"])
+def test_a_later_call_with_a_stated_period_is_a_revision(quote):
+    r = pvd.settle_changes(_row("Q4 FY26", ("Q2 FY27", "16%+", "revised", quote)))
+    assert r["later"][0]["change"] == "revised" and [v["target"] for v in r["revisions"]] == ["16%+"]
+    assert "change" not in r["revisions"][0]
+
+
+def test_a_different_figure_on_the_promise_s_own_call_is_a_conflict():
+    r = pvd.settle_changes(_row("Q1 FY27", ("Q1 FY27", "21%–23%", "revised", "EBITDA margin 21% to 23% this year")))
+    assert r["later"][0]["change"] == "differs" and r["revisions"] == []
+
+
+def test_a_statement_with_no_figure_is_left_alone_on_a_conflicting_call():
+    r = pvd.settle_changes(_row("Q4 FY26", ("Q1 FY27", "28%+", "restated", "we keep 28% this year"),
+                                ("Q1 FY27", "21%–23%", "revised", "21% to 23% this year"), ("Q1 FY27", "", "no figure read", "more on this later")))
+    assert [v["change"] for v in r["later"]] == ["differs", "differs", "no figure read"]
+
+
 @pytest.mark.parametrize("path", sorted((settings.data_dir / "recordings" / "research").glob("*.json")), ids=lambda p: p.stem)
 def test_every_recorded_claim_reverifies_against_its_page(path):
     rec = json.loads(path.read_text())

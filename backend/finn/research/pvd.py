@@ -16,6 +16,7 @@ replayed from the LLM gate's own recordings, each naming the model that wrote it
 import gzip
 import json
 import re
+from collections import defaultdict
 from datetime import datetime
 from typing import Literal
 
@@ -615,7 +616,7 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
                 dropped.append({"stage": "verdict", "what": first["label"], "doc": first["doc"], "page": first["page"],
                                 "why": "judge's reason used a number not in the cited items; verdict withheld"})
                 verdict, by, reason, delivered = "not_found", "rule", "Verdict withheld: reasoning didn't check out.", None
-        rows.append({
+        rows.append(settle_changes({
             "id": ids[0], "metric": first["metric"], "label": first["label"], "kind": first["kind"],
             "verdict": verdict, "verdict_by": by, "reason": reason, "due": horizon,
             "promised": _claim(first, docs) | {"target": format_target(first)},
@@ -628,7 +629,7 @@ def assemble(promises, actuals, j: Judgement | None, latest: str, docs: dict[str
                                                           else "revised" if _target(by_p[i]) != _target(first) else "restated")}
                       for i in ids[1:]],
             "delivered": _actual(delivered, docs) if delivered else None,
-        })
+        }))
     rank = {"missed": 0, "partially": 1, "met": 2, "not_found": 3, "too_vague": 4, "not_yet_due": 5}
     rows.sort(key=lambda r: (rank[r["verdict"]], Period.parse(r["promised"]["call"])))
     return rows, dropped
@@ -722,6 +723,37 @@ def settle_direction(p: dict) -> dict:
     if p["direction"] == "at_least" and _ABOUT.search(p["quote"]) and not _AT_LEAST.search(p["quote"]):
         return p | {"direction": "about"}
     return p
+
+
+_STATES_PERIOD = re.compile(r"\bFY\s*'?\s*\d{2,4}\b|\bfiscal\b|\bfinancial year\b|\b(?:this|the|current|next|full)\s+year\b"
+                            r"|\bQ[1-4]\b|\b20[12]\d\b|'\d{2}\b", re.I)
+
+
+def settle_changes(row: dict) -> dict:
+    """"Revised" says management moved its target, so it has to earn the word: a call after the promise, and a period stated
+    in the quote. Two different figures on one call are a conflict FINN can't resolve (BEL's Q1 FY27 call keeps 28% on p.5
+    and gives 21% to 23% on p.21), and a different figure with no period may be a passing description (Coforge's cash flow)."""
+    bound = lambda c: (m := re.search(r"\d[\d,.]*", c["target"] or "")) and m.group()  # noqa: E731
+    p = row["promised"]
+    on_call: dict[str, list[dict]] = defaultdict(list)
+    for v in row["later"]:
+        if v["target"]:
+            on_call[v["call"]].append(v)
+    conflict = {call for call, vs in on_call.items()
+                if any(v["change"] == "revised" for v in vs)
+                and len({bound(c) for c in vs + ([p] if call == p["call"] else [])}) > 1}
+    for v in row["later"]:
+        if v["call"] in conflict and v["target"]:
+            v["change"] = "differs"
+        elif v["change"] == "revised" and not (_after(v["call"], p["call"]) and _STATES_PERIOD.search(v["quote"])):
+            v["change"] = "no period"
+    row["revisions"] = [{k: x for k, x in v.items() if k != "change"} for v in row["later"] if v["change"] == "revised"]
+    return row
+
+
+def _after(call: str, other: str) -> bool:
+    a, b = Period.parse(call), Period.parse(other)
+    return bool(a and b and a.end > b.end)
 
 
 def _target(p: dict) -> tuple:
