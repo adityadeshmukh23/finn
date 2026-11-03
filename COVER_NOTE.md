@@ -9,25 +9,32 @@ I built FINN, a mobile-first investor agent.
 - Repo: [REPO LINK]
 - Build history: [BUILD HISTORY LINKS]
 
-**What it is.** The home screen is a ranked briefing, not a chatbox: one card per company for a window and as-of date I pick, with routine filings collapsed into a count I can open. Results cards show revenue, EBITDA, PBT and PAT with QoQ and YoY; management changes show who, role, date and background; price and volume alerts have editable thresholds. "Ask FINN" opens promised vs delivered: what management guided across five earnings calls against what it reported, from transcripts and annual reports only, with a page citation on every claim.
+**What I built.** Briefing first, chat second. Today is a ranked list of what changed across a portfolio, with routine filings collapsed into a count you can open. Detailed is the default and shows each company's reason and figures; Compact shows the top three. Ask FINN opens a company file, and Research sets what management promised on earnings calls against what it delivered, with a page on every claim.
 
 **Key decisions.**
-- Rules rank and place filings. The cheap model reads only the 39 of 229 the rules can't place or that need a summary.
-- Code does all arithmetic and sets every numeric verdict. The model only copies figures and quotes. A verifier drops any quote not on its cited page and any number not in its quote. If the documents don't say, FINN says so.
-- The public site is a static replay of recorded data: no key to leak, no cold start. It can't fetch live filings; `./run.sh` can, for any NSE ticker.
+- The public site is a static replay: no key to leak, no cold start, no live data. `./run.sh` runs live for any NSE ticker.
+- The model extracts; code computes every number and numeric verdict. A verifier checks every claim against its page, which proves it's there, not that it's the right column.
+- Routing goes rules, then a cheap model, then a strong one, all on free tiers. Cost is $0, though my ledger undercounts Google's calls.
 
-**Left out.** Cash quality, balance sheet, trajectory, bull vs bear, web bios for new executives (LinkedIn means logging in) and push notifications. One lens verified end to end beats four that aren't.
+**What I measured and fixed.** Building Compact cut the first screen from 52 to 24 text elements. My own audit found wrong figures on the Equitas and HUL results cards, and 55 price cards saying nothing was filed when filings existed. All are fixed and guarded by tests. Now 104 of 104 figures match, read from the PDF text layer.
+
+**Left out.**
+- Web bios: LinkedIn means logging in.
+- Push notifications and a live backend: a static demo can't break mid-review.
+- Cash quality: one lens verified end to end beats several that aren't.
+- Tap-to-explain figures: out of time.
+- Classifier accuracy: I prepared a blind 60-filing gold set but didn't label it, so I report no number.
+- Company logos: a third-party request on a site that says nothing is live.
 
 **Weak spots.**
-- Asian Paints has no checkable promise: its management guides in words, so its scorecard has no verdict.
-- Gemini's free tier was flaky (503s, daily quotas), so research is recorded ahead of time behind a fallback chain.
-- "Not found" can be a search miss, not proof of absence.
-- No live backend behind the public link.
-- A verifier bug found late: figures like "0.5%" are wrongly dropped. It fails closed and is documented. [delete if fixed]
+- Asian Paints has no checkable promise; its management guides in words.
+- Free tiers were flaky, so research is recorded ahead of time.
+- "Not found" can be a search miss.
+- Ranking weights are hand-set, with no preference data to test them.
+- I tested with three people, which proves nothing.
+- Mobile PDF page links aren't tested on every device.
 
-**Cost.** $0. Both model slots ran on Gemini's free tier: 145 live calls, 1.2M input and 230k output tokens (lower bounds; our ledger undercounts Google's). The public site makes no model calls.
-
-**Next.** Fix the verifier bug, add financial-snapshot and trajectory lenses on the same verified data, block-deal data so a volume spike can say why, and a hosted API with real push.
+**Next.** Real push on a hosted API, more lenses on the same verified data, and a company report card in the spirit of Simply Wall St, built only from verified facts (results confirmed, promises met, filings) with no composite score.
 
 Thanks,
 Aditya Deshmukh
@@ -37,5 +44,4 @@ Aditya Deshmukh
 *Draft notes, not part of the email:*
 
 - Fill `[LIVE LINK]` (the deployed site is https://finn-olive.vercel.app), `[REPO LINK]` (remote is https://github.com/adityadeshmukh23/finn; confirm it is public or shared with ENAM) and `[BUILD HISTORY LINKS]` (one per row in `docs/BUILD_HISTORY.md`).
-- The email body above is under 400 words.
 - The brief asks for a deployed link, the repository, the AI build history and a short writeup, all in one email.
