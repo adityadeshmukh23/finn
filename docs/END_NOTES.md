@@ -1,6 +1,6 @@
 # What COVER_NOTE.md needs changed
 
-A running list. `COVER_NOTE.md` has not been edited. README.md, DESIGN.md and DECISIONS.md match the app at the tag `submission-candidate`: Detailed by default, the Guidance Walk, and the gold set awaiting labels. The 2-minute tour and link previews follow the tag. Monogram badges were tried after it and removed because they did not look good; the layout is text-first.
+A running list. `COVER_NOTE.md` has not been edited. README.md, DESIGN.md and DECISIONS.md match the app at the tag `submission-candidate`: Detailed by default, the Guidance Walk, and a gold set that wasn't labelled. The 2-minute tour and link previews follow the tag. Monogram badges were tried after it and removed because they did not look good; the layout is text-first.
 
 ## Exact changes
 
@@ -22,5 +22,5 @@ Detailed is the default again, so the note's lines about the home screen ("one c
 - **Guidance Walk, optional, if words allow:** "Kaynes guided ₹4,500 crore, later about ₹4,000, and delivered ₹3,626: code reports 80.6% of the first promise, 90.7% of the last statement, with every step's page." That's 26 words, more than the room left, so it replaces something. It says more than the audit line for a reader who opens the Research tab, and less for one who asks how far to trust the figures. Don't write "cut" or "walked back" in the note either: the app reports arithmetic only.
 - **"Nine walks":** say it only with the split, 1 revised and delivered, 5 held and delivered, 3 revised and open. Only one of the nine goes promise, revision, delivered.
 - **"Promised vs delivered":** still accurate. The note doesn't mention the company rows' verdict counts, so their move to the scorecard changes nothing here.
-- **No classifier accuracy in the note yet.** The gold set is sampled and unlabelled. Don't write a figure until `docs/EVAL.md` has one, and quote it with its sample size and its limits: the sample is drawn from FINN's own labels.
+- **No classifier accuracy in the note.** A blind 60-filing gold set was prepared but not labelled in time, so there's no number to quote.
 - **Later blocks:** the evaluation page, the ledger, Listen for and any new recordings will each add a line here when they land.

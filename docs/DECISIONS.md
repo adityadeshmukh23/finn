@@ -337,3 +337,7 @@ Fixed before any label was filled in, so the rules can't bend to the result. No 
 
 - **Monogram badges were tried and removed because they did not look good, which reverses the entry above.** The layout is text-first: rows lead with the ticker in type. The share image and the tour never mentioned them. Compact's first screen is back to 97 words and 16 numbers at 390x844 and 375x667, on the budget's count. The golden diff is empty.
 
+## Polish: the gold set wasn't labelled (2026-11-03)
+
+- **A blind 60-filing gold set was prepared but not labelled in time, so no classifier accuracy number is reported.** This overrides the scoring plan above, which never ran. The files stay in `data/eval/`, with FINN's labels held back in a separate key. The app makes no accuracy claim. What stands is in `EVAL.md`: the results audit of 104 of 104 figures, read from the PDF text layer; the verifier's statistics, which prove a quote or number is on the page and not that it's the right column; the Equitas, HUL and BEL corrections; and the price rows and Book counts fixed against the company file. Ranking weights couldn't be evaluated, because there's no labelled preference data.
+

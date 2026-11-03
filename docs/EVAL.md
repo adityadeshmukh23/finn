@@ -1,6 +1,6 @@
 # How FINN was checked
 
-**Draft.** This covers the results cards, the errors found and fixed in them, the verifier's statistics, and a gold set for the filing classifier. **No classifier accuracy figure exists yet, and none will be computed until the hand labels are done.**
+What was measured, what was fixed, and what wasn't measured. **No classifier accuracy number is reported, because the gold set wasn't labelled.**
 
 ## Results cards against the filings
 
@@ -49,26 +49,31 @@ All of these had passed the verifier. It proves a number or quote is on the cite
 
 **What this shows:** the verifier throws out a lot, and every claim shown has its quote or number on its page. **What it doesn't show:** it proves a quote or number is on the page, not that it's the right column or the right meaning. Equitas passed it, and so did HUL. A drop rate is also not an error rate: some dropped claims were true, and a stricter check would drop more.
 
-## The filing classifier: a gold set, not yet scored
+## Price rows and Book counts against the company file
 
-**The method.** 60 of the 229 recorded filings, sampled with a fixed seed from FINN's own labels. Every filing is taken from a label with 7 or fewer, and the rest of the sample is split by label size. `data/eval/gold_blind.csv` shows each filing in NSE's own words, in shuffled order, for one person to label against `data/eval/categories.md`. FINN's labels sit apart in `data/eval/gold_key.csv`. The sample and its labels use no model call and no network. `python -m scripts.eval_gold` from `backend/` rebuilds the files, and it needs the local PDF cache.
+An audit over all 66 recorded briefings, at default alert settings, found rows that disagreed with the company file. All are fixed, and `trust.test.ts` holds them over every recording at two alert settings.
 
-**What the gold set can't cover.**
+| What disagreed | Count |
+|---|---|
+| Price rows saying "No filing in this window" when routine filings existed | 55 |
+| The same claim with material filings on that session | 5 |
+| "Last filing" lines that were the heaviest of that day, not the last | 5 |
+| Filings on a card, or in the hidden list, missing from the company file | 48 and 64 |
+| Book counts disagreeing with the file | 112 |
+| Rows showing a close from before the filing beside it | 45 |
 
-- **Pledging, bonus or split, and insider trades have no filings in the recording,** by FINN's labels and in NSE's own category and subject words. So nothing here says how FINN would handle them.
-- **Postal ballot is in the glossary, but FINN's rules never assign it.** They file ballots under `agm_egm`. How a `postal_ballot` label counts gets decided and written down before scoring.
-- **The window is 22 days across 18 holdings.** It says nothing about other companies or other times of year.
+## The filing classifier: a gold set prepared, not labelled
 
-**Limits to keep in mind when it's scored.**
+**A blind 60-filing gold set was prepared but wasn't labelled in time, so no classifier accuracy number is reported.** `data/eval/gold_blind.csv` holds 60 of the 229 recorded filings, in NSE's own words, in shuffled order, with an empty `my_label` column. FINN's own labels are held back in a separate key file, `data/eval/gold_key.csv`. The sample used a fixed seed and no model calls. `data/eval/categories.md` has the definitions. `python -m scripts.eval_gold` from `backend/` rebuilds the files, and it needs the local PDF cache.
 
-- **Per-category counts are tiny: 10 at most, and 1 for capex. No percentage will be shown below 20 items,** so categories get counts, and only the whole set could get a percentage.
-- **2 of 60 rows say "summary only".** The filings' PDFs were fetched for this at one request every 3 seconds, and these 2 have no text to extract. On those rows the reviewer reads the same one-line subject FINN's rules read, so agreement there shows the rule reads the line as a person would. It doesn't show the line was right about the filing.
-- **An excerpt is the first page or so, not the whole filing.** A long filing can change subject after it.
-- **The sample is drawn from FINN's own labels.** That guarantees every label is seen, but it isn't a random draw from all filings, so a raw agreement figure isn't an estimate of accuracy on filings as a whole. The key records each label's size so the figure can be weighted.
-- **One reviewer's labels.** There's no second reader to measure how far two people would disagree.
-- **The key is frozen.** A disagreement found in scoring may lead to a rule fix, but the score stays as measured against the committed key, and any later figure says it's a re-run.
+**What it would and wouldn't have shown, if labelled.**
 
-**How it will be scored, fixed before any label was filled in.** No model calls. `cannot_tell` rows are excluded and counted. The report gives counts, per-category agreement and every disagreement with both labels. No category under 20 items gets a percentage. Postal ballot rows are reported separately. It says plainly that 60 filings is a small sample drawn from FINN's own labels, and that agreement is not accuracy across all filings.
+- **Pledging, bonus or split, and insider trades have no filings in the recording,** by FINN's labels and in NSE's own category and subject words, so it couldn't cover them.
+- **Postal ballot is in the glossary, but FINN's rules never assign it.** They file ballots under `agm_egm`.
+- **Per-category counts are tiny: 10 at most, and 1 for capex.** No percentage should be shown below 20 items.
+- **2 of 60 rows say "summary only".** Their PDFs have no text to extract.
+- **The sample is drawn from FINN's own labels,** so agreement wouldn't be accuracy across all filings.
+- **The window is 22 days across 18 holdings, with one reviewer.**
 
 ## What can't be measured here
 
