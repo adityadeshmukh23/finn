@@ -303,3 +303,12 @@
 - **The three group lines on Research home share one weight.** To keep them from competing, the Kaynes name line drops to regular. The figures line stays semibold.
 - **"Over" follows the speaker's word, narrowly.** No walk quote says "over" about a figure. Coforge's "over any further EBIT improvement" isn't about the 14%. Dixon's Q4 FY26 quote says "more than INR4,000 crores", so that revised step reads "over ₹4,000 cr". "More than" on the held BEL steps keeps "+", so "Held on 3 calls: 15%+" stands. A literal "over" about a figure would read "over" on any step.
 
+## Polish: block E1, a gold set to label blind (2026-11-03)
+
+- **Two files, so the review isn't anchored.** The plan's single CSV of candidate labels would have shown FINN's answer beside each filing. `gold_blind.csv` shows no label and `gold_key.csv` stays apart. The blind file uses NSE's own subject line, never FINN's rewritten headline or a model's summary, because those carry FINN's reading. Its order is shuffled. Categories come from the glossary with made-up examples, so no example is a row in the sample.
+- **Sampling is by FINN's label, on purpose.** It's the only way to see the thin labels at all: capex has 1 filing and credit rating 3. The cost is that a raw agreement figure won't estimate accuracy on all filings. The key records each label's size for weighting.
+- **47 of 60 rows are "summary only", more than the plan implied.** The excerpts use only the 74 PDFs already on disk, as instructed. Those PDFs cluster where FINN needed to read the filing, so most sampled rows have none. On those rows the reviewer and the rules read the same line.
+- **Nothing is scored until the labels are in.** There's no scoring script yet, and no agreement figure exists, on purpose.
+- **Postal ballot found while checking the categories.** The glossary has it, a recorded HDFC Bank filing is one, and FINN's rules file it under `agm_egm`. It isn't changed now: changing the classifier before the labels would move what's being measured.
+- **The verifier's statistics reproduce from the recordings:** 166 shown, 51 dropped, 17 of them "quote not found", and 38 of 39 filing reads.
+

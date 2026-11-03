@@ -1,6 +1,6 @@
 # How FINN was checked
 
-**Draft.** This covers the results cards, and the errors found and fixed in them. The classifier check against hand-reviewed labels and the verifier statistics come in block E, and no accuracy figure exists for them yet.
+**Draft.** This covers the results cards, the errors found and fixed in them, the verifier's statistics, and a gold set for the filing classifier. **No classifier accuracy figure exists yet, and none will be computed until the hand labels are done.**
 
 ## Results cards against the filings
 
@@ -39,6 +39,38 @@ All of these had passed the verifier. It proves a number or quote is on the cite
 - **Row labels and column order are set by hand for these 9 cards.** A new filing is covered by the rules above, not by this audit.
 - **The tax band is set from 15 cards.** A real one-off, such as a large tax credit, will withhold a correct card. That's the intended direction of failure.
 - **HUL's rule was written for HUL's layout.** It fails closed on any other: if the sum can't be proved, the card is withheld.
+
+## The verifier
+
+| Where | Result |
+|---|---|
+| Research, all 5 recorded companies | 166 claims shown, 51 dropped: 23.5% of those considered. 17 of the drops are "quote not found on the cited page" |
+| Filing reads | 38 of 39 pass. The one that fails keeps the rules' label |
+
+**What this shows:** the verifier throws out a lot, and every claim shown has its quote or number on its page. **What it doesn't show:** it proves a quote or number is on the page, not that it's the right column or the right meaning. Equitas passed it, and so did HUL. A drop rate is also not an error rate: some dropped claims were true, and a stricter check would drop more.
+
+## The filing classifier: a gold set, not yet scored
+
+**The method.** 60 of the 229 recorded filings, sampled with a fixed seed from FINN's own labels. Every filing is taken from a label with 7 or fewer, and the rest of the sample is split by label size. `data/eval/gold_blind.csv` shows each filing in NSE's own words, in shuffled order, for one person to label against `data/eval/categories.md`. FINN's labels sit apart in `data/eval/gold_key.csv`. The sample and its labels use no model call and no network. `python -m scripts.eval_gold` from `backend/` rebuilds the files, and it needs the local PDF cache.
+
+**What the gold set can't cover.**
+
+- **Pledging, bonus or split, and insider trades have no filings in the recording,** by FINN's labels and in NSE's own category and subject words. So nothing here says how FINN would handle them.
+- **Postal ballot is in the glossary, but FINN's rules never assign it.** They file ballots under `agm_egm`. How a `postal_ballot` label counts gets decided and written down before scoring.
+- **The window is 22 days across 18 holdings.** It says nothing about other companies or other times of year.
+
+**Limits to keep in mind when it's scored.**
+
+- **Per-category counts are tiny: 10 at most, and 1 for capex. No percentage will be shown below 20 items,** so categories get counts, and only the whole set could get a percentage.
+- **47 of 60 rows say "summary only".** The excerpt comes only from PDFs already on disk, and the rest aren't fetched for this. On those rows the reviewer reads the same one-line subject FINN's rules read, so agreement there shows the rule reads the line as a person would. It doesn't show the line was right about the filing.
+- **Having an excerpt isn't random.** PDFs are on disk mostly where FINN needed to read the filing.
+- **The sample is drawn from FINN's own labels.** That guarantees every label is seen, but it isn't a random draw from all filings, so a raw agreement figure isn't an estimate of accuracy on filings as a whole. The key records each label's size so the figure can be weighted.
+- **One reviewer's labels.** There's no second reader to measure how far two people would disagree.
+- **The key is frozen.** A disagreement found in scoring may lead to a rule fix, but the score stays as measured against the committed key, and any later figure says it's a re-run.
+
+## What can't be measured here
+
+**Ranking weights.** There's no labelled preference data and no investor behaviour in this project. The weights were hand-set and then checked by reading the briefings. `ranking.test.ts` proves every rank explanation is true of the data, not that the order is the best one.
 
 ## Definitions a reader should know
 
