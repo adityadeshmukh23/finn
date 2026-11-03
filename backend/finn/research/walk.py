@@ -2,6 +2,7 @@
 
 Arithmetic only. Delivered against the first promise and against the last statement, margins in points and amounts in percent
 of the target. It adds no verdict: the row's own verdict stays scored against the first promise, and nothing here is a score.
+A step is held or revised, never raised or cut: the figures say which way it went, and a direction word starts to say why.
 
 A row becomes a walk only if every step has a figure read from a verified quote, and it either ended in a delivered figure or
 was revised and isn't due yet. Same-call conflicts and figures with no stated period aren't walks: FINN can't order those.
@@ -99,7 +100,7 @@ def _steps(row: dict) -> list[dict] | None:
             steps.append(_step(later, t, "recorded"))
     steps[0]["change"] = "first"
     for before, s in zip(steps, steps[1:]):
-        s["change"] = "held" if s["low"] == before["low"] else "raised" if s["low"] > before["low"] else "lowered"
+        s["change"] = "held" if s["low"] == before["low"] else "revised"
     return steps
 
 

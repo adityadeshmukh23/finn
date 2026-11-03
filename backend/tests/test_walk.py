@@ -70,6 +70,10 @@ def test_speakers_are_the_company_s_own():
     assert not re.search(r"\benam\b", (REPO_ROOT / "web/public/demo/walks.json").read_text(), re.I)
 
 
+def test_a_step_is_held_or_revised_with_no_direction_word():
+    assert {s["change"] for w in WALKS for s in w["steps"]} == {"first", "held", "revised"}
+
+
 def test_a_relabelled_row_says_so_in_its_own_quotes():
     assert "other than QRSAM" in BY_ROW["BEL", "PQ1FY26-3"]["steps"][1]["quote"]
     assert any("14% EBIT guidance for FY2026" in s["quote"] for s in BY_ROW["COFORGE", "PQ2FY26-8"]["steps"])
