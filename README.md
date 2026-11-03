@@ -44,6 +44,7 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 - No API key is needed to run. Without one, FINN replays the recordings in `data/recordings/` or uses mock output, and says so.
 - `./run.sh research TICKER` makes live model calls, so it needs a free `GEMINI_API_KEY` in `.env` (get one at aistudio.google.com/apikey). It takes a few minutes per company and lands in the Research tab. If the free tier is out of quota it records nothing and tells you to re-run later.
 - A ticker that screener.in has no earnings-call transcripts for (ITC, for one) is refused with a plain message, not a guess.
+- If a local page says "Couldn't reach FINN", the server behind that tab has stopped. From a fresh terminal, run `cd web && npm run build && npm run preview`, then Try again.
 - Tests: `cd backend && ../.venv/bin/pytest -q` and `cd web && npm test`. No key needed.
 
 ## What it does
