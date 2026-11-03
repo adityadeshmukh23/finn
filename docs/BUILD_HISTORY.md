@@ -13,7 +13,7 @@ Times are IST. For rows 1 to 6 they come from the session transcripts, and two r
 | 5 | Pull mode | 1 Nov 03:13 to 04:48 | Document index from screener.in, claim verifier, strong-model fallback chain. BEL, Asian Paints, Kaynes, Coforge and Dixon recorded and read row by row. `./run.sh research TICKER` | TODO |
 | 6 | First documents | 1 Nov, from 04:51 | Unseen-ticker smoke test, README, `docs/DESIGN.md`, `docs/COST.md`, the first cover note, a clean-clone CI run | TODO |
 | 7 | Polish audit | 1 Nov, from 16:01 | `docs/POLISH_AUDIT.md`, then the Ledger design, bottom tabs, Book and Alerts tabs, the company file, and the Today hero | TODO |
-| 8 | UX audit | 3 Nov, 00:14 to 05:24 | Phone testing found the first screen cramped. Compact first screen, How to read this, trust fixes over all 66 briefings, plain language, ranking by seniority, size and kind of event | TODO |
+| 8 | UX audit | 3 Nov, 00:14 to 05:24 | My own look on a phone found the first screen cramped. Compact first screen, How to read this, trust fixes over all 66 briefings, plain language, ranking by seniority, size and kind of event | TODO |
 | 9 | Planning | 3 Nov, to 15:28 | `docs/POLISH_PLAN.md`: the block order, the Guidance Walk's real size, and a wrong Equitas figure found while checking the data. No code changed | TODO |
 | 10 | Block A | 3 Nov, to 15:50 | Equitas withheld, HUL revenue summed and proved, "Revised" has to earn the word, a consistency check, an audit script: 104 of 104 figures | TODO |
 | 11 | Blocks B and C | 3 Nov, to 16:19 | One formatter and a figures golden over every screen, a guard against raw formats, a contrast check over every colour pair | TODO |
