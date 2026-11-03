@@ -1,0 +1,61 @@
+﻿id,finn_label,finn_tier,finn_reason,read_used,label_filings,label_sampled,seed
+106812282,fund_raise,routine,Routine debt issuance,False,6,6,20261103
+106812368,unclassified,routine,Compliance certificates,False,39,7,20261103
+106812872,unclassified,routine,Newspaper ads,False,39,7,20261103
+106813216,agm_egm,routine,Shareholder meetings & ballots,False,3,3,20261103
+106813629,credit_rating,routine,Credit ratings (no change stated),False,3,3,20261103
+106814472,litigation,medium,Litigation / regulatory order,True,10,2,20261103
+106815003,fund_raise,routine,Routine debt issuance,True,6,6,20261103
+106815039,management_change,medium,Board change,False,29,5,20261103
+106816165,credit_rating,routine,Credit ratings (no change stated),False,3,3,20261103
+106816298,agm_egm,routine,Shareholder meetings & ballots,False,3,3,20261103
+106816463,unclassified,routine,Compliance certificates,False,39,7,20261103
+106817485,unclassified,routine,Compliance certificates,False,39,7,20261103
+106817653,M&A,high,Subsidiary IPO / listing,False,15,3,20261103
+106817804,M&A,high,Subsidiary IPO / listing,False,15,3,20261103
+106818494,results,high,Quarterly results,False,51,10,20261103
+106819599,litigation,medium,Litigation / regulatory order,True,10,2,20261103
+106820326,investor_meetings,routine,Investor meetings,False,21,4,20261103
+106821121,investor_meetings,routine,Investor meetings,False,21,4,20261103
+106821168,management_change,high,Top management change,True,29,5,20261103
+106821932,press_release,medium,Product / approval news,True,15,3,20261103
+106822099,earnings_call,routine,Concall notices & recordings,False,29,6,20261103
+106822125,results,high,Quarterly results,False,51,10,20261103
+106822208,fund_raise,routine,Routine debt issuance,False,6,6,20261103
+106823131,agm_egm,routine,Shareholder meetings & ballots,False,3,3,20261103
+106823197,fund_raise,routine,Routine debt issuance,False,6,6,20261103
+106823610,earnings_call,routine,Concall notices & recordings,False,29,6,20261103
+106823937,credit_rating,routine,Credit ratings (no change stated),False,3,3,20261103
+106826469,dividend,routine,Dividend,False,7,7,20261103
+106827628,management_change,medium,Board change,False,29,5,20261103
+106828196,fund_raise,routine,Routine debt issuance,False,6,6,20261103
+106830479,results,high,Quarterly results,False,51,10,20261103
+106830649,results,high,Quarterly results,False,51,10,20261103
+106830682,results,medium,Results press release,False,51,10,20261103
+106830897,investor_meetings,routine,Investor meetings,False,21,4,20261103
+106830931,investor_meetings,routine,Investor meetings,False,21,4,20261103
+106831073,earnings_call,routine,Concall notices & recordings,False,29,6,20261103
+106831228,results,medium,Results deck,False,51,10,20261103
+106831490,results,medium,Results deck,False,51,10,20261103
+106831491,dividend,medium,Dividend,False,7,7,20261103
+106831498,dividend,routine,Dividend,False,7,7,20261103
+106831668,dividend,medium,Dividend,False,7,7,20261103
+106831671,dividend,routine,Dividend,False,7,7,20261103
+106831889,management_change,medium,Board change,False,29,5,20261103
+106831891,M&A,routine,Subsidiary housekeeping,False,15,3,20261103
+106831892,unclassified,routine,Intra-group guarantees,False,39,7,20261103
+106831960,management_change,high,Top management change,False,29,5,20261103
+106831972,results,routine,Results newspaper ads,False,51,10,20261103
+106833097,unclassified,routine,Newspaper ads,False,39,7,20261103
+106833111,unclassified,routine,ESOP grants & allotments,False,39,7,20261103
+106833712,press_release,routine,General press releases,False,15,3,20261103
+106834090,dividend,medium,Dividend,False,7,7,20261103
+106834098,dividend,medium,Dividend,False,7,7,20261103
+106834102,results,medium,Results press release,False,51,10,20261103
+106834171,results,high,Quarterly results,False,51,10,20261103
+106834219,press_release,routine,General press releases,True,15,3,20261103
+106835047,earnings_call,routine,Concall notices & recordings,False,29,6,20261103
+106836343,fund_raise,routine,Routine debt issuance,False,6,6,20261103
+106837197,capex,routine,Other routine filings,True,1,1,20261103
+106837439,earnings_call,medium,Concall transcript,False,29,6,20261103
+106837454,earnings_call,routine,Concall notices & recordings,False,29,6,20261103
