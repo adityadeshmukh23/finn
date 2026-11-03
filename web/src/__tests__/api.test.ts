@@ -28,6 +28,10 @@ describe('fetchRecorded', () => {
     vi.stubGlobal('fetch', answer(404, ''))
     await expect(fetchRecorded('/x')).rejects.toBeInstanceOf(NotRecorded)
   })
+  it("the app's own page where a file should be means not recorded, as a local preview answers", async () => {
+    vi.stubGlobal('fetch', () => Promise.resolve(new Response('<!doctype html>', { status: 200, headers: { 'content-type': 'text/html' } })))
+    await expect(fetchRecorded('/x')).rejects.toBeInstanceOf(NotRecorded)
+  })
   it('a network failure is not "not recorded", and says what to do', async () => {
     vi.stubGlobal('fetch', () => Promise.reject(new TypeError('Failed to fetch')))
     const e = await fetchRecorded('/x').catch((x: Error) => x)

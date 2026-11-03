@@ -128,7 +128,8 @@ export async function fetchRecorded<T>(url: string): Promise<T> {
   const t = setTimeout(() => ctl.abort(), LOAD_LIMIT_MS)
   try {
     const r = await fetch(url, { signal: ctl.signal })
-    if (r.status === 404) throw new NotRecorded(`${url} isn't in this build`)
+    // A local preview answers a missing file with the app's own page, where a real host says 404.
+    if (r.status === 404 || (r.ok && r.headers?.get('content-type')?.includes('text/html'))) throw new NotRecorded(`${url} isn't in this build`)
     if (!r.ok) throw new Error(`The server returned an error (${r.status}). Try again.`)
     return (await r.json()) as T
   } catch (e) {
