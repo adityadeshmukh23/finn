@@ -60,13 +60,14 @@ export function points(n: number): string {
 /** Delivered as a share of an amount target: "80.6%". */
 export const ofTarget = (n: number) => `${n.toFixed(1)}%`
 
-/** What management said, as it said it: "₹1,000 cr+", "27%", "about ₹4,000 cr minimum", "₹3,500–4,000 cr". Stated figures keep their own decimals. */
-export function target(t: { low: number; high: number | null; floor: boolean; about: boolean }, unit: '%' | 'crore'): string {
+/** What management said, as it said it: "₹1,000 cr+", "over ₹4,000 cr", "27%", "about ₹4,000 cr minimum", "₹3,500–4,000 cr". Stated figures keep their own decimals. */
+export function target(t: { low: number; high: number | null; floor: boolean; about: boolean; over?: boolean }, unit: '%' | 'crore'): string {
   const write = (s: string) => (unit === '%' ? `${s}%` : `₹${s} cr`)
   const n = (v: number) => (unit === '%' ? String(v) : crore(v))
   if (t.high !== null) return write(`${n(t.low)}–${n(t.high)}`)
   const one = write(n(t.low))
   if (t.about) return t.floor ? `about ${one} minimum` : `about ${one}`
+  if (t.over) return `over ${one}`
   return t.floor ? `${one}+` : one
 }
 

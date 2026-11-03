@@ -106,6 +106,14 @@ def test_plus_and_about_come_from_the_words_beside_the_figure(value, quote, floo
     assert walk.qualifier(value, quote) == {"floor": floor, "about": about}
 
 
+def test_a_step_says_over_only_where_the_words_earn_it():
+    assert [s["over"] for s in BY_ROW["DIXON", "PQ3FY26-4"]["steps"]] == [False, True]         # "more than INR4,000 crores", revised
+    assert not any(s["over"] for s in BY_ROW["BEL", "PQ1FY26-1"]["steps"])                     # "more than 15%", held
+    assert not any(s["over"] for s in BY_ROW["COFORGE", "PQ2FY26-8"]["steps"])                 # "over any further EBIT improvement" isn't about the 14%
+    assert walk.says_over(4000, "our revenue is going to be over INR4,000 crores", revised=False)
+    assert not walk.says_over(4000, "our revenue is going to be more than INR4,000 crores", revised=False)
+
+
 def test_a_ceiling_or_a_dollar_target_is_not_a_walk_yet():
     assert walk.parse_target("under 5%") is None
     assert walk.parse_target("about $1 bn") is None

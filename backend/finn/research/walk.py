@@ -24,6 +24,7 @@ LABELS = {("BEL", "PQ1FY26-3"): "Order inflow, excluding QRSAM", ("COFORGE", "PQ
 _TARGET = re.compile(r"(?:about )?₹?(\d[\d,.]*)( ?cr|%)?\+?(?:–₹?(\d[\d,.]*)( ?cr|%)?)?")
 _FLOOR_BEFORE = re.compile(r"\b(more than|at least|minimum|north of|over|above|exceed\w*)\b", re.I)
 _FLOOR_AFTER = re.compile(r"^\s*(?:crores?|cr\b)?\s*-?\s*(plus\b|\+|or higher|or more|or above|and above|minimum\b)", re.I)
+_OVER = re.compile(r"\b(over|above|exceed\w*)\b", re.I)
 _ABOUT = re.compile(r"\b(about|around|approximately|nearly|almost|close to|roughly)\b", re.I)
 _MONEY = re.compile(r"(?:INR|Rs\.?|₹)\s*(\d[\d,]*(?:\.\d+)?)\s*(?:crores?|cr\b)", re.I)
 _PERCENT = re.compile(r"(\d[\d.]*)\s*%")
@@ -57,6 +58,12 @@ def qualifier(value: float, quote: str) -> dict:
     around = _clause_around(value, quote)
     return {"floor": any(_FLOOR_BEFORE.search(before) or _FLOOR_AFTER.match(after.lstrip("%")) for before, after in around),
             "about": any(_ABOUT.search(before) for before, _ in around)}
+
+
+def says_over(value: float, quote: str, revised: bool) -> bool:
+    """The speaker's own word where it matters. "Over" wherever a quote says it about the figure, and "more than" on a step that
+    moved the target: "more than INR4,000 crores" is the news there. A held step keeps the shorter "+"."""
+    return any(_OVER.search(before) or (revised and re.search(r"\bmore than\b", before, re.I)) for before, _ in _clause_around(value, quote))
 
 
 def recover_figure(quote: str, unit: str, due: str) -> float | None:
@@ -101,6 +108,8 @@ def _steps(row: dict) -> list[dict] | None:
     steps[0]["change"] = "first"
     for before, s in zip(steps, steps[1:]):
         s["change"] = "held" if s["low"] == before["low"] else "revised"
+    for s in steps:
+        s["over"] = s["floor"] and says_over(s["low"], s["quote"], s["change"] == "revised")
     return steps
 
 

@@ -295,3 +295,11 @@
 - **A walk link opens its row.** `#research/KAYNES/PQ1FY26-1` from the front door. The page moves only if the line wouldn't otherwise be on screen, so at 390x844 Kaynes keeps its header: the line ends at 526 px and the delivered step at 665 px, with the tab bar at 787. At 375x667 it scrolls to the row, and the company name goes off screen.
 - **Limits.** The re-verification proves a quote is on its page, not that the row grouped the right statements together. "Held" compares the figure, not the wording: BEL's "27% only" and "more than 27%" both count as 27. Coforge's first FY26 statement is conditional ("if we manage to hit it this year"), and the Q3 call calls 14% "guidance for FY2026". A hand-kept label map names QRSAM on BEL's order inflow, because another row in that scorecard includes it; a test holds it to the quote.
 
+## Polish: Guidance Walk, after review (2026-11-03)
+
+- **"Missed both" is gone, which reverses block D.** Kaynes reads "80.6% of the first promise, 90.7% of the last statement". "Missed" is a verdict word, and it sat beside a Partially pill, so the row was arguing with itself. The figures say it. The note under the steps stays: "Partially means at least 80% of it".
+- **The chart now says "Axis doesn't start at zero", which reverses "the chart doesn't say so".** The drop looked steeper than its 19%. Printing every level wasn't enough on its own.
+- **An opened walk's title carries the company,** "KAYNES · Consolidated revenue, FY26", because at 375x667 the row opens with the header off screen. At 390x844 the title wraps to two lines. The delivered step now ends at 705 px, tab bar at 787.
+- **The three group lines on Research home share one weight.** To keep them from competing, the Kaynes name line drops to regular. The figures line stays semibold.
+- **"Over" follows the speaker's word, narrowly.** No walk quote says "over" about a figure. Coforge's "over any further EBIT improvement" isn't about the 14%. Dixon's Q4 FY26 quote says "more than INR4,000 crores", so that revised step reads "over ₹4,000 cr". "More than" on the held BEL steps keeps "+", so "Held on 3 calls: 15%+" stands. A literal "over" about a figure would read "over" on any step.
+

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { ResearchEntry, Walk } from '../api'
-import { lead, title, trail } from '../walk'
+import { lead, named, trail } from '../walk'
 import { Icon } from './Icon'
 
 const GROUP: Record<Walk['group'], string> = {
@@ -12,14 +12,12 @@ const checkable = (c: ResearchEntry['counts']) => {
   return n ? `${n} checkable` : 'No checkable promise yet'
 }
 
-const name = (w: Walk) => `${w.symbol} · ${title(w)}`
-
 function WalkRow({ w, onOpen }: { w: Walk; onOpen: (path: string) => void }) {
   return (
     <li>
       <button onClick={() => onOpen(`${w.symbol}/${w.row}`)} className="flex min-h-14 w-full items-center gap-3 py-2 text-left">
         <span className="min-w-0 flex-1">
-          <span className="block font-semibold text-ink">{name(w)}</span>
+          <span className="block font-semibold text-ink">{named(w)}</span>
           <span className="block text-meta text-ink-2">{lead(w)}</span>
         </span>
         <Icon name="chevron" className="shrink-0 text-ink-3" />
@@ -49,11 +47,11 @@ function FrontDoor({ walks, onOpen }: { walks: Walk[]; onOpen: (path: string) =>
     <section className="mt-3 divide-y divide-line border-y border-line" aria-label="Guidance walks">
       {anchors.length > 0 && (
         <div className="py-2">
-          <p className="text-meta text-ink-3">{anchors.length} {GROUP.revised_delivered}</p>
+          <p className="min-h-6 font-semibold text-ink">{anchors.length} {GROUP.revised_delivered}</p>
           {anchors.map((w) => (
             <button key={w.row} onClick={() => onOpen(`${w.symbol}/${w.row}`)} className="mt-0.5 flex w-full items-center gap-3 text-left">
               <span className="min-w-0 flex-1">
-                <span className="block font-semibold text-ink">{name(w)}</span>
+                <span className="block text-ink">{named(w)}</span>
                 <span className="block text-ink-2">{trail(w)}</span>
                 <span className="block font-semibold text-ink">{lead(w)}</span>
               </span>

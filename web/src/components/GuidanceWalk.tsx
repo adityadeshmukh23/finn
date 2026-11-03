@@ -21,7 +21,7 @@ function clearOfNext(marks: Mark[]) {
   }
 }
 
-/** The target as a stepped line, drawn only where it changed. One axis, in ink, so a colour can't read as a verdict. The scale doesn't start at zero; every level prints its figure. */
+/** The target as a stepped line, drawn only where it changed. One axis, in ink, so a colour can't read as a verdict. The axis doesn't start at zero, and says so; every level prints its figure. */
 function StepLine({ walk }: { walk: Walk }) {
   const box = useRef<HTMLDivElement>(null)
   const [W, setW] = useState(326)
@@ -74,6 +74,7 @@ function StepLine({ walk }: { walk: Walk }) {
         {d && <text x={x(walk.steps.length)} y={AXIS} className="fill-ink-3 text-meta">{d.source === 'annual_report' ? 'Reported' : 'Stated'}</text>}
         {!d && <text x={W - EDGE} y={AXIS} textAnchor="end" className="fill-ink-3 text-meta">Not yet due</text>}
       </svg>
+      <p className="text-meta text-ink-3">Axis doesn't start at zero.</p>
     </div>
   )
 }

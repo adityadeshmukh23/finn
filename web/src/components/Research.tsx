@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Icon } from './Icon'
 import * as fig from '../fig'
 import { verdictLine } from '../format'
-import { lastRevision, lead, title } from '../walk'
+import { lastRevision, lead, named } from '../walk'
 import { GuidanceWalk, Quote } from './GuidanceWalk'
 import { fetchResearch, fetchWalks, NotRecorded, type Research as R, type ResearchDoc, type ScoreRow, type Verdict, type Walk } from '../api'
 
@@ -70,7 +70,7 @@ function Row({ r, docs, walk, focus }: { r: ScoreRow; docs: Record<string, Resea
     <li ref={self} className="border-t border-line py-3 first:border-0">
       <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full text-left">
         <div className="flex items-start justify-between gap-3">
-          <span className="font-semibold text-ink">{walk && open ? title(walk) : walk?.label ?? r.label}</span>
+          <span className="font-semibold text-ink">{walk && open ? named(walk) : walk?.label ?? r.label}</span>
           <Pill v={r.verdict} />
         </div>
         {walk && open ? (

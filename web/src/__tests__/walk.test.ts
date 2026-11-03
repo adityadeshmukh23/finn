@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import type { Walk } from '../api'
 import * as fig from '../fig'
-import { lead, title, trail } from '../walk'
+import { lead, named, title, trail } from '../walk'
 
 const walks = JSON.parse(readFileSync(join(__dirname, '../../public/demo/walks.json'), 'utf8')) as Walk[]
 const of = (symbol: string, row: string) => walks.find((w) => w.symbol === symbol && w.row === row)!
@@ -14,6 +14,7 @@ describe('fig: guidance figures', () => {
     expect(fig.target(t(4500, true), 'crore')).toBe('₹4,500 cr+')
     expect(fig.target(t(4000, true, true), 'crore')).toBe('about ₹4,000 cr minimum')
     expect(fig.target(t(1000), 'crore')).toBe('₹1,000 cr')
+    expect(fig.target({ ...t(4000, true), over: true }, 'crore')).toBe('over ₹4,000 cr')
     expect(fig.target(t(3500, false, false, 4000), 'crore')).toBe('₹3,500–4,000 cr')
     expect(fig.target(t(27, true), '%')).toBe('27%+')
     expect(fig.target(t(15.5), '%')).toBe('15.5%')
@@ -28,8 +29,9 @@ describe('fig: guidance figures', () => {
 })
 
 describe('the walk reads as arithmetic', () => {
-  it('Kaynes says it missed both, with the two figures', () => {
-    expect(lead(of('KAYNES', 'PQ1FY26-1'))).toBe('Missed both: 80.6% of the first promise, 90.7% of the last statement')
+  it('Kaynes reads as its two figures, and the title carries the company', () => {
+    expect(lead(of('KAYNES', 'PQ1FY26-1'))).toBe('80.6% of the first promise, 90.7% of the last statement')
+    expect(named(of('KAYNES', 'PQ1FY26-1'))).toBe('KAYNES · Consolidated revenue, FY26')
     expect(trail(of('KAYNES', 'PQ1FY26-1'))).toBe('₹4,500 cr+ → about ₹4,000 cr minimum → ₹3,626 cr')
   })
   it('a target that held is one sentence, and a management figure says it was stated on call', () => {
@@ -39,15 +41,17 @@ describe('the walk reads as arithmetic', () => {
     expect(lead(of('BEL', 'PQ1FY26-5'))).toBe('Held on 3 calls: ₹1,000 cr+. Delivered ₹900 cr, 90.0% of target, stated on call')
     expect(lead(of('COFORGE', 'PQ2FY26-8'))).toBe('Held on 2 calls: 14%+. Delivered 14.4%, +0.4 pts, stated on call')
   })
+  it('a step says "over" where the words earn it', () => {
+    expect(trail(of('DIXON', 'PQ3FY26-4'))).toBe('₹3,500–4,000 cr → over ₹4,000 cr')
+  })
   it('an open walk names its last revision and claims nothing else', () => {
     expect(lead(of('COFORGE', 'PQ4FY26-3'))).toBe('Revised on the Q2 FY27 call. Not yet due')
     expect(lead(of('DIXON', 'PQ3FY26-4'))).toBe('Revised on the Q4 FY26 call. Not yet due')
     expect(lead(of('DIXON', 'PQ4FY26-13'))).toBe('Revised on the Q1 FY27 call. Not yet due')
   })
   it('no intent words, no score, on any walk', () => {
-    const INTENT = /\b(cuts?|lowered|raised|walked back|beat|bar|slashed|credib\w*|honest\w*|broke|kept|score|promise kept)\b/i
+    const INTENT = /\b(missed|cuts?|lowered|raised|walked back|beat|bar|slashed|credib\w*|honest\w*|broke|kept|score|promise kept)\b/i
     for (const w of walks) for (const line of [title(w), lead(w), trail(w)]) expect(line, line).not.toMatch(INTENT)
-    expect(walks.filter((w) => /missed/i.test(lead(w))).map((w) => w.symbol)).toEqual(['KAYNES'])
   })
   it('every figure in a lead comes from the walk, through fig', () => {
     for (const w of walks) {

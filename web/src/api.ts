@@ -295,6 +295,7 @@ export interface WalkStep {
   high: number | null
   floor: boolean
   about: boolean
+  over: boolean
   change: 'first' | 'held' | 'revised'
   read: 'recorded' | 'from the quote'
   quote: string
