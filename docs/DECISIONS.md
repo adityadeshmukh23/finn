@@ -242,3 +242,10 @@
 ## Polish: sector on every company file (2026-11-03)
 
 - **Holdings with no filing in the window had no sector.** The sheet read it from the card. A new additive `sectors` field on each digest fixes it for every entry point, and older data without the field still renders.
+
+## Polish: a stalled request can't hang a screen (2026-11-03)
+
+- **Reproduced: the scorecard's skeleton stayed up forever when a request never answered.** BEL's file itself is fine: it loaded on a deep link, from the Research tab, on rapid back and forward, and on simulated slow 3G. The static build's fetches had no time limit, while the API path had one. Today's briefing had the same gap.
+- **Every recorded file now has a 15-second limit,** covering a body that stalls after the headers. The scorecard says "Still loading" at 5 seconds, then stops with what happened and Try again. Today's existing error state gets the same limit. Prices and the company timeline still degrade silently, as designed.
+- **A failure no longer blames the data.** Offline or a bad response used to read "No research for BEL yet", which says the work was never done. Only a 404 says that now.
+- **Untested on a real network:** whether a real phone stall matches this. The stall here is a request held open in headless Chrome.

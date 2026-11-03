@@ -116,12 +116,34 @@ export interface Manifest {
   holdings: number
 }
 
+/** The file isn't in this build, which is different from failing to get it. */
+export class NotRecorded extends Error {}
+
+export const LOAD_LIMIT_MS = 15000
+
+/** A recorded file, with a time limit: a request that never answers must not leave a skeleton up forever. */
+export async function fetchRecorded<T>(url: string): Promise<T> {
+  const ctl = new AbortController()
+  const t = setTimeout(() => ctl.abort(), LOAD_LIMIT_MS)
+  try {
+    const r = await fetch(url, { signal: ctl.signal })
+    if (r.status === 404) throw new NotRecorded(`${url} isn't in this build`)
+    if (!r.ok) throw new Error(`The server returned an error (${r.status}). Try again.`)
+    return (await r.json()) as T
+  } catch (e) {
+    if (e instanceof NotRecorded) throw e
+    if (ctl.signal.aborted) throw new Error(`Stopped waiting after ${LOAD_LIMIT_MS / 1000} seconds. Check your connection and try again.`)
+    if (e instanceof SyntaxError) throw new Error("The data didn't load properly. Try again.")
+    if (e instanceof TypeError) throw new Error("Couldn't reach FINN. Check your connection and try again.")
+    throw e
+  } finally {
+    clearTimeout(t)
+  }
+}
+
 let manifest: Promise<Manifest> | null = null
 export function fetchManifest(): Promise<Manifest> {
-  manifest ??= fetch('/demo/manifest.json').then((r) => {
-    if (!r.ok) throw new Error('Demo data missing from this build')
-    return r.json() as Promise<Manifest>
-  }).catch((e) => { manifest = null; throw e })
+  manifest ??= fetchRecorded<Manifest>('/demo/manifest.json').catch((e) => { manifest = null; throw e })
   return manifest
 }
 
@@ -147,9 +169,7 @@ export async function fetchBundled(hours: number, asOf: string | null): Promise<
   if (!m.days.includes(day)) {
     throw new Error(`No recorded filings for that date. The demo covers ${m.from} to ${m.to}.`)
   }
-  const r = await fetch(`/demo/digest-${day}-${hours}.json`)
-  if (!r.ok) throw new Error(`Demo data missing for ${day}`)
-  return (await r.json()) as Digest
+  return fetchRecorded<Digest>(`/demo/digest-${day}-${hours}.json`)
 }
 
 export async function fetchDigest(hours: number, asOf: string | null, refresh = false): Promise<Digest> {
@@ -173,10 +193,7 @@ export async function fetchDigest(hours: number, asOf: string | null, refresh = 
 
 let bundledMarket: Promise<Market> | null = null
 function fetchBundledMarket(): Promise<Market> {
-  bundledMarket ??= fetch('/demo/market.json').then((r) => {
-    if (!r.ok) throw new Error('No price data in this build')
-    return r.json() as Promise<Market>
-  }).catch((e) => { bundledMarket = null; throw e })
+  bundledMarket ??= fetchRecorded<Market>('/demo/market.json').catch((e) => { bundledMarket = null; throw e })
   return bundledMarket
 }
 
@@ -194,7 +211,7 @@ export async function fetchMarket(asOf: string | null): Promise<Market | null> {
 let timeline: Promise<Timeline | null> | null = null
 /** Every filing per company. Never throws: without it the company file shows what the card has. */
 export function fetchTimeline(): Promise<Timeline | null> {
-  timeline ??= fetch('/demo/timeline.json').then((r) => (r.ok ? r.json() as Promise<Timeline> : null)).catch(() => null)
+  timeline ??= fetchRecorded<Timeline>('/demo/timeline.json').catch(() => null)
   return timeline
 }
 
@@ -275,7 +292,10 @@ export interface ResearchEntry { symbol: string; name: string; headline: string;
 let researchIndex: Promise<ResearchEntry[]> | null = null
 /** Companies with recorded research. Never throws: no index means Ask FINN says research isn't recorded. */
 export function fetchResearchIndex(): Promise<ResearchEntry[]> {
-  const bundled = () => fetch('/demo/research/index.json').then((r) => (r.ok ? r.json() : { companies: [] }))
+  const bundled = () => fetchRecorded<{ companies: ResearchEntry[] }>('/demo/research/index.json').catch((e) => {
+    if (e instanceof NotRecorded) return { companies: [] }
+    throw e
+  })
   researchIndex ??= (STATIC ? bundled() : getJSON<{ companies: ResearchEntry[] }>('/api/research', 10000).catch(bundled))
     .then((d: { companies: ResearchEntry[] }) => d.companies)
     .catch(() => { researchIndex = null; return [] })
@@ -283,11 +303,7 @@ export function fetchResearchIndex(): Promise<ResearchEntry[]> {
 }
 
 export async function fetchResearch(symbol: string): Promise<Research> {
-  const bundled = async () => {
-    const r = await fetch(`/demo/research/${encodeURIComponent(symbol)}.json`)
-    if (!r.ok) throw new Error(`FINN hasn't read ${symbol}'s earnings calls yet.`)
-    return (await r.json()) as Research
-  }
+  const bundled = () => fetchRecorded<Research>(`/demo/research/${encodeURIComponent(symbol)}.json`)
   if (STATIC) return bundled()
   try {
     return await getJSON<Research>(`/api/research/${encodeURIComponent(symbol)}`)

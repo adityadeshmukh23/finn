@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Icon } from './Icon'
 import { verdictLine } from '../format'
-import { fetchResearch, type Research as R, type ResearchDoc, type ScoreRow, type Verdict } from '../api'
+import { fetchResearch, NotRecorded, type Research as R, type ResearchDoc, type ScoreRow, type Verdict } from '../api'
 
 const LABEL: Record<Verdict, string> = {
   missed: 'Missed',
@@ -180,9 +180,17 @@ function Financials({ f, docs }: { f: NonNullable<R['financials']>; docs: Record
   )
 }
 
+const SLOW_MS = 5000
+
 function Skeleton() {
+  const [slow, setSlow] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setSlow(true), SLOW_MS)
+    return () => clearTimeout(t)
+  }, [])
   return (
     <div className="mt-4 space-y-3" aria-label="Loading research">
+      <p role="status" className="min-h-[18px] text-meta text-ink-3">{slow && 'Still loading. This is taking longer than usual.'}</p>
       <div className="skeleton h-5 w-40" />
       <div className="skeleton h-16 w-full" />
       {[0, 1, 2].map((i) => <div key={i} className="skeleton h-14 w-full" />)}
@@ -192,7 +200,8 @@ function Skeleton() {
 
 export function Research({ symbol, onBack }: { symbol: string; onBack: () => void }) {
   const [data, setData] = useState<R | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<Error | null>(null)
+  const [attempt, setAttempt] = useState(0)
   const [filter, setFilter] = useState<Verdict | null>(null)
   const [later, setLater] = useState(false)
   const [drops, setDrops] = useState(false)
@@ -201,10 +210,10 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
     let live = true
     setData(null)
     setError(null)
-    fetchResearch(symbol).then((d) => live && setData(d)).catch((e) => live && setError((e as Error).message))
+    fetchResearch(symbol).then((d) => live && setData(d)).catch((e) => live && setError(e as Error))
     window.scrollTo(0, 0)
     return () => { live = false }
-  }, [symbol])
+  }, [symbol, attempt])
 
   const docs = useMemo(() => {
     if (!data) return {}
@@ -229,9 +238,22 @@ export function Research({ symbol, onBack }: { symbol: string; onBack: () => voi
       {!data && !error && <Skeleton />}
       {error && (
         <div className="mt-4 rounded-2xl border border-line bg-surface p-5">
-          <p className="font-semibold text-ink">No research for {symbol} yet</p>
-          <p className="mt-1 text-ink-2">{error}</p>
-          <button onClick={onBack} className="mt-3 min-h-11 rounded-full bg-ink px-4 font-semibold text-bg">Back to briefing</button>
+          {error instanceof NotRecorded ? (
+            <>
+              <p className="font-semibold text-ink">No research for {symbol} yet</p>
+              <p className="mt-1 text-ink-2">FINN hasn't read {symbol}'s earnings calls yet.</p>
+              <button onClick={onBack} className="mt-3 min-h-11 rounded-full bg-ink px-4 font-semibold text-bg">Back</button>
+            </>
+          ) : (
+            <>
+              <p className="font-semibold text-ink">Couldn't load {symbol}'s scorecard</p>
+              <p className="mt-1 text-ink-2" role="alert">{error.message}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button onClick={() => setAttempt(attempt + 1)} className="min-h-11 rounded-full bg-ink px-4 font-semibold text-bg">Try again</button>
+                <button onClick={onBack} className="min-h-11 rounded-full border border-line px-4 text-ink-2">Back</button>
+              </div>
+            </>
+          )}
         </div>
       )}
 
