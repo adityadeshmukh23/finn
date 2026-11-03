@@ -319,4 +319,5 @@
 - **The choice moved onto Today,** as a Compact | Detailed control under the as-of line, and stays in How to read this. Burying it was how the depth stayed hidden.
 - **The budgets now apply to Compact only.** Compact is 16 numbers and 104 words on the count used this session, which includes tab labels; the control added 2 of those words. The block-level figure of 95 words used an earlier count, so compare like with like. Detailed has no budget and isn't trying to meet one: 185 words and 53 numbers at 390x844, 146 and 42 at 375x667.
 - **Cost:** Compact no longer quite fits at 375x667. The last line sits just under the tab bar.
+- **Plan changed on 3 Nov: the deadline is today.** Block E stops at the gold set unless the labels come in. Blocks F, G apart from a monogram badge, H, I and J aren't built. The tag `submission-candidate` marks the app before the last small additions, each of which is its own commit.
 

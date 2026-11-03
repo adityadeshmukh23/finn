@@ -1,6 +1,6 @@
 # FINN
 
-A mobile-first investor briefing. You open a ranked answer to what changed across your portfolio, not a chatbox: the top three companies with one number each, the rest one tap away, the routine paperwork collapsed into a count you can inspect, and every number tied to the page it came from.
+A mobile-first investor briefing. You open a ranked answer to what changed across your portfolio, not a chatbox: each company that needs a look, why it ranks there and its figures, the routine paperwork collapsed into a count you can inspect, and every number tied to the page it came from.
 
 **Try it on a phone: https://finn-olive.vercel.app** (a static replay of recorded data; see [what's recorded vs live](#whats-recorded-vs-live))
 
@@ -10,7 +10,7 @@ A mobile-first investor briefing. You open a ranked answer to what changed acros
   <img src="docs/img/03-research-bel.jpg" width="250" alt="Promised vs delivered for BEL: 3 of 6 checkable promises met">
 </p>
 
-*Screenshots are the static build at 375px wide: Today, an opened row, and BEL's promised-vs-delivered scorecard.*
+*Screenshots are the static build at 375px wide: Today in its Compact view, an opened row, and BEL's promised-vs-delivered scorecard.*
 
 ## Quickstart (Mac)
 
@@ -32,7 +32,7 @@ git clone https://github.com/adityadeshmukh23/finn.git && cd finn
 
 **Push: the briefing.** The Today tab: a windowed digest (24h, 3 days, 7 days, plus an as-of date so it works on quiet days) of every NSE filing across the portfolio. Four tabs: Today, Book, Research, Alerts.
 
-- Three levels. The first screen shows the top three companies with one number each. Tapping a row gives why it ranks there, its filing and the results table. Ask FINN gives the company file. A Compact / Detailed toggle in "How to read this" keeps the full density for power users.
+- Two views, chosen on Today and remembered on the device. Detailed, the default, opens every row: why it ranks there, its filing and the results table, plus a one-line synthesis and the book strip. Compact shows the top three companies with one number each, the rest a tap away. Ask FINN gives the company file.
 
 - Rules classify and rank each filing; no model is involved in ranking. The order weighs the kind of event, how senior a management change is, company size, other kinds of major filing, and how far a price or volume move went. Routine filings collapse into a filtered count, grouped by reason, with every item inspectable.
 - Quarterly results get a table: revenue, EBITDA, PBT, PAT, this quarter vs last quarter and vs a year ago. The cheap model copies figures off the filing; code verifies each figure is printed on the cited page and does all the arithmetic. If it can't, the row shows no numbers and says why.
